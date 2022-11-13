@@ -1,24 +1,59 @@
-<h1 align="center"> Base C Project </h1>
+<p align="center"><img src="https://i2.wp.com/www.aponia-dental-center.com/fachzahnarztliche-praxis/wp-content/uploads/2014/01/work-in-progress.png?fit=286%2C253" alt="Working Progress"> </p>
 
-• <b>Base C Project</b>
+<div align="center">
 
-• <b>Debugging C in Ubuntu</b>
+[![HitCount](https://hits.dwyl.com/rlinsdev/42-Minishell-aux.svg?style=flat-square&show=unique)](http://hits.dwyl.com/rlinsdev/42-Minishell-aux)
 
-• <b>VSCode</b>
+</div>
 
-• <b>Folder Structure</b>
+<p align="center"><img src="https://miro.medium.com/max/450/1*ZE2T9JllKfTOQ90oDwqGmQ.png" alt="Bash 1"> </p>
 
-• <b>Make File</b>
 
-• <b>LibFt</b>
+# MiniShell
+Project to test and detail all the external functions allowed
 
-• <b>Ctrl + Shift + B - compilation</b>
 
-• <b>F5 (in main file) - debug</b>
 
-Fonts:<br>
-https://www.youtube.com/watch?v=9pjBseGfEPU<br/>
-https://www.youtube.com/watch?v=n_gcsuGKD58<br/>
-https://www.youtube.com/watch?v=gv96TJnIw-w<br/>
-https://www.youtube.com/watch?v=LFZFndrXd-Q<br/>
+## Definition
+* One line definition: A shell is an interface that allows you to interact with the kernel of an operating system.
+* Lexer: TODO
+* Parser: TODO
+* HereDoc: TODO
 
+## Todo's
+* Prompt display
+* Command history (up and down arrows)
+* System executables available from the environment (`ls`, `cat`, `grep`, etc.)
+* Builtin commands:
+  * `echo` (and option `-n`)
+  * `cd` (with only a relative or absolute path)
+  * `pwd` (no options)
+  * `export` (no options) - Export  variables in bash
+  * `unset` (no options)
+  * `env` (no options or arguments)
+  * `exit` (with exit number but no other options)
+
+* Pipes: `|` which redirect output from one command to input for the next
+
+* Re-directions:
+  * `>` redirects output
+  * `>>` redirects output in append mode
+  * `<` redirects input
+  * `<< DELIMITER` displays a new prompt, reads user input until reaching
+  	`DELIMITER`, redirects user input to command input (does not update history)
+
+
+* Environment variables (`$USER` or `$VAR`) that expand to their values.
+  * `$?` expands to the exit status of the most recently executed foreground pipeline.
+
+
+* Signals:
+  * `ctrl-c` displays a new prompt line. SIGINT: SIGINT resets the user input
+  prompt to a new blank line.
+  * `ctrl-d` exits minishell.
+  * `ctrl-\` does nothing. SIGQUIT: is ignored.
+
+* Global variable:
+
+## Links
+* <a href="https://www.makeuseof.com/shell-builtin-commands-in-linux/">How to Identify a Shell Builtin Command</a>
