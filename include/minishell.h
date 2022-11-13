@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/13 15:51:40 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/13 16:17:24 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,14 @@
 # include <sys/types.h>
 # include <dirent.h>
 # include <stdio.h> // TODO: Allowed?
+# include <stdbool.h>
 
 # include <readline/readline.h> // Readline
 # include <readline/history.h> // History
+
+# define INV_ARGS "Invalid Arguments\n"
+
+
 
 /**
  * @brief First method in project.
