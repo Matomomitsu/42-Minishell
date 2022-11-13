@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/13 17:11:45 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/13 17:38:35 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	init_prompt(t_data *data)
 {
 	while (1)
 	{
+		signals_handler();
 		data->user_input = readline(">$");
 	}
 }

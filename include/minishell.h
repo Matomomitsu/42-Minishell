@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/13 17:00:30 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/13 17:34:56 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ int		init(int argc, char **argv, char **envp);
  * @param status_code
  */
 void	exit_shell(int status_code);
+
+/**
+ * @brief 
+ *
+ */
+void	signals_handler();
 
 /**
  * @brief
