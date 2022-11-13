@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:56:34 by rlins             #+#    #+#             */
-/*   Updated: 2022/04/04 02:08:05 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/13 15:51:17 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
 	size_t	i;
-	int			diff;
+	int		diff;
 
 	if (n == 0)
 		return (0);

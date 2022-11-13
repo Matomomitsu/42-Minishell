@@ -6,13 +6,13 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 09:08:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/12 09:22:00 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/13 15:50:45 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	echo_cmd()
+void	echo_cmd(void)
 {
 	printf("Echo");
 }

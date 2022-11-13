@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/13 15:37:39 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/13 15:51:40 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@
  * @param argv Arguments Vector
  * @return int
  */
-int	init(int argc, char **argv, char **envp);
+int		init(int argc, char **argv, char **envp);
 
-
-void	echo_cmd();
-
+/**
+ * @brief
+ *
+ */
+void	echo_cmd(void);
 
 #endif
