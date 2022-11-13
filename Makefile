@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/12 17:07:54 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/13 17:02:13 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ INCLUDE = -I $(INC_PATH) -I $(LIBFT_PATH)
 
 SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init.c \
+		$(PATH_INIT)exit.c \
 		$(PATH_BUILTINS)echo.c
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))

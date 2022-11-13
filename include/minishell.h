@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/13 16:17:24 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/13 17:00:30 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,17 @@
 
 # define INV_ARGS "Invalid Arguments\n"
 
-
+typedef struct s_data
+{
+	// bool		interactive;
+	// t_token		*token;
+	char		*user_input;
+	char		**env;
+	char		*working_dir;
+	char		*old_working_dir;
+	// t_command	*cmd;
+	pid_t		pid;
+}	t_data;
 
 /**
  * @brief First method in project.
@@ -42,6 +52,12 @@
  * @return int
  */
 int		init(int argc, char **argv, char **envp);
+
+/**
+ * @brief Responsible to exit / finish the shell.
+ * @param status_code
+ */
+void	exit_shell(int status_code);
 
 /**
  * @brief
