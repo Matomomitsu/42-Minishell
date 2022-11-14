@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/14 16:47:22 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/14 17:21:07 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,8 @@ void	call_builtin(char **argv);
  *
  */
 void	echo_cmd(void);
+
+
+void	cmd_exit();
 
 #endif

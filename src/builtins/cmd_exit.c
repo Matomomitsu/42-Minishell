@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_handler.c                                 :+:      :+:    :+:   */
+/*   cmd_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/14 17:13:55 by rlins            ###   ########.fr       */
+/*   Created: 2022/11/14 17:14:03 by rlins             #+#    #+#             */
+/*   Updated: 2022/11/14 17:14:33 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-bool	is_builtin(char **argv)
+void	cmd_exit()
 {
-	if (ft_strncmp(argv[0], "echo", 5) == 0)
-		return (true);
-	else if (ft_strncmp(argv[0], "exit", 5) == 0)
-		return (true);
-}
-
-void	call_builtin(char **argv)
-{
-	if (ft_strncmp(argv[0], "echo", 5) == 0)
-		echo_cmd();
-	else if (ft_strncmp(argv[0], "echo", 5) == 0)
-		cmd_exit();
-
+	exit(1);
 }
