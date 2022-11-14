@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/13 17:34:56 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/14 16:47:22 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,25 @@ int		init(int argc, char **argv, char **envp);
 void	exit_shell(int status_code);
 
 /**
- * @brief 
+ * @brief
  *
  */
 void	signals_handler();
+
+/**
+ * @brief Verify if the command is a Builtin command. This is necessary to know
+ * what is came from terminal
+ * @param argv
+ * @return true
+ * @return false
+ */
+bool	is_builtin(char **argv);
+
+/**
+ * @brief Call correct function from Builtin command
+ * @param argv
+ */
+void	call_builtin(char **argv);
 
 /**
  * @brief
