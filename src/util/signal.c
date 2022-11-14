@@ -6,25 +6,26 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:25:21 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/13 17:37:11 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/14 09:11:32 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	ctrl_c(int signal);
+static void	reset_prompt(int signal);
 
 void	signals_handler()
 {
-	signal(SIGINT, ctrl_c);
+	signal(SIGINT, reset_prompt);
 	signal(SIGQUIT, SIG_IGN);
 }
 
-/** TODO: Falta colocar a variável glogal com o status code correto aqui.
+/** TODO: Falta colocar a variável global com o status code correto aqui.
+ * TODO: Signal deverá ser construído para HereDoc e / ou Child / parent proc.
  * @brief Will reset the prompt
  * @param signal
  */
-static void	ctrl_c(int signal)
+static void	reset_prompt(int signal)
 {
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_replace_line("", 0);

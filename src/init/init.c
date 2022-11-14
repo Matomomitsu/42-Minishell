@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/14 08:08:01 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/14 09:18:09 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static bool	valid_args(int argc)
 	return (true);
 }
 
-/** TODO: Signal handler here?. History handler here?
+/**
  * @brief Initialize prompt.
  * @param data
  */
 static void	init_prompt(t_data *data)
 {
-	while (1)
+	while (true)
 	{
 		signals_handler();
 		data->user_input = readline("@MINISHELL>$");
@@ -55,6 +55,11 @@ static void	init_prompt(t_data *data)
 		if (data->user_input)
 		{
 			add_history(data->user_input);
+		}
+		else
+		{
+			ft_putstr_fd("exit\n", STDOUT_FILENO);
+			exit(1);
 		}
 		// TODO: Melhorar isso. Criar estrutura q limpara tudo.
 		free (data->user_input);
