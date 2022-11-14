@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 09:16:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/13 16:48:17 by rlins            ###   ########.fr       */
+/*   Created: 2022/11/13 16:54:30 by rlins             #+#    #+#             */
+/*   Updated: 2022/11/14 08:03:39 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/**
- * @brief Main Class of program
- * @param argc Arguments Count
- * @param argv Arguments Vector
- * @param envp Environment variables
- * @return int
- */
-int	main(int argc, char **argv, char **envp)
+/** TODO: Este cara vai receber provavelmente o free de varios objetos tb
+ * Este cara tb receberá como param a variável global - status de exec do último
+ * commando */
+void	exit_shell(int status_code)
 {
-	init(argc, argv, envp);
-	return (0);
+	exit(status_code);
 }
