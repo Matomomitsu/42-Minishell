@@ -67,10 +67,37 @@ void	exit_shell(int status_code);
  */
 void	signals_handler();
 
+/******************************************************************************/
+/*Begin - Builtins*/
+/******************************************************************************/
 /**
- * @brief
+ * @brief Verify if the command is a Builtin command. This is necessary to know
+ * what is came from terminal
+ * @param argv
+ * @return true
+ * @return false
+ */
+bool	is_builtin(char *argv);
+
+/**
+ * @brief Call correct function from Builtin command
+ * @param argv
+ */
+void	call_builtin(char *argv);
+
+/**
+ * @brief Builtins Echo - Represent the Echo command in shell
  *
  */
-void	echo_cmd(void);
+void	cmd_echo(void);
+
+/**
+ * @brief Builtins Exit - Responsible to close the program.
+ *
+ */
+void	cmd_exit();
+/******************************************************************************/
+/*End - Builtins*/
+/******************************************************************************/
 
 #endif
