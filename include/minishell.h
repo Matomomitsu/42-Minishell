@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/15 10:37:31 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/14 17:05:09 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ int		init(int argc, char **argv, char **envp);
 void	exit_shell(int status_code);
 
 /**
- * @brief
- *
+ * @brief Manipulate Signals in MiniShell
+ * 	(Ctrl+D) The Same - Terminate
+ * 	(Ctrl+C) Change - Before: Stop process. Now: New line in clean prompt
+ * 	(Ctrl+\) Change - Before: Terminate. Now: Ignore
  */
 void	signals_handler();
 

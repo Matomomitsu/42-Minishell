@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:25:21 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/14 09:37:23 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/14 16:59:42 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	reset_prompt(int signal);
 
 void	signals_handler()
 {
+	// Ctrl+C -> Reset prompt
 	signal(SIGINT, reset_prompt);
 	// Ctrl+\ handler
 	signal(SIGQUIT, SIG_IGN);
