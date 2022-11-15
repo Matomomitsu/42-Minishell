@@ -6,15 +6,16 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/14 17:05:09 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/15 12:01:24 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# define BUFFER_SIZE 1024;
-# define TOK_BUFSIZE 64;
-# define TOK_DELIM " \t\r\n\a"
+// # define BUFFER_SIZE 1024;
+// # define TOK_BUFSIZE 64;
+// # define TOK_DELIM " \t\r\n\a"
+# define MAX_PATH 4096
 
 # include "./libft.h"
 # include <stdio.h> // Printf
@@ -93,9 +94,15 @@ void	cmd_echo(void);
 
 /**
  * @brief Builtins Exit - Responsible to close the program.
- *
- */
+  */
 void	cmd_exit();
+
+/**
+ * @brief Builtins - PWD Command - Print working directory
+ * MaxSize:
+ * https://serverfault.com/questions/9546/filename-length-limits-on-linux
+ */
+void	cmd_pwd(void);
 /******************************************************************************/
 /*End - Builtins*/
 /******************************************************************************/
