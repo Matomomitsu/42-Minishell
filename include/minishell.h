@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/15 10:23:52 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/15 10:37:31 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ void	exit_shell(int status_code);
  */
 void	signals_handler();
 
+/******************************************************************************/
+/*Begin - Builtins*/
+/******************************************************************************/
 /**
  * @brief Verify if the command is a Builtin command. This is necessary to know
  * what is came from terminal
@@ -81,15 +84,18 @@ bool	is_builtin(char *argv);
 void	call_builtin(char *argv);
 
 /**
- * @brief
+ * @brief Builtins Echo - Represent the Echo command in shell
  *
  */
-void	echo_cmd(void);
+void	cmd_echo(void);
 
 /**
- * @brief Responsible to close the program.
+ * @brief Builtins Exit - Responsible to close the program.
  *
  */
 void	cmd_exit();
+/******************************************************************************/
+/*End - Builtins*/
+/******************************************************************************/
 
 #endif
