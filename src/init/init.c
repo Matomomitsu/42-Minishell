@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/15 10:24:36 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/15 16:06:44 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static void exec_cmd(t_data *data);
 int	init(int argc, char **argv, char **envp)
 {
 	t_data data;
-	// TODO: Inicializar estrutura aqui também
-	if (!valid_args(argc))
+	if (valid_args(argc)== false || init_structure(&data, envp) == false)
 		exit_shell(EXIT_FAILURE);
 	init_prompt(&data);
 	return (0);

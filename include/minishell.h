@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/15 12:01:24 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/15 16:02:03 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ typedef struct s_data
 	// t_token		*token;
 	char		*user_input;
 	char		**env;
-	char		*working_dir;
-	char		*old_working_dir;
+	// char		*working_dir;
+	// char		*old_working_dir;
 	// t_command	*cmd;
-	pid_t		pid;
+	// pid_t		pid;
 }	t_data;
 
 /**
@@ -103,6 +103,13 @@ void	cmd_exit();
  * https://serverfault.com/questions/9546/filename-length-limits-on-linux
  */
 void	cmd_pwd(void);
+
+/**
+ * @brief Will initiate the structure of mini-shell.
+ * @return boolean (true) if OK. (false) if error
+ */
+bool	init_structure(t_data *data, char **envp);
+
 /******************************************************************************/
 /*End - Builtins*/
 /******************************************************************************/
