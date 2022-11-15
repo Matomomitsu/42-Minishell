@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/14 17:21:07 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/15 10:23:52 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	signals_handler();
  * @return true
  * @return false
  */
-bool	is_builtin(char **argv);
+bool	is_builtin(char *argv);
 
 /**
  * @brief Call correct function from Builtin command
  * @param argv
  */
-void	call_builtin(char **argv);
+void	call_builtin(char *argv);
 
 /**
  * @brief
@@ -86,7 +86,10 @@ void	call_builtin(char **argv);
  */
 void	echo_cmd(void);
 
-
+/**
+ * @brief Responsible to close the program.
+ *
+ */
 void	cmd_exit();
 
 #endif
