@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_exit.c                                         :+:      :+:    :+:   */
+/*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 17:14:03 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/16 11:20:10 by rlins            ###   ########.fr       */
+/*   Created: 2022/11/16 08:51:53 by rlins             #+#    #+#             */
+/*   Updated: 2022/11/16 08:56:48 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/** TODO: Verificar se é necessário colocar msg de saída?
- * TODO: Verificar o código de saída que é necessário atribuir
- * TODO: Necessário dar free em algo?
- * @brief
- *
- */
-void	cmd_exit(void)
+void	cmd_env(t_data *data)
 {
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	exit(EXIT_SUCCESS);
+	int	i;
+
+	i = 0;
+	while (data->env[i])
+	{
+		ft_putstr_fd(data->env[i], STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		i++;
+	}
 }

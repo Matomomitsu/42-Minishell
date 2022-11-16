@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/15 12:01:24 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/16 11:24:45 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,30 @@ typedef struct s_data
 	pid_t		pid;
 }	t_data;
 
+/******************************************************************************/
+/*Begin - Initialization*/
+/******************************************************************************/
 /**
  * @brief First method in project.
  * @param argc Arguments count
  * @param argv Arguments Vector
+ * @param envp Environment pointer variable
  * @return int
  */
 int		init(int argc, char **argv, char **envp);
+
+/**
+ * @brief Initialize structure.
+ * @param data
+ * @param envp Environment pointer variable
+ * @return true
+ * @return false
+ */
+bool	init_structure(t_data *data, char **envp);
+
+/******************************************************************************/
+/*Begin - Initialization*/
+/******************************************************************************/
 
 /**
  * @brief Responsible to exit / finish the shell.
@@ -66,7 +83,7 @@ void	exit_shell(int status_code);
  * 	(Ctrl+C) Change - Before: Stop process. Now: New line in clean prompt
  * 	(Ctrl+\) Change - Before: Terminate. Now: Ignore
  */
-void	signals_handler();
+void	signals_handler(void);
 
 /******************************************************************************/
 /*Begin - Builtins*/
@@ -82,9 +99,9 @@ bool	is_builtin(char *argv);
 
 /**
  * @brief Call correct function from Builtin command
- * @param argv
+ * @param data Structure of MiniShell
  */
-void	call_builtin(char *argv);
+void	call_builtin(t_data *data);
 
 /**
  * @brief Builtins Echo - Represent the Echo command in shell
@@ -95,7 +112,7 @@ void	cmd_echo(void);
 /**
  * @brief Builtins Exit - Responsible to close the program.
   */
-void	cmd_exit();
+void	cmd_exit(void);
 
 /**
  * @brief Builtins - PWD Command - Print working directory
@@ -103,6 +120,14 @@ void	cmd_exit();
  * https://serverfault.com/questions/9546/filename-length-limits-on-linux
  */
 void	cmd_pwd(void);
+
+/**
+ * @brief Builtins - Env - Environment Variables
+ *
+ * @param data
+ */
+void	cmd_env(t_data *data);
+
 /******************************************************************************/
 /*End - Builtins*/
 /******************************************************************************/
