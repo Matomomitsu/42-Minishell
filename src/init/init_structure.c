@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/16 11:21:13 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/16 14:23:42 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool	init_env(t_data *data, char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		data->env[i] = ft_strdup(envp[i]);
+		data->env[i] = ft_strdup(envp[i]); // TODO: Dar free aqui tb!
 		i++;
 	}
 	return (true);
