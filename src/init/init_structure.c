@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/15 16:05:16 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/16 11:18:27 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static bool	init_env(t_data *data, char **envp)
 	int i;
 
 	// TODO: Tem q dar free neste maluco aqui
-	data->env = ft_calloc(count_env_var(envp), sizeof * data->env);
+	// +1 pq senão vai dar segment fault
+	data->env = ft_calloc(count_env_var(envp) + 1, sizeof * data->env);
 	if (!data->env)
 		return (false);
 	i = 0;
@@ -50,7 +51,6 @@ static bool	init_env(t_data *data, char **envp)
 		data->env[i] = ft_strdup(envp[i]);
 		i++;
 	}
-
 	return (true);
 }
 

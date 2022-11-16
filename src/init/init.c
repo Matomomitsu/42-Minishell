@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/15 16:06:44 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/16 10:36:33 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ static void	init_prompt(t_data *data)
 static void exec_cmd(t_data *data)
 {
 	if (is_builtin(data->user_input))
-		call_builtin(data->user_input);
+		call_builtin(data);
 }

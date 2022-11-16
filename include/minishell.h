@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/15 16:02:03 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/16 11:17:28 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,37 @@ typedef struct s_data
 	// t_token		*token;
 	char		*user_input;
 	char		**env;
-	// char		*working_dir;
-	// char		*old_working_dir;
+	char		*working_dir;
+	char		*old_working_dir;
 	// t_command	*cmd;
-	// pid_t		pid;
+	pid_t		pid;
 }	t_data;
 
+/******************************************************************************/
+/*Begin - Initialization*/
+/******************************************************************************/
 /**
  * @brief First method in project.
  * @param argc Arguments count
  * @param argv Arguments Vector
+ * @param envp Environment pointer variable
  * @return int
  */
 int		init(int argc, char **argv, char **envp);
+
+/**
+ * @brief Initialize structure.
+ * @param data
+ * @param envp Environment pointer variable
+ * @return true
+ * @return false
+ */
+bool	init_structure(t_data *data, char **envp);
+
+/******************************************************************************/
+/*Begin - Initialization*/
+/******************************************************************************/
+
 
 /**
  * @brief Responsible to exit / finish the shell.
@@ -82,9 +100,9 @@ bool	is_builtin(char *argv);
 
 /**
  * @brief Call correct function from Builtin command
- * @param argv
+ * @param data Structure of MiniShell
  */
-void	call_builtin(char *argv);
+void	call_builtin(t_data *data);
 
 /**
  * @brief Builtins Echo - Represent the Echo command in shell
@@ -105,10 +123,12 @@ void	cmd_exit();
 void	cmd_pwd(void);
 
 /**
- * @brief Will initiate the structure of mini-shell.
- * @return boolean (true) if OK. (false) if error
+ * @brief Builtins - Env - Environment Variables
+ *
+ * @param data
  */
-bool	init_structure(t_data *data, char **envp);
+void	cmd_env(t_data *data);
+
 
 /******************************************************************************/
 /*End - Builtins*/
