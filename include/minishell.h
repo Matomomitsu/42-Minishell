@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/16 11:17:28 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/16 11:24:45 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ bool	init_structure(t_data *data, char **envp);
 /*Begin - Initialization*/
 /******************************************************************************/
 
-
 /**
  * @brief Responsible to exit / finish the shell.
  * @param status_code
@@ -84,7 +83,7 @@ void	exit_shell(int status_code);
  * 	(Ctrl+C) Change - Before: Stop process. Now: New line in clean prompt
  * 	(Ctrl+\) Change - Before: Terminate. Now: Ignore
  */
-void	signals_handler();
+void	signals_handler(void);
 
 /******************************************************************************/
 /*Begin - Builtins*/
@@ -113,7 +112,7 @@ void	cmd_echo(void);
 /**
  * @brief Builtins Exit - Responsible to close the program.
   */
-void	cmd_exit();
+void	cmd_exit(void);
 
 /**
  * @brief Builtins - PWD Command - Print working directory
@@ -128,7 +127,6 @@ void	cmd_pwd(void);
  * @param data
  */
 void	cmd_env(t_data *data);
-
 
 /******************************************************************************/
 /*End - Builtins*/

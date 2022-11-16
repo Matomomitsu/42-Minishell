@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/16 11:18:27 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/16 11:21:13 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	init_structure(t_data *data, char **envp)
 {
 	if (!init_env(data, envp))
 		return (false);
-	return(true);
+	return (true);
 }
 
 /**
@@ -38,7 +38,7 @@ bool	init_structure(t_data *data, char **envp)
  */
 static bool	init_env(t_data *data, char **envp)
 {
-	int i;
+	int	i;
 
 	// TODO: Tem q dar free neste maluco aqui
 	// +1 pq senão vai dar segment fault
@@ -61,11 +61,10 @@ static bool	init_env(t_data *data, char **envp)
  */
 static int	count_env_var(char **envp)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (envp && envp[count])
 		count++;
-
 	return (count);
 }

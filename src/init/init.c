@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/16 10:36:33 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/16 11:23:26 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 static bool	valid_args(int argc);
 static void	init_prompt(t_data *data);
-static void exec_cmd(t_data *data);
+static void	exec_cmd(t_data *data);
 
 int	init(int argc, char **argv, char **envp)
 {
-	t_data data;
-	if (valid_args(argc)== false || init_structure(&data, envp) == false)
+	t_data	data;
+
+	if (valid_args(argc) == false || init_structure(&data, envp) == false)
 		exit_shell(EXIT_FAILURE);
 	init_prompt(&data);
 	return (0);
@@ -51,8 +52,6 @@ static void	init_prompt(t_data *data)
 	{
 		signals_handler();
 		data->user_input = readline("@MINI-SHELL>$");
-		// data->user_input = "exit";
-
 		if (data->user_input)
 		{
 			add_history(data->user_input);
@@ -75,7 +74,7 @@ static void	init_prompt(t_data *data)
  * @brief Verify what type of command is comming
  * @param data
  */
-static void exec_cmd(t_data *data)
+static void	exec_cmd(t_data *data)
 {
 	if (is_builtin(data->user_input))
 		call_builtin(data);
