@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 15:10:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/17 19:18:49 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define INV_ARGS "Invalid Arguments\n"
 
 # define OLD_PWD "OLDPWD"
+# define PWD "PWD"
 
 typedef struct s_command
 {
@@ -135,9 +136,9 @@ void	cmd_pwd(void);
  */
 void	cmd_env(t_data *data);
 
-/**
+/** TODO: Verificar se há mais possitilidades aqui (passar parâmetros que nao
+ * foi atendido ainda)
  * @brief Builtins - Command Change Directory.
- * 
  * @param data
  */
 void	cmd_cd(t_data *data);
@@ -191,7 +192,11 @@ int	env_var_count(char **envp);
 
 /**
  * @brief Update or insert a new environment variable.
- * @return true (success) false (failed)
+ * @param data Structure of MiniShell
+ * @param key key of variable
+ * @param value value of variable
+ * @return true - Success
+ * @return false - Failed
  */
 bool	set_env_var(t_data *data, char *key, char *value);
 /******************************************************************************/

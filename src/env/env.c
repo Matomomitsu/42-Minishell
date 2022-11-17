@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 08:36:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 10:05:00 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/17 19:52:26 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_env_var_value(char **env, char *var)
 	char	*tmp;
 
 	i = 0;
-	tmp = ft_strjoin(var, "=");
+	tmp = ft_strjoin(var, "="); // TODO: Free OK
 	if (!tmp)
 		return (NULL);
 	while (env[i])
@@ -64,6 +64,8 @@ bool	set_env_var(t_data *data, char *key, char *value)
 	int		index;
 
 	index = get_env_var_index(data->env, key);
+	if (value == NULL) // Will be null when there is no variable yetS
+		value = "";
 	temp = ft_strjoin("=", value);
 	// If variable exist
 	if (index != -1 && data->env[index])
