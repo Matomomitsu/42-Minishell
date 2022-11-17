@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/16 11:23:26 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/17 15:21:12 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static bool	valid_args(int argc);
 static void	init_prompt(t_data *data);
 static void	exec_cmd(t_data *data);
+static t_command	*init_cmd_args(t_data *data, char **args);
 
 int	init(int argc, char **argv, char **envp)
 {
@@ -68,7 +69,7 @@ static void	init_prompt(t_data *data)
 	rl_clear_history();
 }
 
-/** TODO: PRovavelmente este método ficará em outra classe apartada
+/** TODO: Provavelmente este método ficará em outra classe apartada
  * TODO: Provavelmente ele receberá outros métodos auiliares para as
  * diferentes execuções que teremos no minishell
  * @brief Verify what type of command is comming
@@ -76,6 +77,37 @@ static void	init_prompt(t_data *data)
  */
 static void	exec_cmd(t_data *data)
 {
-	if (is_builtin(data->user_input))
+	char	**args;
+
+	args = split_args(data->user_input);
+
+	data->command = init_cmd_args(data, args);
+
+	// if (is_builtin(data->user_input))
+	// if (is_builtin(args[0]))
+	if (is_builtin(data->command->cmd))
 		call_builtin(data);
+}
+
+/**
+ * @brief Initialize object command. Will receive the command (first token) and
+ * arguments to execute the command
+ * @param command
+ * @param args
+ */
+static t_command	*init_cmd_args(t_data *data, char **args)
+{
+	t_command	*cmd;
+
+	// TODO: Dar um free neste cara
+	cmd = (t_command *)malloc(sizeof(t_command));
+	if (!cmd)
+		return (NULL);
+	ft_memset(cmd, 0, sizeof(t_command));
+
+	// First arg is a command
+	cmd->cmd = args[0];
+	cmd->args = args;
+
+	return (cmd);
 }
