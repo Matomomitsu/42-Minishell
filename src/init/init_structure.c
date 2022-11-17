@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 10:39:42 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/17 14:13:23 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	init_structure(t_data *data, char **envp)
 		return (false);
 
 	data->user_input = NULL;
+	data->command = NULL;
 	return (true);
 }
 

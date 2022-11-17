@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 10:34:32 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/17 15:10:10 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,22 @@
 
 # define OLD_PWD "OLDPWD"
 
+typedef struct s_command
+{
+	char	*cmd;
+	char	**args;
+}	t_command;
+
 typedef struct s_data
 {
-	// bool		interactive;
-	// t_token		*token;
 	char		*user_input;
 	char		**env;
 	char		*work_dir;
 	char		*old_work_dir;
-	// t_command	*cmd;
-	pid_t		pid;
+	t_command	*command;
 }	t_data;
+
+
 
 /******************************************************************************/
 /*Begin - Initialization*/
@@ -130,6 +135,13 @@ void	cmd_pwd(void);
  */
 void	cmd_env(t_data *data);
 
+/**
+ * @brief Builtins - Command Change Directory.
+ * 
+ * @param data
+ */
+void	cmd_cd(t_data *data);
+
 /******************************************************************************/
 /*End - Builtins*/
 /******************************************************************************/
@@ -144,6 +156,8 @@ void	cmd_env(t_data *data);
  * @param ptr Pointer to be free.
  */
 void	free_ptr(void *ptr);
+
+char	**split_args(char *command);
 
 /******************************************************************************/
 /*End - Utils*/
