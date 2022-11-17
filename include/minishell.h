@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 10:10:23 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/17 10:34:32 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,16 @@
 
 # define INV_ARGS "Invalid Arguments\n"
 
+# define OLD_PWD "OLDPWD"
+
 typedef struct s_data
 {
 	// bool		interactive;
 	// t_token		*token;
 	char		*user_input;
 	char		**env;
-	char		*working_dir;
-	char		*old_working_dir;
+	char		*work_dir;
+	char		*old_work_dir;
 	// t_command	*cmd;
 	pid_t		pid;
 }	t_data;
@@ -59,11 +61,11 @@ typedef struct s_data
 int		init(int argc, char **argv, char **envp);
 
 /**
- * @brief Initialize structure.
- * @param data
- * @param envp Environment pointer variable
- * @return true
- * @return false
+ * @brief Initialize the structure of minishell
+ * @param data TypeDef in MiniShell
+ * @param envp Pointer to Environment variables
+ * @return true - Success
+ * @return false - Problem
  */
 bool	init_structure(t_data *data, char **envp);
 
