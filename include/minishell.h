@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 09:10:55 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/17 10:10:23 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,19 @@ char	*get_env_var_value(char **env, char *var);
  * @return Index inside the environment variables
  */
 int		get_env_var_index(char **env, char *var);
+
+/**
+ * @brief Count the number of environment variable
+ * @param envp Pointer to Environment variables
+ * @return int - Number or variables
+ */
+int	env_var_count(char **envp);
+
+/**
+ * @brief Update or insert a new environment variable.
+ * @return true (success) false (failed)
+ */
+bool	set_env_var(t_data *data, char *key, char *value);
 /******************************************************************************/
 /*End - Env*/
 /******************************************************************************/
