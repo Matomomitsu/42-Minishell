@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 09:02:21 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/17 09:10:55 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ void	free_ptr(void *ptr);
 /******************************************************************************/
 /*Begin - Env*/
 /******************************************************************************/
-
 /**
  * @brief Will try to find the variable in environment variable
  * @param env All the environment variables
@@ -159,6 +158,13 @@ void	free_ptr(void *ptr);
  */
 char	*get_env_var_value(char **env, char *var);
 
+/**
+ * @brief Will try to find the variable in environment variable
+ * @param env All the environment variables
+ * @param var Variable to search
+ * @return Index inside the environment variables
+ */
+int		get_env_var_index(char **env, char *var);
 /******************************************************************************/
 /*End - Env*/
 /******************************************************************************/
