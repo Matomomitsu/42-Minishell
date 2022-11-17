@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 08:36:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 09:09:55 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/17 09:13:30 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ int	get_env_var_index(char **env, char *var)
 		index++;
 	}
 	free_ptr(tmp);
-	return (NULL);
+	return (-1);
 }
