@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/17 08:52:21 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/17 09:12:52 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ PATH_SRC 		= ./src/
 PATH_MAIN 		= $(PATH_SRC)main/
 PATH_INIT 		= $(PATH_SRC)init/
 PATH_UTIL 		= $(PATH_SRC)util/
+PATH_ENV 		= $(PATH_SRC)env/
 PATH_BUILTINS 	= $(PATH_SRC)builtins/
 PATH_OBJS 		= ./objs/
 
@@ -50,6 +51,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_UTIL)exit.c \
 		$(PATH_UTIL)signal.c \
 		$(PATH_UTIL)ft_free.c \
+		$(PATH_ENV)env.c \
 		$(PATH_BUILTINS)builtins_handler.c \
 		$(PATH_BUILTINS)cmd_exit.c \
 		$(PATH_BUILTINS)cmd_pwd.c \
@@ -69,6 +71,7 @@ $(PATH_OBJS)%.o: $(PATH_SRC)%.c
 	@mkdir -p $(PATH_OBJS)main/
 	@mkdir -p $(PATH_OBJS)init/
 	@mkdir -p $(PATH_OBJS)util/
+	@mkdir -p $(PATH_OBJS)env/
 	@mkdir -p $(PATH_OBJS)builtins/
 	@$(CC) $(CFLAGS) $(INCLUDE) -I. -c $< -o $@
 
