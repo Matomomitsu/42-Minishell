@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:02:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 15:45:13 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 15:51:04 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	is_valid_var_name(char *name)
 	i = 0;
 	if (!ft_isalpha(name[i]) && name[i] != '_')
 		return (false);
-	while (name[i])
+	while (name[i] && name[i] != '=')
 	{
 		if (!ft_isalnum(name[i]) && name[i] != '_')
 			return (false);

@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 14:39:53 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 16:02:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,11 +220,18 @@ bool	set_env_var(t_data *data, char *key, char *value);
 void	env_var_remove(t_data *data, int index);
 
 /**
- * @brief Builting Export - Just one argument, just export all variables.
+ * @brief Builtins Export - Just one argument, just export all variables.
  * Sortable and with 'declare -x'
- *
  */
 void	cmd_export(t_data *data);
+
+/**
+ * @brief Realloc memory to Environment variable
+ * @param data Data structure
+ * @param size Size / number of variables
+ * @return char** -> New char
+ */
+char	**env_var_realloc(t_data *data, int size);
 
 /******************************************************************************/
 /*End - Env*/

@@ -6,13 +6,11 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 08:36:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 09:29:19 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 16:02:45 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static char	**env_var_realloc(t_data *data, int size);
 
 /**
  * TODO: Variable tmp free - OK
@@ -99,13 +97,7 @@ int	env_var_count(char **envp)
 	return (count);
 }
 
-/**
- * @brief Realloc memory to Environment variable
- * @param data Data structure
- * @param size Size / number of variables
- * @return char** -> New char
- */
-static char	**env_var_realloc(t_data *data, int size)
+char	**env_var_realloc(t_data *data, int size)
 {
 	char	**new_env_var;
 	int		i;
