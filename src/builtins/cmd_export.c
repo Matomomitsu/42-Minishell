@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:53:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 15:33:04 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 16:41:31 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	cmd_export(t_data *data)
 				// exit(EXIT_FAILURE);
 			}
 			set_env_var(data, key_value[0], key_value[1]);
-			//  TODO: JÁ FAZER O FREE LOGO NA SEQUENCIA
 		}
 		index++;
 	}
