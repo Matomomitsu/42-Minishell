@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 08:36:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 19:52:26 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 09:00:36 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*get_env_var_value(char **env, char *var)
 {
 	int		i;
 	char	*tmp;
+	char	*result;
 
 	i = 0;
 	tmp = ft_strjoin(var, "="); // TODO: Free OK
@@ -25,10 +26,11 @@ char	*get_env_var_value(char **env, char *var)
 		return (NULL);
 	while (env[i])
 	{
-		if (ft_strncmp(tmp, env[i], ft_strlen(tmp) == 0))
+		if (ft_strncmp(tmp, env[i], ft_strlen(tmp)) == 0)
 		{
 			free_ptr(tmp);
-			return (ft_strchr(env[i], '=') + 1);
+			result = ft_strchr(env[i], '=') + 1;
+			return (result);
 		}
 		i++;
 	}
@@ -47,7 +49,7 @@ int	get_env_var_index(char **env, char *var)
 		return (-1);
 	while (env[index])
 	{
-		if (ft_strncmp(tmp, env[index], ft_strlen(tmp) == 0))
+		if (ft_strncmp(tmp, env[index], ft_strlen(tmp)) == 0)
 		{
 			free_ptr(tmp);
 			return (index);
