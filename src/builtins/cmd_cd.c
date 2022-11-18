@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 19:37:15 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 09:12:21 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	update_work_dir_var(t_data *data, char *path);
  * 1) Verify more than 1 param
  * 2) cd / cd [space] / cd -- / cd $HOME => Redirect to home
  * 3) cd - => Redirect to old path
+ * TODO: cd $HOME Is NOT Working
  */
 void	cmd_cd(t_data *data)
 {
