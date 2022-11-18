@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/18 10:03:39 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/18 11:19:39 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_UTIL)ft_free.c \
 		$(PATH_UTIL)split_args.c \
 		$(PATH_ENV)env.c \
+		$(PATH_ENV)env_partial.c \
 		$(PATH_BUILTINS)builtins_handler.c \
 		$(PATH_BUILTINS)cmd_exit.c \
 		$(PATH_BUILTINS)cmd_pwd.c \

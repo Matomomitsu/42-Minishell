@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 09:38:22 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 11:14:24 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,14 @@ int		env_var_count(char **envp);
  * @return false - Failed
  */
 bool	set_env_var(t_data *data, char *key, char *value);
+
+/**
+ * @brief Will remove a variable environment based on this index
+ * @param data Structure of MiniShell
+ * @param index Index to remove
+ */
+void	env_var_remove(t_data *data, int index);
+
 /******************************************************************************/
 /*End - Env*/
 /******************************************************************************/
