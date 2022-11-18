@@ -6,15 +6,12 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/16 11:24:45 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 09:38:22 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-// # define BUFFER_SIZE 1024;
-// # define TOK_BUFSIZE 64;
-// # define TOK_DELIM " \t\r\n\a"
 # define MAX_PATH 4096
 
 # include "./libft.h"
@@ -34,16 +31,22 @@
 
 # define INV_ARGS "Invalid Arguments\n"
 
+# define OLD_PWD "OLDPWD"
+# define PWD "PWD"
+
+typedef struct s_command
+{
+	char	*cmd;
+	char	**args;
+}	t_command;
+
 typedef struct s_data
 {
-	// bool		interactive;
-	// t_token		*token;
 	char		*user_input;
 	char		**env;
-	char		*working_dir;
-	char		*old_working_dir;
-	// t_command	*cmd;
-	pid_t		pid;
+	char		*work_dir;
+	char		*old_work_dir;
+	t_command	*command;
 }	t_data;
 
 typedef struct s_cmd
@@ -76,11 +79,11 @@ typedef struct s_cmds
 int		init(int argc, char **argv, char **envp);
 
 /**
- * @brief Initialize structure.
- * @param data
- * @param envp Environment pointer variable
- * @return true
- * @return false
+ * @brief Initialize the structure of minishell
+ * @param data TypeDef in MiniShell
+ * @param envp Pointer to Environment variables
+ * @return true - Success
+ * @return false - Problem
  */
 bool	init_structure(t_data *data, char **envp);
 
@@ -145,8 +148,74 @@ void	cmd_pwd(void);
  */
 void	cmd_env(t_data *data);
 
+/** TODO: Verificar se há mais possitilidades aqui (passar parâmetros que nao
+ * foi atendido ainda)
+ * @brief Builtins - Command Change Directory.
+ * @param data
+ */
+void	cmd_cd(t_data *data);
+
 /******************************************************************************/
 /*End - Builtins*/
+/******************************************************************************/
+
+/******************************************************************************/
+/*Begin - Utils*/
+/******************************************************************************/
+
+/**
+ * @brief Deallocate memory from a pointer. Update the variable to NULL
+ * (good pattern)
+ * @param ptr Pointer to be free.
+ */
+void	free_ptr(void *ptr);
+
+char	**split_args(char *command);
+
+/******************************************************************************/
+/*End - Utils*/
+/******************************************************************************/
+
+/******************************************************************************/
+/*Begin - Env*/
+/******************************************************************************/
+/**
+ * @brief Will try to find the variable in environment variable
+ * @param env All the environment variables
+ * @param var Variable to search
+ * @return Value of the variable
+ */
+char	*get_env_var_value(char **env, char *var);
+
+/**
+ * @brief Will try to find the variable in environment variable
+ * @param env All the environment variables
+ * @param var Variable to search
+ * @return Index inside the environment variables (-1) if there is no variable
+ * with this name
+ */
+int		get_env_var_index(char **env, char *var);
+
+/**
+ * @brief Count the number of environment variable
+ * @param envp Pointer to Environment variables
+ * @return int - Number or variables
+ */
+int		env_var_count(char **envp);
+
+/**
+ * @brief Update or insert a new environment variable. Value may be null if
+ * the variable was not found.
+ * If Index is positive, the variable exist! Otherwise, will be a new variable.
+ * @param data Structure of MiniShell
+ * @param key key of variable
+ * @param value value of variable
+ * @return true - Success
+ * @return false - Failed
+ */
+bool	set_env_var(t_data *data, char *key, char *value);
+/******************************************************************************/
+/*End - Env*/
 /******************************************************************************/
 
 #endif
