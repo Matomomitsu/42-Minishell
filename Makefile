@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/18 11:19:39 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/18 11:54:08 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_BUILTINS)cmd_pwd.c \
 		$(PATH_BUILTINS)cmd_cd.c \
 		$(PATH_BUILTINS)cmd_env.c \
+		$(PATH_BUILTINS)cmd_export.c \
 		$(PATH_BUILTINS)cmd_unset.c \
 		$(PATH_BUILTINS)cmd_echo.c
 

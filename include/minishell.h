@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 11:44:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 13:47:45 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,13 @@ bool	set_env_var(t_data *data, char *key, char *value);
  * @param index Index to remove
  */
 void	env_var_remove(t_data *data, int index);
+
+/**
+ * @brief Builting Export - Just one argument, just export all variables.
+ * Sortable and with 'declare -x'
+ *
+ */
+void	cmd_export(t_data *data);
 
 /******************************************************************************/
 /*End - Env*/
