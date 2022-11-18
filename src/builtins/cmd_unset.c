@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:02:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 11:45:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 15:45:13 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	cmd_unset(t_data *data)
 		{
 			ft_putstr_fd("Minishell: unset: not a valid identifier\n",
 				STDOUT_FILENO);
-			exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE); // TODO: Tem q ser exit qdo da erro?
 		}
 		else
 		{
@@ -44,9 +44,11 @@ bool	is_valid_var_name(char *name)
 	int	i;
 
 	i = 0;
+	if (!ft_isalpha(name[i]) && name[i] != '_')
+		return (false);
 	while (name[i])
 	{
-		if (ft_isalnum(name[i]) != 0)
+		if (!ft_isalnum(name[i]) && name[i] != '_')
 			return (false);
 		i++;
 	}
