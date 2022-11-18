@@ -46,16 +46,18 @@ typedef struct s_data
 	char		**env;
 	char		*work_dir;
 	char		*old_work_dir;
-	t_command	*command;
 }	t_data;
 
 typedef struct s_cmd
 {
+	char		*cmd;
 	char		*path;
 	char		**args;
+	char		*infile;
+	char		*outfile;
 }	t_cmd;
 
-typedef struct s_cmds
+typedef struct s_commands
 {
 	pid_t		*pid;
 	int			num_cmds;
@@ -64,7 +66,7 @@ typedef struct s_cmds
 	int			exit_value;
 	int			**pipe_fd;
 	t_cmd		*cmd;
-}	t_cmds;
+}	t_commands;
 
 /******************************************************************************/
 /*Begin - Initialization*/

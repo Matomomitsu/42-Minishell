@@ -24,6 +24,7 @@ PATH_INIT 		= $(PATH_SRC)init/
 PATH_UTIL 		= $(PATH_SRC)util/
 PATH_ENV 		= $(PATH_SRC)env/
 PATH_BUILTINS 	= $(PATH_SRC)builtins/
+PATH_LEXER		= $(PATH_SRC)lexer/
 PATH_OBJS 		= ./objs/
 
 INC_PATH 		= ./include/
@@ -58,7 +59,9 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_BUILTINS)cmd_pwd.c \
 		$(PATH_BUILTINS)cmd_cd.c \
 		$(PATH_BUILTINS)cmd_env.c \
-		$(PATH_BUILTINS)cmd_echo.c
+		$(PATH_BUILTINS)cmd_echo.c \
+		$(PATH_LEXER)lexer.c \
+		$(PATH_LEXER)complete_lexer.c \
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
