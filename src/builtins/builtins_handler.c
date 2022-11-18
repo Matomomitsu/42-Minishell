@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 15:07:52 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 11:47:48 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ bool	is_builtin(char *cmd)
 	else if (ft_strncmp(cmd, "env", 3) == 0)
 		return (true);
 	else if (ft_strncmp(cmd, "cd", 2) == 0)
+		return (true);
+	else if (ft_strncmp(cmd, "unset", 5) == 0)
 		return (true);
 	else
 	{
@@ -43,6 +45,8 @@ void	call_builtin(t_data *data)
 		cmd_env(data);
 	else if (ft_strncmp(data->command->cmd, "cd", 2) == 0)
 		cmd_cd(data);
+	else if (ft_strncmp(data->command->cmd, "unset", 5) == 0)
+		cmd_unset(data);
 	else
 	{
 		ft_putstr_fd("TODO: Must Implement!!!!\n", STDOUT_FILENO);

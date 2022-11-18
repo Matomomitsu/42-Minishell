@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 09:38:22 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 11:44:10 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,16 +146,30 @@ void	cmd_pwd(void);
 /**
  * @brief Builtins - Env - Environment Variables
  *
- * @param data
+ * @param data Structure of MiniShell
  */
 void	cmd_env(t_data *data);
 
 /** TODO: Verificar se há mais possitilidades aqui (passar parâmetros que nao
  * foi atendido ainda)
  * @brief Builtins - Command Change Directory.
- * @param data
+ * @param data Structure of MiniShell
  */
 void	cmd_cd(t_data *data);
+
+/**
+ * @brief Builtins - Unset Variables
+ * @param data Structure of MiniShell
+ */
+void	cmd_unset(t_data *data);
+
+/**
+ * @brief Verify if the name of variable is a valid name
+ * @param name
+ * @return true
+ * @return false
+ */
+bool	is_valid_var_name(char *name);
 
 /******************************************************************************/
 /*End - Builtins*/
@@ -216,6 +230,14 @@ int		env_var_count(char **envp);
  * @return false - Failed
  */
 bool	set_env_var(t_data *data, char *key, char *value);
+
+/**
+ * @brief Will remove a variable environment based on this index
+ * @param data Structure of MiniShell
+ * @param index Index to remove
+ */
+void	env_var_remove(t_data *data, int index);
+
 /******************************************************************************/
 /*End - Env*/
 /******************************************************************************/
