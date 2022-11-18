@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 13:47:45 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 14:39:53 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,10 @@ void	cmd_pwd(void);
 
 /**
  * @brief Builtins - Env - Environment Variables
- *
  * @param data Structure of MiniShell
+ * @param exp_no_arg Export With no args - Show env with a pre-fix
  */
-void	cmd_env(t_data *data);
+void	cmd_env(t_data *data, bool exp_no_arg);
 
 /** TODO: Verificar se há mais possitilidades aqui (passar parâmetros que nao
  * foi atendido ainda)

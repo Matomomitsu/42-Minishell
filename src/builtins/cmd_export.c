@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:53:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 13:49:16 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 14:41:34 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	cmd_export(t_data *data)
 {
 	if (!data->command->args[1])
 	{
-		printf("oi");
+		cmd_env(data, true);
 	}
 }
