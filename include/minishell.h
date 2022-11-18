@@ -46,6 +46,23 @@ typedef struct s_data
 	pid_t		pid;
 }	t_data;
 
+typedef struct s_cmd
+{
+	char		*path;
+	char		**args;
+}	t_cmd;
+
+typedef struct s_cmds
+{
+	pid_t		*pid;
+	int			num_cmds;
+	int			num_exec;
+	char		**paths;
+	int			exit_value;
+	int			**pipe_fd;
+	t_cmd		*cmd;
+}	t_cmds;
+
 /******************************************************************************/
 /*Begin - Initialization*/
 /******************************************************************************/
