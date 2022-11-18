@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 14:13:23 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 08:08:32 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	init_structure(t_data *data, char **envp)
 
 /**
  * @brief Will initialize PWD and update OLDPWD in data structure.
- * Verify fi OLDPWD exist in ENVP
+ * Verify if OLDPWD exist in ENVP
  * @param data
  * @return true
  * @return false
@@ -47,13 +47,9 @@ static bool	init_pwd(t_data *data)
 		return (false);
 
 	if (get_env_var_index(data->env, OLD_PWD) != -1)
-	{
 		data->old_work_dir = ft_strdup(get_env_var_value(data->env, OLD_PWD));
-	}
 	else
-	{
 		data->old_work_dir = ft_strdup(cwd);
-	}
 	return (true);
 }
 
