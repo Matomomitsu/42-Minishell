@@ -6,15 +6,12 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/17 19:18:49 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 09:38:22 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-// # define BUFFER_SIZE 1024;
-// # define TOK_BUFSIZE 64;
-// # define TOK_DELIM " \t\r\n\a"
 # define MAX_PATH 4096
 
 # include "./libft.h"
@@ -51,8 +48,6 @@ typedef struct s_data
 	char		*old_work_dir;
 	t_command	*command;
 }	t_data;
-
-
 
 /******************************************************************************/
 /*Begin - Initialization*/
@@ -179,7 +174,8 @@ char	*get_env_var_value(char **env, char *var);
  * @brief Will try to find the variable in environment variable
  * @param env All the environment variables
  * @param var Variable to search
- * @return Index inside the environment variables
+ * @return Index inside the environment variables (-1) if there is no variable
+ * with this name
  */
 int		get_env_var_index(char **env, char *var);
 
@@ -188,10 +184,12 @@ int		get_env_var_index(char **env, char *var);
  * @param envp Pointer to Environment variables
  * @return int - Number or variables
  */
-int	env_var_count(char **envp);
+int		env_var_count(char **envp);
 
 /**
- * @brief Update or insert a new environment variable.
+ * @brief Update or insert a new environment variable. Value may be null if
+ * the variable was not found.
+ * If Index is positive, the variable exist! Otherwise, will be a new variable.
  * @param data Structure of MiniShell
  * @param key key of variable
  * @param value value of variable

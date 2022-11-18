@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 08:08:32 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 09:33:36 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ bool	init_structure(t_data *data, char **envp)
 		return (false);
 	if (!init_pwd(data))
 		return (false);
-
 	data->user_input = NULL;
 	data->command = NULL;
 	return (true);
@@ -45,7 +44,6 @@ static bool	init_pwd(t_data *data)
 	data->work_dir = ft_strdup(cwd);
 	if (!data->work_dir)
 		return (false);
-
 	if (get_env_var_index(data->env, OLD_PWD) != -1)
 		data->old_work_dir = ft_strdup(get_env_var_value(data->env, OLD_PWD));
 	else
@@ -59,20 +57,19 @@ static bool	init_pwd(t_data *data)
  * @param envp Pointer to Environment variables
  * @return true - Success
  * @return false - Problem
+ * TODO: Necessário dar free nas variáveis: data->env[i] | data->env
  */
 static bool	init_env(t_data *data, char **envp)
 {
 	int	i;
 
-	// TODO: Tem q dar free neste maluco aqui
-	// +1 pq senão vai dar segment fault
 	data->env = ft_calloc(env_var_count(envp) + 1, sizeof * data->env);
 	if (!data->env)
 		return (false);
 	i = 0;
 	while (envp[i])
 	{
-		data->env[i] = ft_strdup(envp[i]); // TODO: Dar free aqui tb!
+		data->env[i] = ft_strdup(envp[i]);
 		i++;
 	}
 	return (true);

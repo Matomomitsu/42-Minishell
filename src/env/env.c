@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 08:36:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 09:00:36 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 09:29:19 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static char	**env_var_realloc(t_data *data, int size);
 
+/**
+ * TODO: Variable tmp free - OK
+ */
 char	*get_env_var_value(char **env, char *var)
 {
 	int		i;
@@ -21,7 +24,7 @@ char	*get_env_var_value(char **env, char *var)
 	char	*result;
 
 	i = 0;
-	tmp = ft_strjoin(var, "="); // TODO: Free OK
+	tmp = ft_strjoin(var, "=");
 	if (!tmp)
 		return (NULL);
 	while (env[i])
@@ -66,10 +69,9 @@ bool	set_env_var(t_data *data, char *key, char *value)
 	int		index;
 
 	index = get_env_var_index(data->env, key);
-	if (value == NULL) // Will be null when there is no variable yetS
+	if (value == NULL)
 		value = "";
 	temp = ft_strjoin("=", value);
-	// If variable exist
 	if (index != -1 && data->env[index])
 	{
 		free_ptr(data->env[index]);
@@ -77,13 +79,11 @@ bool	set_env_var(t_data *data, char *key, char *value)
 	}
 	else
 	{
-		// New Var
 		index = env_var_count(data->env);
 		data->env = env_var_realloc(data, (index + 1));
 		if (!data->env)
 			return (false);
 		data->env[index] = ft_strjoin(key, temp);
-
 	}
 	free_ptr(temp);
 	return (true);
