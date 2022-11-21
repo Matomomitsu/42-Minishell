@@ -19,7 +19,7 @@ typedef struct s_index_data
 	size_t	j;
 }	t_index_data;
 
-void	handle_quotes(t_index_data *data, const char *s, t_data *data)
+static void	handle_quotes(t_index_data *data, const char *s, t_data *data)
 {
 	if (s[data->i++] == '\'')
 	{
@@ -36,7 +36,7 @@ void	handle_quotes(t_index_data *data, const char *s, t_data *data)
 				data->i++;
 		}
 	}
-	if (!s[data->i] && (s[data->i++] == '\"' || s[data->i++] == '\''))
+	if (!s[data->i - 1])
 		data->exit_value = 2;
 }
 
@@ -48,7 +48,7 @@ static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 	while (s[i_data->i] && s[i_data->i] != '&' && s[i_data->i++] != '|')
 	{
 		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
-			handle_quotes(i_data, s);
+			handle_quotes(i_data, s, data);
 		if (s[i_data->i])
 			i_data->malloc_size++;
 	}

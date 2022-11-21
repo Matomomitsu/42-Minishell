@@ -19,7 +19,7 @@ typedef struct s_index_data
 	size_t	j;
 }	t_index_data;
 
-void	copy_quotes(char const *s, char **str, t_index_data *data)
+static void	copy_quotes(char const *s, char **str, t_index_data *data)
 {
 	if (s[data->i++] == '\'')
 	{
