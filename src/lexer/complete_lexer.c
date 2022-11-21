@@ -15,17 +15,34 @@
 typedef struct s_index_data
 {
 	size_t	i;
-	size_t	malloc_size;
+	size_t	o;
 	size_t	j;
 }	t_index_data;
+
+void	copy_quotes(char const *s, char **str, t_index_data *data)
+{
+	if (s[data->i++] == '\'')
+	{
+		while (s[data->i] && s[data->i++] != '\'')
+			data->malloc_size++;
+	}
+	else
+	{
+		while (s[data->i] && s[data->i++] != '\"')
+		{
+			if (s[data->i] != '$')
+				data->malloc_size++;
+			else
+				data->i++;
+		}
+	}
+}
 
 static void	ft_strcpy(char const *s, char **str, t_index_data *data)
 {
 	char	special_char;
 
 	data->o = 0;
-	while (s[data->i] && s[data->i] == ' ')
-		data->i++;
 	while (s[data->i] && s[data->i] != ' ')
 	{
 		if (s[data->i] == '\'' || s[data->i] == '\"')
