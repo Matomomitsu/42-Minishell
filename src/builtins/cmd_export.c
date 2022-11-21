@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:53:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 16:41:31 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 07:47:40 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	cmd_export(t_data *data)
 {
-	char **key_value;
-	int	index;
+	char	**key_value;
+	int		index;
 
 	index = 1;
 	if (!data->command->args[1])
@@ -29,7 +29,6 @@ void	cmd_export(t_data *data)
 			{
 				ft_putstr_fd("Minishell: export: not a valid identifier\n",
 					STDOUT_FILENO);
-				// exit(EXIT_FAILURE);
 			}
 			set_env_var(data, key_value[0], key_value[1]);
 		}

@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:02:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 15:51:04 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 07:46:51 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /** TODO: Centralizar estas msgs de erro
  * TODO: Tem que colocar o valor digitado no retorno do erro
+ * TODO: Ainda tenho dúvidas se qdo houver erro é necessário sair do minishell
 */
 void	cmd_unset(t_data *data)
 {
@@ -27,7 +28,6 @@ void	cmd_unset(t_data *data)
 		{
 			ft_putstr_fd("Minishell: unset: not a valid identifier\n",
 				STDOUT_FILENO);
-			exit(EXIT_FAILURE); // TODO: Tem q ser exit qdo da erro?
 		}
 		else
 		{
