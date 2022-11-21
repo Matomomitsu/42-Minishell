@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 16:02:01 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 08:26:44 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,11 @@ bool	is_builtin(char *argv);
 void	call_builtin(t_data *data);
 
 /**
- * @brief Builtins Echo - Represent the Echo command in shell
- *
+ * @brief Builtins Echo - Represent the Echo command in shell (-n flag enabled)
+ * @param data Structure of MiniShell
  */
-void	cmd_echo(void);
+
+void	cmd_echo(t_data *data);
 
 /**
  * @brief Builtins Exit - Responsible to close the program.
