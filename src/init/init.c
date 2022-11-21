@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 11:50:35 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:35:06 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,5 @@ static t_command	*init_cmd_args(t_data *data, char **args)
 	ft_memset(cmd, 0, sizeof(t_command));
 	cmd->cmd = args[0];
 	cmd->args = args;
-	// free(args);
 	return (cmd);
 }
