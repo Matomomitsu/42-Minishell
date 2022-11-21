@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 08:36:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 16:02:45 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:24:08 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	set_env_var(t_data *data, char *key, char *value)
 	index = get_env_var_index(data->env, key);
 	if (value == NULL)
 		value = "";
-	temp = ft_strjoin("=", value);
+	temp = ft_strjoin("=", value); // [temp] Aberto
 	if (index != -1 && data->env[index])
 	{
 		free_ptr(data->env[index]);
@@ -78,12 +78,12 @@ bool	set_env_var(t_data *data, char *key, char *value)
 	else
 	{
 		index = env_var_count(data->env);
-		data->env = env_var_realloc(data, (index + 1));
+		data->env = env_var_realloc(data, (index + 1)); // será liberado lá dentro
 		if (!data->env)
 			return (false);
-		data->env[index] = ft_strjoin(key, temp);
+		data->env[index] = ft_strjoin(key, temp); // Será fechado na saída
 	}
-	free_ptr(temp);
+	free_ptr(temp); // [temp] fechado
 	return (true);
 }
 
@@ -112,6 +112,6 @@ char	**env_var_realloc(t_data *data, int size)
 		free_ptr(data->env[i]);
 		i++;
 	}
-	free_ptr(data->env);
+	free_ptr(data->env); //
 	return (new_env_var);
 }

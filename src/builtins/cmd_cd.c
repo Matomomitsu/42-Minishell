@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 09:24:05 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 11:49:11 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	cmd_cd(t_data *data)
 {
 	char	*path;
 
+	// TODO: Com o tempo isso vai ficar errado. Sujeira na variável
 	if (data->command->args[2])
 	{
 		ft_putstr_fd("Minishell: cd: too manyargments\n", STDOUT_FILENO);
