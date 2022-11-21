@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 12:37:15 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:38:54 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h> // signal
 # include <sys/types.h>
 # include <dirent.h>
-# include <stdio.h> // TODO: Allowed?
+# include <stdio.h>
 # include <stdbool.h>
 
 # include <readline/readline.h> // Readline

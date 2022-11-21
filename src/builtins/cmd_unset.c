@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:02:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 07:46:51 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:42:06 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /** TODO: Centralizar estas msgs de erro
  * TODO: Tem que colocar o valor digitado no retorno do erro
- * TODO: Ainda tenho dúvidas se qdo houver erro é necessário sair do minishell
 */
 void	cmd_unset(t_data *data)
 {

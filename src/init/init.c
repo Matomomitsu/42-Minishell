@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 12:35:06 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:43:30 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ static bool	valid_args(int argc)
  * @brief Initialize prompt. Will read a input from user and wait the command.
  * Add a History of execution too.
  * @param data
- * TODO: Melhorar o Free que estou dando só no userinput. Tem que ter 1 método
- * 'clean all'
  */
 static void	init_prompt(t_data *data)
 {
@@ -92,7 +90,6 @@ static void	exec_cmd(t_data *data)
  * 'First token' will be the command. The others will be the args
  * @param command Object Structure Command
  * @param args All the token passed in command
- * TODO: Must free the variable cmd
  */
 static t_command	*init_cmd_args(t_data *data, char **args)
 {

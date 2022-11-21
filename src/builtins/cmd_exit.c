@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:14:03 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 10:41:15 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:41:45 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /** TODO: Verificar se é necessário colocar msg de saída?
  * TODO: Verificar o código de saída que é necessário atribuir
- * TODO: Necessário dar free em algo?
  * @brief
  *
  */
