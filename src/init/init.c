@@ -75,6 +75,19 @@ static void	init_prompt(t_data *data)
  * @brief Verify what type of command is comming
  * @param data
  */
+
+static void	free_cmds(t_commands *cmds)
+{
+	int	i;
+
+	i = 0;
+	while (cmds->cmds[i] != NULL)
+		free(cmds->cmds[i++]);
+	free(cmds->cmds[i]);
+	free(cmds->cmds);
+	free(cmds);
+}
+
 static void	exec_cmd(t_data *data)
 {
 	t_commands	*cmds;
@@ -82,7 +95,7 @@ static void	exec_cmd(t_data *data)
 
 	data->old_exit_value = data->exit_value;
 	data->exit_value = 0;
-	cmds = ft_calloc(1 , sizeof(cmds));
+	cmds = (t_commands *)ft_calloc(1 , sizeof(t_commands));
 	cmds->cmds = lexer(data->user_input, data);
 	if (data->exit_value == 0)
 	{
@@ -90,8 +103,8 @@ static void	exec_cmd(t_data *data)
 		data->command = init_cmd_args(data, args);
 		if (is_builtin(data->command->cmd))
 			call_builtin(data);
+		free_cmds(cmds);
 	}
-	free(cmds);
 }
 
 /**
