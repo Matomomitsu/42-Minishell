@@ -23,15 +23,15 @@ static void	copy_quotes(char const *s, char **str, t_index_data *data)
 {
 	if (s[data->i++] == '\'')
 	{
-		while (s[data->i] && s[data->i++] != '\'')
-			data->malloc_size++;
+		while (s[data->i] && s[data->i] != '\'')
+			str[data->j][data->o++] = s[data->i++];
 	}
 	else
 	{
-		while (s[data->i] && s[data->i++] != '\"')
+		while (s[data->i] && s[data->i] != '\"')
 		{
 			if (s[data->i] != '$')
-				data->malloc_size++;
+				str[data->j][data->o++] = s[data->i++];
 			else
 				data->i++;
 		}
@@ -40,22 +40,12 @@ static void	copy_quotes(char const *s, char **str, t_index_data *data)
 
 static void	ft_strcpy(char const *s, char **str, t_index_data *data)
 {
-	char	special_char;
-
 	data->o = 0;
-	while (s[data->i] && s[data->i] != ' ')
+	while (s[data->i] && s[data->i] != '&' && s[data->i] != '|')
 	{
 		if (s[data->i] == '\'' || s[data->i] == '\"')
-		{
-			special_char = s[data->i++];
-			while (s[data->i] && s[data->i] != special_char)
-				str[data->j][data->o++] = s[data->i++];
-			if (s[data->i] != ' ')
-				while (s[data->i] && s[data->i] != special_char)
-					str[data->j][data->o++] = s[data->i++];
-			data->i++;
-		}
-		else
+			handle_quotes(data, s, data);
+		if (s[data->i])
 			str[data->j][data->o++] = s[data->i++];
 	}
 }
