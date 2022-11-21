@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/18 16:06:55 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/21 10:13:21 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,10 @@ CC = gcc
 # TODO: RollBack this flags
 # CFLAGS = -g -Wall -Werror -Wextra
 CFLAGS = -g
+
+#Chedk Leak memory
+LEAK = valgrind --leak-check=full --show-leak-kinds=all \
+	--trace-children=yes --suppressions=readline.supp --track-origins=yes -s
 
 RM				= rm -rf
 NO_PRINT	= --no-print-directory
@@ -101,5 +105,8 @@ re: fclean all
 
 run:
 	make re && ./minishell
+
+valgrind:
+	$(LEAK) ./minishell
 
 .PHONY: all run re clean fclean

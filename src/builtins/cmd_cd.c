@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 09:24:05 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:41:30 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	cmd_cd(t_data *data)
  * @param path This must be necessary because some times the path will be
  * different from data structure (Shortcuts).
  * TODO: Msg incompleta. Tem que ter o path passado (no erro)
- * TODO: Dar Free na variável path_pwd
  */
 static void	change_dir(t_data *data, char *path)
 {
@@ -66,7 +65,6 @@ static void	change_dir(t_data *data, char *path)
 	{
 		ft_putstr_fd("Minishell: cd: No such file or directory\n",
 			STDOUT_FILENO);
-		exit(EXIT_FAILURE);
 	}
 	getcwd(buff, MAX_PATH);
 	path_pwd = ft_strdup(buff);
@@ -78,7 +76,6 @@ static void	change_dir(t_data *data, char *path)
  * structure too.
  * @param data
  * @param path
- * TODO: Pending Free nas 2 variávveis do data: old_work_dir e work_dir
  */
 static void	update_work_dir_var(t_data *data, char *path)
 {

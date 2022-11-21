@@ -6,15 +6,12 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 08:36:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 16:02:45 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:42:19 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/**
- * TODO: Variable tmp free - OK
- */
 char	*get_env_var_value(char **env, char *var)
 {
 	int		i;

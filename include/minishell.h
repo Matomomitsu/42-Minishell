@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 08:26:44 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:38:54 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h> // signal
 # include <sys/types.h>
 # include <dirent.h>
-# include <stdio.h> // TODO: Allowed?
+# include <stdio.h>
 # include <stdbool.h>
 
 # include <readline/readline.h> // Readline
@@ -115,8 +115,9 @@ void	cmd_echo(t_data *data);
 
 /**
  * @brief Builtins Exit - Responsible to close the program.
-  */
-void	cmd_exit(void);
+ * @param data Structure of MiniShell
+ */
+void	cmd_exit(t_data *data);
 
 /**
  * @brief Builtins - PWD Command - Print working directory
@@ -168,7 +169,26 @@ bool	is_valid_var_name(char *name);
  */
 void	free_ptr(void *ptr);
 
+/**
+ * @brief
+ *
+ * @param data
+ * @param exit_shell
+ */
+void	free_data(t_data *data, bool exit_shell);
+
+/**
+ * @brief Temporary variable - Split the command with spaces
+ * @param command
+ * @return char**
+ */
 char	**split_args(char *command);
+
+/**
+ * @brief deallocate memory to pointer to pointer.
+ * @param arr_str Pointer to pointer variable to be freed
+ */
+void	free_array_str(char **arr_str);
 
 /******************************************************************************/
 /*End - Utils*/
