@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:14:03 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/16 11:20:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 10:41:15 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
  * @brief
  *
  */
-void	cmd_exit(void)
+void	cmd_exit(t_data *data)
 {
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	free_data(data, true);
 	exit(EXIT_SUCCESS);
 }
