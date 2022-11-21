@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 11:44:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/18 16:02:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,10 @@ void	cmd_pwd(void);
 
 /**
  * @brief Builtins - Env - Environment Variables
- *
  * @param data Structure of MiniShell
+ * @param exp_no_arg Export With no args - Show env with a pre-fix
  */
-void	cmd_env(t_data *data);
+void	cmd_env(t_data *data, bool exp_no_arg);
 
 /** TODO: Verificar se há mais possitilidades aqui (passar parâmetros que nao
  * foi atendido ainda)
@@ -218,6 +218,20 @@ bool	set_env_var(t_data *data, char *key, char *value);
  * @param index Index to remove
  */
 void	env_var_remove(t_data *data, int index);
+
+/**
+ * @brief Builtins Export - Just one argument, just export all variables.
+ * Sortable and with 'declare -x'
+ */
+void	cmd_export(t_data *data);
+
+/**
+ * @brief Realloc memory to Environment variable
+ * @param data Data structure
+ * @param size Size / number of variables
+ * @return char** -> New char
+ */
+char	**env_var_realloc(t_data *data, int size);
 
 /******************************************************************************/
 /*End - Env*/
