@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/18 11:19:39 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/21 10:13:21 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,10 @@ CC = gcc
 # CFLAGS = -g -Wall -Werror -Wextra
 CFLAGS = -g
 
+#Chedk Leak memory
+LEAK = valgrind --leak-check=full --show-leak-kinds=all \
+	--trace-children=yes --suppressions=readline.supp --track-origins=yes -s
+
 RM				= rm -rf
 NO_PRINT	= --no-print-directory
 READ_LN		= -l readline
@@ -51,7 +55,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init_structure.c \
 		$(PATH_UTIL)exit.c \
 		$(PATH_UTIL)signal.c \
-		$(PATH_UTIL)ft_free.c \
+		$(PATH_UTIL)sanitization.c \
 		$(PATH_UTIL)split_args.c \
 		$(PATH_ENV)env.c \
 		$(PATH_ENV)env_partial.c \
@@ -60,6 +64,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_BUILTINS)cmd_pwd.c \
 		$(PATH_BUILTINS)cmd_cd.c \
 		$(PATH_BUILTINS)cmd_env.c \
+		$(PATH_BUILTINS)cmd_export.c \
 		$(PATH_BUILTINS)cmd_unset.c \
 		$(PATH_BUILTINS)cmd_echo.c \
 		$(PATH_LEXER)lexer.c \
@@ -104,5 +109,8 @@ re: fclean all
 
 run:
 	make re && ./minishell
+
+valgrind:
+	$(LEAK) ./minishell
 
 .PHONY: all run re clean fclean

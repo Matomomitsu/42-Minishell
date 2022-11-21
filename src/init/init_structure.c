@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 09:33:36 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:42:45 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static bool	init_pwd(t_data *data)
  * @param envp Pointer to Environment variables
  * @return true - Success
  * @return false - Problem
- * TODO: Necessário dar free nas variáveis: data->env[i] | data->env
  */
 static bool	init_env(t_data *data, char **envp)
 {

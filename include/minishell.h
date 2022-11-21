@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 11:44:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:38:54 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h> // signal
 # include <sys/types.h>
 # include <dirent.h>
-# include <stdio.h> // TODO: Allowed?
+# include <stdio.h>
 # include <stdbool.h>
 
 # include <readline/readline.h> // Readline
@@ -129,15 +129,17 @@ bool	is_builtin(char *argv);
 void	call_builtin(t_data *data);
 
 /**
- * @brief Builtins Echo - Represent the Echo command in shell
- *
+ * @brief Builtins Echo - Represent the Echo command in shell (-n flag enabled)
+ * @param data Structure of MiniShell
  */
-void	cmd_echo(void);
+
+void	cmd_echo(t_data *data);
 
 /**
  * @brief Builtins Exit - Responsible to close the program.
-  */
-void	cmd_exit(void);
+ * @param data Structure of MiniShell
+ */
+void	cmd_exit(t_data *data);
 
 /**
  * @brief Builtins - PWD Command - Print working directory
@@ -148,10 +150,10 @@ void	cmd_pwd(void);
 
 /**
  * @brief Builtins - Env - Environment Variables
- *
  * @param data Structure of MiniShell
+ * @param exp_no_arg Export With no args - Show env with a pre-fix
  */
-void	cmd_env(t_data *data);
+void	cmd_env(t_data *data, bool exp_no_arg);
 
 /** TODO: Verificar se há mais possitilidades aqui (passar parâmetros que nao
  * foi atendido ainda)
@@ -189,7 +191,26 @@ bool	is_valid_var_name(char *name);
  */
 void	free_ptr(void *ptr);
 
+/**
+ * @brief
+ *
+ * @param data
+ * @param exit_shell
+ */
+void	free_data(t_data *data, bool exit_shell);
+
+/**
+ * @brief Temporary variable - Split the command with spaces
+ * @param command
+ * @return char**
+ */
 char	**split_args(char *command);
+
+/**
+ * @brief deallocate memory to pointer to pointer.
+ * @param arr_str Pointer to pointer variable to be freed
+ */
+void	free_array_str(char **arr_str);
 
 /******************************************************************************/
 /*End - Utils*/
@@ -240,6 +261,20 @@ bool	set_env_var(t_data *data, char *key, char *value);
  * @param index Index to remove
  */
 void	env_var_remove(t_data *data, int index);
+
+/**
+ * @brief Builtins Export - Just one argument, just export all variables.
+ * Sortable and with 'declare -x'
+ */
+void	cmd_export(t_data *data);
+
+/**
+ * @brief Realloc memory to Environment variable
+ * @param data Data structure
+ * @param size Size / number of variables
+ * @return char** -> New char
+ */
+char	**env_var_realloc(t_data *data, int size);
 
 /******************************************************************************/
 /*End - Env*/
