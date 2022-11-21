@@ -46,6 +46,8 @@ typedef struct s_data
 	char		**env;
 	char		*work_dir;
 	char		*old_work_dir;
+	int			old_exit_value;
+	t_command	*command;
 	int			exit_value;
 }	t_data;
 
@@ -63,8 +65,8 @@ typedef struct s_commands
 	pid_t		*pid;
 	int			num_cmds;
 	int			num_exec;
+	char		**cmds;
 	char		**paths;
-	int			exit_value;
 	int			**pipe_fd;
 	t_cmd		*cmd;
 }	t_commands;
@@ -238,6 +240,17 @@ bool	set_env_var(t_data *data, char *key, char *value);
  * @param index Index to remove
  */
 void	env_var_remove(t_data *data, int index);
+
+/******************************************************************************/
+/*End - Env*/
+/******************************************************************************/
+
+/******************************************************************************/
+/*Begin - Lexer*/
+/******************************************************************************/
+
+char	**lexer(char const *s, t_data *data);
+void	putchar_str(char const *s, char **str, size_t countc);
 
 /******************************************************************************/
 /*End - Env*/

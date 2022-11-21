@@ -44,10 +44,15 @@ static void	ft_strcpy(char const *s, char **str, t_index_data *data)
 	while (s[data->i] && s[data->i] != '&' && s[data->i] != '|')
 	{
 		if (s[data->i] == '\'' || s[data->i] == '\"')
-			handle_quotes(data, s, data);
+			copy_quotes(s, str, data);
 		if (s[data->i])
 			str[data->j][data->o++] = s[data->i++];
 	}
+	data->i++;
+	if (s[data->i - 1] == '&' && s[data->i] == '&')
+		data->i++;
+	if (s[data->i - 1] == '|' && s[data->i] == '|')
+		data->i++;
 }
 
 void	putchar_str(char const *s, char **str, size_t countc)

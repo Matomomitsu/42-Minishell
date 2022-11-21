@@ -19,31 +19,29 @@ typedef struct s_index_data
 	size_t	j;
 }	t_index_data;
 
-static void	handle_quotes(t_index_data *data, const char *s, t_data *data)
+static void	handle_quotes(t_index_data *i_data, const char *s, t_data *data)
 {
-	if (s[data->i++] == '\'')
+	if (s[i_data->i++] == '\'')
 	{
-		while (s[data->i] && s[data->i++] != '\'')
-			data->malloc_size++;
+		while (s[i_data->i] && s[i_data->i++] != '\'')
+			i_data->malloc_size++;
 	}
 	else
 	{
-		while (s[data->i] && s[data->i++] != '\"')
+		while (s[i_data->i] && s[i_data->i++] != '\"')
 		{
-			if (s[data->i] != '$')
-				data->malloc_size++;
+			if (s[i_data->i] != '$')
+				i_data->malloc_size++;
 			else
-				data->i++;
+				i_data->i++;
 		}
 	}
-	if (!s[data->i - 1])
+	if (!s[i_data->i - 1])
 		data->exit_value = 2;
 }
 
 static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 {
-	char	special_char;
-
 	i_data->malloc_size = 0;
 	while (s[i_data->i] && s[i_data->i] != '&' && s[i_data->i++] != '|')
 	{
@@ -52,12 +50,15 @@ static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 		if (s[i_data->i])
 			i_data->malloc_size++;
 	}
-	if (s[i_data->i - 1] == '&' && s[i_data->i] == '&')
-		i_data->i++;
+	if (s[i_data->i] == '&' && s[i_data->i + 1] == '&')
+		i_data->i = i_data->i + 2;
 	if (s[i_data->i - 1] == '|' && s[i_data->i] == '|')
 		i_data->i++;
 	if (s[i_data->i] == '|' || s[i_data->i] == '&')
+	{
 		data->exit_value = 2;
+		i_data->i++;
+	}
 }
 
 static size_t	ft_countstr(char const *s, t_data *data)
@@ -69,7 +70,7 @@ static size_t	ft_countstr(char const *s, t_data *data)
 	counter = 0;
 	while (s[i_data.i])
 	{
-		get_size(&i_data, s);
+		get_size(&i_data, s, data);
 		if (i_data.malloc_size != 0)
 			counter++;
 	}

@@ -64,7 +64,6 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_BUILTINS)cmd_echo.c \
 		$(PATH_LEXER)lexer.c \
 		$(PATH_LEXER)complete_lexer.c \
-		$(PATH_LEXER)handle_quotes.c \
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
@@ -81,6 +80,7 @@ $(PATH_OBJS)%.o: $(PATH_SRC)%.c
 	@mkdir -p $(PATH_OBJS)util/
 	@mkdir -p $(PATH_OBJS)env/
 	@mkdir -p $(PATH_OBJS)builtins/
+	@mkdir -p $(PATH_OBJS)lexer/
 	@$(CC) $(CFLAGS) $(INCLUDE) -I. -c $< -o $@
 
 # Libft rule

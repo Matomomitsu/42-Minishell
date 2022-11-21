@@ -79,12 +79,21 @@ static void	init_prompt(t_data *data)
  */
 static void	exec_cmd(t_data *data)
 {
-	char	**args;
+	t_commands	*cmds;
+	char		**args;
 
-	args = split_args(data->user_input);
-	data->command = init_cmd_args(data, args);
-	if (is_builtin(data->command->cmd))
-		call_builtin(data);
+	data->old_exit_value = data->exit_value;
+	data->exit_value = 0;
+	cmds = ft_calloc(1 , sizeof(cmds));
+	cmds->cmds = lexer(data->user_input, data);
+	if (data->exit_value == 0)
+	{
+		args = split_args(data->user_input);
+		data->command = init_cmd_args(data, args);
+		if (is_builtin(data->command->cmd))
+			call_builtin(data);
+	}
+	free(cmds);
 }
 
 /**
