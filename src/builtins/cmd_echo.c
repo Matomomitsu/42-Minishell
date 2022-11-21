@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 09:08:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 09:20:39 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 09:26:21 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	cmd_echo(t_data *data)
 	bool	option_n;
 
 	option_n = exist_n_option(data);
-
 	if (option_n == true)
 		i = 2;
 	else
@@ -49,7 +48,7 @@ void	cmd_echo(t_data *data)
  */
 static bool	exist_n_option(t_data *data)
 {
-	if (ft_strncmp(data->user_input,"echo -n", 7) == 0)
+	if (ft_strncmp(data->user_input, "echo -n", 7) == 0)
 		return (true);
 	return (false);
 }
