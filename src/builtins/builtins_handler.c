@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/18 14:40:06 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 08:25:43 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	is_builtin(char *cmd)
 void	call_builtin(t_data *data)
 {
 	if (ft_strncmp(data->command->cmd, "echo", 4) == 0)
-		cmd_echo();
+		cmd_echo(data);
 	else if (ft_strncmp(data->command->cmd, "exit", 4) == 0)
 		cmd_exit();
 	else if (ft_strncmp(data->command->cmd, "pwd", 3) == 0)
