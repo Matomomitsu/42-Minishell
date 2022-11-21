@@ -46,6 +46,7 @@ typedef struct s_data
 	char		**env;
 	char		*work_dir;
 	char		*old_work_dir;
+	int			exit_value;
 }	t_data;
 
 typedef struct s_cmd

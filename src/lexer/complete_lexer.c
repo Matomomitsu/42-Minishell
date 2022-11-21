@@ -15,7 +15,7 @@
 typedef struct s_index_data
 {
 	size_t	i;
-	size_t	o;
+	size_t	malloc_size;
 	size_t	j;
 }	t_index_data;
 

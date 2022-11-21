@@ -19,43 +19,37 @@ typedef struct s_index_data
 	size_t	j;
 }	t_index_data;
 
-static void	get_size(t_index_data *data, const char *s)
+static void	get_size(t_index_data *i_data, const char *s)
 {
 	char	special_char;
 
-	data->malloc_size = 0;
-	while (s[data->i] && s[data->i] == ' ')
-		data->i++;
-	while (s[data->i] && s[data->i] != ' ')
+	i_data->malloc_size = 0;
+	while (s[i_data->i] && s[i_data->i] != '&' && s[i_data->i++] != '|')
 	{
-		if (s[data->i] == '\'' || s[data->i] == '\"')
-		{
-			special_char = s[data->i++];
-			while (s[data->i] && s[data->i++] != special_char)
-				data->malloc_size++;
-			if (s[data->i] != ' ')
-				while (s[data->i] && s[data->i++] != special_char)
-					data->malloc_size++;
-		}
-		else
-		{
-			data->malloc_size++;
-			data->i++;
-		}
+		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
+			handle_quotes(i_data, s);
+		if (s[i_data->i])
+			i_data->malloc_size++;
 	}
+	if (s[i_data->i - 1] == '&' && s[i_data->i] == '&')
+		i_data->i++;
+	if (s[i_data->i - 1] == '|' && s[i_data->i] == '|')
+		i_data->i++;
+	if (s[i_data->i] == '|' || s[i_data->i] == '&')
+		exit_value(1)
 }
 
 static size_t	ft_countstr(char const *s)
 {
-	t_index_data	data;
+	t_index_data	i_data;
 	size_t			counter;
 
-	data.i = 0;
+	i_data.i = 0;
 	counter = 0;
-	while (s[data.i])
+	while (s[i_data.i])
 	{
-		get_size(&data, s);
-		if (data.malloc_size != 0)
+		get_size(&i_data, s);
+		if (i_data.malloc_size != 0)
 			counter++;
 	}
 	return (counter);

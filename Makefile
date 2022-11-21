@@ -60,14 +60,11 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_BUILTINS)cmd_pwd.c \
 		$(PATH_BUILTINS)cmd_cd.c \
 		$(PATH_BUILTINS)cmd_env.c \
-<<<<<<< HEAD
+		$(PATH_BUILTINS)cmd_unset.c \
 		$(PATH_BUILTINS)cmd_echo.c \
 		$(PATH_LEXER)lexer.c \
 		$(PATH_LEXER)complete_lexer.c \
-=======
-		$(PATH_BUILTINS)cmd_unset.c \
-		$(PATH_BUILTINS)cmd_echo.c
->>>>>>> main
+		$(PATH_LEXER)handle_quotes.c \
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
