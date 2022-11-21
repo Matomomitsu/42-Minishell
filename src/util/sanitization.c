@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:06:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 11:32:50 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/21 11:41:34 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	free_data(t_data *data, bool exit_shell)
 			if (data->command->args)
 				free_array_str(data->command->args);
 			// if (data->command->cmd)
-			// 	free_ptr(data->command->cmd);
+			 	//free_ptr(data->command->cmd);
+			free_ptr(data->command);
 		}
 
 		if (exit_shell)
