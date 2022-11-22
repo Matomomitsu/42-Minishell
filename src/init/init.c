@@ -88,7 +88,7 @@ static void	exec_cmd(t_data *data)
 	data->old_exit_value = data->exit_value;
 	data->exit_value = 0;
 	cmds = (t_commands *)ft_calloc(1 , sizeof(t_commands));
-	cmds->cmds = lexer(data->user_input, data);
+	init_cmds(t_data *data, t_commands *cmds);
 	if (data->exit_value == 0)
 	{
 		args = split_args(data->user_input);

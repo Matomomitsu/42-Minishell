@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-char	**get_paths(char **env)
+static char	**get_paths(char **env)
 {
 	size_t	i;
 	char	**paths;
