@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 08:01:16 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 09:13:10 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ static bool	valid_args(int argc)
 static void	init_prompt(t_data *data)
 {
 	char	*prompt;
+
 	while (true)
 	{
 		signals_handler();
-		// data->user_input = readline("@MINI-SHELL>$");
 		prompt = get_prompt(data);
 		data->user_input = readline(prompt);
 		free_ptr(prompt);

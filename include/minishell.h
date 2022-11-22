@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 07:29:01 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 09:09:26 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@
 
 # define OLD_PWD "OLDPWD"
 # define PWD "PWD"
+
+// Color prompt
+# define GREEN "\001\033[0;92m\002"
+# define DEFAULT "\001\033[0;39m\002"
+# define YELLOW "\001\033[0;93m\002"
 
 typedef struct s_command
 {
