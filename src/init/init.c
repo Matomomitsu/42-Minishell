@@ -76,18 +76,6 @@ static void	init_prompt(t_data *data)
  * @param data
  */
 
-static void	free_cmds(t_commands *cmds)
-{
-	int	i;
-
-	i = 0;
-	while (cmds->cmds[i] != NULL)
-		free(cmds->cmds[i++]);
-	free(cmds->cmds[i]);
-	free(cmds->cmds);
-	free(cmds);
-}
-
 static void	exec_cmd(t_data *data)
 {
 	t_commands	*cmds;
