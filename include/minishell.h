@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 13:56:07 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 15:06:57 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <sys/types.h>
 # include <dirent.h>
 # include <stdio.h>
-# include <stdbool.h>
 # include <errno.h> // errno
 
 # include <readline/readline.h> // Readline
@@ -144,8 +143,9 @@ void	cmd_echo(t_data *data);
 /**
  * @brief Builtins Exit - Responsible to close the program.
  * @param data Structure of MiniShell
+ * @return int - exit code
  */
-void	cmd_exit(t_data *data);
+int		cmd_exit(t_data *data);
 
 /**
  * @brief Builtins - PWD Command - Print working directory
@@ -161,7 +161,7 @@ int		cmd_pwd(void);
  */
 int	cmd_env(t_data *data, bool exp_no_arg);
 
-/** 
+/**
  * @brief Builtins - Command Change Directory.
  * @param data Structure of MiniShell
  */

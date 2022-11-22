@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:30:32 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 13:37:44 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 14:11:27 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdbool.h>
 
 /**
 * @brief The isalpha() function checks whether a character is an alphabet or not.
@@ -107,6 +108,14 @@ char	*ft_strrchr(char *str, int argument);
  * @return int
  */
 int		ft_isspace(int c);
+
+/**
+ * @brief Like AtoInt, this will change Asc to Long.
+ * @param str str to verify
+ * @param error Updated if some error was catch
+ * @return int
+*/
+int		ft_ato_long(const char *str, bool *error);
 
 /**
 * @brief Compares at most the first n bytes of str1 and str2.
