@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 10:44:22 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 11:09:19 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ bool	is_builtin(char *cmd)
 	}
 }
 
-void	call_builtin(t_data *data)
+int	call_builtin(t_data *data)
 {
+	//TODO:Lins - Todos métodos precisam de retorno
+	int cmd_code;
+
+	cmd_code = CMD_NOT_FOUND;
 	if (ft_strncmp(data->command->cmd, "echo", 4) == 0)
 		cmd_echo(data);
 	else if (ft_strncmp(data->command->cmd, "exit", 4) == 0)
@@ -56,4 +60,5 @@ void	call_builtin(t_data *data)
 		ft_putstr_fd("TODO: Must Implement!!!!\n", STDOUT_FILENO);
 		exit(EXIT_SUCCESS);
 	}
+	return (cmd_code);
 }

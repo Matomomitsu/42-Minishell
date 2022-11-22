@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 10:20:46 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 11:05:05 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	init_prompt(t_data *data)
 		exec_cmd(data);
 		free_data(data, false);
 	}
-	rl_clear_history();
+	exit_shell(data, g_status_code);
 }
 
 /** TODO: Provavelmente este método ficará em outra classe apartada
@@ -105,5 +105,6 @@ static t_command	*init_cmd_args(t_data *data, char **args)
 	ft_memset(cmd, 0, sizeof(t_command));
 	cmd->cmd = args[0];
 	cmd->args = args;
+	cmd->args_count = 1; // TODO:LINS Implementar
 	return (cmd);
 }

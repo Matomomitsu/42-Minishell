@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 10:19:34 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 11:07:58 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define OLD_PWD "OLDPWD"
 # define PWD "PWD"
 
+# define CMD_NOT_FOUND 127
+
 // Color prompt
 # define GREEN "\001\033[0;92m\002"
 # define DEFAULT "\001\033[0;39m\002"
@@ -43,6 +45,7 @@ typedef struct s_command
 {
 	char	*cmd;
 	char	**args;
+	int		args_count;
 }	t_command;
 
 typedef struct s_data
@@ -118,8 +121,9 @@ bool	is_builtin(char *argv);
 /**
  * @brief Call correct function from Builtin command
  * @param data Structure of MiniShell
+ * @return code of execution. Success or error
  */
-void	call_builtin(t_data *data);
+int		call_builtin(t_data *data);
 
 /**
  * @brief Builtins Echo - Represent the Echo command in shell (-n flag enabled)
@@ -145,8 +149,9 @@ void	cmd_pwd(void);
  * @brief Builtins - Env - Environment Variables
  * @param data Structure of MiniShell
  * @param exp_no_arg Export With no args - Show env with a pre-fix
+ * @return integer - success or error
  */
-void	cmd_env(t_data *data, bool exp_no_arg);
+int	cmd_env(t_data *data, bool exp_no_arg);
 
 /** TODO: Verificar se há mais possitilidades aqui (passar parâmetros que nao
  * foi atendido ainda)
