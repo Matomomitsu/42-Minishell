@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 11:07:58 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 11:18:16 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,16 @@ int		init(int argc, char **argv, char **envp);
  */
 bool	init_structure(t_data *data, char **envp);
 
+/**
+ * @brief Return the number of arguments passed in the command
+ * @param args TypeDef in MiniShell
+ * @return int - Count Number of arguments. The Command argument will be ignored
+ * in this method. Return just arguments
+ */
+int	args_count(char **args);
+
 /******************************************************************************/
-/*Begin - Initialization*/
+/*End - Initialization*/
 /******************************************************************************/
 
 /**
