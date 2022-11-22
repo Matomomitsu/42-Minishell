@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 12:38:54 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 07:29:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,13 @@ void	exit_shell(int status_code);
  * 	(Ctrl+\) Change - Before: Terminate. Now: Ignore
  */
 void	signals_handler(void);
+
+/**
+ * @brief Get the prompt text of mini-shell
+ * @param data Structure of MiniShell
+ * @return char* Text of prompt
+ */
+char *get_prompt(t_data *data);
 
 /******************************************************************************/
 /*Begin - Builtins*/
