@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 14:04:52 by rlins             #+#    #+#              #
-#    Updated: 2022/11/12 17:02:56 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/22 13:38:28 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC_FILES =	ft_atoi.c \
 			ft_strchr.c \
 			ft_strdup.c \
 			ft_strjoin.c \
+			ft_isspace.c \
 			ft_strlcat.c \
 			ft_strlcpy.c \
 			ft_strlen.c \
