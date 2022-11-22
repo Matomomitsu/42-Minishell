@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/21 10:13:21 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/22 07:16:15 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,11 @@ INCLUDE = -I $(INC_PATH) -I $(LIBFT_PATH)
 
 SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init.c \
+<<<<<<< HEAD
 		$(PATH_INIT)init_cmds.c \
+=======
+		$(PATH_INIT)prompt.c \
+>>>>>>> main
 		$(PATH_INIT)init_structure.c \
 		$(PATH_UTIL)exit.c \
 		$(PATH_UTIL)signal.c \
