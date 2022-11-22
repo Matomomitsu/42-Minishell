@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 11:40:30 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 12:09:06 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void	cmd_cd(t_data *data);
  * @brief Builtins - Unset Variables
  * @param data Structure of MiniShell
  */
-void	cmd_unset(t_data *data);
+int		cmd_unset(t_data *data);
 
 /**
  * @brief Verify if the name of variable is a valid name

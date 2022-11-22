@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 11:09:19 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 12:10:22 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	call_builtin(t_data *data)
 	else if (ft_strncmp(data->command->cmd, "pwd", 3) == 0)
 		cmd_pwd();
 	else if (ft_strncmp(data->command->cmd, "env", 3) == 0)
-		cmd_env(data, false);
+		cmd_code = cmd_env(data, false);
 	else if (ft_strncmp(data->command->cmd, "cd", 2) == 0)
 		cmd_cd(data);
 	else if (ft_strncmp(data->command->cmd, "unset", 5) == 0)
-		cmd_unset(data);
+		cmd_code = cmd_unset(data);
 	else if (ft_strncmp(data->command->cmd, "export", 6) == 0)
 		cmd_export(data);
 	else
