@@ -53,9 +53,11 @@ static void	ft_strcpy(char const *s, char **str, t_index_data *data)
 		data->i++;
 	if (s[data->i - 1] == '|' && s[data->i] == '|')
 		data->i++;
+	while (s[data->i] == ' ')
+		data->i++;
 }
 
-void	putchar_str(char const *s, char **str, size_t countc)
+void	putchar_lexer(char const *s, char **str, size_t countc)
 {
 	t_index_data	data;
 

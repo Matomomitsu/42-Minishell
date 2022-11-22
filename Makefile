@@ -25,6 +25,7 @@ PATH_UTIL 		= $(PATH_SRC)util/
 PATH_ENV 		= $(PATH_SRC)env/
 PATH_BUILTINS 	= $(PATH_SRC)builtins/
 PATH_LEXER		= $(PATH_SRC)lexer/
+PATH_PARSER		= $(PATH_SRC)parser/
 PATH_OBJS 		= ./objs/
 
 INC_PATH 		= ./include/
@@ -52,6 +53,7 @@ INCLUDE = -I $(INC_PATH) -I $(LIBFT_PATH)
 
 SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init.c \
+		$(PATH_INIT)init_cmds.c \
 		$(PATH_INIT)init_structure.c \
 		$(PATH_UTIL)exit.c \
 		$(PATH_UTIL)signal.c \
@@ -69,6 +71,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_BUILTINS)cmd_echo.c \
 		$(PATH_LEXER)lexer.c \
 		$(PATH_LEXER)complete_lexer.c \
+		$(PATH_PARSER)parser.c
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
@@ -86,6 +89,7 @@ $(PATH_OBJS)%.o: $(PATH_SRC)%.c
 	@mkdir -p $(PATH_OBJS)env/
 	@mkdir -p $(PATH_OBJS)builtins/
 	@mkdir -p $(PATH_OBJS)lexer/
+	@mkdir -p $(PATH_OBJS)parser/
 	@$(CC) $(CFLAGS) $(INCLUDE) -I. -c $< -o $@
 
 # Libft rule

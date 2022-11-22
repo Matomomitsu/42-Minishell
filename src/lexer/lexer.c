@@ -36,7 +36,7 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_data *data)
 				i_data->i++;
 		}
 	}
-	if (!s[i_data->i - 1])
+	if (!s[i_data->i])
 		data->exit_value = 2;
 }
 
@@ -53,6 +53,8 @@ static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 	if (s[i_data->i] == '&' && s[i_data->i + 1] == '&')
 		i_data->i = i_data->i + 2;
 	if (s[i_data->i - 1] == '|' && s[i_data->i] == '|')
+		i_data->i++;
+	while (s[i_data->i++] == ' ')
 		i_data->i++;
 	if (s[i_data->i] == '|' || s[i_data->i] == '&')
 	{
@@ -112,6 +114,6 @@ char	**lexer(char const *s, t_data *data)
 	splitstr(str, s, countstr, data);
 	if (str == NULL)
 		return (NULL);
-	putchar_str(s, str, countstr);
+	putchar_lexer(s, str, countstr);
 	return (str);
 }

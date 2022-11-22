@@ -63,3 +63,20 @@ void	free_array_str(char **arr_str)
 		arr_str = NULL;
 	}
 }
+
+void	free_cmds(t_commands *cmds)
+{
+	int	i;
+
+	i = 0;
+	while (cmds->cmds[i])
+		free(cmds->cmds[i++]);
+	free(cmds->cmds[i]);
+	free(cmds->cmds);
+	i = 0;
+	while (cmds->paths[i])
+		free(cmds->paths[i++]);
+	free(cmds->paths[i]);
+	free(cmds->paths);
+	free(cmds);
+}

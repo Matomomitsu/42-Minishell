@@ -285,7 +285,7 @@ char	**env_var_realloc(t_data *data, int size);
 /******************************************************************************/
 
 char	**lexer(char const *s, t_data *data);
-void	putchar_str(char const *s, char **str, size_t countc);
+void	putchar_lexer(char const *s, char **str, size_t countc);
 
 /******************************************************************************/
 /*End - Env*/
