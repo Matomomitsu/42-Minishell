@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 09:08:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 09:26:21 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 12:34:11 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	cmd_echo(t_data *data)
 		i++;
 	}
 	if (option_n == false)
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO); // TODO:Lins - Refaatorar isso
 }
 
 /**

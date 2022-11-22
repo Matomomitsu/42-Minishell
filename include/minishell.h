@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 12:09:06 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 12:38:08 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@
 # include <dirent.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <errno.h> // errno
 
 # include <readline/readline.h> // Readline
 # include <readline/history.h> // History
 
-# define INV_ARGS "Invalid Arguments\n"
+# define INV_ARGS "Invalid Arguments\n" //TODO:Lins - Refatorar isso
 
 # define OLD_PWD "OLDPWD"
 # define PWD "PWD"
@@ -148,10 +149,9 @@ void	cmd_exit(t_data *data);
 
 /**
  * @brief Builtins - PWD Command - Print working directory
- * MaxSize:
- * https://serverfault.com/questions/9546/filename-length-limits-on-linux
+ * @return Integer - Result of command
  */
-void	cmd_pwd(void);
+int		cmd_pwd(void);
 
 /**
  * @brief Builtins - Env - Environment Variables

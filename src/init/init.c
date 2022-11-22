@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 11:17:24 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 12:35:24 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	init_prompt(t_data *data)
 		}
 		else
 		{
-			ft_putstr_fd("exit\n", STDOUT_FILENO);
+			ft_putendl_fd("exit", STDOUT_FILENO);
 			exit(1);
 		}
 		exec_cmd(data);
