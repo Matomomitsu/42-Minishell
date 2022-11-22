@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 12:38:08 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 13:56:07 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,12 +161,11 @@ int		cmd_pwd(void);
  */
 int	cmd_env(t_data *data, bool exp_no_arg);
 
-/** TODO: Verificar se há mais possitilidades aqui (passar parâmetros que nao
- * foi atendido ainda)
+/** 
  * @brief Builtins - Command Change Directory.
  * @param data Structure of MiniShell
  */
-void	cmd_cd(t_data *data);
+int	cmd_cd(t_data *data);
 
 /**
  * @brief Builtins - Unset Variables
