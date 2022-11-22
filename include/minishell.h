@@ -34,6 +34,11 @@
 # define OLD_PWD "OLDPWD"
 # define PWD "PWD"
 
+// Color prompt
+# define GREEN "\001\033[0;92m\002"
+# define DEFAULT "\001\033[0;39m\002"
+# define YELLOW "\001\033[0;93m\002"
+
 typedef struct s_command
 {
 	char	*cmd;
@@ -91,6 +96,8 @@ int		init(int argc, char **argv, char **envp);
  * @return false - Problem
  */
 bool	init_structure(t_data *data, char **envp);
+
+char	*get_prompt(t_data *data);
 
 void	init_cmds(t_data *data, t_commands *cmds);
 
