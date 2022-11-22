@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 09:13:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 10:20:46 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	init(int argc, char **argv, char **envp)
 	t_data	data;
 
 	if (valid_args(argc) == false || init_structure(&data, envp) == false)
-		exit_shell(EXIT_FAILURE);
+		exit_shell(NULL, EXIT_FAILURE);
 	init_prompt(&data);
 	return (0);
 }

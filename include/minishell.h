@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 09:09:26 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 10:19:34 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_data
 	t_command	*command;
 }	t_data;
 
+extern int g_status_code;
+
 /******************************************************************************/
 /*Begin - Initialization*/
 /******************************************************************************/
@@ -82,8 +84,9 @@ bool	init_structure(t_data *data, char **envp);
 /**
  * @brief Responsible to exit / finish the shell.
  * @param status_code
+ * @param data Data to clean up
  */
-void	exit_shell(int status_code);
+void	exit_shell(t_data *data, int status_code);
 
 /**
  * @brief Manipulate Signals in MiniShell

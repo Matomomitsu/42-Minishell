@@ -6,11 +6,13 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 09:16:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/13 16:48:17 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 10:04:16 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int g_status_code;
 
 /**
  * @brief Main Class of program
