@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 11:18:16 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 11:40:30 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,17 @@ char	**split_args(char *command);
  * @param arr_str Pointer to pointer variable to be freed
  */
 void	free_array_str(char **arr_str);
+
+/**
+ * @brief Handler error messages when commands will be applied.
+ *
+ * @param cmd Command applied
+ * @param detail Details. Not required
+ * @param msg Msg of error
+ * @param status_code Will be the return, get in method called
+ * @return int Code of error returned
+ */
+int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
 
 /******************************************************************************/
 /*End - Utils*/

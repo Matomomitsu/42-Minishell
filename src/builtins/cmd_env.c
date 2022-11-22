@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:51:53 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 11:09:58 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 11:41:42 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	cmd_env(t_data *data, bool exp_no_arg)
 	int	i;
 
 	if (data->command->args_count > 1)
-		// TODO:LINS MENSAGEM DE ERRO
+		return (error_msg_cmd("env", NULL, "too many arguments", 2));
 
 	if (!data->env)
 		return (EXIT_FAILURE);
