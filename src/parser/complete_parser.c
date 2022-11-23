@@ -12,14 +12,14 @@
 
 #include <minishell.h>
 
-typedef struct s_index_data
+typedef struct s_temp_index
 {
 	size_t	i;
 	size_t	o;
 	size_t	j;
-}	t_index_data;
+}	t_temp_index;
 
-static void	ft_strcpy(char const *s, char **str, t_index_data *data)
+static void	ft_strcpy(char const *s, char **str, t_temp_index *data)
 {
 	char	special_char;
 
@@ -40,9 +40,9 @@ static void	ft_strcpy(char const *s, char **str, t_index_data *data)
 	}
 }
 
-void	putchar_str(char const *s, char **str, size_t countc)
+void	putchar_parser(char const *s, char **str, size_t countc)
 {
-	t_index_data	data;
+	t_temp_index	data;
 
 	data.i = 0;
 	data.j = 0;

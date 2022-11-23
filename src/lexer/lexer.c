@@ -12,13 +12,6 @@
 
 #include <minishell.h>
 
-typedef struct s_index_data
-{
-	size_t	i;
-	size_t	malloc_size;
-	size_t	j;
-}	t_index_data;
-
 static void	handle_quotes(t_index_data *i_data, const char *s, t_data *data)
 {
 	if (s[i_data->i++] == '\'')
@@ -29,12 +22,7 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_data *data)
 	else
 	{
 		while (s[i_data->i] && s[i_data->i++] != '\"')
-		{
-			if (s[i_data->i] != '$')
 				i_data->malloc_size++;
-			else
-				i_data->i++;
-		}
 	}
 	if (!s[i_data->i])
 		data->exit_value = 2;
@@ -54,13 +42,7 @@ static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 		i_data->i = i_data->i + 2;
 	if (s[i_data->i - 1] == '|' && s[i_data->i] == '|')
 		i_data->i++;
-	while (s[i_data->i++] == ' ')
-		i_data->i++;
-	if (s[i_data->i] == '|' || s[i_data->i] == '&')
-	{
-		data->exit_value = 2;
-		i_data->i++;
-	}
+	lexer_errors(i_data, s, data);
 }
 
 static size_t	ft_countstr(char const *s, t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 12:38:54 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 20:34:53 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@
 
 # define OLD_PWD "OLDPWD"
 # define PWD "PWD"
+
+# define STDOUT	STDOUT_FILENO
+# define STDIN	STDIN_FILENO
+# define STDERR	STDERR_FILENO
 
 // Color prompt
 # define GREEN "\001\033[0;92m\002"
@@ -75,6 +79,13 @@ typedef struct s_commands
 	int			**pipe_fd;
 	t_cmd		*cmd;
 }	t_commands;
+
+typedef struct s_index_data
+{
+	size_t	i;
+	size_t	malloc_size;
+	size_t	j;
+}	t_index_data;
 
 /******************************************************************************/
 /*Begin - Initialization*/
@@ -297,9 +308,20 @@ char	**env_var_realloc(t_data *data, int size);
 
 char	**lexer(char const *s, t_data *data);
 void	putchar_lexer(char const *s, char **str, size_t countc);
+void	lexer_errors(t_index_data *i_data, const char *s, t_data *data);
 
 /******************************************************************************/
-/*End - Env*/
+/*End - Lexer*/
+/******************************************************************************/
+
+/******************************************************************************/
+/*Begin - Parser*/
+/******************************************************************************/
+
+void	putchar_parser(char const *s, char **str, size_t countc);
+
+/******************************************************************************/
+/*End - Parser*/
 /******************************************************************************/
 
 #endif

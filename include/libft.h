@@ -353,4 +353,13 @@ void	ft_putendl_fd(char *s, int fd);
 */
 void	ft_putnbr_fd(int n, int fd);
 
+// Ft_printf
+
+int		ft_printf(int fd, const char *format, ...);
+int		hex_conversion(int fd, unsigned int nb, char type);
+int		int_conversion(int fd, int nb);
+int		unsigint_conversion(int fd, unsigned int nb);
+int		str_conversion(int fd, char *str);
+int		ptr_conversion(int fd, void *ptr);
+
 #endif
