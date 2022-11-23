@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/22 07:16:15 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/22 11:38:58 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init_structure.c \
 		$(PATH_UTIL)exit.c \
 		$(PATH_UTIL)signal.c \
+		$(PATH_UTIL)error_handler.c \
 		$(PATH_UTIL)sanitization.c \
 		$(PATH_UTIL)split_args.c \
 		$(PATH_ENV)env.c \

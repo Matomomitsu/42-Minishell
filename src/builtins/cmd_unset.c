@@ -6,27 +6,26 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:02:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 12:42:06 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 12:08:53 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/** TODO: Centralizar estas msgs de erro
- * TODO: Tem que colocar o valor digitado no retorno do erro
-*/
-void	cmd_unset(t_data *data)
+int	cmd_unset(t_data *data)
 {
 	int	i;
 	int	index;
+	int	status_code;
 
+	status_code = EXIT_SUCCESS;
 	i = 1;
 	while (data->command->args[i])
 	{
 		if (is_valid_var_name(data->command->args[i]) == false)
 		{
-			ft_putstr_fd("Minishell: unset: not a valid identifier\n",
-				STDOUT_FILENO);
+			status_code = error_msg_cmd("unset", data->command->args[i],
+					"not a valid identifier", EXIT_FAILURE);
 		}
 		else
 		{
@@ -36,6 +35,7 @@ void	cmd_unset(t_data *data)
 		}
 		i++;
 	}
+	return (status_code);
 }
 
 bool	is_valid_var_name(char *name)
