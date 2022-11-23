@@ -38,6 +38,10 @@
 # define STDIN	STDIN_FILENO
 # define STDERR	STDERR_FILENO
 
+# define OR		1
+# define AND	2
+# define PIPE	3
+
 // Color prompt
 # define GREEN "\001\033[0;92m\002"
 # define DEFAULT "\001\033[0;39m\002"
@@ -76,6 +80,7 @@ typedef struct s_commands
 	int			num_exec;
 	char		**cmds;
 	char		**paths;
+	int			*operators;
 	int			**pipe_fd;
 	t_cmd		*cmd;
 }	t_commands;

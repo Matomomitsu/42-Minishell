@@ -14,6 +14,7 @@
 
 static void	handle_quotes(t_index_data *i_data, const char *s, t_data *data)
 {
+	i_data->malloc_size++;
 	if (s[i_data->i++] == '\'')
 	{
 		while (s[i_data->i] && s[i_data->i++] != '\'')
@@ -26,21 +27,27 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_data *data)
 	}
 	if (!s[i_data->i])
 		data->exit_value = 2;
+	else
+		i_data->malloc_size++;
 }
 
 static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 {
 	i_data->malloc_size = 0;
-	while (s[i_data->i] && s[i_data->i] != '&' && s[i_data->i++] != '|')
+	while (s[i_data->i] && s[i_data->i] != '&' && s[i_data->i] != '|')
 	{
 		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
 			handle_quotes(i_data, s, data);
 		if (s[i_data->i])
 			i_data->malloc_size++;
+		i_data->i++;
 	}
 	if (s[i_data->i] == '&' && s[i_data->i + 1] == '&')
 		i_data->i = i_data->i + 2;
-	if (s[i_data->i - 1] == '|' && s[i_data->i] == '|')
+	if (s[i_data->i] == '|' && s[i_data->i + 1] == '|')
+		i_data->i = i_data->i + 2;
+	if (s[i_data->i] == '|' && s[i_data->i - 1] != '|' && s[i_data->i - 1] \
+		!= '&')
 		i_data->i++;
 	lexer_errors(i_data, s, data);
 }
