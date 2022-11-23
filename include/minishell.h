@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:22:06 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:38:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_data
 	t_command	*command;
 }	t_data;
 
-extern int g_status_code;
+extern int	g_status_code;
 
 /******************************************************************************/
 /*Begin - Initialization*/
@@ -86,7 +86,7 @@ bool	init_structure(t_data *data, char **envp);
  * @return int - Count Number of arguments. The Command argument will be ignored
  * in this method. Return just arguments
  */
-int	args_count(char **args);
+int		args_count(char **args);
 
 /******************************************************************************/
 /*End - Initialization*/
@@ -112,7 +112,7 @@ void	signals_handler(void);
  * @param data Structure of MiniShell
  * @return char* Text of prompt
  */
-char *get_prompt(t_data *data);
+char	*get_prompt(t_data *data);
 
 /******************************************************************************/
 /*Begin - Builtins*/
@@ -159,13 +159,13 @@ int		cmd_pwd(void);
  * @param exp_no_arg Export With no args - Show env with a pre-fix
  * @return integer - success or error
  */
-int	cmd_env(t_data *data, bool exp_no_arg);
+int		cmd_env(t_data *data, bool exp_no_arg);
 
 /**
  * @brief Builtins - Command Change Directory.
  * @param data Structure of MiniShell
  */
-int	cmd_cd(t_data *data);
+int		cmd_cd(t_data *data);
 
 /**
  * @brief Builtins - Unset Variables
@@ -226,7 +226,7 @@ void	free_array_str(char **arr_str);
  * @param status_code Will be the return, get in method called
  * @return int Code of error returned
  */
-int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
+int		error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
 
 /******************************************************************************/
 /*End - Utils*/

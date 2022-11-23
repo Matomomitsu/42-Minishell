@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:14:03 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 15:12:28 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:34:16 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	cmd_exit(t_data *data)
 			exit_code = error_msg_cmd("exit", data->command->args[1],
 					"numeric argument required", STDERR_FILENO);
 		else if (data->command->args[2])
-			return (error_msg_cmd("exit", NULL, "too many arguments", 1));
+			return (error_msg_cmd("exit", NULL, "too many arguments",
+					EXIT_FAILURE));
 	}
 	exit_shell(data, exit_code);
 	return (STDERR_FILENO);

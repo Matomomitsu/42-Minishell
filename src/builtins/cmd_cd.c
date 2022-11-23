@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 13:56:46 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:33:31 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ int	cmd_cd(t_data *data)
 		path = get_env_var_value(data->env, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
 			return (error_msg_cmd("cd", NULL, "HOME not set", EXIT_FAILURE));
-		return(change_dir(data, path));
+		return (change_dir(data, path));
 	}
 	else if (ft_strncmp(data->command->args[1], "-", 1) == 0)
 	{
 		path = get_env_var_value(data->env, OLD_PWD);
 		if (!path)
 			return (error_msg_cmd("cd", NULL, "OLDPWD not set", EXIT_FAILURE));
-		return(change_dir(data, path));
+		return (change_dir(data, path));
 	}
 	else
-		return(change_dir(data, data->command->args[1]));
+		return (change_dir(data, data->command->args[1]));
 }
 
 /**
@@ -62,11 +62,11 @@ static int	change_dir(t_data *data, char *path)
 	char	buff[MAX_PATH];
 
 	if (chdir(path) != 0)
-		return error_msg_cmd("cd", path, strerror(errno), errno);
+		return (error_msg_cmd("cd", path, strerror(errno), errno));
 	getcwd(buff, MAX_PATH);
 	path_pwd = ft_strdup(buff);
 	update_work_dir_var(data, path_pwd);
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 /**

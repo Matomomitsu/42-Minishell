@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:21:49 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:34:32 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ bool	is_builtin(char *cmd)
 
 int	call_builtin(t_data *data)
 {
-	//TODO:Lins - Todos métodos precisam de retorno
-	int cmd_code;
+	int	cmd_code;
 
 	cmd_code = CMD_NOT_FOUND;
 	if (ft_strncmp(data->command->cmd, "echo", 4) == 0)

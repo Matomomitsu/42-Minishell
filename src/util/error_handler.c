@@ -6,14 +6,14 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:23:22 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 18:40:00 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:37:03 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 static char	*join_strs(char *str, char *add);
-static bool response_with_quotes(char *cmd);
+static bool	response_with_quotes(char *cmd);
 
 int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
 {
@@ -21,7 +21,6 @@ int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
 	bool	is_quotes;
 
 	is_quotes = response_with_quotes(cmd);
-
 	full_msg = ft_strdup("minishell: ");
 	if (cmd != NULL)
 	{
@@ -50,7 +49,7 @@ int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
  * @return true
  * @return false
  */
-static bool response_with_quotes(char *cmd)
+static bool	response_with_quotes(char *cmd)
 {
 	if (ft_strncmp(cmd, "export", 6) == 0)
 		return (true);

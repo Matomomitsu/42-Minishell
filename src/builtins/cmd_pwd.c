@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:37:20 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 12:40:08 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:34:54 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	cmd_pwd(void)
 {
-	char 	*pwd;
+	char	*pwd;
 	char	path[MAX_PATH];
 
 	pwd = getcwd(path, MAX_PATH);
