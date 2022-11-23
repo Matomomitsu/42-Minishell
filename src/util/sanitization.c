@@ -69,10 +69,13 @@ void	free_cmds(t_commands *cmds)
 	int	i;
 
 	i = 0;
-	while (cmds->cmds[i] != NULL)
-		free(cmds->cmds[i++]);
-	free(cmds->cmds[i]);
-	free(cmds->cmds);
+	if (cmds->cmds != NULL)
+	{
+		while (cmds->cmds[i] != NULL)
+			free(cmds->cmds[i++]);
+		free(cmds->cmds[i]);
+		free(cmds->cmds);
+	}
 	i = 0;
 	while (cmds->paths[i] != NULL)
 		free(cmds->paths[i++]);
