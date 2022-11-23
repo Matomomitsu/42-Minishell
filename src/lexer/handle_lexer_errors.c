@@ -12,13 +12,6 @@
 
 #include <minishell.h>
 
-typedef struct s_index_data
-{
-	size_t	i;
-	size_t	malloc_size;
-	size_t	j;
-}	t_index_data;
-
 void	lexer_errors(t_index_data *i_data, const char *s, t_data *data)
 {
 	while (s[i_data->i] == '|' || s[i_data->i] == '&' || s[i_data->i] == ' ')
