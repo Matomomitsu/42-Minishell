@@ -80,7 +80,7 @@ static void	init_prompt(t_data *data)
  * @param data
  */
 
-static void	exec_cmd(t_data *data)
+static int	exec_cmd(t_data *data)
 {
 	t_commands	*cmds;
 	char		**args;

@@ -91,9 +91,9 @@ void	init_cmds(t_data *data, t_commands *cmds)
 {
 	int		i;
 
-	cmds->cmds = lexer(data->user_input, data);
+	cmds->cmds = lexer(data->user_input, cmds);
 	i = 0;
-	if (data->exit_value == 0)
+	if (cmds->exit_value == 0)
 	{
 		while (cmds->cmds[i])
 			i++;
