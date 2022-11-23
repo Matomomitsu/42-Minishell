@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:15:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:22:06 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,7 @@ void	env_var_remove(t_data *data, int index);
  * @brief Builtins Export - Just one argument, just export all variables.
  * Sortable and with 'declare -x'
  */
-void	cmd_export(t_data *data);
+int		cmd_export(t_data *data);
 
 /**
  * @brief Realloc memory to Environment variable
