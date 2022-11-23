@@ -95,8 +95,8 @@ static void	exec_cmd(t_data *data)
 		data->command = init_cmd_args(data, args);
 		if (is_builtin(data->command->cmd))
 			call_builtin(data);
-		free_cmds(cmds);
 	}
+	free_cmds(cmds);
 }
 
 /**

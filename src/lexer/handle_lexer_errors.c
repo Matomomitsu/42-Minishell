@@ -14,6 +14,11 @@
 
 void	lexer_errors(t_index_data *i_data, const char *s, t_data *data)
 {
+	if (!s[i_data->i] && (s[i_data->i - 1] == '|' || s[i_data->i - 1] == '&'))
+		{
+			data->exit_value = 2;
+			ft_putstr_fd("-minishell: syntax error not expecting newline\n", STDERR);
+		}
 	while (s[i_data->i] == '|' || s[i_data->i] == '&' || s[i_data->i] == ' ')
 	{
 		if ((s[i_data->i] == '|' || s[i_data->i] == '&') && data->exit_value == 0)
@@ -24,10 +29,10 @@ void	lexer_errors(t_index_data *i_data, const char *s, t_data *data)
 			ft_putstr_fd("'\n", STDERR);
 		}
 		i_data->i++;
-	}
-	if (!s[i_data->i] && data->exit_value == 0)
-	{
-		data->exit_value = 2;
-		ft_putstr_fd("-minishell: syntax error not expecting newline", STDERR);
+		if (!s[i_data->i] && data->exit_value == 0)
+		{
+			data->exit_value = 2;
+			ft_putstr_fd("-minishell: syntax error not expecting newline\n", STDERR);
+		}
 	}
 }
