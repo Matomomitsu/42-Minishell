@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_pwd.c                                          :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 11:37:20 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:34:54 by rlins            ###   ########.fr       */
+/*   Created: 2022/11/22 13:35:38 by rlins             #+#    #+#             */
+/*   Updated: 2022/11/22 13:36:37 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-int	cmd_pwd(void)
+int	ft_isspace(int c)
 {
-	char	*pwd;
-	char	path[MAX_PATH];
-
-	pwd = getcwd(path, MAX_PATH);
-	if (pwd)
-	{
-		ft_putendl_fd(path, STDOUT_FILENO);
-		return (EXIT_SUCCESS);
-	}
-	error_msg_cmd("pwd", NULL, strerror(errno), errno);
-	return (EXIT_FAILURE);
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\r'
+		|| c == '\v' || c == '\f')
+		return (c);
+	return (0);
 }

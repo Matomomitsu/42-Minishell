@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:30:32 by rlins             #+#    #+#             */
-/*   Updated: 2022/04/12 19:23:40 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 14:11:27 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdbool.h>
 
 /**
 * @brief The isalpha() function checks whether a character is an alphabet or not.
@@ -82,24 +83,39 @@ int		ft_toupper(int argument);
 int		ft_tolower(int argument);
 
 /**
-* @brief Searches for the first occurrence of the character c 
+* @brief Searches for the first occurrence of the character c
 * (an unsigned char) in the string pointed to by the argument str.
 * @param str - This is the C string to be scanned.
 * @param argument This is the character to be searched in str
-* @return This returns a pointer to the first occurrence of the 
+* @return This returns a pointer to the first occurrence of the
 * character c in the string str, or NULL if the character is not found
 */
 char	*ft_strchr(const char *str, int argument);
 
 /**
-* @brief Searches for the last occurrence of the character c 
+* @brief Searches for the last occurrence of the character c
 * (an unsigned char) in the string pointed to, by the argument str.
 * @param str − This is the C string.
-* @param argument − This is the character to be located. It is passed as its int 
+* @param argument − This is the character to be located. It is passed as its int
 * promotion, but it is internally converted back to char.
 * @return pointer to the last occurrence of character in str.
 */
 char	*ft_strrchr(char *str, int argument);
+
+/**
+ * @brief Check if there is a space in this char
+ * @param c
+ * @return int
+ */
+int		ft_isspace(int c);
+
+/**
+ * @brief Like AtoInt, this will change Asc to Long.
+ * @param str str to verify
+ * @param error Updated if some error was catch
+ * @return int
+*/
+int		ft_ato_long(const char *str, bool *error);
 
 /**
 * @brief Compares at most the first n bytes of str1 and str2.
@@ -113,7 +129,7 @@ char	*ft_strrchr(char *str, int argument);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 
 /**
-* @brief The bzero() function shall place n zero-valued bytes in 
+* @brief The bzero() function shall place n zero-valued bytes in
 * the area pointed to by s.
 * @param str: An existing object that you want to fill with zeroes
 * @param len: The number of bytes to fill
@@ -132,7 +148,7 @@ void	*ft_memset(void *str, int val, size_t len);
 
 /**
 * @brief Copies n characters from memory area src to memory area dest.
-* @param dest − This is pointer to the destination array where the 
+* @param dest − This is pointer to the destination array where the
 * content is to be copied, type-casted to a pointer of type void*.
 * @param src − This is pointer to the source of data to be copied, type-casted
 * to a pointer of type void*
@@ -142,11 +158,11 @@ void	*ft_memset(void *str, int val, size_t len);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 /**
-* @brief copies n characters from str2 to str1, but for 
+* @brief copies n characters from str2 to str1, but for
 * overlapping memory blocks
-* @param des − This is a pointer to the destination array where the 
+* @param des − This is a pointer to the destination array where the
 * content is to be copied, type-casted to a pointer of type void*.
-* @param src − This is a pointer to the source of data to be copied, 
+* @param src − This is a pointer to the source of data to be copied,
 * type-casted to a pointer of type void*.
 * @param len − This is the number of bytes to be copied
 * @return void
@@ -154,13 +170,13 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *des, void *src, size_t len);
 
 /**
-* @brief takes the full size of the buffer, not only the length, 
+* @brief takes the full size of the buffer, not only the length,
 * and terminates the result with NUL as long as size is greater than 0.
 * Include a byte for the NUL in your size value.
 * @param des - Pointer to the destination area of memory
 * @param src - Pointer to the source area of memory
 * @param len - Buffer size in bytes
-* @return Total length of the string that would have been copied if 
+* @return Total length of the string that would have been copied if
 * there was unlimited space.
 */
 size_t	ft_strlcpy(char *des, const char *src, size_t len);
@@ -171,7 +187,7 @@ size_t	ft_strlcpy(char *des, const char *src, size_t len);
 * @param des - Pointer to the destination area of memory
 * @param src - Pointer to the source area of memory
 * @param len - Buffer size in bytes
-* @return Total length of the string that would have been copied if 
+* @return Total length of the string that would have been copied if
 * there was unlimited space.
 */
 size_t	ft_strlcat(char *des, const char *src, size_t len);
@@ -182,22 +198,22 @@ size_t	ft_strlcat(char *des, const char *src, size_t len);
 * @param big - String to be searched by `little`
 * @param little - String to search in `big`
 * @param len - Number of bytes to search
-* @return If little is an empty string, big is returned; if little occurs 
-* nowhere * in big, NULL is returned; otherwise a pointer to the first 
+* @return If little is an empty string, big is returned; if little occurs
+* nowhere * in big, NULL is returned; otherwise a pointer to the first
 * character of the first occurrence of little is returned.
 */
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 
 /**
-* @brief searches for the first occurrence of the character c (an unsigned 
+* @brief searches for the first occurrence of the character c (an unsigned
 * char) in the first n bytes of the string pointed to, by the argument str.
 * @param str Pointer to the block of memory where the search is performed.
-* @param val - Value to be located. The value is passed as an int, but the 
+* @param val - Value to be located. The value is passed as an int, but the
 * function performs a byte per byte search using the unsigned char
 * conversion of this value.
-* @param len - Number of bytes to be analyzed. size_t is an unsigned 
+* @param len - Number of bytes to be analyzed. size_t is an unsigned
 * integral type.
-* @return This function returns a pointer to the matching byte or NULL 
+* @return This function returns a pointer to the matching byte or NULL
 * if the character does not occur in the given memory area.
 */
 void	*ft_memchr(const void *str, int val, size_t len);
@@ -216,14 +232,14 @@ int		ft_memcmp(const void *str1, const void *str2, size_t len);
 /**
 * @brief converts the string argument str to an integer (type int).
 * @param str − This is the string representation of an integral number.
-* @return This function returns the converted integral number as an int 
+* @return This function returns the converted integral number as an int
 * value. If no valid conversion could be performed, it returns zero.
 */
 int		ft_atoi(const char *str);
 
 /**
-* @brief allocates the requested memory and returns a pointer to it. 
-* The difference in malloc and calloc is that malloc does not set the 
+* @brief allocates the requested memory and returns a pointer to it.
+* The difference in malloc and calloc is that malloc does not set the
 * memory to zero where as calloc sets allocated memory to zero.
 * @param nitems − This is the number of elements to be allocated.
 * @param len - This is the size of elements.
@@ -251,7 +267,7 @@ char	*ft_strdup(const char *src);
 
 /**
 * @brief Allocates (with malloc(3)) and returns a substring
-*from the string ’s’. The substring begins at index ’start’ 
+*from the string ’s’. The substring begins at index ’start’
 *and is of maximum size ’len’.
 * @param s: The string from which to create the substring.
 * @param start: The start index of the substring in the string ’s’.

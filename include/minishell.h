@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 20:34:53 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/23 07:42:09 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/types.h>
 # include <dirent.h>
 # include <stdio.h>
-# include <stdbool.h>
+# include <errno.h> // errno
 
 # include <readline/readline.h> // Readline
 # include <readline/history.h> // History
@@ -42,6 +42,8 @@
 # define AND	2
 # define PIPE	3
 
+# define CMD_NOT_FOUND 127
+
 // Color prompt
 # define GREEN "\001\033[0;92m\002"
 # define DEFAULT "\001\033[0;39m\002"
@@ -51,6 +53,7 @@ typedef struct s_command
 {
 	char	*cmd;
 	char	**args;
+	int		args_count;
 }	t_command;
 
 typedef struct s_data
@@ -59,9 +62,7 @@ typedef struct s_data
 	char		**env;
 	char		*work_dir;
 	char		*old_work_dir;
-	int			old_exit_value;
 	t_command	*command;
-	int			exit_value;
 }	t_data;
 
 typedef struct s_cmd
@@ -82,6 +83,7 @@ typedef struct s_commands
 	char	**cmds;
 	char	**paths;
 	int		*operators;
+	int		exit_value;
 	int		**pipe_fd;
 	t_cmd	*cmd;
 }	t_commands;
@@ -92,6 +94,8 @@ typedef struct s_index_data
 	size_t	malloc_size;
 	size_t	j;
 }	t_index_data;
+
+extern int	g_status_code;
 
 /******************************************************************************/
 /*Begin - Initialization*/
@@ -114,9 +118,15 @@ int		init(int argc, char **argv, char **envp);
  */
 bool	init_structure(t_data *data, char **envp);
 
-char	*get_prompt(t_data *data);
-
 void	init_cmds(t_data *data, t_commands *cmds);
+
+/**
+ * @brief Return the number of arguments passed in the command
+ * @param args TypeDef in MiniShell
+ * @return int - Count Number of arguments. The Command argument will be ignored
+ * in this method. Return just arguments
+ */
+int		args_count(char **args);
 
 /******************************************************************************/
 /*End - Initialization*/
@@ -125,8 +135,9 @@ void	init_cmds(t_data *data, t_commands *cmds);
 /**
  * @brief Responsible to exit / finish the shell.
  * @param status_code
+ * @param data Data to clean up
  */
-void	exit_shell(int status_code);
+void	exit_shell(t_data *data, int status_code);
 
 /**
  * @brief Manipulate Signals in MiniShell
@@ -135,6 +146,13 @@ void	exit_shell(int status_code);
  * 	(Ctrl+\) Change - Before: Terminate. Now: Ignore
  */
 void	signals_handler(void);
+
+/**
+ * @brief Get the prompt text of mini-shell
+ * @param data Structure of MiniShell
+ * @return char* Text of prompt
+ */
+char	*get_prompt(t_data *data);
 
 /******************************************************************************/
 /*Begin - Builtins*/
@@ -151,48 +169,49 @@ bool	is_builtin(char *argv);
 /**
  * @brief Call correct function from Builtin command
  * @param data Structure of MiniShell
+ * @return code of execution. Success or error
  */
-void	call_builtin(t_data *data);
+int		call_builtin(t_data *data);
 
 /**
  * @brief Builtins Echo - Represent the Echo command in shell (-n flag enabled)
  * @param data Structure of MiniShell
  */
 
-void	cmd_echo(t_data *data);
+int		cmd_echo(t_data *data);
 
 /**
  * @brief Builtins Exit - Responsible to close the program.
  * @param data Structure of MiniShell
+ * @return int - exit code
  */
-void	cmd_exit(t_data *data);
+int		cmd_exit(t_data *data);
 
 /**
  * @brief Builtins - PWD Command - Print working directory
- * MaxSize:
- * https://serverfault.com/questions/9546/filename-length-limits-on-linux
+ * @return Integer - Result of command
  */
-void	cmd_pwd(void);
+int		cmd_pwd(void);
 
 /**
  * @brief Builtins - Env - Environment Variables
  * @param data Structure of MiniShell
  * @param exp_no_arg Export With no args - Show env with a pre-fix
+ * @return integer - success or error
  */
-void	cmd_env(t_data *data, bool exp_no_arg);
+int		cmd_env(t_data *data, bool exp_no_arg);
 
-/** TODO: Verificar se há mais possitilidades aqui (passar parâmetros que nao
- * foi atendido ainda)
+/**
  * @brief Builtins - Command Change Directory.
  * @param data Structure of MiniShell
  */
-void	cmd_cd(t_data *data);
+int		cmd_cd(t_data *data);
 
 /**
  * @brief Builtins - Unset Variables
  * @param data Structure of MiniShell
  */
-void	cmd_unset(t_data *data);
+int		cmd_unset(t_data *data);
 
 /**
  * @brief Verify if the name of variable is a valid name
@@ -239,6 +258,17 @@ char	**split_args(char *command);
 void	free_array_str(char **arr_str);
 
 void	free_cmds(t_commands *cmds);
+
+/**
+ * @brief Handler error messages when commands will be applied.
+ *
+ * @param cmd Command applied
+ * @param detail Details. Not required
+ * @param msg Msg of error
+ * @param status_code Will be the return, get in method called
+ * @return int Code of error returned
+ */
+int		error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
 
 /******************************************************************************/
 /*End - Utils*/
@@ -294,7 +324,7 @@ void	env_var_remove(t_data *data, int index);
  * @brief Builtins Export - Just one argument, just export all variables.
  * Sortable and with 'declare -x'
  */
-void	cmd_export(t_data *data);
+int		cmd_export(t_data *data);
 
 /**
  * @brief Realloc memory to Environment variable
@@ -312,9 +342,9 @@ char	**env_var_realloc(t_data *data, int size);
 /*Begin - Lexer*/
 /******************************************************************************/
 
-char	**lexer(char const *s, t_data *data);
+char	**lexer(char const *s, t_commands *cmds);
 void	putchar_lexer(char const *s, char **str, size_t countc);
-void	lexer_errors(t_index_data *i_data, const char *s, t_data *data);
+void	lexer_errors(t_index_data *i_data, const char *s, t_commands *cmds);
 
 /******************************************************************************/
 /*End - Lexer*/

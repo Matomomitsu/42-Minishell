@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 12:42:45 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:36:18 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,16 @@ static bool	init_env(t_data *data, char **envp)
 		i++;
 	}
 	return (true);
+}
+
+int	args_count(char **args)
+{
+	int	i;
+
+	i = 1;
+	while (args[i])
+	{
+		i++;
+	}
+	return (i);
 }
