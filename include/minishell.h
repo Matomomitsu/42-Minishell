@@ -66,23 +66,24 @@ typedef struct s_data
 
 typedef struct s_cmd
 {
-	char		*cmd;
-	char		*path;
-	char		**args;
-	char		*infile;
-	char		*outfile;
+	char	*cmd;
+	char	*path;
+	char	**args;
+	char	*infile;
+	char	*outfile;
+	int		exit_value;
 }	t_cmd;
 
 typedef struct s_commands
 {
-	pid_t		*pid;
-	int			num_cmds;
-	int			num_exec;
-	char		**cmds;
-	char		**paths;
-	int			*operators;
-	int			**pipe_fd;
-	t_cmd		*cmd;
+	pid_t	*pid;
+	int		num_cmds;
+	int		num_exec;
+	char	**cmds;
+	char	**paths;
+	int		*operators;
+	int		**pipe_fd;
+	t_cmd	*cmd;
 }	t_commands;
 
 typedef struct s_index_data
