@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:38:01 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:42:09 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <readline/readline.h> // Readline
 # include <readline/history.h> // History
 
-# define INV_ARGS "Invalid Arguments\n" //TODO:Lins - Refatorar isso
+# define INV_ARGS "Invalid Arguments\n"
 
 # define OLD_PWD "OLDPWD"
 # define PWD "PWD"

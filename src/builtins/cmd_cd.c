@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:33:31 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:43:02 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	cmd_cd(t_data *data)
  * @param data Data Structure MiniShell
  * @param path This must be necessary because some times the path will be
  * different from data structure (Shortcuts).
- * TODO: Msg incompleta. Tem que ter o path passado (no erro)
  */
 static int	change_dir(t_data *data, char *path)
 {

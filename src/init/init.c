@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 12:35:24 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:46:49 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool			valid_args(int argc);
 static void			init_prompt(t_data *data);
-static void			exec_cmd(t_data *data);
+static int			exec_cmd(t_data *data);
 static t_command	*init_cmd_args(t_data *data, char **args);
 
 int	init(int argc, char **argv, char **envp)
@@ -67,7 +67,7 @@ static void	init_prompt(t_data *data)
 			ft_putendl_fd("exit", STDOUT_FILENO);
 			exit(1);
 		}
-		exec_cmd(data);
+		g_status_code = exec_cmd(data);
 		free_data(data, false);
 	}
 	exit_shell(data, g_status_code);
@@ -79,14 +79,17 @@ static void	init_prompt(t_data *data)
  * @brief Verify what type of command is comming
  * @param data
  */
-static void	exec_cmd(t_data *data)
+static int	exec_cmd(t_data *data)
 {
+	int		status_code;
 	char	**args;
 
+	status_code = 0;
 	args = split_args(data->user_input);
 	data->command = init_cmd_args(data, args);
 	if (is_builtin(data->command->cmd))
-		call_builtin(data);
+		status_code = call_builtin(data);
+	return (status_code);
 }
 
 /**
