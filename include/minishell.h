@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 15:06:57 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/23 07:15:10 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int		call_builtin(t_data *data);
  * @param data Structure of MiniShell
  */
 
-void	cmd_echo(t_data *data);
+int		cmd_echo(t_data *data);
 
 /**
  * @brief Builtins Exit - Responsible to close the program.

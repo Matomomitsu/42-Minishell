@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:23:22 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 12:25:32 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/22 18:40:00 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
 }
 
 /**
- * @brief Will check if the command is like this: export temp_env =aaa-aaa
+ * @brief Will check if the command is like this: export temp_env =aaa-aaa.
+ * ("). Return must be between quotes
  * @param cmd Command applied
  * @return true
  * @return false
