@@ -72,7 +72,7 @@ void	init_pipe(t_commands *cmds)
 	i = -1;
 	num_pipes = 0;
 	while (cmds->operators[++i])
-		if (cmds->operators == 3)
+		if (cmds->operators[i] == 3)
 			num_pipes++;
 	i = 0;
 	cmds->pipe_fd = (int **)ft_calloc(sizeof(int *), num_pipes + 1);

@@ -80,6 +80,7 @@ void	free_cmds(t_commands *cmds)
 		free(cmds->paths[i]);
 		free(cmds->paths);
 		free(cmds->operators);
+		free(cmds->pipe_fd);
 		free(cmds);
 	}
 }
