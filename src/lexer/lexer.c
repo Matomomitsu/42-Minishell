@@ -95,6 +95,7 @@ char	**lexer(char const *s, t_commands *cmds)
 	if (!s)
 		return (NULL);
 	countstr = ft_countstr(s, cmds);
+	lexer_parenthesis(s, cmds);
 	if (cmds->exit_value != 0)
 		return (NULL);
 	str = (char **)malloc((countstr + 1) * sizeof(char *));

@@ -12,57 +12,69 @@
 
 #include <minishell.h>
 
-static void	get_size(t_index_data *data, const char *s)
+static void	handle_quotes(t_index_data *i_data, const char *s, t_data *data)
+{
+	if (s[i_data->i++] == '\'')
+	{
+		while (s[i_data->i] && s[i_data->i++] != '\'')
+			i_data->malloc_size++;
+	}
+	else
+	{
+		while (s[i_data->i] && s[i_data->i++] != '\"')
+				i_data->malloc_size++;
+	}
+}
+
+static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 {
 	char	special_char;
 
-	data->malloc_size = 0;
-	while (s[data->i] && s[data->i] == ' ')
-		data->i++;
-	while (s[data->i] && s[data->i] != ' ')
+	i_data->malloc_size = 0;
+	while (s[i_data->i] && s[i_data->i] == ' ')
+		i_data->i++;
+	while (s[i_data->i] && s[i_data->i] != ' ')
 	{
-		if (s[data->i] == '\'' || s[data->i] == '\"')
-		{
-			special_char = s[data->i++];
-			while (s[data->i] && s[data->i++] != special_char)
-				data->malloc_size++;
-		}
+		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
+			handle_quotes(i_data, s, data);
+//		if (s[i_data->i] == '$')
+//			handle_env(i_data, s, data)
 		else
 		{
-			data->malloc_size++;
-			data->i++;
+			i_data->malloc_size++;
+			i_data->i++;
 		}
 	}
 }
 
-static size_t	ft_countstr(char const *s)
+static size_t	ft_countstr(char const *s, t_data *data)
 {
-	t_index_data	data;
+	t_index_data	i_data;
 	size_t			counter;
 
-	data.i = 0;
+	i_data.i = 0;
 	counter = 0;
-	while (s[data.i])
+	while (s[i_data.i])
 	{
-		get_size(&data, s);
-		if (data.malloc_size != 0)
+		get_size(&i_data, s, data);
+		if (i_data.malloc_size != 0)
 			counter++;
 	}
 	return (counter);
 }
 
-static void	splitstr(char **str, char const *s, size_t countc)
+static void	splitstr(char **str, char const *s, size_t countc, t_data *data)
 {
-	t_index_data	data;
+	t_index_data	i_data;
 
-	data.i = 0;
-	data.j = 0;
-	while (data.j < countc)
+	i_data.i = 0;
+	i_data.j = 0;
+	while (i_data.j < countc)
 	{
-		get_size(&data, s);
-		str[data.j] = (char *)malloc((data.malloc_size + 1) * sizeof(char));
-		str[data.j][data.malloc_size] = '\0';
-		if (str[data.j++] == NULL)
+		get_size(&i_data, s, data);
+		str[i_data.j] = (char *)malloc((i_data.malloc_size + 1) * sizeof(char));
+		str[i_data.j][i_data.malloc_size] = '\0';
+		if (str[i_data.j++] == NULL)
 		{
 			str = NULL;
 			break ;
@@ -70,18 +82,18 @@ static void	splitstr(char **str, char const *s, size_t countc)
 	}
 }
 
-char	**argument_parser(char const *s)
+char	**argument_parser(char const *s, t_data *data)
 {
 	char	**str;
 	size_t	countstr;
 
 	if (!s)
 		return (NULL);
-	countstr = ft_countstr(s);
+	countstr = ft_countstr(s, data);
 	str = (char **)malloc((countstr + 1) * sizeof(char *));
 	if (!str)
 		return (NULL);
-	splitstr(str, s, countstr);
+	splitstr(str, s, countstr, data);
 	if (str == NULL)
 		return (NULL);
 	putchar_parser(s, str, countstr);

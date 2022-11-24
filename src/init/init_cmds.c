@@ -93,6 +93,12 @@ void	init_cmds(t_data *data, t_commands *cmds)
 
 	cmds->cmds = lexer(data->user_input, cmds);
 	i = 0;
+	if (cmds->cmds)
+	{
+		while (cmds->cmds[i])
+			printf("%s\n", cmds->cmds[i++]);
+	}
+	i = 0;
 	if (cmds->exit_value == 0)
 	{
 		while (cmds->cmds[i])

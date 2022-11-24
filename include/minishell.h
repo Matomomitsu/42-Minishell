@@ -345,6 +345,7 @@ char	**env_var_realloc(t_data *data, int size);
 char	**lexer(char const *s, t_commands *cmds);
 void	putchar_lexer(char const *s, char **str, size_t countc);
 void	lexer_errors(t_index_data *i_data, const char *s, t_commands *cmds);
+void	lexer_parenthesis(const char *s, t_commands *cmds);
 
 /******************************************************************************/
 /*End - Lexer*/

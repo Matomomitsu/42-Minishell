@@ -74,6 +74,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_LEXER)lexer.c \
 		$(PATH_LEXER)complete_lexer.c \
 		$(PATH_LEXER)handle_lexer_errors.c \
+		$(PATH_LEXER)handle_parenthesis.c \
 		$(PATH_PARSER)parser.c \
 		$(PATH_PARSER)complete_parser.c \
 
