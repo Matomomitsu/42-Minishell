@@ -30,6 +30,12 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
 static void	parenthesis_erros(const char *s, t_commands *cmds, t_index_data \
 							*i_data)
 {
+	if (s[i_data->i] == '(')
+	{
+		i_data->i++;
+		while (s[i_data->i] && s[i_data->i] == ' ')
+			i_data->i++;
+	}
 	if (cmds->exit_value == 0 && s[i_data->i])
 	{
 		cmds->exit_value = 2;
@@ -41,8 +47,9 @@ static void	parenthesis_erros(const char *s, t_commands *cmds, t_index_data \
 	if (cmds->exit_value == 0 && !s[i_data->i])
 	{
 		cmds->exit_value = 2;
-		ft_putstr_fd("-minishell: syntax error unclosed parenthesis\n", \
+		ft_putstr_fd("-minishell: syntax error near unexpected token `", \
 		STDERR);
+		ft_putstr_fd("newline'\n", STDERR);
 	}
 }
 
@@ -53,9 +60,13 @@ static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data *i_
 	if (s[i_data->i] && s[i_data->i] == ')')
 		parenthesis_erros(s, cmds, i_data);
 	while (s[i_data->i] && s[i_data->i] != ')')
-			if (s[i_data->i++] == '(')
-				handle_parenteshis(s, cmds, i_data);
-	if (!s[i_data->i])
+	{
+		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
+			handle_quotes(i_data, s, cmds);
+		if (s[i_data->i++] == '(')
+			handle_parenteshis(s, cmds, i_data);
+	}
+	if (!s[i_data->i] && s[i_data->i - 1] != ')')
 		parenthesis_erros(s, cmds, i_data);
 	else
 		i_data->i++;
@@ -68,13 +79,21 @@ void	lexer_parenthesis(const char *s, t_commands *cmds)
 	i_data.i = 0;
 	while (s[i_data.i])
 	{
+		while (s[i_data.i] && s[i_data.i] == ' ')
+			i_data.i++;
 		if (s[i_data.i] == ')')
 			parenthesis_erros(s, cmds, &i_data);
 		if (s[i_data.i] == '(')
 			handle_parenteshis(s, cmds, &i_data);
-		if (s[i_data.i] == '\'' || s[i_data.i] == '\"')
-			handle_quotes(&i_data, s, cmds);
-		if (s[i_data.i])
+		while (s[i_data.i] && s[i_data.i] != '&' && s[i_data.i] != '|')
+		{
+			if (s[i_data.i] == ')' || s[i_data.i] == '(')
+				parenthesis_erros(s, cmds, &i_data);
+			if (s[i_data.i] == '\'' || s[i_data.i] == '\"')
+				handle_quotes(&i_data, s, cmds);
+			i_data.i++;
+		}
+		if (s[i_data.i] == '&' || s[i_data.i] == '|')
 			i_data.i++;
 	}
 }

@@ -25,7 +25,7 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
 		while (s[i_data->i] && s[i_data->i++] != '\"')
 				i_data->malloc_size++;
 	}
-	if (!s[i_data->i])
+	if (!s[i_data->i] && s[i_data->i - 1] != '\"' && s[i_data->i - 1] != '\'')
 		cmds->exit_value = 2;
 	else
 		i_data->malloc_size++;
@@ -88,6 +88,7 @@ static void	splitstr(char **str, char const *s, size_t countc, t_commands *cmds)
 }
 
 char	**lexer(char const *s, t_commands *cmds)
+
 {
 	char	**str;
 	size_t	countstr;
