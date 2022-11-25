@@ -50,6 +50,7 @@ SRC_FILES =	ft_atoi.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
 			ft_putstr_fd.c \
+			ft_realloc.c \
 			ft_split.c \
 			ft_strchr.c \
 			ft_strdup.c \
@@ -66,7 +67,7 @@ SRC_FILES =	ft_atoi.c \
 			ft_strtrim.c \
 			ft_substr.c \
 			ft_tolower.c \
-			ft_toupper.c
+			ft_toupper.c \
 
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))

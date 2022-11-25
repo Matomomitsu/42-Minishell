@@ -37,8 +37,8 @@ static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 	{
 		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
 			handle_quotes(i_data, s, data);
-//		if (s[i_data->i] == '$')
-//			handle_env(i_data, s, data)
+		if (s[i_data->i] == '$')
+			handle_env(i_data, s, data)
 		else
 		{
 			i_data->malloc_size++;
