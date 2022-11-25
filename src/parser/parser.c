@@ -82,7 +82,7 @@ static void	splitstr(char **str, char const *s, size_t countc, t_data *data)
 	}
 }
 
-char	**argument_parser(char const *s, t_data *data)
+char	**parser(char const *s, t_data *data)
 {
 	char	**str;
 	size_t	countstr;

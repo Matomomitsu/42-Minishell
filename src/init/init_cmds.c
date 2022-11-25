@@ -27,7 +27,8 @@ static char	**get_paths(char **env)
 	return (paths);
 }
 
-static void	handle_operators(t_data *data, t_commands *cmds, size_t *o, size_t *i)
+static void	handle_operators(t_data *data, t_commands *cmds, size_t *o, \
+			size_t *i)
 {
 	if (data->user_input[*i] == '&' || data->user_input[*i + 1] == '&')
 		cmds->operators[*o] = AND;

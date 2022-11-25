@@ -53,7 +53,8 @@ static void	parenthesis_erros(const char *s, t_commands *cmds, t_index_data \
 	}
 }
 
-static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data *i_data)
+static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data \
+			*i_data)
 {
 	while (s[i_data->i] && s[i_data->i] == ' ')
 		i_data->i++;
@@ -74,7 +75,7 @@ static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data *i_
 
 void	lexer_parenthesis(const char *s, t_commands *cmds)
 {
-	t_index_data i_data;
+	t_index_data	i_data;
 
 	i_data.i = 0;
 	while (s[i_data.i])

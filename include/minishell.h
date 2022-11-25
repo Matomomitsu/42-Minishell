@@ -355,6 +355,7 @@ void	lexer_parenthesis(const char *s, t_commands *cmds);
 /*Begin - Parser*/
 /******************************************************************************/
 
+char	**argument_parser(char const *s, t_commands *cmds);
 void	putchar_parser(char const *s, char **str, size_t countc);
 
 /******************************************************************************/
