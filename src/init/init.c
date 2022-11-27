@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/27 09:55:14 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/27 10:18:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ static int	exec_cmd(t_data *data)
 	data->command = init_cmd_args(data, args);
 	if (is_builtin(data->command->cmd))
 		status_code = call_builtin(data);
+	else
+		exec_handler(data);
 	return (status_code);
 }
 
