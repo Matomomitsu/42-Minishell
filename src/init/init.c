@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/27 09:35:46 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/27 09:55:14 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static bool			valid_args(int argc);
 static void			init_prompt(t_data *data);
 static int			exec_cmd(t_data *data);
 static t_command	*init_cmd_args(t_data *data, char **args);
+static bool			input_handler(t_data *data);
+static bool			just_space_string(char *str);
 
 int	init(int argc, char **argv, char **envp)
 {
@@ -58,17 +60,10 @@ static void	init_prompt(t_data *data)
 		prompt = get_prompt(data);
 		data->user_input = readline(prompt);
 		free_ptr(prompt);
-		signals_run_cmd();
-		if (data->user_input)
-		{
-			add_history(data->user_input);
-		}
+		if (input_handler(data))
+			g_status_code = exec_cmd(data);
 		else
-		{
-			ft_putendl_fd("exit", STDOUT_FILENO);
-			exit(1);
-		}
-		g_status_code = exec_cmd(data);
+			g_status_code = 1;
 		free_data(data, false);
 	}
 	exit_shell(data, g_status_code);
@@ -111,4 +106,43 @@ static t_command	*init_cmd_args(t_data *data, char **args)
 	cmd->args = args;
 	cmd->args_count = args_count(args);
 	return (cmd);
+}
+
+/**
+ * @brief Fill the user_input variable.
+ * Verify if something was put in console, or just a null value. Space must
+ * give prompt back
+ * @param data
+ * @return true
+ * @return false
+ */
+static bool	input_handler(t_data *data)
+{
+	if (data->user_input == NULL || ft_strncmp(data->user_input, "\0", 1) == 0)
+		return (false);
+	else if (just_space_string(data->user_input) == true)
+		return (false);
+
+	add_history(data->user_input);
+	return (true);
+}
+
+/**
+ * @brief Verify if all sentence is just space or similar char
+ * @param str
+ * @return true
+ * @return false
+ */
+static bool just_space_string(char *str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (!ft_isspace(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }
