@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/22 11:38:58 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/27 10:16:15 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ PATH_SRC 		= ./src/
 PATH_MAIN 		= $(PATH_SRC)main/
 PATH_INIT 		= $(PATH_SRC)init/
 PATH_UTIL 		= $(PATH_SRC)util/
+PATH_EXEC 		= $(PATH_SRC)execution/
 PATH_ENV 		= $(PATH_SRC)env/
 PATH_BUILTINS 	= $(PATH_SRC)builtins/
 PATH_OBJS 		= ./objs/
@@ -43,7 +44,7 @@ CFLAGS = -g
 LEAK = valgrind --leak-check=full --show-leak-kinds=all \
 	--trace-children=yes --suppressions=readline.supp --track-origins=yes -s
 
-RM				= rm -rf
+RM			= rm -rf
 NO_PRINT	= --no-print-directory
 READ_LN		= -l readline
 
@@ -57,6 +58,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_UTIL)signal.c \
 		$(PATH_UTIL)error_handler.c \
 		$(PATH_UTIL)sanitization.c \
+		$(PATH_EXEC)exec_handler.c \
 		$(PATH_UTIL)split_args.c \
 		$(PATH_ENV)env.c \
 		$(PATH_ENV)env_partial.c \
@@ -82,6 +84,7 @@ $(PATH_OBJS)%.o: $(PATH_SRC)%.c
 	@mkdir -p $(PATH_OBJS)main/
 	@mkdir -p $(PATH_OBJS)init/
 	@mkdir -p $(PATH_OBJS)util/
+	@mkdir -p $(PATH_OBJS)execution/
 	@mkdir -p $(PATH_OBJS)env/
 	@mkdir -p $(PATH_OBJS)builtins/
 	@$(CC) $(CFLAGS) $(INCLUDE) -I. -c $< -o $@
