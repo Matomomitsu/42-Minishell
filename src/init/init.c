@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:46:49 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/27 09:35:46 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ static void	init_prompt(t_data *data)
 
 	while (true)
 	{
-		signals_handler();
+		signals_wait_cmd();
 		prompt = get_prompt(data);
 		data->user_input = readline(prompt);
 		free_ptr(prompt);
+		signals_run_cmd();
 		if (data->user_input)
 		{
 			add_history(data->user_input);
