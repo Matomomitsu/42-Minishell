@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/27 10:16:15 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/27 11:10:13 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ INCLUDE = -I $(INC_PATH) -I $(LIBFT_PATH)
 
 SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init.c \
+		$(PATH_INIT)init_validation.c \
 		$(PATH_INIT)prompt.c \
 		$(PATH_INIT)init_structure.c \
 		$(PATH_UTIL)exit.c \

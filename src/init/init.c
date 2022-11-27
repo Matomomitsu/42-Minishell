@@ -6,18 +6,16 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/27 10:18:01 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/27 11:09:44 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static bool			valid_args(int argc);
 static void			init_prompt(t_data *data);
 static int			exec_cmd(t_data *data);
 static t_command	*init_cmd_args(t_data *data, char **args);
 static bool			input_handler(t_data *data);
-static bool			just_space_string(char *str);
 
 int	init(int argc, char **argv, char **envp)
 {
@@ -27,22 +25,6 @@ int	init(int argc, char **argv, char **envp)
 		exit_shell(NULL, EXIT_FAILURE);
 	init_prompt(&data);
 	return (0);
-}
-
-/**
- * @brief Validate number of arguments of Mini-shell
- * @param argc Argument Counts
- * @return true - Valid
- * @return false - Failed
- */
-static bool	valid_args(int argc)
-{
-	if (argc > 1)
-	{
-		ft_putstr_fd(INV_ARGS, STDOUT_FILENO);
-		return (false);
-	}
-	return (true);
 }
 
 /**
@@ -124,27 +106,6 @@ static bool	input_handler(t_data *data)
 		return (false);
 	else if (just_space_string(data->user_input) == true)
 		return (false);
-
 	add_history(data->user_input);
-	return (true);
-}
-
-/**
- * @brief Verify if all sentence is just space or similar char
- * @param str
- * @return true
- * @return false
- */
-static bool just_space_string(char *str)
-{
-	int	i;
-
-	i = 0;
-	while(str[i])
-	{
-		if (!ft_isspace(str[i]))
-			return (false);
-		i++;
-	}
 	return (true);
 }

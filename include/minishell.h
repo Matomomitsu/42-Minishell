@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/27 10:51:57 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/27 11:08:07 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 # include <sys/stat.h> //S_ISDIR
 # include <readline/readline.h> // Readline
 # include <readline/history.h> // History
-
-# define INV_ARGS "Invalid Arguments\n"
 
 # define OLD_PWD "OLDPWD"
 # define PWD "PWD"
@@ -88,6 +86,22 @@ bool	init_structure(t_data *data, char **envp);
  * in this method. Return just arguments
  */
 int		args_count(char **args);
+
+/**
+ * @brief Validate number of arguments of Mini-shell
+ * @param argc Argument Counts
+ * @return true - Valid
+ * @return false - Failed
+ */
+bool	valid_args(int argc);
+
+/**
+ * @brief Verify if all sentence is just space or similar char
+ * @param str String / User Input
+ * @return true
+ * @return false
+ */
+bool	just_space_string(char *str);
 
 /******************************************************************************/
 /*End - Initialization*/
