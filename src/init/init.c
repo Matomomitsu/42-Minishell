@@ -6,16 +6,16 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:46:49 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/27 11:09:44 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static bool			valid_args(int argc);
 static void			init_prompt(t_data *data);
 static int			exec_cmd(t_data *data);
 static t_command	*init_cmd_args(t_data *data, char **args);
+static bool			input_handler(t_data *data);
 
 int	init(int argc, char **argv, char **envp)
 {
@@ -25,22 +25,6 @@ int	init(int argc, char **argv, char **envp)
 		exit_shell(NULL, EXIT_FAILURE);
 	init_prompt(&data);
 	return (0);
-}
-
-/**
- * @brief Validate number of arguments of Mini-shell
- * @param argc Argument Counts
- * @return true - Valid
- * @return false - Failed
- */
-static bool	valid_args(int argc)
-{
-	if (argc > 1)
-	{
-		ft_putstr_fd(INV_ARGS, STDOUT_FILENO);
-		return (false);
-	}
-	return (true);
 }
 
 /**
@@ -54,20 +38,14 @@ static void	init_prompt(t_data *data)
 
 	while (true)
 	{
-		signals_handler();
+		signals_wait_cmd();
 		prompt = get_prompt(data);
 		data->user_input = readline(prompt);
 		free_ptr(prompt);
-		if (data->user_input)
-		{
-			add_history(data->user_input);
-		}
+		if (input_handler(data))
+			g_status_code = exec_cmd(data);
 		else
-		{
-			ft_putendl_fd("exit", STDOUT_FILENO);
-			exit(1);
-		}
-		g_status_code = exec_cmd(data);
+			g_status_code = 1;
 		free_data(data, false);
 	}
 	exit_shell(data, g_status_code);
@@ -96,6 +74,8 @@ static int	exec_cmd(t_data *data)
 		data->command = init_cmd_args(data, args);
 		if (is_builtin(data->command->cmd))
 			status_code = call_builtin(data);
+		else
+			exec_handler(data);
 	}
 	status_code = cmds->exit_value;
 	free_cmds(cmds);
@@ -120,4 +100,22 @@ static t_command	*init_cmd_args(t_data *data, char **args)
 	cmd->args = args;
 	cmd->args_count = args_count(args);
 	return (cmd);
+}
+
+/**
+ * @brief Fill the user_input variable.
+ * Verify if something was put in console, or just a null value. Space must
+ * give prompt back
+ * @param data
+ * @return true
+ * @return false
+ */
+static bool	input_handler(t_data *data)
+{
+	if (data->user_input == NULL || ft_strncmp(data->user_input, "\0", 1) == 0)
+		return (false);
+	else if (just_space_string(data->user_input) == true)
+		return (false);
+	add_history(data->user_input);
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:42:09 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/27 11:08:07 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@
 # include <dirent.h>
 # include <stdio.h>
 # include <errno.h> // errno
-
+# include <sys/stat.h> //S_ISDIR
 # include <readline/readline.h> // Readline
 # include <readline/history.h> // History
-
-# define INV_ARGS "Invalid Arguments\n"
 
 # define OLD_PWD "OLDPWD"
 # define PWD "PWD"
@@ -43,6 +41,7 @@
 # define PIPE	3
 
 # define CMD_NOT_FOUND 127
+# define CMD_NOT_EXEC 126
 
 // Color prompt
 # define GREEN "\001\033[0;92m\002"
@@ -129,6 +128,22 @@ void	init_cmd(t_data *data, t_commands *cmds);
  */
 int		args_count(char **args);
 
+/**
+ * @brief Validate number of arguments of Mini-shell
+ * @param argc Argument Counts
+ * @return true - Valid
+ * @return false - Failed
+ */
+bool	valid_args(int argc);
+
+/**
+ * @brief Verify if all sentence is just space or similar char
+ * @param str String / User Input
+ * @return true
+ * @return false
+ */
+bool	just_space_string(char *str);
+
 /******************************************************************************/
 /*End - Initialization*/
 /******************************************************************************/
@@ -141,12 +156,23 @@ int		args_count(char **args);
 void	exit_shell(t_data *data, int status_code);
 
 /**
- * @brief Manipulate Signals in MiniShell
+ * @brief Manipulate Signals in MiniShell when the prompt is waiting for a
+ * command.
  * 	(Ctrl+D) The Same - Terminate
- * 	(Ctrl+C) Change - Before: Stop process. Now: New line in clean prompt
- * 	(Ctrl+\) Change - Before: Terminate. Now: Ignore
+ * 	(Ctrl+C) SIGINT: New line in clean prompt
+ * 	(Ctrl+\) SIGQUIT: Ignored
  */
-void	signals_handler(void);
+void	signals_wait_cmd(void);
+
+/**
+ * @brief Manipulate Signals in MiniShell when the prompt is executing some
+ * command.
+ * 	(Ctrl+D) The Same - Terminate
+ * 	(Ctrl+C) SIGINT: New line
+ * 	(Ctrl+\) SIGQUIT: New line
+ *
+ */
+void	signals_run_cmd(void);
 
 /**
  * @brief Get the prompt text of mini-shell
@@ -273,6 +299,21 @@ int		error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
 
 /******************************************************************************/
 /*End - Utils*/
+/******************************************************************************/
+
+/******************************************************************************/
+/*Begin - Execute*/
+/******************************************************************************/
+
+/** TODO:Lins. Add epois
+ * @brief
+ *
+ * @param data
+ * @return int
+ */
+int		exec_handler(t_data *data);
+/******************************************************************************/
+/*End - Execute*/
 /******************************************************************************/
 
 /******************************************************************************/

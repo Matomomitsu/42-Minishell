@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:34:32 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/27 10:23:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ bool	is_builtin(char *cmd)
 	else if (ft_strncmp(cmd, "export", 6) == 0)
 		return (true);
 	else
-	{
-		ft_putstr_fd("TODO: Must Implement!!!!\n", STDOUT_FILENO);
-		exit(EXIT_SUCCESS);
-	}
+		return (false);
 }
 
 int	call_builtin(t_data *data)
@@ -55,9 +52,6 @@ int	call_builtin(t_data *data)
 	else if (ft_strncmp(data->command->cmd, "export", 6) == 0)
 		cmd_code = cmd_export(data);
 	else
-	{
-		ft_putstr_fd("TODO: Must Implement!!!!\n", STDOUT_FILENO);
 		exit(EXIT_SUCCESS);
-	}
 	return (cmd_code);
 }
