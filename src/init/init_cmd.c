@@ -23,10 +23,12 @@ void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd)
 		if (cmds->cmds[num_cmd][i_data.i] == '$')
 		{
 			temp_char = handle_env(&i_data, cmds->cmds[num_cmd], data);
-			free(cmds->cmds[num_cmd]);
-			cmds->cmds[num_cmd] = temp_char;
+			cmds->cmds[num_cmd] = ft_realloc(cmds->cmds[num_cmd], ft_strlen(temp_char) + 1);
+			ft_strlcpy(cmds->cmds[num_cmd], temp_char, ft_strlen(temp_char) + 1);
+			free(temp_char);
 		}
-		i_data.i++;
+		if (cmds->cmds[num_cmd][i_data.i])
+			i_data.i++;
 	}
 
 }
@@ -37,7 +39,6 @@ void	init_cmd(t_data *data, t_commands *cmds)
 	int	o;
 
 	i = 0;
-	cmds->cmd = ft_calloc(cmds->num_cmds, sizeof(t_cmd));
 	while (i < cmds->num_cmds)
 	{
 		find_dollar_sign(data, cmds, i);

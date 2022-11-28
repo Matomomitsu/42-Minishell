@@ -32,7 +32,7 @@ int		get_env_variable_size(char *s, t_index_data *i_data)
 	int		o;
 
 	i = i_data->i + 1;
-	while (check_type(s[i]))
+	while (s[i] && check_type(s[i]))
 		i++;
 	return (i - i_data->i);
 }
@@ -68,7 +68,7 @@ void	copy_to_new_str(char *new_str, char *s, char *env_value, \
 	i = 0;
 	o = 0;
 	j = 0;
-	while (s[i] != '$')
+	while (s[i] && s[i] != '$')
 		new_str[o++] = s[i++];
 	if (env_value)
 	{
@@ -78,8 +78,9 @@ void	copy_to_new_str(char *new_str, char *s, char *env_value, \
 			i_data->i++;
 		}
 	}
-	i++;
-	while (check_type(s[i]))
+	if (s[i])
+		i++;
+	while (s[i] && check_type(s[i]))
 		i++;
 	while (s[i])
 		new_str[o++] = s[i++];
@@ -96,11 +97,12 @@ char	*handle_env(t_index_data *i_data, char *s, t_data *data)
 	env_value = get_env_value(s, i_data, data);
 	variable_size = get_env_variable_size(s, i_data);
 	if (env_value)
-		env_value_size = ft_strlen(env_value);
+		env_value_size = ft_strlen(env_value) - 1;
 	else
 		env_value_size = 0;
 	new_str = (char *)malloc(sizeof(char) * (ft_strlen(s) - variable_size + \
-			env_value_size));
+			env_value_size) + 2);
+	new_str[ft_strlen(s) - variable_size + env_value_size + 1] = '\0';
 	copy_to_new_str(new_str, s, env_value, i_data);
 	return (new_str);
 }
