@@ -120,14 +120,14 @@ bool	init_structure(t_data *data, char **envp);
 /**
  * @brief Initialize the commands structure
  * @param data Structure of MiniShell
- * @param cmds Commands structure.
+ * @param cmds Commands structure
  */
 void	init_cmds(t_data *data, t_commands *cmds);
 
 /**
  * @brief Initialize a command structure
  * @param data Structure of MiniShell
- * @param cmds Commands structure.
+ * @param cmds Commands structure
  */
 void	init_cmd(t_data *data, t_commands *cmds);
 
@@ -297,7 +297,7 @@ void	free_array_str(char **arr_str);
 
 /**
  * @brief Free all the terms of cmds
- * @param cmds Commands structure.
+ * @param cmds Commands structure
  */
 void	free_cmds(t_commands *cmds);
 
