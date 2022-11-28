@@ -64,6 +64,23 @@ void	free_array_str(char **arr_str)
 	}
 }
 
+void	free_cmd(t_commands *cmds)
+{
+	int	i;
+	int	o;
+
+	i = 0;
+	while (i < cmds->num_cmds)
+	{
+		o = 0;
+		while (cmds->cmd[i].args[o] != NULL)
+			free(cmds->cmd[i].args[o++]);
+		free(cmds->cmd[i].args[o]);
+		free(cmds->cmd[i].args);
+		i++;
+	}
+}
+
 void	free_cmds(t_commands *cmds)
 {
 	int	i;
@@ -71,6 +88,7 @@ void	free_cmds(t_commands *cmds)
 	i = 0;
 	if (cmds->cmds != NULL)
 	{
+		free_cmd(cmds);
 		while (cmds->cmds[i] != NULL)
 			free(cmds->cmds[i++]);
 		free(cmds->cmds[i]);

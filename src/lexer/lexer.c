@@ -26,7 +26,7 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
 				i_data->malloc_size++;
 	}
 	if (!s[i_data->i] && s[i_data->i - 1] != '\"' && s[i_data->i - 1] != '\'')
-		cmds->exit_value = 2;
+		quotes_error(i_data, s, cmds);
 	else
 		i_data->malloc_size++;
 }
@@ -49,7 +49,8 @@ static void	get_size(t_index_data *i_data, const char *s, t_commands *cmds)
 	if (s[i_data->i] == '|' && s[i_data->i - 1] != '|' && s[i_data->i - 1] \
 		!= '&')
 		i_data->i++;
-	lexer_errors(i_data, s, cmds);
+	if (cmds->exit_value != 0)
+		lexer_errors(i_data, s, cmds);
 }
 
 static size_t	ft_countstr(char const *s, t_commands *cmds)

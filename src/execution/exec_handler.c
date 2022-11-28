@@ -12,30 +12,19 @@
 
 #include <minishell.h>
 
-// TODO:Lins - Será descontinuado depois q a estrutura estiver no .h
-typedef struct s_commands
-{
-	pid_t		pid;
-	int			num_cmds;
-	int			num_exec;
-	char		**cmds;
-	char		**paths;
-	int			**pipe_fd;
-}	t_commandsTEMP;
-
-static int	cmd_not_found(t_data *data, t_commandsTEMP *cmds, char *cmd);
-static void	debug_cmds(t_commandsTEMP *cmds);
-static int	execute_cmd(t_data *data, t_commandsTEMP *cmds, char *cmd);
-static int	exec_local_bin(t_data *data, t_commandsTEMP *cmds, char *cmd);
-static int	exec_path_var_bin(t_data *data, t_commandsTEMP *cmds, char *cmd);
+static int	cmd_not_found(t_data *data, t_commands *cmds, char *cmd);
+static void	debug_cmds(t_commands *cmds);
+static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd);
+static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd);
+static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd);
 static bool	input_is_dir(char *cmd);
 
 int	exec_handler(t_data *data) // TODO:Lins [create_children]
 {
-	t_commandsTEMP	*cmds;
+	t_commands	*cmds;
 
 	//TODO:Lins: Freelá este cara aqui! (Talvez ele venha param.)
-	cmds = (t_commandsTEMP *)ft_calloc(1, sizeof(t_commandsTEMP));
+	cmds = (t_commands *)ft_calloc(1, sizeof(t_commands));
 
 	// debug_cmds(cmds);
 	cmds->num_cmds = 1; // TODO:Lins No loop da execução, calcular este valor
@@ -48,8 +37,8 @@ int	exec_handler(t_data *data) // TODO:Lins [create_children]
 		/* TODO:Lins IMPORTANTE:
 		 *-exec set follow-fork-mode child
 		 */
-		cmds->pid = fork();
-		if (cmds->pid == -1)
+		cmds->pid[0] = fork();
+		if (cmds->pid[0] == -1)
 			return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
 		else if (cmds->pid == 0)
 			// execute_cmd(data, cmds, "/bin/ls");
@@ -61,7 +50,7 @@ int	exec_handler(t_data *data) // TODO:Lins [create_children]
 	return (1); // TODO
 }
 
-static int	execute_cmd(t_data *data, t_commandsTEMP *cmds, char *cmd)
+static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd)
 {
 	int	status_code;
 
@@ -92,7 +81,7 @@ static char	**apagar_parser_aqui(char **path)
  * @param cmd
  * @return int
  */
-static int	exec_path_var_bin(t_data *data, t_commandsTEMP *cmds, char *cmd)
+static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd)
 {
 	// TODO:Lins = Harded code p/ testes
 	// char **teste = (char **)"/usr/bin/ls -l";
@@ -107,7 +96,7 @@ static int	exec_path_var_bin(t_data *data, t_commandsTEMP *cmds, char *cmd)
 }
 
 // TODO:Lins - Remover este método daqui. Colocar em uma classe separada
-static void	debug_cmds(t_commandsTEMP *cmds)
+static void	debug_cmds(t_commands *cmds)
 {
 	return;
 	int	i;
@@ -136,7 +125,7 @@ static void	debug_cmds(t_commandsTEMP *cmds)
  * @param cmds TypeDef commands
  * @return int
  */
-static int	exec_local_bin(t_data *data, t_commandsTEMP *cmds, char *cmd)
+static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd)
 {
 	int	result_code;
 
@@ -156,7 +145,7 @@ static int	exec_local_bin(t_data *data, t_commandsTEMP *cmds, char *cmd)
  * @param cmds
  * @return int
  */
-static int	cmd_not_found(t_data *data, t_commandsTEMP *cmds, char *cmd)
+static int	cmd_not_found(t_data *data, t_commands *cmds, char *cmd)
 {
 	if (ft_strchr(cmd, '/') == NULL
 			&& get_env_var_index(data->env, "PATH") != -1)

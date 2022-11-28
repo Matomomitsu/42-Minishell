@@ -110,5 +110,6 @@ void	init_cmds(t_data *data, t_commands *cmds)
 			get_operators(data, cmds);
 		cmds->pid = (pid_t *)ft_calloc(sizeof(pid_t), cmds->num_cmds + 1);
 		init_pipe(cmds);
+		cmds->cmd = ft_calloc(cmds->num_cmds, sizeof(t_cmd));
 	}
 }
