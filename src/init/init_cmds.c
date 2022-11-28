@@ -65,29 +65,6 @@ static void	get_operators(t_data *data, t_commands *cmds)
 	}
 }
 
-void	init_pipe(t_commands *cmds)
-{
-	int	i;
-	int	num_pipes;
-
-	i = -1;
-	num_pipes = 0;
-	while (cmds->operators[++i])
-		if (cmds->operators[i] == 3)
-			num_pipes++;
-	i = 0;
-	cmds->pipe_fd = (int **)ft_calloc(sizeof(int *), num_pipes + 1);
-	while (i < num_pipes)
-	{
-		cmds->pipe_fd[i] = (int *)ft_calloc(sizeof(int), 3);
-		if (!cmds->pipe_fd[i])
-			exit(6);
-		if (pipe(cmds->pipe_fd[i]) == -1)
-			exit (7);
-		i++;
-	}
-}
-
 void	init_cmds(t_data *data, t_commands *cmds)
 {
 	int		i;
@@ -109,7 +86,6 @@ void	init_cmds(t_data *data, t_commands *cmds)
 		if (cmds->num_cmds > 0)
 			get_operators(data, cmds);
 		cmds->pid = (pid_t *)ft_calloc(sizeof(pid_t), cmds->num_cmds + 1);
-		init_pipe(cmds);
 		cmds->cmd = ft_calloc(cmds->num_cmds, sizeof(t_cmd));
 	}
 }

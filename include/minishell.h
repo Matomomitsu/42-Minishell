@@ -69,8 +69,10 @@ typedef struct s_cmd
 	char	*cmd;
 	char	*path;
 	char	**args;
+	char	**cmd_args;
 	char	*infile;
 	char	*outfile;
+	int		*pipe_fd;
 	int		exit_value;
 }	t_cmd;
 
@@ -83,7 +85,6 @@ typedef struct s_commands
 	char	**paths;
 	int		*operators;
 	int		exit_value;
-	int		**pipe_fd;
 	t_cmd	*cmd;
 }	t_commands;
 

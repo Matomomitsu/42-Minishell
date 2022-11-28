@@ -29,9 +29,26 @@ void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd)
 					1);
 			free(temp_char);
 		}
+		if (cmds->cmds[num_cmd][i_data.i] == '\'')
+			while (cmds->cmds[num_cmd][++i_data.i] != '\'')
+				;
 		if (cmds->cmds[num_cmd][i_data.i])
 			i_data.i++;
 	}
+}
+
+static void	init_pipe(t_commands *cmds, int num_cmd)
+{
+	cmds->cmd[num_cmd].pipe_fd = (int *)ft_calloc(sizeof(int), 3);
+		if (!cmds->cmd[num_cmd].pipe_fd)
+			exit(6);
+		if (pipe(cmds->cmd[num_cmd].pipe_fd) == -1)
+			exit (7);
+}
+
+char	**get_cmd_args()
+{
+
 }
 
 void	init_cmd(t_data *data, t_commands *cmds)
@@ -44,9 +61,11 @@ void	init_cmd(t_data *data, t_commands *cmds)
 	{
 		find_dollar_sign(data, cmds, i);
 		cmds->cmd[i].args = parser(cmds->cmds[i], data);
+		cmds->cmd[i].cmd_args = get_cmd_args(cmds);
 		o = 0;
 		while (cmds->cmd[i].args[o])
 			printf("%s\n", cmds->cmd[i].args[o++]);
+		init_pipe(cmds, i);
 		i++;
 	}
 }
