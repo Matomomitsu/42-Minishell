@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static void	handle_quotes(t_index_data *i_data, const char *s, t_data *data)
+static void	handle_quotes(t_index_data *i_data, char *s, t_data *data)
 {
 	if (s[i_data->i++] == '\'')
 	{
@@ -24,9 +24,10 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_data *data)
 		while (s[i_data->i] && s[i_data->i++] != '\"')
 				i_data->malloc_size++;
 	}
+	i_data->i++;
 }
 
-static void	get_size(t_index_data *i_data, const char *s, t_data *data)
+static void	get_size(t_index_data *i_data, char *s, t_data *data)
 {
 	char	special_char;
 
@@ -37,8 +38,6 @@ static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 	{
 		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
 			handle_quotes(i_data, s, data);
-		if (s[i_data->i] == '$')
-			handle_env(i_data, s, data)
 		else
 		{
 			i_data->malloc_size++;
@@ -47,7 +46,7 @@ static void	get_size(t_index_data *i_data, const char *s, t_data *data)
 	}
 }
 
-static size_t	ft_countstr(char const *s, t_data *data)
+static size_t	ft_countstr(char *s, t_data *data)
 {
 	t_index_data	i_data;
 	size_t			counter;
@@ -63,7 +62,7 @@ static size_t	ft_countstr(char const *s, t_data *data)
 	return (counter);
 }
 
-static void	splitstr(char **str, char const *s, size_t countc, t_data *data)
+static void	splitstr(char **str, char *s, size_t countc, t_data *data)
 {
 	t_index_data	i_data;
 
@@ -82,7 +81,7 @@ static void	splitstr(char **str, char const *s, size_t countc, t_data *data)
 	}
 }
 
-char	**parser(char const *s, t_data *data)
+char	**parser(char *s, t_data *data)
 {
 	char	**str;
 	size_t	countstr;

@@ -119,6 +119,7 @@ int		init(int argc, char **argv, char **envp);
 bool	init_structure(t_data *data, char **envp);
 
 void	init_cmds(t_data *data, t_commands *cmds);
+void	init_cmd(t_data *data, t_commands *cmds);
 
 /**
  * @brief Return the number of arguments passed in the command
@@ -357,6 +358,7 @@ void	lexer_parenthesis(const char *s, t_commands *cmds);
 
 char	**parser(char *s, t_data *data);
 void	putchar_parser(char *s, char **str, size_t countc);
+char	*handle_env(t_index_data *i_data, char *s, t_data *data);
 
 /******************************************************************************/
 /*End - Parser*/

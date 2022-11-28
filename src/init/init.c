@@ -91,6 +91,7 @@ static int	exec_cmd(t_data *data)
 	init_cmds(data, cmds);
 	if (cmds->exit_value == 0)
 	{
+		init_cmd(data, cmds);
 		args = split_args(data->user_input);
 		data->command = init_cmd_args(data, args);
 		if (is_builtin(data->command->cmd))

@@ -21,7 +21,7 @@ typedef struct s_temp_index
 
 static void	copy_quotes(char *s, char **str, t_temp_index *data)
 {
-	str[data->j][data->o++] = s[data->i++];
+	data->i++;
 	if (s[data->i - 1] == '\'')
 	{
 		while (s[data->i] && s[data->i] != '\'')
@@ -32,7 +32,7 @@ static void	copy_quotes(char *s, char **str, t_temp_index *data)
 		while (s[data->i] && s[data->i] != '\"')
 			str[data->j][data->o++] = s[data->i++];
 	}
-	str[data->j][data->o++] = s[data->i++];
+	data->i++;
 }
 
 static void	ft_strcpy(char *s, char **str, t_temp_index *data)
@@ -46,10 +46,7 @@ static void	ft_strcpy(char *s, char **str, t_temp_index *data)
 	{
 		if (s[data->i] == '\'' || s[data->i] == '\"')
 		{
-			special_char = s[data->i++];
-			while (s[data->i] && s[data->i] != special_char)
-				str[data->j][data->o++] = s[data->i++];
-			data->i++;
+			copy_quotes(s, str, data);
 		}
 		else
 			str[data->j][data->o++] = s[data->i++];

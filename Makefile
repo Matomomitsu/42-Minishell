@@ -54,6 +54,7 @@ INCLUDE = -I $(INC_PATH) -I $(LIBFT_PATH)
 SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init.c \
 		$(PATH_INIT)init_cmds.c \
+		$(PATH_INIT)init_cmd.c \
 		$(PATH_INIT)prompt.c \
 		$(PATH_INIT)init_structure.c \
 		$(PATH_UTIL)exit.c \
@@ -77,6 +78,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_LEXER)handle_parenthesis.c \
 		$(PATH_PARSER)parser.c \
 		$(PATH_PARSER)complete_parser.c \
+		$(PATH_PARSER)handle_env.c \
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
