@@ -64,7 +64,7 @@ void	free_array_str(char **arr_str)
 	}
 }
 
-void	free_cmd(t_commands *cmds)
+static void	free_cmd(t_commands *cmds)
 {
 	int	i;
 	int	o;

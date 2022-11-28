@@ -117,7 +117,18 @@ int		init(int argc, char **argv, char **envp);
  */
 bool	init_structure(t_data *data, char **envp);
 
+/**
+ * @brief Initialize the commands structure
+ * @param data Structure of MiniShell
+ * @param cmds Commands structure.
+ */
 void	init_cmds(t_data *data, t_commands *cmds);
+
+/**
+ * @brief Initialize a command structure
+ * @param data Structure of MiniShell
+ * @param cmds Commands structure.
+ */
 void	init_cmd(t_data *data, t_commands *cmds);
 
 /**
@@ -284,6 +295,10 @@ char	**split_args(char *command);
  */
 void	free_array_str(char **arr_str);
 
+/**
+ * @brief Free all the terms of cmds
+ * @param cmds Commands structure.
+ */
 void	free_cmds(t_commands *cmds);
 
 /**
@@ -384,10 +399,43 @@ char	**env_var_realloc(t_data *data, int size);
 /*Begin - Lexer*/
 /******************************************************************************/
 
+/**
+ * @brief Tokenize the string based on parenthesis and operators
+ * @param s User input
+ * @param cmds Structure of commands
+ * @return char** -> Tokenizer string
+ */
 char	**lexer(char const *s, t_commands *cmds);
+
+/**
+ * @brief Copy the user input into the tokenize string
+ * @param s User input
+ * @param str Tokenized string
+ * @param countc Number of divisions of user input
+ */
 void	putchar_lexer(char const *s, char **str, size_t countc);
+
+/**
+ * @brief Handle the errors that could be present in the user input
+ * @param i_data Index variable
+ * @param s User input
+ * @param cmds Structure of commands
+ */
 void	lexer_errors(t_index_data *i_data, const char *s, t_commands *cmds);
+
+/**
+ * @brief Handle the parenthesis present in the user input
+ * @param s User input
+ * @param cmds Structure of commands
+ */
 void	lexer_parenthesis(const char *s, t_commands *cmds);
+
+/**
+ * @brief Handle errors that may be present in user input
+ * @param i_data Index variable
+ * @param s User input
+ * @param cmds Structure of commands
+ */
 void	quotes_error(t_index_data *i_data, const char *s, t_commands *cmds);
 
 /******************************************************************************/
@@ -398,8 +446,28 @@ void	quotes_error(t_index_data *i_data, const char *s, t_commands *cmds);
 /*Begin - Parser*/
 /******************************************************************************/
 
+/**
+ * @brief Tokenize command based on their arguments
+ * @param s Command
+ * @param data Data structure
+ * @return char** -> Command split in arguments
+ */
 char	**parser(char *s, t_data *data);
+
+/**
+ * @brief Copy the command into the tokenize string
+ * @param s Command of user input
+ * @param str Split command
+ * @param countc Number of arguments
+ */
 void	putchar_parser(char *s, char **str, size_t countc);
+
+/**
+ * @brief Swap the '$' in input for environment variable value
+ * @param i_data index variable
+ * @param s Command of user input
+ * @param data Data structure
+ */
 char	*handle_env(t_index_data *i_data, char *s, t_data *data);
 
 /******************************************************************************/
