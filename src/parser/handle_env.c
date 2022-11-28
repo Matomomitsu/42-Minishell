@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-int		check_type(char ch)
+static int	check_type(char ch)
 {
 	if (ch >= '0' && ch <= '9')
 		return (1);
@@ -23,10 +23,9 @@ int		check_type(char ch)
 	if (ch == '_')
 		return (1);
 	return (0);
-
 }
 
-int		get_env_variable_size(char *s, t_index_data *i_data)
+static int	get_env_variable_size(char *s, t_index_data *i_data)
 {
 	int		i;
 	int		o;
@@ -37,7 +36,7 @@ int		get_env_variable_size(char *s, t_index_data *i_data)
 	return (i - i_data->i);
 }
 
-char	*get_env_value(char *s, t_index_data *i_data, t_data *data)
+static char	*get_env_value(char *s, t_index_data *i_data, t_data *data)
 {
 	int		variable_size;
 	int		i;
@@ -58,7 +57,7 @@ char	*get_env_value(char *s, t_index_data *i_data, t_data *data)
 	return (env_value);
 }
 
-void	copy_to_new_str(char *new_str, char *s, char *env_value, \
+static void	copy_to_new_str(char *new_str, char *s, char *env_value, \
 		t_index_data *i_data)
 {
 	size_t	i;
