@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/29 07:20:41 by mtomomit         ###   ########.fr        #
+#    Updated: 2022/11/29 10:00:56 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init_structure.c \
 		$(PATH_UTIL)exit.c \
 		$(PATH_UTIL)signal.c \
+		$(PATH_UTIL)debug.c \
 		$(PATH_UTIL)error_handler.c \
 		$(PATH_UTIL)sanitization.c \
 		$(PATH_EXEC)exec_handler.c \
