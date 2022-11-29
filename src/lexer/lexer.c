@@ -40,7 +40,8 @@ static void	get_size(t_index_data *i_data, const char *s, t_commands *cmds)
 			handle_quotes(i_data, s, cmds);
 		if (s[i_data->i])
 			i_data->malloc_size++;
-		i_data->i++;
+		if (s[i_data->i])
+			i_data->i++;
 	}
 	if (s[i_data->i] == '&' && s[i_data->i + 1] == '&')
 		i_data->i = i_data->i + 2;

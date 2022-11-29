@@ -12,64 +12,59 @@
 
 #include <minishell.h>
 
-static int	check_type(char ch)
+static char	*verify_existing_quotes(t_commands *cmds, int num_cmd)
 {
-	if (ch >= '0' && ch <= '9')
-		return (1);
-	if (ch >= 'a' && ch <= 'z')
-		return (1);
-	if (ch >= 'A' && ch <= 'Z')
-		return (1);
-	if (ch == '_')
-		return (1);
-	return (0);
-}
+	int		i;
+	int		o;
+	char	*temp_char;
 
-static void	handle_quotes(t_index_data *i_data, char *s, t_data *data)
-{
-	if (s[i_data->i++] == '\'')
-	{
-		while (s[i_data->i] && s[i_data->i++] != '\'')
-			;
-	}
-	else
-	{
-		while (s[i_data->i] && s[i_data->i++] != '\"')
-				;
-	}
-}
-
-static void	verify_redirections(t_commands *cmds, int num_cmd, t_data *data, \
-		char **temp_parser)
-{
-	int	i;
-
+	o = 0;
+	while (cmds->cmds[num_cmd][o++] != '=')
+		;
+	if (cmds->cmds[num_cmd][o] == '\"' || cmds->cmds[num_cmd][o] == '\'')
+		return (NULL);
+	temp_char = malloc(sizeof(char) * ft_strlen(cmds->cmds[num_cmd]) + 3);
+	temp_char[ft_strlen(cmds->cmds[num_cmd]) + 2] = '\0';
 	i = 0;
-	while (temp_parser[i])
-	{
+	o = 0;
+	while (cmds->cmds[num_cmd][o] != '=')
+		temp_char[i++] = cmds->cmds[num_cmd][o++];
+	temp_char[i++] = cmds->cmds[num_cmd][o++];
+	temp_char[i++] = '"';
+	while (cmds->cmds[num_cmd][o] && cmds->cmds[num_cmd][o] != ' ')
+		temp_char[i++] = cmds->cmds[num_cmd][o++];
+	temp_char[i++] = '"';
+	while (cmds->cmds[num_cmd][o])
+		temp_char[i++] = cmds->cmds[num_cmd][o++];
+	return (temp_char);
+}
 
+static void	add_quotes(t_commands *cmds, int num_cmd)
+{
+	char	*temp_char;
+
+	temp_char = verify_existing_quotes(cmds, num_cmd);
+	if (temp_char)
+	{
+		cmds->cmds[num_cmd] = ft_realloc(cmds->cmds[num_cmd], \
+				ft_strlen(temp_char) + 1);
+		ft_strlcpy(cmds->cmds[num_cmd], temp_char, ft_strlen(temp_char) + \
+			1);
 	}
+	free(temp_char);
 }
 
 void	find_export_cmd(t_commands *cmds, int num_cmd, t_data *data)
 {
-	char			**temp_parser;
-	int				o;
-	int				i;
+	char	**temp_parser;
+	int		o;
+	int		i;
 
 	temp_parser = parser(cmds->cmds[num_cmd]);
 	i = 0;
 	o = 0;
-	while (temp_parser[o])
-		o++;
-	while (i < o)
-	{
-		if (!ft_strncmp("export\0", temp_parser[i], 7))
-			break ;
-		i = i + 2;
-	}
-	if (i < o)
-		verify_redirections(cmds, num_cmd, data, temp_parser);
+	if (!ft_strncmp("export\0", temp_parser[0], 7))
+		add_quotes(cmds, num_cmd);
 	i = 0;
 	while (temp_parser[i])
 		free(temp_parser[i++]);

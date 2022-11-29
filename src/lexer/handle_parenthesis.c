@@ -92,7 +92,8 @@ void	lexer_parenthesis(const char *s, t_commands *cmds)
 				parenthesis_erros(s, cmds, &i_data);
 			if (s[i_data.i] == '\'' || s[i_data.i] == '\"')
 				handle_quotes(&i_data, s, cmds);
-			i_data.i++;
+			if (s[i_data.i])
+				i_data.i++;
 		}
 		if (s[i_data.i] == '&' || s[i_data.i] == '|')
 			i_data.i++;

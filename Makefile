@@ -6,7 +6,7 @@
 #    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/29 06:07:25 by mtomomit         ###   ########.fr        #
+#    Updated: 2022/11/29 07:20:41 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_PARSER)copy_cmd.c \
 		$(PATH_PARSER)handle_env.c \
 		$(PATH_PARSER)find_dollar_sign.c \
+		$(PATH_PARSER)find_export_cmd.c \
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))
 

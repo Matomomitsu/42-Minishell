@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 06:03:51 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/29 07:20:12 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -473,6 +473,7 @@ char	**handle_redirection(char *s);
 void	putchar_redirection(char *s, char **str, size_t countc);
 char	*rm_redirection(char *s);
 void	copy_cmd(char *s, char *new_str, size_t countc);
+void	find_export_cmd(t_commands *cmds, int num_cmd, t_data *data);
 
 /******************************************************************************/
 /*End - Parser*/

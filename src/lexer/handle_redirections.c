@@ -74,6 +74,7 @@ void	lexer_redirections(const char *s, t_commands *cmds)
 			handle_redirections(s, cmds, &i_data);
 		if (s[i_data.i] == '\'' || s[i_data.i] == '\"')
 			handle_quotes(&i_data, s, cmds);
-		i_data.i++;
+		if (s[i_data.i])
+			i_data.i++;
 	}
 }
