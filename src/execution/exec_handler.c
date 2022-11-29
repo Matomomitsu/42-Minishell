@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 19:14:47 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 19:33:51 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
 	}
 	if (WIFEXITED(save_status))
 		status = WEXITSTATUS(save_status);
-	else if (WISIGNALED(save_status))
+	else if (WIFSIGNALED(save_status))
 		status = WTERMSIG(save_status);
 	else
 		status = save_status;
