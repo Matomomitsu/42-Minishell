@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 05:41:45 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/11/29 06:03:01 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/29 08:45:00 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static void	ft_strcpy(char *s, char *new_str, t_temp_index *data)
 		{
 			if (s[data->i] == '\'' || s[data->i] == '\"')
 				copy_quotes(s, new_str, data);
-		else
-			new_str[data->o++] = s[data->i++];
+			else
+				new_str[data->o++] = s[data->i++];
 		}
 		while (s[data->i] && (s[data->i] == '<' || s[data->i] == '>' || \
 				s[data->i] == ' ' ))

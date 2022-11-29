@@ -12,7 +12,8 @@
 
 #include <minishell.h>
 
-static void	handle_quotes(t_index_data *i_data, char *s, int add_malloc, char special_char)
+static void	handle_quotes(t_index_data *i_data, char *s, int add_malloc, \
+				char special_char)
 {
 	if (add_malloc == 1)
 	{

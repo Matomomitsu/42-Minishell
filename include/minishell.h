@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 07:20:12 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/29 08:23:07 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -468,6 +468,13 @@ void	putchar_parser(char *s, char **str, size_t countc);
  * @param data Data structure
  */
 char	*handle_env(t_index_data *i_data, char *s, t_data *data);
+
+/**
+ * @brief Search the existence of '$' in that part of the input
+ * @param data Data structure
+ * @param cmds Structure of commands
+ * @param num_cmd The number of the command
+ */
 void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd);
 char	**handle_redirection(char *s);
 void	putchar_redirection(char *s, char **str, size_t countc);
