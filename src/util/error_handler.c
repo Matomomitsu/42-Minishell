@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:23:22 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 15:08:49 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:26:25 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,3 @@ static bool	response_with_quotes(char *cmd)
 		return (true);
 	return (false);
 }
-
