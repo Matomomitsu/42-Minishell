@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 08:53:43 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:00:57 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -436,6 +436,12 @@ void	lexer_parenthesis(const char *s, t_commands *cmds);
  * @param cmds Structure of commands
  */
 void	quotes_error(t_index_data *i_data, const char *s, t_commands *cmds);
+
+/**
+ * @brief Handle the redirections present in the user input
+ * @param s User input
+ * @param cmds Structure of commands
+ */
 void	lexer_redirections(const char *s, t_commands *cmds);
 
 /******************************************************************************/
@@ -503,6 +509,12 @@ char	*rm_redirection(char *s);
  * @param str An array that contain the new command
  */
 void	copy_cmd(char *s, char *new_str);
+
+/**
+ * @brief Copy the command now without the redirection in a new object
+ * @param s Command
+ * @param str An array that contain the new command
+ */
 void	find_export_cmd(t_commands *cmds, int num_cmd, t_data *data);
 
 /******************************************************************************/
