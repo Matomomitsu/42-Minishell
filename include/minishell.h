@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 09:01:28 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:43:00 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,13 @@ bool	is_valid_var_name(char *name);
 /******************************************************************************/
 /*Begin - Utils*/
 /******************************************************************************/
+
+/**
+ * @brief Will return the value of the structures
+ * @param data Structure of MiniShell
+ * @param cmds Structure of commands
+ */
+void	debug_structs(t_data *data, t_commands *cmds);
 
 /**
  * @brief Deallocate memory from a pointer. Update the variable to NULL
