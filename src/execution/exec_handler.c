@@ -6,28 +6,22 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/27 10:47:03 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:15:41 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 static int	cmd_not_found(t_data *data, t_commands *cmds, char *cmd);
-static void	debug_cmds(t_commands *cmds);
 static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd);
 static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd);
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd);
 static bool	input_is_dir(char *cmd);
 
-int	exec_handler(t_data *data) // TODO:Lins [create_children]
+int	exec_handler(t_data *data, t_commands *cmds) // TODO:Lins [create_children]
 {
-	t_commands	*cmds;
-
-	//TODO:Lins: Freelá este cara aqui! (Talvez ele venha param.)
-	cmds = (t_commands *)ft_calloc(1, sizeof(t_commands));
-
-	// debug_cmds(cmds);
-	cmds->num_cmds = 1; // TODO:Lins No loop da execução, calcular este valor
+	debug_structs(data, cmds);
+	// cmds->num_cmds = 1; // TODO:Lins No loop da execução, calcular este valor
 
 	int	i;
 
@@ -37,34 +31,37 @@ int	exec_handler(t_data *data) // TODO:Lins [create_children]
 		/* TODO:Lins IMPORTANTE:
 		 *-exec set follow-fork-mode child
 		 */
-		cmds->pid[0] = fork();
-		if (cmds->pid[0] == -1)
+		*cmds->pid = fork();
+		if (*cmds->pid == -1)
 			return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
-		else if (cmds->pid == 0)
+		else if (*cmds->pid == 0)
+			// TODO:Lins IMPORTANTE Harded code p/ teste
 			// execute_cmd(data, cmds, "/bin/ls");
-			execute_cmd(data, cmds, "./sh_test.sh");
-		// TODO:Lins Harded code p/ teste
+			execute_cmd(data, cmds, *cmds->cmds);
+			// execute_cmd(data, cmds, "./sh_test.sh");
 		i++;
 	}
 
 	return (1); // TODO
 }
 
+// TODO: Fazer agora este cara
+// static int	wait_child(t_data *s_data)
+// {
+
+// }
+
 static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd)
 {
 	int	status_code;
 
-	// if (!cmds || !cmds->cmd)
-	// 	exit_shell(data, error_msg_cmd("child", NULL,
-	// 			"no command to execute", EXIT_FAILURE));
-	// Commando com barra
 	if (ft_strchr(cmd, '/') == NULL)
 	{
 		status_code = exec_path_var_bin(data, cmds, cmd);
 		if (status_code != CMD_NOT_FOUND)
 			exit_shell(data, status_code);
 	}
-	status_code = exec_local_bin(data, cmds, cmd);
+	status_code = exec_local_bin(data, cmds, cmd); // TODO: Implementar este
 	exit_shell(data, status_code);
 	return (status_code);
 }
@@ -74,48 +71,26 @@ static char	**apagar_parser_aqui(char **path)
 	return (path);
 }
 
-/**
- * @brief Execute command with contain slash (/). So: Var binaries
- * @param data
- * @param cmds
- * @param cmd
- * @return int
+/** [OK]
+ * @brief Execute command with no slash (/). So: Var binaries.
+ * Sample: ls -l.
+ * This method will get the full path of the command, and execute it.
+ * Sample: Change ls to '/usr/bin/ls'
+ * @param data TypeDef in MiniShell
+ * @param cmds TypeDef commands
+ * @param cmd First Arg. Simple the command
+ * @return int - exit code
  */
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd)
 {
-	// TODO:Lins = Harded code p/ testes
-	// char **teste = (char **)"/usr/bin/ls -l";
-	// char **teste = (char **)"/usr/bin/ls -l";
-	char **teste = (char **)"/usr/bin/ls -l";
-	cmds->paths = apagar_parser_aqui(teste);
-	if (!cmds->paths)
+	cmds->cmd[0].path = get_cmd_path(data, cmds);
+	if (!cmds->cmd[0].path)
 		return (CMD_NOT_FOUND);
-	if (execve((char *)cmds->paths, data->command->args, data->env) == -1)
+	if (execve(cmds->cmd[0].path, data->command->args, data->env) == -1)
 		error_msg_cmd("execve", NULL, strerror(errno), errno);
 	return (EXIT_FAILURE);
 }
 
-// TODO:Lins - Remover este método daqui. Colocar em uma classe separada
-static void	debug_cmds(t_commands *cmds)
-{
-	return;
-	int	i;
-
-	i = 0;
-	while (cmds->cmds[i])
-	{
-		printf("Cmd %i: %s\n", i, cmds->cmds[i]);
-		i++;
-	}
-	printf("\n\n");
-	i = 0;
-	while (cmds->paths[i])
-	{
-		printf("Paths %i: %s\n", i, cmds->paths[i]);
-		i++;
-	}
-	printf("\n\n");
-}
 
 /** [OK] -  * TODO:Lins - Remover o char *cmd
  * @brief Responsible to handler the local executions. Local Directory,
