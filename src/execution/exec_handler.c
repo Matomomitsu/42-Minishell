@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 16:15:41 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 17:08:14 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,25 @@ static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd);
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd);
 static bool	input_is_dir(char *cmd);
 
-int	exec_handler(t_data *data, t_commands *cmds) // TODO:Lins [create_children]
+/* Debug Fork - -exec set follow-fork-mode child
+*/
+int	exec_handler(t_data *data, t_commands *cmds)
 {
-	debug_structs(data, cmds);
-	// cmds->num_cmds = 1; // TODO:Lins No loop da execução, calcular este valor
-
 	int	i;
+	int	status_code;
 
+	debug_structs(data, cmds);
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
-		/* TODO:Lins IMPORTANTE:
-		 *-exec set follow-fork-mode child
-		 */
 		*cmds->pid = fork();
 		if (*cmds->pid == -1)
 			return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
 		else if (*cmds->pid == 0)
-			// TODO:Lins IMPORTANTE Harded code p/ teste
-			// execute_cmd(data, cmds, "/bin/ls");
-			execute_cmd(data, cmds, *cmds->cmds);
-			// execute_cmd(data, cmds, "./sh_test.sh");
+			status_code = execute_cmd(data, cmds, *cmds->cmds);
 		i++;
 	}
-
-	return (1); // TODO
+	return (status_code);
 }
 
 // TODO: Fazer agora este cara
@@ -61,14 +55,9 @@ static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd)
 		if (status_code != CMD_NOT_FOUND)
 			exit_shell(data, status_code);
 	}
-	status_code = exec_local_bin(data, cmds, cmd); // TODO: Implementar este
+	status_code = exec_local_bin(data, cmds, data->command->cmd);
 	exit_shell(data, status_code);
 	return (status_code);
-}
-
-static char	**apagar_parser_aqui(char **path)
-{
-	return (path);
 }
 
 /** [OK]
@@ -91,14 +80,13 @@ static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd)
 	return (EXIT_FAILURE);
 }
 
-
-/** [OK] -  * TODO:Lins - Remover o char *cmd
+/** [OK]
  * @brief Responsible to handler the local executions. Local Directory,
  * file or in some path.
  * Ex: /bin/ls
  * @param data TypeDef in MiniShell
  * @param cmds TypeDef commands
- * @return int
+ * @return int - Result of execution
  */
 static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd)
 {
@@ -123,10 +111,10 @@ static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd)
 static int	cmd_not_found(t_data *data, t_commands *cmds, char *cmd)
 {
 	if (ft_strchr(cmd, '/') == NULL
-			&& get_env_var_index(data->env, "PATH") != -1)
-		return (error_msg_cmd(cmd, NULL, "command not found", CMD_NOT_FOUND ));
+		&& get_env_var_index(data->env, "PATH") != -1)
+		return (error_msg_cmd(cmd, NULL, "command not found", CMD_NOT_FOUND));
 	if (access(cmd, F_OK) != 0)
-		return (error_msg_cmd(cmd, NULL, strerror(errno), CMD_NOT_FOUND ));
+		return (error_msg_cmd(cmd, NULL, strerror(errno), CMD_NOT_FOUND));
 	else if (input_is_dir(cmd))
 		return (error_msg_cmd(cmd, NULL, "is a directory", CMD_NOT_EXEC));
 	else if (access(cmd, X_OK) != 0)
@@ -143,6 +131,7 @@ static int	cmd_not_found(t_data *data, t_commands *cmds, char *cmd)
 static bool	input_is_dir(char *cmd)
 {
 	struct stat	stat_buf;
+
 	stat(cmd, &stat_buf);
 	return (S_ISDIR(stat_buf.st_mode));
 }
