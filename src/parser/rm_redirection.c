@@ -12,7 +12,8 @@
 
 #include <minishell.h>
 
-static void	handle_quotes(t_index_data *i_data, char *s, int add_malloc, char special_char)
+static void	handle_quotes(t_index_data *i_data, char *s, int add_malloc, \
+				char special_char)
 {
 	if (add_malloc == 1)
 	{
@@ -85,6 +86,6 @@ char	*rm_redirection(char *s)
 	new_str[(ft_strlen(s) - countstr)] = '\0';
 	if (!new_str)
 		return (NULL);
-	copy_cmd(s, new_str, countstr);
+	copy_cmd(s, new_str);
 	return (new_str);
 }

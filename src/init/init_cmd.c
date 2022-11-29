@@ -27,7 +27,8 @@ static void	change_cmd(t_commands *cmds, int num_cmd)
 
 	temp_char = rm_redirection(cmds->cmds[num_cmd]);
 	free(cmds->cmds[num_cmd]);
-	cmds->cmds[num_cmd] = (char *)malloc(ft_strlen(temp_char) * sizeof(char) + 1);
+	cmds->cmds[num_cmd] = (char *)malloc(ft_strlen(temp_char) * \
+						sizeof(char) + 1);
 	cmds->cmds[num_cmd][ft_strlen(temp_char)] = '\0';
 	ft_strlcpy(cmds->cmds[num_cmd], temp_char, ft_strlen(temp_char) + 1);
 	free(temp_char);

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 07:20:12 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/29 08:53:43 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -468,11 +468,41 @@ void	putchar_parser(char *s, char **str, size_t countc);
  * @param data Data structure
  */
 char	*handle_env(t_index_data *i_data, char *s, t_data *data);
+
+/**
+ * @brief Search the existence of '$' in that part of the input
+ * @param data Data structure
+ * @param cmds Structure of commands
+ * @param num_cmd The number of the command
+ */
 void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd);
+
+/**
+ * @brief Search if exists redirection in the command
+ * @param s Command
+ */
 char	**handle_redirection(char *s);
+
+/**
+ * @brief Copy the redirection in a new object
+ * @param s Command
+ * @param str An array that contains all the redirections
+ * @param countc Number of redirections
+ */
 void	putchar_redirection(char *s, char **str, size_t countc);
+
+/**
+ * @brief Remove the redirection from the command
+ * @param s Command
+ */
 char	*rm_redirection(char *s);
-void	copy_cmd(char *s, char *new_str, size_t countc);
+
+/**
+ * @brief Copy the command now without the redirection in a new object
+ * @param s Command
+ * @param str An array that contain the new command
+ */
+void	copy_cmd(char *s, char *new_str);
 void	find_export_cmd(t_commands *cmds, int num_cmd, t_data *data);
 
 /******************************************************************************/
