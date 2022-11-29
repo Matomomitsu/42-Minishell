@@ -6,13 +6,12 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:23:22 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:37:03 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 15:08:49 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static char	*join_strs(char *str, char *add);
 static bool	response_with_quotes(char *cmd);
 
 int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
@@ -56,16 +55,3 @@ static bool	response_with_quotes(char *cmd)
 	return (false);
 }
 
-static char	*join_strs(char *str, char *add)
-{
-	char	*tmp;
-
-	if (!add)
-		return (str);
-	if (!str)
-		return (ft_strdup(add));
-	tmp = str;
-	str = ft_strjoin(tmp, add);
-	free_ptr(tmp);
-	return (str);
-}
