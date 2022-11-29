@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_args.c                                       :+:      :+:    :+:   */
+/*   parse_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 11:47:03 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 15:07:55 by rlins            ###   ########.fr       */
+/*   Created: 2022/11/29 12:34:21 by rlins             #+#    #+#             */
+/*   Updated: 2022/11/29 16:26:41 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	**split_args(char *command)
+char	*get_cmd_path(t_data *data, t_commands *cmds)
 {
-	return (ft_split(command, ' '));
-}
+	int		i;
+	char	*cmd_comp;
+	char	*cmd;
 
-char	*join_strs(char *str, char *add)
-{
-	char	*tmp;
-
-	if (!add)
-		return (str);
-	if (!str)
-		return (ft_strdup(add));
-	tmp = str;
-	str = ft_strjoin(tmp, add);
-	free_ptr(tmp);
-	return (str);
+	cmd = ft_strdup("/");
+	cmd = join_strs(cmd, data->command->cmd);
+	i = 0;
+	while (cmds->paths[i])
+	{
+		cmd_comp = ft_strjoin(cmds->paths[i], cmd);
+		if (access(cmd_comp, F_OK | X_OK) == 0)
+		{
+			free_ptr(cmd);
+			return (cmd_comp);
+		}
+		free_ptr(cmd_comp);
+		i++;
+	}
 }
