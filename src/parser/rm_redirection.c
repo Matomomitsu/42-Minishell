@@ -86,6 +86,6 @@ char	*rm_redirection(char *s)
 	new_str[(ft_strlen(s) - countstr)] = '\0';
 	if (!new_str)
 		return (NULL);
-	copy_cmd(s, new_str, countstr);
+	copy_cmd(s, new_str);
 	return (new_str);
 }
