@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sanitization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:06:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 12:37:34 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 06:15:47 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,49 @@ void	free_array_str(char **arr_str)
 		}
 		free(arr_str);
 		arr_str = NULL;
+	}
+}
+
+static void	free_cmd(t_commands *cmds)
+{
+	int	i;
+	int	o;
+
+	i = 0;
+	while (i < cmds->num_cmds)
+	{
+		o = 0;
+		while (cmds->cmd[i].args[o] != NULL)
+			free(cmds->cmd[i].args[o++]);
+		free(cmds->cmd[i].args[o]);
+		free(cmds->cmd[i].args);
+		o = 0;
+		while (cmds->cmd[i].redirections[o] != NULL)
+			free(cmds->cmd[i].redirections[o++]);
+		free(cmds->cmd[i].redirections[o]);
+		free(cmds->cmd[i].redirections);
+		free(cmds->cmd[i].pipe_fd);
+		i++;
+	}
+}
+
+void	free_cmds(t_commands *cmds)
+{
+	int	i;
+
+	i = 0;
+	if (cmds->cmds != NULL)
+	{
+		free_cmd(cmds);
+		while (cmds->cmds[i] != NULL)
+			free(cmds->cmds[i++]);
+		free(cmds->cmds[i]);
+		free(cmds->cmds);
+		while (cmds->paths[i] != NULL)
+			free(cmds->paths[i++]);
+		free(cmds->paths[i]);
+		free(cmds->paths);
+		free(cmds->operators);
+		free(cmds);
 	}
 }

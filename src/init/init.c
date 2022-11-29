@@ -57,18 +57,28 @@ static void	init_prompt(t_data *data)
  * @brief Verify what type of command is comming
  * @param data
  */
+
 static int	exec_cmd(t_data *data)
 {
-	int		status_code;
-	char	**args;
+	t_commands	*cmds;
+	char		**args;
+	int			status_code;
 
-	status_code = 0;
-	args = split_args(data->user_input);
-	data->command = init_cmd_args(data, args);
-	if (is_builtin(data->command->cmd))
-		status_code = call_builtin(data);
-	else
-		exec_handler(data);
+	cmds = (t_commands *)ft_calloc(1, sizeof(t_commands));
+	cmds->exit_value = 0;
+	init_cmds(data, cmds);
+	if (cmds->exit_value == 0)
+	{
+		init_cmd(data, cmds);
+		args = split_args(data->user_input);
+		data->command = init_cmd_args(data, args);
+		if (is_builtin(data->command->cmd))
+			status_code = call_builtin(data);
+		else
+			exec_handler(data);
+	}
+	status_code = cmds->exit_value;
+	free_cmds(cmds);
 	return (status_code);
 }
 

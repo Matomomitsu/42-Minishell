@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/27 11:08:07 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 07:20:12 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@
 # define OLD_PWD "OLDPWD"
 # define PWD "PWD"
 
+# define STDOUT	STDOUT_FILENO
+# define STDIN	STDIN_FILENO
+# define STDERR	STDERR_FILENO
+
+# define OR		1
+# define AND	2
+# define PIPE	3
+
 # define CMD_NOT_FOUND 127
 # define CMD_NOT_EXEC 126
 
@@ -56,6 +64,35 @@ typedef struct s_data
 	t_command	*command;
 }	t_data;
 
+typedef struct s_cmd
+{
+	char	*cmd;
+	char	*path;
+	char	**args;
+	char	**redirections;
+	int		*pipe_fd;
+	int		exit_value;
+}	t_cmd;
+
+typedef struct s_commands
+{
+	pid_t	*pid;
+	int		num_cmds;
+	int		num_exec;
+	char	**cmds;
+	char	**paths;
+	int		*operators;
+	int		exit_value;
+	t_cmd	*cmd;
+}	t_commands;
+
+typedef struct s_index_data
+{
+	size_t	i;
+	size_t	malloc_size;
+	size_t	j;
+}	t_index_data;
+
 extern int	g_status_code;
 
 /******************************************************************************/
@@ -78,6 +115,20 @@ int		init(int argc, char **argv, char **envp);
  * @return false - Problem
  */
 bool	init_structure(t_data *data, char **envp);
+
+/**
+ * @brief Initialize the commands structure
+ * @param data Structure of MiniShell
+ * @param cmds Commands structure
+ */
+void	init_cmds(t_data *data, t_commands *cmds);
+
+/**
+ * @brief Initialize a command structure
+ * @param data Structure of MiniShell
+ * @param cmds Commands structure
+ */
+void	init_cmd(t_data *data, t_commands *cmds);
 
 /**
  * @brief Return the number of arguments passed in the command
@@ -244,6 +295,12 @@ char	**split_args(char *command);
 void	free_array_str(char **arr_str);
 
 /**
+ * @brief Free all the terms of cmds
+ * @param cmds Commands structure
+ */
+void	free_cmds(t_commands *cmds);
+
+/**
  * @brief Handler error messages when commands will be applied.
  *
  * @param cmd Command applied
@@ -335,6 +392,91 @@ char	**env_var_realloc(t_data *data, int size);
 
 /******************************************************************************/
 /*End - Env*/
+/******************************************************************************/
+
+/******************************************************************************/
+/*Begin - Lexer*/
+/******************************************************************************/
+
+/**
+ * @brief Tokenize the string based on parenthesis and operators
+ * @param s User input
+ * @param cmds Structure of commands
+ * @return char** -> Tokenizer string
+ */
+char	**lexer(char const *s, t_commands *cmds);
+
+/**
+ * @brief Copy the user input into the tokenize string
+ * @param s User input
+ * @param str Tokenized string
+ * @param countc Number of divisions of user input
+ */
+void	putchar_lexer(char const *s, char **str, size_t countc);
+
+/**
+ * @brief Handle the errors that could be present in the user input
+ * @param i_data Index variable
+ * @param s User input
+ * @param cmds Structure of commands
+ */
+void	lexer_errors(t_index_data *i_data, const char *s, t_commands *cmds);
+
+/**
+ * @brief Handle the parenthesis present in the user input
+ * @param s User input
+ * @param cmds Structure of commands
+ */
+void	lexer_parenthesis(const char *s, t_commands *cmds);
+
+/**
+ * @brief Handle errors that may be present in user input
+ * @param i_data Index variable
+ * @param s User input
+ * @param cmds Structure of commands
+ */
+void	quotes_error(t_index_data *i_data, const char *s, t_commands *cmds);
+void	lexer_redirections(const char *s, t_commands *cmds);
+
+/******************************************************************************/
+/*End - Lexer*/
+/******************************************************************************/
+
+/******************************************************************************/
+/*Begin - Parser*/
+/******************************************************************************/
+
+/**
+ * @brief Tokenize command based on their arguments
+ * @param s Command
+ * @return char** -> Command split in arguments
+ */
+char	**parser(char *s);
+
+/**
+ * @brief Copy the command into the tokenize string
+ * @param s Command of user input
+ * @param str Split command
+ * @param countc Number of arguments
+ */
+void	putchar_parser(char *s, char **str, size_t countc);
+
+/**
+ * @brief Swap the '$' in input for environment variable value
+ * @param i_data index variable
+ * @param s Command of user input
+ * @param data Data structure
+ */
+char	*handle_env(t_index_data *i_data, char *s, t_data *data);
+void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd);
+char	**handle_redirection(char *s);
+void	putchar_redirection(char *s, char **str, size_t countc);
+char	*rm_redirection(char *s);
+void	copy_cmd(char *s, char *new_str, size_t countc);
+void	find_export_cmd(t_commands *cmds, int num_cmd, t_data *data);
+
+/******************************************************************************/
+/*End - Parser*/
 /******************************************************************************/
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
+#    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/27 11:10:13 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/29 07:20:41 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ PATH_UTIL 		= $(PATH_SRC)util/
 PATH_EXEC 		= $(PATH_SRC)execution/
 PATH_ENV 		= $(PATH_SRC)env/
 PATH_BUILTINS 	= $(PATH_SRC)builtins/
+PATH_LEXER		= $(PATH_SRC)lexer/
+PATH_PARSER		= $(PATH_SRC)parser/
 PATH_OBJS 		= ./objs/
 
 INC_PATH 		= ./include/
@@ -52,6 +54,8 @@ INCLUDE = -I $(INC_PATH) -I $(LIBFT_PATH)
 
 SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init.c \
+		$(PATH_INIT)init_cmds.c \
+		$(PATH_INIT)init_cmd.c \
 		$(PATH_INIT)init_validation.c \
 		$(PATH_INIT)prompt.c \
 		$(PATH_INIT)init_structure.c \
@@ -70,7 +74,22 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_BUILTINS)cmd_env.c \
 		$(PATH_BUILTINS)cmd_export.c \
 		$(PATH_BUILTINS)cmd_unset.c \
-		$(PATH_BUILTINS)cmd_echo.c
+		$(PATH_BUILTINS)cmd_echo.c \
+		$(PATH_LEXER)lexer.c \
+		$(PATH_LEXER)complete_lexer.c \
+		$(PATH_LEXER)handle_lexer_errors.c \
+		$(PATH_LEXER)handle_parenthesis.c \
+		$(PATH_LEXER)handle_redirections.c \
+		$(PATH_LEXER)quotes_error.c \
+		$(PATH_PARSER)parser.c \
+		$(PATH_PARSER)complete_parser.c \
+		$(PATH_PARSER)redirections.c \
+		$(PATH_PARSER)complete_redirections.c \
+		$(PATH_PARSER)rm_redirection.c \
+		$(PATH_PARSER)copy_cmd.c \
+		$(PATH_PARSER)handle_env.c \
+		$(PATH_PARSER)find_dollar_sign.c \
+		$(PATH_PARSER)find_export_cmd.c \
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
@@ -88,6 +107,8 @@ $(PATH_OBJS)%.o: $(PATH_SRC)%.c
 	@mkdir -p $(PATH_OBJS)execution/
 	@mkdir -p $(PATH_OBJS)env/
 	@mkdir -p $(PATH_OBJS)builtins/
+	@mkdir -p $(PATH_OBJS)lexer/
+	@mkdir -p $(PATH_OBJS)parser/
 	@$(CC) $(CFLAGS) $(INCLUDE) -I. -c $< -o $@
 
 # Libft rule
