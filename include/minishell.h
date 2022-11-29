@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/27 11:08:07 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 06:03:51 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ typedef struct s_cmd
 	char	*cmd;
 	char	*path;
 	char	**args;
-	char	**cmd_args;
-	char	*infile;
-	char	*outfile;
+	char	**redirections;
 	int		*pipe_fd;
 	int		exit_value;
 }	t_cmd;
@@ -438,6 +436,7 @@ void	lexer_parenthesis(const char *s, t_commands *cmds);
  * @param cmds Structure of commands
  */
 void	quotes_error(t_index_data *i_data, const char *s, t_commands *cmds);
+void	lexer_redirections(const char *s, t_commands *cmds);
 
 /******************************************************************************/
 /*End - Lexer*/
@@ -450,10 +449,9 @@ void	quotes_error(t_index_data *i_data, const char *s, t_commands *cmds);
 /**
  * @brief Tokenize command based on their arguments
  * @param s Command
- * @param data Data structure
  * @return char** -> Command split in arguments
  */
-char	**parser(char *s, t_data *data);
+char	**parser(char *s);
 
 /**
  * @brief Copy the command into the tokenize string
@@ -470,6 +468,11 @@ void	putchar_parser(char *s, char **str, size_t countc);
  * @param data Data structure
  */
 char	*handle_env(t_index_data *i_data, char *s, t_data *data);
+void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd);
+char	**handle_redirection(char *s);
+void	putchar_redirection(char *s, char **str, size_t countc);
+char	*rm_redirection(char *s);
+void	copy_cmd(char *s, char *new_str, size_t countc);
 
 /******************************************************************************/
 /*End - Parser*/

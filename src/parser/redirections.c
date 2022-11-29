@@ -1,49 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 17:52:56 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/11/21 17:52:56 by mtomomit         ###   ########.fr       */
+/*   Created: 2022/11/29 05:36:20 by mtomomit          #+#    #+#             */
+/*   Updated: 2022/11/29 05:36:20 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	handle_quotes(t_index_data *i_data, char *s)
+static void	handle_quotes(t_index_data *i_data, char *s, int add_malloc, char special_char)
 {
-	if (s[i_data->i++] == '\'')
+	if (add_malloc == 1)
 	{
-		while (s[i_data->i] && s[i_data->i++] != '\'')
+		i_data->i++;
+		while (s[i_data->i] && s[i_data->i++] != special_char)
 			i_data->malloc_size++;
+		i_data->malloc_size++;
 	}
 	else
 	{
-		while (s[i_data->i] && s[i_data->i++] != '\"')
-				i_data->malloc_size++;
+		i_data->i++;
+		while (s[i_data->i] && s[i_data->i++] != special_char)
+			;
 	}
 }
 
 static void	get_size(t_index_data *i_data, char *s)
 {
 	i_data->malloc_size = 0;
-	while (s[i_data->i] && (s[i_data->i] == ' ' || s[i_data->i] == '('))
+	while (s[i_data->i] && s[i_data->i] != '<' && s[i_data->i] != '>')
+	{
+		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
+			handle_quotes(i_data, s, 0, s[i_data->i]);
+		else
+			i_data->i++;
+	}
+	while (s[i_data->i] && (s[i_data->i] == '<' || s[i_data->i] == '>' || \
+			s[i_data->i] == ' ' ))
+	{
 		i_data->i++;
+		i_data->malloc_size++;
+	}
 	while (s[i_data->i] && s[i_data->i] != ' ')
 	{
 		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
-			handle_quotes(i_data, s);
+			handle_quotes(i_data, s, 1, s[i_data->i]);
 		else
 		{
-			if (s[i_data->i] == ')')
-				i_data->i++;
-			else
-			{
-				i_data->malloc_size++;
-				i_data->i++;
-			}
+			i_data->malloc_size++;
+			i_data->i++;
 		}
 	}
 }
@@ -83,7 +92,7 @@ static void	splitstr(char **str, char *s, size_t countc)
 	}
 }
 
-char	**parser(char *s)
+char	**handle_redirection(char *s)
 {
 	char	**str;
 	size_t	countstr;
@@ -97,6 +106,6 @@ char	**parser(char *s)
 	splitstr(str, s, countstr);
 	if (str == NULL)
 		return (NULL);
-	putchar_parser(s, str, countstr);
+	putchar_redirection(s, str, countstr);
 	return (str);
 }

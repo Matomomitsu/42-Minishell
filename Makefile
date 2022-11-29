@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
+#    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/27 11:10:13 by rlins            ###   ########.fr        #
+#    Updated: 2022/11/29 06:07:25 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,10 +79,16 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_LEXER)complete_lexer.c \
 		$(PATH_LEXER)handle_lexer_errors.c \
 		$(PATH_LEXER)handle_parenthesis.c \
+		$(PATH_LEXER)handle_redirections.c \
 		$(PATH_LEXER)quotes_error.c \
 		$(PATH_PARSER)parser.c \
 		$(PATH_PARSER)complete_parser.c \
+		$(PATH_PARSER)redirections.c \
+		$(PATH_PARSER)complete_redirections.c \
+		$(PATH_PARSER)rm_redirection.c \
+		$(PATH_PARSER)copy_cmd.c \
 		$(PATH_PARSER)handle_env.c \
+		$(PATH_PARSER)find_dollar_sign.c \
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))
 

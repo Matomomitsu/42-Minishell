@@ -12,43 +12,25 @@
 
 #include <minishell.h>
 
-void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd)
-{
-	t_index_data	i_data;
-	char			*temp_char;
-
-	i_data.i = 0;
-	while (cmds->cmds[num_cmd][i_data.i])
-	{
-		if (cmds->cmds[num_cmd][i_data.i] == '$')
-		{
-			temp_char = handle_env(&i_data, cmds->cmds[num_cmd], data);
-			cmds->cmds[num_cmd] = ft_realloc(cmds->cmds[num_cmd], \
-				ft_strlen(temp_char) + 1);
-			ft_strlcpy(cmds->cmds[num_cmd], temp_char, ft_strlen(temp_char) + \
-					1);
-			free(temp_char);
-		}
-		if (cmds->cmds[num_cmd][i_data.i] == '\'')
-			while (cmds->cmds[num_cmd][++i_data.i] != '\'')
-				;
-		if (cmds->cmds[num_cmd][i_data.i])
-			i_data.i++;
-	}
-}
-
 static void	init_pipe(t_commands *cmds, int num_cmd)
 {
 	cmds->cmd[num_cmd].pipe_fd = (int *)ft_calloc(sizeof(int), 3);
-		if (!cmds->cmd[num_cmd].pipe_fd)
-			exit(6);
-		if (pipe(cmds->cmd[num_cmd].pipe_fd) == -1)
-			exit (7);
+	if (!cmds->cmd[num_cmd].pipe_fd)
+		exit(6);
+	if (pipe(cmds->cmd[num_cmd].pipe_fd) == -1)
+		exit (7);
 }
 
-char	**get_cmd_args()
+static void	change_cmd(t_commands *cmds, int num_cmd)
 {
+	char			*temp_char;
 
+	temp_char = rm_redirection(cmds->cmds[num_cmd]);
+	printf("%s\n", temp_char);
+	cmds->cmds[num_cmd] = ft_realloc(cmds->cmds[num_cmd], \
+				ft_strlen(temp_char) + 1);
+	ft_strlcpy(cmds->cmds[num_cmd], temp_char, ft_strlen(temp_char) + 1);
+	free(temp_char);
 }
 
 void	init_cmd(t_data *data, t_commands *cmds)
@@ -57,11 +39,17 @@ void	init_cmd(t_data *data, t_commands *cmds)
 	int	o;
 
 	i = 0;
+	printf("%i\n", cmds->num_cmds);
 	while (i < cmds->num_cmds)
 	{
+		cmds->cmd[i].redirections = handle_redirection(cmds->cmds[i]);
+		o = 0;
+		while (cmds->cmd[i].redirections[o])
+			printf("%s\n", cmds->cmd[i].redirections[o++]);
+		change_cmd(cmds, i);
+		printf("%s\n", cmds->cmds[i]);
 		find_dollar_sign(data, cmds, i);
-		cmds->cmd[i].args = parser(cmds->cmds[i], data);
-		cmds->cmd[i].cmd_args = get_cmd_args(cmds);
+		cmds->cmd[i].args = parser(cmds->cmds[i]);
 		o = 0;
 		while (cmds->cmd[i].args[o])
 			printf("%s\n", cmds->cmd[i].args[o++]);

@@ -96,6 +96,7 @@ char	**lexer(char const *s, t_commands *cmds)
 
 	if (!s)
 		return (NULL);
+	lexer_redirections(s, cmds);
 	countstr = ft_countstr(s, cmds);
 	lexer_parenthesis(s, cmds);
 	if (cmds->exit_value != 0)

@@ -12,19 +12,6 @@
 
 #include <minishell.h>
 
-static int	check_type(char ch)
-{
-	if (ch >= '0' && ch <= '9')
-		return (1);
-	if (ch >= 'a' && ch <= 'z')
-		return (1);
-	if (ch >= 'A' && ch <= 'Z')
-		return (1);
-	if (ch == '_')
-		return (1);
-	return (0);
-}
-
 static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
 {
 	if (s[i_data->i++] == '\'')
@@ -43,12 +30,6 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
 static void	redirections_erros(const char *s, t_commands *cmds, t_index_data \
 							*i_data)
 {
-	if (s[i_data->i] == '(')
-	{
-		i_data->i++;
-		while (s[i_data->i] && s[i_data->i] == ' ')
-			i_data->i++;
-	}
 	if (cmds->exit_value == 0 && s[i_data->i])
 	{
 		cmds->exit_value = 2;
@@ -69,21 +50,17 @@ static void	redirections_erros(const char *s, t_commands *cmds, t_index_data \
 static void	handle_redirections(const char *s, t_commands *cmds, t_index_data \
 			*i_data)
 {
+	i_data->i++;
+	if (s[i_data->i] && (s[i_data->i] == '<' || s[i_data->i] == '>'))
+		i_data->i++;
 	while (s[i_data->i] && s[i_data->i] == ' ')
 		i_data->i++;
-	if (s[i_data->i] && s[i_data->i] == ')')
-		parenthesis_erros(s, cmds, i_data);
-	while (s[i_data->i] && s[i_data->i] != ')')
-	{
-		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
-			handle_quotes(i_data, s, cmds);
-		if (s[i_data->i++] == '(')
-			handle_parenteshis(s, cmds, i_data);
-	}
-	if (!s[i_data->i] && s[i_data->i - 1] != ')')
-		parenthesis_erros(s, cmds, i_data);
-	else
-		i_data->i++;
+	if (s[i_data->i] && (s[i_data->i] == '&' || s[i_data->i] == '|'))
+		redirections_erros(s, cmds, i_data);
+	if (s[i_data->i] && (s[i_data->i] == '<' || s[i_data->i] == '>'))
+		redirections_erros(s, cmds, i_data);
+	if (!s[i_data->i])
+		redirections_erros(s, cmds, i_data);
 }
 
 void	lexer_redirections(const char *s, t_commands *cmds)

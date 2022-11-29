@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sanitization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:06:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 12:37:34 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 06:15:47 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ static void	free_cmd(t_commands *cmds)
 			free(cmds->cmd[i].args[o++]);
 		free(cmds->cmd[i].args[o]);
 		free(cmds->cmd[i].args);
+		o = 0;
+		while (cmds->cmd[i].redirections[o] != NULL)
+			free(cmds->cmd[i].redirections[o++]);
+		free(cmds->cmd[i].redirections[o]);
+		free(cmds->cmd[i].redirections);
 		free(cmds->cmd[i].pipe_fd);
 		i++;
 	}
