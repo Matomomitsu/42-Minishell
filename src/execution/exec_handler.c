@@ -6,26 +6,26 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 17:08:14 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/29 19:14:47 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	cmd_not_found(t_data *data, t_commands *cmds, char *cmd);
+static int	validate_cmd_not_found(t_data *data, t_commands *cmds, char *cmd);
 static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd);
 static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd);
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd);
 static bool	input_is_dir(char *cmd);
+static int	wait_child(t_data *t_data, t_commands *cmds);
 
 /* Debug Fork - -exec set follow-fork-mode child
 */
 int	exec_handler(t_data *data, t_commands *cmds)
 {
 	int	i;
-	int	status_code;
 
-	debug_structs(data, cmds);
+	// debug_structs(data, cmds);
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
@@ -33,18 +33,52 @@ int	exec_handler(t_data *data, t_commands *cmds)
 		if (*cmds->pid == -1)
 			return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
 		else if (*cmds->pid == 0)
-			status_code = execute_cmd(data, cmds, *cmds->cmds);
+			execute_cmd(data, cmds, *cmds->cmds);
 		i++;
 	}
-	return (status_code);
+	return (wait_child(data, cmds));
 }
 
-// TODO: Fazer agora este cara
-// static int	wait_child(t_data *s_data)
-// {
+/**
+ * @brief Wait the child process finish.
+ * ECHILD - The process specified by the pid parameter does not exist.
+ * WIFEXITED - Query status to see if a child process ended normally
+ * WEXITSTATUS - Obtain exit status of a child process
+ * @param t_data
+ * @return int - Returns Child status.
+ */
+static int	wait_child(t_data *t_data, t_commands *cmds)
+{
+	pid_t	pid;
+	int		status;
+	int		save_status;
 
-// }
+	pid = 0;
+	status = 0;
+	while (pid != -1 || errno != ECHILD)
+	{
+		pid = waitpid(-1, &status, 0);
+		if (pid == *cmds->pid)
+			save_status = status;
+		continue ;
+	}
+	if (WIFEXITED(save_status))
+		status = WEXITSTATUS(save_status);
+	else if (WISIGNALED(save_status))
+		status = WTERMSIG(save_status);
+	else
+		status = save_status;
+	return (status);
+}
 
+/** [OK]
+ * @brief Check if command must be execute by variable path or if is a
+ * local binary to execute
+ * @param data
+ * @param cmds
+ * @param cmd
+ * @return int
+ */
 static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd)
 {
 	int	status_code;
@@ -83,7 +117,7 @@ static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd)
 /** [OK]
  * @brief Responsible to handler the local executions. Local Directory,
  * file or in some path.
- * Ex: /bin/ls
+ * Ex: /bin/ls or ./sh_test.sh
  * @param data TypeDef in MiniShell
  * @param cmds TypeDef commands
  * @return int - Result of execution
@@ -92,7 +126,7 @@ static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd)
 {
 	int	result_code;
 
-	result_code = cmd_not_found(data, cmds, cmd);
+	result_code = validate_cmd_not_found(data, cmds, cmd);
 	if (result_code != 0)
 		return (result_code);
 	if (execve(cmd, data->command->args, data->env) == -1)
@@ -100,7 +134,7 @@ static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd)
 	return (EXIT_FAILURE);
 }
 
-/** [OK] TODO:Lins - Remover o char *cmd.
+/** [OK]
  * @brief Verify if command is not found.
  * This will handler the possibles of the command was not found previously,
  * and return the msg and code of exit
@@ -108,7 +142,7 @@ static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd)
  * @param cmds
  * @return int
  */
-static int	cmd_not_found(t_data *data, t_commands *cmds, char *cmd)
+static int	validate_cmd_not_found(t_data *data, t_commands *cmds, char *cmd)
 {
 	if (ft_strchr(cmd, '/') == NULL
 		&& get_env_var_index(data->env, "PATH") != -1)
