@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 15:05:27 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:21:32 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static int	exec_cmd(t_data *data)
 
 	cmds = (t_commands *)ft_calloc(1, sizeof(t_commands));
 	cmds->exit_value = 0;
+	status_code = 0;
 	init_cmds(data, cmds);
 	if (cmds->exit_value == 0)
 	{
@@ -75,9 +76,10 @@ static int	exec_cmd(t_data *data)
 		if (is_builtin(data->command->cmd))
 			status_code = call_builtin(data, cmds);
 		else
-			exec_handler(data, cmds);
+			cmds->exit_value = exec_handler(data, cmds);
 	}
-	status_code = cmds->exit_value;
+	if (status_code == 0 && cmds->exit_value != 0)
+		status_code = cmds->exit_value;
 	free_cmds(cmds);
 	return (status_code);
 }
