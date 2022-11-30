@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 10:38:58 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:05:27 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	exec_cmd(t_data *data)
 		args = split_args(data->user_input);
 		data->command = init_cmd_args(data, args);
 		if (is_builtin(data->command->cmd))
-			status_code = call_builtin(data);
+			status_code = call_builtin(data, cmds);
 		else
 			exec_handler(data, cmds);
 	}
