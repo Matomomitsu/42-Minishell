@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:12:44 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/11/30 10:50:53 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:11:20 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	get_env_variable_size(char *s, t_index_data *i_data)
 {
 	int		i;
 	int		o;
+	char	*exit_value;
 
 	i = i_data->i + 1;
 	while (s[i] && check_type(s[i]))
@@ -44,18 +45,21 @@ static char	*get_env_value(char *s, t_index_data *i_data, t_data *data)
 	char	*env_value;
 
 	variable_size = get_env_variable_size(s, i_data) - 1;
-	if (s[i_data->i + 1] == '?')
-		variable_size = 1;
-	env_variable = (char *)malloc(sizeof(char) * (variable_size + 1));
-	env_variable[variable_size] = '\0';
-	i = 1;
-	while (i <= variable_size)
+	if (s[i_data->i + 1] != '?')
 	{
-		env_variable[i - 1] = s[i_data->i + i];
-		i++;
+		env_variable = (char *)malloc(sizeof(char) * (variable_size + 1));
+		env_variable[variable_size] = '\0';
+		i = 1;
+		while (i <= variable_size)
+		{
+			env_variable[i - 1] = s[i_data->i + i];
+			i++;
+		}
+		env_value = get_env_var_value(data->env, env_variable);
+		free(env_variable);
 	}
-	env_value = get_env_var_value(data->env, env_variable);
-	free(env_variable);
+	else
+		env_value = ft_itoa(g_status_code);
 	return (env_value);
 }
 
@@ -73,13 +77,14 @@ static void	copy_to_new_str(char *new_str, char *s, char *env_value, \
 		new_str[o++] = s[i++];
 	if (env_value)
 	{
+		i++;
 		while (env_value[j])
 		{
 			new_str[o++] = env_value[j++];
 			i_data->i++;
 		}
 	}
-	if (s[i])
+	if (s[i] == '?')
 		i++;
 	while (s[i] && check_type(s[i]))
 		i++;
