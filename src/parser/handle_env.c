@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:12:44 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/11/30 16:11:20 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:33:20 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,9 @@ static void	copy_to_new_str(char *new_str, char *s, char *env_value, \
 	}
 	if (s[i] == '?')
 		i++;
-	while (s[i] && check_type(s[i]))
-		i++;
+	else
+		while (s[i] && check_type(s[i]))
+			i++;
 	while (s[i])
 		new_str[o++] = s[i++];
 	new_str[o] = s[i];
