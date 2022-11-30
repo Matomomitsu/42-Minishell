@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 09:08:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:11:26 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/30 11:33:15 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 static bool	exist_n_option(t_data *data);
 
-/**
- * TODO: Ainda imprimindo aspas (simpples e duplas). Tem que ser corrigido
- * quando implementar o parser
- */
-int	cmd_echo(t_data *data)
+int	cmd_echo(t_data *data, t_commands *cmds)
 {
 	int		i;
 	char	**echo_cmd;
@@ -29,10 +25,10 @@ int	cmd_echo(t_data *data)
 		i = 2;
 	else
 		i = 1;
-	while (data->command->args[i])
+	while (cmds->cmd[0].args[i])
 	{
-		ft_putstr_fd(data->command->args[i], STDOUT_FILENO);
-		if (data->command->args[i + 1])
+		ft_putstr_fd(cmds->cmd[0].args[i], STDOUT_FILENO);
+		if (cmds->cmd[0].args[i + 1])
 			ft_putchar_fd(' ', STDOUT_FILENO);
 		i++;
 	}

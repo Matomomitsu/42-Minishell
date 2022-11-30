@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/27 10:23:01 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/30 10:43:17 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ bool	is_builtin(char *cmd)
 		return (false);
 }
 
-int	call_builtin(t_data *data)
+int	call_builtin(t_data *data, t_commands *cmds)
 {
 	int	cmd_code;
 
 	cmd_code = CMD_NOT_FOUND;
 	if (ft_strncmp(data->command->cmd, "echo", 4) == 0)
-		cmd_code = cmd_echo(data);
+		cmd_code = cmd_echo(data, cmds);
 	else if (ft_strncmp(data->command->cmd, "exit", 4) == 0)
 		cmd_code = cmd_exit(data);
 	else if (ft_strncmp(data->command->cmd, "pwd", 3) == 0)
