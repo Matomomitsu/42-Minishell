@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 15:05:12 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:41:54 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,14 +338,33 @@ int		error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
 /*Begin - Execute*/
 /******************************************************************************/
 
-/** TODO:Lins. Add depois
- * @brief
- *
- * @param data
- * @param cmds
+/**
+ * @brief Responsible to manage the execution. Will call the method to call
+ * local bins or path bins.
+ * @param data Data structure Minishell
+ * @param cmds Cmds structure
  * @return int
  */
 int		exec_handler(t_data *data, t_commands *cmds);
+
+/**
+ * @brief Verify if the command passed is a directory. Necessary to throw the
+ * correct message
+ * @param cmd Command to check
+ * @return true - Input passed is a dir
+ * @return false - Itś not a dir
+ */
+bool	input_is_dir(char *cmd);
+
+/**
+ * @brief Verify if command is not found.
+ * This will handler the possibles of the command was not found previously,
+ * and return the msg and code of exit
+ * @param data TypeDef in MiniShell
+ * @param cmds
+ * @return int
+ */
+int		validate_cmd_not_found(t_data *data, t_commands *cmds, char *cmd);
 /******************************************************************************/
 /*End - Execute*/
 /******************************************************************************/
