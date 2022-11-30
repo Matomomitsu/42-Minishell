@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 12:43:00 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/30 09:32:32 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,6 +296,15 @@ void	free_data(t_data *data, bool exit_shell);
 char	**split_args(char *command);
 
 /**
+ * @brief TODO:Lins
+ *
+ * @param str
+ * @param add
+ * @return char*
+ */
+char	*join_strs(char *str, char *add);
+
+/**
  * @brief deallocate memory to pointer to pointer.
  * @param arr_str Pointer to pointer variable to be freed
  */
@@ -326,13 +335,14 @@ int		error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
 /*Begin - Execute*/
 /******************************************************************************/
 
-/** TODO:Lins. Add epois
+/** TODO:Lins. Add depois
  * @brief
  *
  * @param data
+ * @param cmds
  * @return int
  */
-int		exec_handler(t_data *data);
+int		exec_handler(t_data *data, t_commands *cmds);
 /******************************************************************************/
 /*End - Execute*/
 /******************************************************************************/
@@ -458,6 +468,15 @@ void	lexer_redirections(const char *s, t_commands *cmds);
 /******************************************************************************/
 /*Begin - Parser*/
 /******************************************************************************/
+
+/**
+ * @brief Get the cmd path object
+ *
+ * @param data
+ * @param cmds
+ * @return char*
+ */
+char	*get_cmd_path(t_data *data, t_commands *cmds);
 
 /**
  * @brief Tokenize command based on their arguments
