@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:57:56 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 11:17:59 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/30 10:55:14 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	print_cmds(t_commands *cmds)
 		j = 0;
 		while (cmds->cmd[i].args[j])
 		{
-			printf("	cmd - args: %s\n", cmds->cmd[i].args[j]);
+			printf("	cmd - args [%i][%i]: %s\n", i, j, cmds->cmd[i].args[j]);
 			j++;
 		}
 	i++;
