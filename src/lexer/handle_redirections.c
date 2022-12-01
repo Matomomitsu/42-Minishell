@@ -24,7 +24,8 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
 		while (s[i_data->i] && s[i_data->i] != '\"')
 				i_data->i++;
 	}
-	i_data->i++;
+	if (s[i_data->i])
+		i_data->i++;
 }
 
 static void	redirections_erros(const char *s, t_commands *cmds, t_index_data \

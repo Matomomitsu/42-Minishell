@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:57:56 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 11:10:52 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/01 13:21:24 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ static void	print_cmds(t_commands *cmds)
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
-		printf("  cmd[%i]- cmd: %s\n", i, cmds->cmd[i].cmd);
-		printf("  cmd[%i]- path: %s\n", i, cmds->cmd[i].path);
-		printf("  cmd[%i]- exit_value: %i\n", i, cmds->exit_value);
+		printf("	cmd - path: %s\n", cmds->cmd[i].path);
+		printf("	cmd - exit_value: %i\n", cmds->exit_value);
 		j = 0;
 		while (cmds->cmd[i].redirections[j])
 		{

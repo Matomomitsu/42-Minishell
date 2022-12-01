@@ -25,10 +25,11 @@ void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd)
 		if (cmds->cmds[num_cmd][i_data.i] == '$')
 		{
 			temp_char = handle_env(&i_data, cmds->cmds[num_cmd], data);
-			cmds->cmds[num_cmd] = ft_realloc(cmds->cmds[num_cmd], \
-				ft_strlen(temp_char) + 1);
-			ft_strlcpy(cmds->cmds[num_cmd], temp_char, ft_strlen(temp_char) + \
-					1);
+			free(cmds->cmds[num_cmd]);
+			cmds->cmds[num_cmd] = (char *)malloc(ft_strlen(temp_char) * \
+						sizeof(char) + 1);
+			cmds->cmds[num_cmd][ft_strlen(temp_char)] = '\0';
+			ft_strlcpy(cmds->cmds[num_cmd], temp_char, ft_strlen(temp_char) + 1);
 			free(temp_char);
 		}
 		if (cmds->cmds[num_cmd][i_data.i] == '\'')

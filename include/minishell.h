@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 11:15:57 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/01 15:03:32 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,16 @@
 # define DEFAULT "\001\033[0;39m\002"
 # define YELLOW "\001\033[0;93m\002"
 
-typedef struct s_command
-{
-	char	*cmd;
-	char	**args;
-	int		args_count;
-}	t_command;
-
 typedef struct s_data
 {
 	char		*user_input;
 	char		**env;
 	char		*work_dir;
 	char		*old_work_dir;
-	t_command	*command;
 }	t_data;
 
 typedef struct s_cmd
 {
-	char	*cmd;
 	char	*path;
 	char	**args;
 	char	**redirections;
@@ -203,13 +194,15 @@ char	*get_prompt(t_data *data);
  */
 bool	is_builtin(char *argv);
 
+bool	is_builtin_without_output(t_commands *cmds);
+
 /**
  * @brief Call correct function from Builtin command
  * @param data Structure of MiniShell
  * @param cmds Command Structure
  * @return code of execution. Success or error
  */
-int		call_builtin(t_data *data, t_commands *cmds);
+int		call_builtin(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins Echo - Represent the Echo command in shell (-n flag enabled)
@@ -218,14 +211,14 @@ int		call_builtin(t_data *data, t_commands *cmds);
  * @return int - Code of execution
  */
 
-int		cmd_echo(t_data *data, t_commands *cmds);
+int		cmd_echo(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins Exit - Responsible to close the program.
  * @param data Structure of MiniShell
  * @return int - exit code
  */
-int		cmd_exit(t_data *data);
+int		cmd_exit(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins - PWD Command - Print working directory
@@ -239,19 +232,19 @@ int		cmd_pwd(void);
  * @param exp_no_arg Export With no args - Show env with a pre-fix
  * @return integer - success or error
  */
-int		cmd_env(t_data *data, bool exp_no_arg);
+int		cmd_env(t_data *data, bool exp_no_arg, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins - Command Change Directory.
  * @param data Structure of MiniShell
  */
-int		cmd_cd(t_data *data);
+int		cmd_cd(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins - Unset Variables
  * @param data Structure of MiniShell
  */
-int		cmd_unset(t_data *data);
+int		cmd_unset(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Verify if the name of variable is a valid name
@@ -380,7 +373,7 @@ bool	input_is_dir(char *cmd);
  * @param cmds
  * @return int
  */
-int		validate_cmd_not_found(t_data *data, t_commands *cmds, char *cmd);
+int		validate_cmd_not_found(t_data *data, char *cmd);
 /******************************************************************************/
 /*End - Execute*/
 /******************************************************************************/
@@ -435,7 +428,7 @@ void	env_var_remove(t_data *data, int index);
  * @brief Builtins Export - Just one argument, just export all variables.
  * Sortable and with 'declare -x'
  */
-int		cmd_export(t_data *data);
+int		cmd_export(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Realloc memory to Environment variable
@@ -581,6 +574,9 @@ void	copy_cmd(char *s, char *new_str);
  * @param str An array that contain the new command
  */
 void	find_export_cmd(t_commands *cmds, int num_cmd, t_data *data);
+
+char	**rm_spaces(char const *s);
+void	putchar_split(char const *s, char **str, size_t countc);
 
 /******************************************************************************/
 /*End - Parser*/

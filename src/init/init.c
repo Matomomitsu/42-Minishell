@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 16:21:32 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:16:54 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void			init_prompt(t_data *data);
 static int			exec_cmd(t_data *data);
-static t_command	*init_cmd_args(t_data *data, char **args);
 static bool			input_handler(t_data *data);
 
 int	init(int argc, char **argv, char **envp)
@@ -71,37 +70,12 @@ static int	exec_cmd(t_data *data)
 	if (cmds->exit_value == 0)
 	{
 		init_cmd(data, cmds);
-		args = split_args(data->user_input);
-		data->command = init_cmd_args(data, args);
-		if (is_builtin(data->command->cmd))
-			status_code = call_builtin(data, cmds);
-		else
-			cmds->exit_value = exec_handler(data, cmds);
+		cmds->exit_value = exec_handler(data, cmds);
 	}
 	if (status_code == 0 && cmds->exit_value != 0)
 		status_code = cmds->exit_value;
 	free_cmds(cmds);
 	return (status_code);
-}
-
-/**
- * @brief Initialize object command. Will receive the command .
- * 'First token' will be the command. The others will be the args
- * @param command Object Structure Command
- * @param args All the token passed in command
- */
-static t_command	*init_cmd_args(t_data *data, char **args)
-{
-	t_command	*cmd;
-
-	cmd = (t_command *)malloc(sizeof(t_command));
-	if (!cmd)
-		return (NULL);
-	ft_memset(cmd, 0, sizeof(t_command));
-	cmd->cmd = args[0];
-	cmd->args = args;
-	cmd->args_count = args_count(args);
-	return (cmd);
 }
 
 /**

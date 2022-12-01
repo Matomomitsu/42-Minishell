@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_partial.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:33:45 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 16:39:05 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/30 23:45:36 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	input_is_dir(char *cmd)
 	return (S_ISDIR(stat_buf.st_mode));
 }
 
-int	validate_cmd_not_found(t_data *data, t_commands *cmds, char *cmd)
+int	validate_cmd_not_found(t_data *data, char *cmd)
 {
 	if (ft_strchr(cmd, '/') == NULL
 		&& get_env_var_index(data->env, "PATH") != -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sanitization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:06:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 16:25:46 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/01 00:17:33 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ void	free_data(t_data *data, bool exit_shell)
 	{
 		if (data->user_input)
 			free_ptr(data->user_input);
-		if (data->command)
-		{
-			if (data->command->args)
-				free_array_str(data->command->args);
-			free_ptr(data->command);
-		}
 		if (exit_shell)
 		{
 			if (data->old_work_dir)
@@ -72,7 +66,7 @@ static void	free_cmd(t_commands *cmds)
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
-		o = 0;
+		o = 0;;
 		while (cmds->cmd[i].args[o] != NULL)
 			free(cmds->cmd[i].args[o++]);
 		free(cmds->cmd[i].args[o]);
@@ -86,6 +80,7 @@ static void	free_cmd(t_commands *cmds)
 		free(cmds->cmd[i].path);
 		i++;
 	}
+	free(cmds->cmd);
 }
 
 void	free_cmds(t_commands *cmds)
@@ -100,11 +95,13 @@ void	free_cmds(t_commands *cmds)
 			free(cmds->cmds[i++]);
 		free(cmds->cmds[i]);
 		free(cmds->cmds);
+		i = 0;
 		while (cmds->paths[i] != NULL)
 			free(cmds->paths[i++]);
 		free(cmds->paths[i]);
 		free(cmds->paths);
 		free(cmds->operators);
-		free(cmds);
+		free(cmds->pid);
 	}
+	free(cmds);
 }
