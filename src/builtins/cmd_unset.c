@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:02:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 12:08:53 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/30 21:50:55 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	cmd_unset(t_data *data)
+int	cmd_unset(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int	i;
 	int	index;
@@ -20,21 +20,22 @@ int	cmd_unset(t_data *data)
 
 	status_code = EXIT_SUCCESS;
 	i = 1;
-	while (data->command->args[i])
+	while (cmds->cmd[num_cmd].args[i])
 	{
-		if (is_valid_var_name(data->command->args[i]) == false)
+		if (is_valid_var_name(cmds->cmd[num_cmd].args[i]) == false)
 		{
-			status_code = error_msg_cmd("unset", data->command->args[i],
+			status_code = error_msg_cmd("unset", cmds->cmd[num_cmd].args[i],
 					"not a valid identifier", EXIT_FAILURE);
 		}
 		else
 		{
-			index = get_env_var_index(data->env, data->command->args[i]);
+			index = get_env_var_index(data->env, cmds->cmd[num_cmd].args[i]);
 			if (index != -1)
 				env_var_remove(data, index);
 		}
 		i++;
 	}
+	free(cmds);
 	return (status_code);
 }
 

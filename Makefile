@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
+#    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/11/30 16:39:42 by rlins            ###   ########.fr        #
+#    Updated: 2022/12/01 00:26:49 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,8 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_PARSER)handle_env.c \
 		$(PATH_PARSER)find_dollar_sign.c \
 		$(PATH_PARSER)find_export_cmd.c \
+		$(PATH_PARSER)rm_spaces.c \
+		$(PATH_PARSER)complete_split.c \
 		$(PATH_PARSER)parse_path.c
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRCS))

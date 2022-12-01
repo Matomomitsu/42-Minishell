@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:53:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:36:09 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/30 21:50:53 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	cmd_export(t_data *data)
+int	cmd_export(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int		result;
 	char	**key_value;
@@ -20,16 +20,16 @@ int	cmd_export(t_data *data)
 
 	index = 1;
 	result = EXIT_SUCCESS;
-	if (!data->command->args[1])
-		return (cmd_env(data, true));
-	while (data->command->args[index])
+	if (!cmds->cmd[num_cmd].args[1])
+		return (cmd_env(data, true, cmds, num_cmd));
+	while (cmds->cmd[num_cmd].args[index])
 	{
-		if (ft_strchr(data->command->args[index], '=') != NULL)
+		if (ft_strchr(cmds->cmd[num_cmd].args[index], '=') != NULL)
 		{
-			key_value = ft_split(data->command->args[index], '=');
+			key_value = ft_split(cmds->cmd[num_cmd].args[index], '=');
 			if (is_valid_var_name(key_value[0]) == false)
 			{
-				error_msg_cmd("export", data->command->args[index],
+				error_msg_cmd("export", cmds->cmd[num_cmd].args[index],
 					"not a valid identifier", EXIT_FAILURE);
 				result = EXIT_FAILURE;
 			}

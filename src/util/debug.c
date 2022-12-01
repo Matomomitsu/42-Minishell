@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:57:56 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 10:55:14 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/30 20:49:40 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void	print_cmds(t_commands *cmds)
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
-		printf("	cmd - cmd: %s\n", cmds->cmd[i].cmd);
 		printf("	cmd - path: %s\n", cmds->cmd[i].path);
 		printf("	cmd - exit_value: %i\n", cmds->exit_value);
 		j = 0;

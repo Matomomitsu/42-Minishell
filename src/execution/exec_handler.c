@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 16:26:26 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 00:14:04 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd);
-static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd);
-static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd);
+static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd);
+static int	exec_local_bin(t_data *data, t_commands *cmds, int num_cmd);
+static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd);
 static int	wait_child(t_data *t_data, t_commands *cmds);
 
 /* Debug Fork - -exec set follow-fork-mode child
@@ -24,13 +24,26 @@ int	exec_handler(t_data *data, t_commands *cmds)
 	int	i;
 
 	i = 0;
+	if (cmds->num_cmds == 1)
+		if (!ft_strncmp(cmds->cmd[0].args[0], "exit", 5))
+			cmds->exit_value = cmd_exit(data, cmds, 0);
 	while (i < cmds->num_cmds)
 	{
-		*cmds->pid = fork();
-		if (*cmds->pid == -1)
-			return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
-		else if (*cmds->pid == 0)
-			execute_cmd(data, cmds, *cmds->cmds);
+		if (is_builtin(cmds->cmd[i].args[0]))
+			cmds->exit_value = call_builtin(data, cmds, i);
+		else
+		{
+			cmds->pid[i] = fork();
+			if (cmds->pid[i] == -1)
+				return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
+			else if (cmds->pid[i] == 0)
+			{
+				if (!ft_strncmp(cmds->cmd[i].args[0], "exit", 5))
+					cmd_exit(data, cmds, i);
+				else
+					execute_cmd(data, cmds, i);
+			}
+		}
 		i++;
 	}
 	return (wait_child(data, cmds));
@@ -46,25 +59,21 @@ int	exec_handler(t_data *data, t_commands *cmds)
  */
 static int	wait_child(t_data *t_data, t_commands *cmds)
 {
-	pid_t	pid;
+	int		i;
 	int		status;
 	int		save_status;
 
-	pid = 0;
+	i = 0;
 	status = 0;
-	while (pid != -1 || errno != ECHILD)
-	{
-		pid = waitpid(-1, &status, 0);
-		if (pid == *cmds->pid)
-			save_status = status;
-		continue ;
-	}
-	if (WIFEXITED(save_status))
-		status = WEXITSTATUS(save_status);
-	else if (WIFSIGNALED(save_status))
-		status = WTERMSIG(save_status);
+	while (++i < cmds->num_cmds - 1)
+			waitpid(cmds->pid[i], NULL, 0);
+	waitpid(cmds->pid[i], &status, 0);
+	if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		status = WTERMSIG(status);
 	else
-		status = save_status;
+		status = cmds->exit_value;
 	return (status);
 }
 
@@ -76,17 +85,21 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
  * @param cmd
  * @return int
  */
-static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd)
+static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int	status_code;
 
-	if (ft_strchr(cmd, '/') == NULL)
+	if (ft_strchr(cmds->cmd[num_cmd].args[0], '/') == NULL)
 	{
-		status_code = exec_path_var_bin(data, cmds, cmd);
+		status_code = exec_path_var_bin(data, cmds, num_cmd);
 		if (status_code != CMD_NOT_FOUND)
+		{
+			free_cmds(cmds);
 			exit_shell(data, status_code);
+		}
 	}
-	status_code = exec_local_bin(data, cmds, data->command->cmd);
+	status_code = exec_local_bin(data, cmds, num_cmd);
+	free_cmds(cmds);
 	exit_shell(data, status_code);
 	return (status_code);
 }
@@ -101,12 +114,12 @@ static int	execute_cmd(t_data *data, t_commands *cmds, char *cmd)
  * @param cmd First Arg. Simple the command
  * @return int - exit code
  */
-static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd)
+static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd)
 {
-	cmds->cmd[0].path = get_cmd_path(data, cmds);
-	if (!cmds->cmd[0].path)
+	cmds->cmd[num_cmd].path = get_cmd_path(data, cmds, num_cmd);
+	if (!cmds->cmd[num_cmd].path)
 		return (CMD_NOT_FOUND);
-	if (execve(cmds->cmd[0].path, data->command->args, data->env) == -1)
+	if (execve(cmds->cmd[num_cmd].path, cmds->cmd[num_cmd].args, data->env) == -1)
 		error_msg_cmd("execve", NULL, strerror(errno), errno);
 	return (EXIT_FAILURE);
 }
@@ -119,14 +132,14 @@ static int	exec_path_var_bin(t_data *data, t_commands *cmds, char *cmd)
  * @param cmds TypeDef commands
  * @return int - Result of execution
  */
-static int	exec_local_bin(t_data *data, t_commands *cmds, char *cmd)
+static int	exec_local_bin(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int	result_code;
 
-	result_code = validate_cmd_not_found(data, cmds, cmd);
+	result_code = validate_cmd_not_found(data, cmds->cmd[num_cmd].args[0]);
 	if (result_code != 0)
 		return (result_code);
-	if (execve(cmd, data->command->args, data->env) == -1)
+	if (execve(cmds->cmd[num_cmd].args[0], cmds->cmd[num_cmd].args, data->env) == -1)
 		return (error_msg_cmd("execve", NULL, strerror(errno), errno));
 	return (EXIT_FAILURE);
 }

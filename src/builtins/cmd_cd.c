@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/23 07:43:02 by rlins            ###   ########.fr       */
+/*   Updated: 2022/11/30 21:50:41 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,23 @@ static void	update_work_dir_var(t_data *data, char *path);
  * 3) cd - => Redirect to old path. Error when start prompt and do this cmd.
  * TODO: cd $HOME Is NOT Working yet
  */
-int	cmd_cd(t_data *data)
+int	cmd_cd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	char	*path;
 
-	if (data->command->args_count > 2)
+	if (cmds->cmd[num_cmd].args[3])
 		return (error_msg_cmd("cd", NULL, "too many arguments", EXIT_FAILURE));
-	else if (!data->command->args[1] || ft_isspace(data->command->args[1][0])
-		|| data->command->args[1][0] == '\0'
-		|| (ft_strncmp(data->command->args[1], "--", 2) == 0
-		|| ft_strncmp(data->command->args[1], " ", 1)) == 0)
+	else if (!cmds->cmd[num_cmd].args[1] || ft_isspace(cmds->cmd[num_cmd].args[1][0])
+		|| cmds->cmd[num_cmd].args[1][0] == '\0'
+		|| (ft_strncmp(cmds->cmd[num_cmd].args[1], "--", 3) == 0
+		|| ft_strncmp(cmds->cmd[num_cmd].args[1], " ", 2)) == 0)
 	{
 		path = get_env_var_value(data->env, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
 			return (error_msg_cmd("cd", NULL, "HOME not set", EXIT_FAILURE));
 		return (change_dir(data, path));
 	}
-	else if (ft_strncmp(data->command->args[1], "-", 1) == 0)
+	else if (ft_strncmp(cmds->cmd[num_cmd].args[1], "-", 2) == 0)
 	{
 		path = get_env_var_value(data->env, OLD_PWD);
 		if (!path)
@@ -45,7 +45,7 @@ int	cmd_cd(t_data *data)
 		return (change_dir(data, path));
 	}
 	else
-		return (change_dir(data, data->command->args[1]));
+		return (change_dir(data, cmds->cmd[num_cmd].args[1]));
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:12:44 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/11/30 16:33:20 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 00:45:48 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*get_env_value(char *s, t_index_data *i_data, t_data *data)
 			env_variable[i - 1] = s[i_data->i + i];
 			i++;
 		}
-		env_value = get_env_var_value(data->env, env_variable);
+		env_value = ft_strdup(get_env_var_value(data->env, env_variable));
 		free(env_variable);
 	}
 	else
@@ -111,5 +111,6 @@ char	*handle_env(t_index_data *i_data, char *s, t_data *data)
 			env_value_size) + 2);
 	new_str[ft_strlen(s) - variable_size + env_value_size + 1] = '\0';
 	copy_to_new_str(new_str, s, env_value, i_data);
+	free(env_value);
 	return (new_str);
 }
