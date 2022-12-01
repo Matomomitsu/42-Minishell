@@ -74,7 +74,7 @@ void	find_export_cmd(t_commands *cmds, int num_cmd, t_data *data)
 	int		o;
 	int		i;
 
-	temp_parser = parser(cmds->cmds[num_cmd]);
+	temp_parser = rm_spaces(cmds->cmds[num_cmd]);
 	i = 0;
 	o = 0;
 	if (!ft_strncmp("export\0", temp_parser[0], 7))

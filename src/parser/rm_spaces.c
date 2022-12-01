@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 22:35:57 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/01 00:30:12 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:03:33 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	get_size(t_index_data *i_data, const char *s)
 			i_data->i++;
 		}
 	}
+	if (s[i_data->i])
+		i_data->i++;
 }
 
 static size_t	ft_countstr(char const *s)
@@ -82,6 +84,7 @@ char	**rm_spaces(char const *s)
 {
 	char	**str;
 	size_t	countstr;
+	int		i;
 
 	if (!s)
 		return (NULL);
@@ -93,5 +96,8 @@ char	**rm_spaces(char const *s)
 	if (str == NULL)
 		return (NULL);
 	putchar_split(s, str, countstr);
+	i = 0;
+	while (str[i])
+		printf("%s\n", str[i++]);
 	return (str);
 }
