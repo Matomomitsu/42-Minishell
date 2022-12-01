@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 15:03:32 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:21:46 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -491,6 +491,8 @@ void	quotes_error(t_index_data *i_data, const char *s, t_commands *cmds);
  * @param cmds Structure of commands
  */
 void	lexer_redirections(const char *s, t_commands *cmds);
+
+void	lexer_operators(const char *s, t_commands *cmds);
 
 /******************************************************************************/
 /*End - Lexer*/
