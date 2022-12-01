@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:57:56 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 10:55:14 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/01 11:10:52 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	debug_structs(t_data *data, t_commands *cmds)
 
 	i = 0;
 	printf("----Begin Debug (state Obj)----\n");
-	printf("Nro num_cmds	: %i\n", cmds->num_cmds);
+	printf("Nro num_cmds:	%i\n", cmds->num_cmds);
 	print_operators(*cmds->operators);
-	printf("Nro num_exec	: %i\n", cmds->num_exec);
+	printf("Nro num_exec:	%i\n", cmds->num_exec);
 	while (cmds->paths[i])
 	{
 		printf("Paths:	%s\n", cmds->paths[i]);
@@ -48,11 +48,11 @@ void	debug_structs(t_data *data, t_commands *cmds)
 static void	print_operators(int operator)
 {
 	if (operator == 1)
-		printf("Operators		: OR\n");
+		printf("Operators: 	OR\n");
 	else if (operator == 2)
-		printf("Operators		: AND\n");
+		printf("Operators: 	AND\n");
 	else if (operator == 3)
-		printf("Operators		: PIPE\n");
+		printf("Operators: 	PIPE\n");
 }
 
 /**
@@ -67,19 +67,20 @@ static void	print_cmds(t_commands *cmds)
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
-		printf("	cmd - cmd: %s\n", cmds->cmd[i].cmd);
-		printf("	cmd - path: %s\n", cmds->cmd[i].path);
-		printf("	cmd - exit_value: %i\n", cmds->exit_value);
+		printf("  cmd[%i]- cmd: %s\n", i, cmds->cmd[i].cmd);
+		printf("  cmd[%i]- path: %s\n", i, cmds->cmd[i].path);
+		printf("  cmd[%i]- exit_value: %i\n", i, cmds->exit_value);
 		j = 0;
 		while (cmds->cmd[i].redirections[j])
 		{
-			printf("	cmd - redirection: %s\n", cmds->cmd[i].redirections[j]);
+			printf("  cmd [%i][%i]- red.: %s\n", i, j,
+				cmds->cmd[i].redirections[j]);
 			j++;
 		}
 		j = 0;
 		while (cmds->cmd[i].args[j])
 		{
-			printf("	cmd - args [%i][%i]: %s\n", i, j, cmds->cmd[i].args[j]);
+			printf("  cmd - args [%i][%i]: %s\n", i, j, cmds->cmd[i].args[j]);
 			j++;
 		}
 	i++;
