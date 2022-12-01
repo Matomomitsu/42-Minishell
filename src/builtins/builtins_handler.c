@@ -6,27 +6,28 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 09:13:07 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:59:28 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-bool	is_builtin_without_output(char *cmd)
+bool	is_builtin_without_output(t_commands *cmds)
 {
-	if (ft_strncmp(cmd, "cd", 3) == 0)
+	if (ft_strncmp(cmds->cmd[0].args[0], "cd", 3) == 0)
 		return (true);
-	else if (ft_strncmp(cmd, "exit", 5) == 0)
+	else if (ft_strncmp(cmds->cmd[0].args[0], "exit", 5) == 0)
 		return (true);
-	else if (ft_strncmp(cmd, "unset", 6) == 0)
+	else if (ft_strncmp(cmds->cmd[0].args[0], "unset", 6) == 0)
 		return (true);
-	else if (ft_strncmp(cmd, "export", 7) == 0)
+	else if (ft_strncmp(cmds->cmd[0].args[0], "export", 7) == 0 && \
+			!cmds->cmd[0].args[1])
 		return (true);
 	else
 		return (false);
 }
 
-bool	is_builtin_with_output(char *cmd)
+bool	is_builtin(char *cmd)
 {
 	if (ft_strncmp(cmd, "echo", 5) == 0)
 		return (true);
@@ -37,6 +38,10 @@ bool	is_builtin_with_output(char *cmd)
 	else if (ft_strncmp(cmd, "env", 4) == 0)
 		return (true);
 	else if (ft_strncmp(cmd, "export", 7) == 0)
+		return (true);
+	else if (ft_strncmp(cmd, "cd", 3) == 0)
+		return (true);
+	else if (ft_strncmp(cmd, "unset", 6) == 0)
 		return (true);
 	else
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 13:20:20 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:03:32 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,8 @@ char	*get_prompt(t_data *data);
  * @return false
  */
 bool	is_builtin(char *argv);
+
+bool	is_builtin_without_output(t_commands *cmds);
 
 /**
  * @brief Call correct function from Builtin command

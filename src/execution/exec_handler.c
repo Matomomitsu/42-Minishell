@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 13:20:57 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:02:46 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,15 @@ int	exec_handler(t_data *data, t_commands *cmds)
 
 	i = 0;
 	if (cmds->num_cmds == 1)
-		if (!ft_strncmp(cmds->cmd[0].args[0], "exit", 5))
-			cmds->exit_value = cmd_exit(data, cmds, 0);
+		if (is_builtin_without_output(cmds))
+			cmds->exit_value = call_builtin(data, cmds, 0);
 	while (i < cmds->num_cmds)
 	{
-		if (is_builtin(cmds->cmd[i].args[0]))
-			cmds->exit_value = call_builtin(data, cmds, i);
-		else
-		{
-			cmds->pid[i] = fork();
-			if (cmds->pid[i] == -1)
-				return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
-			else if (cmds->pid[i] == 0)
-			{
-				if (!ft_strncmp(cmds->cmd[i].args[0], "exit", 5))
-					cmd_exit(data, cmds, i);
-				else
-					execute_cmd(data, cmds, i);
-			}
-		}
+		cmds->pid[i] = fork();
+		if (cmds->pid[i] == -1)
+			return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
+		else if (cmds->pid[i] == 0)
+			execute_cmd(data, cmds, i);
 		i++;
 	}
 	return (wait_child(data, cmds));
@@ -59,20 +49,21 @@ int	exec_handler(t_data *data, t_commands *cmds)
  */
 static int	wait_child(t_data *t_data, t_commands *cmds)
 {
-	int		i;
-	int		status;
-
+	int	i;
+	int	status;
+	int	save_status;
 
 	close_pipe_fds(cmds, -1, true);
-	i = 0;
+	i = -1;
 	status = 0;
+	save_status = 0;
 	while (++i < cmds->num_cmds - 1)
 			waitpid(cmds->pid[i], NULL, 0);
-	waitpid(cmds->pid[i], &status, 0);
-	if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-		status = WTERMSIG(status);
+	waitpid(cmds->pid[i], &save_status, 0);
+	if (WIFEXITED(save_status))
+		status = WEXITSTATUS(save_status);
+	else if (WIFSIGNALED(save_status))
+		status = WTERMSIG(save_status);
 	else
 		status = cmds->exit_value;
 	return (status);
@@ -96,16 +87,21 @@ static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 		set_pipe_fds(cmds, num_cmd);
 		close_pipe_fds(cmds, num_cmd, true);
 	}
-	if (ft_strchr(cmds->cmd[num_cmd].args[0], '/') == NULL)
+	if (is_builtin(cmds->cmd[num_cmd].args[0]))
+		status_code = call_builtin(data, cmds, num_cmd);
+	else
 	{
-		status_code = exec_path_var_bin(data, cmds, num_cmd);
-		if (status_code != CMD_NOT_FOUND)
+		if (ft_strchr(cmds->cmd[num_cmd].args[0], '/') == NULL)
 		{
-			free_cmds(cmds);
-			exit_shell(data, status_code);
+			status_code = exec_path_var_bin(data, cmds, num_cmd);
+			if (status_code != CMD_NOT_FOUND)
+			{
+				free_cmds(cmds);
+				exit_shell(data, status_code);
+			}
 		}
+		status_code = exec_local_bin(data, cmds, num_cmd);
 	}
-	status_code = exec_local_bin(data, cmds, num_cmd);
 	free_cmds(cmds);
 	exit_shell(data, status_code);
 	return (status_code);
