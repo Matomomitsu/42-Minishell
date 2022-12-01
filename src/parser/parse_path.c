@@ -6,20 +6,20 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:34:21 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 23:34:28 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:21:32 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*get_cmd_path(t_data *data, t_commands *cmds, int num_cmd)
+char	*get_cmd_path(t_data *data, t_commands *cmds, int index)
 {
 	int		i;
 	char	*cmd_comp;
 	char	*cmd;
 
 	cmd = ft_strdup("/");
-	cmd = join_strs(cmd, cmds->cmd[num_cmd].args[0]);
+	cmd = join_strs(cmd, cmds->cmd[index].args[0]);
 	i = 0;
 	while (cmds->paths[i])
 	{

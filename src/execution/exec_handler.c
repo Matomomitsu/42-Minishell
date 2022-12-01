@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 00:14:04 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:20:57 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
 {
 	int		i;
 	int		status;
-	int		save_status;
 
+
+	close_pipe_fds(cmds, -1, true);
 	i = 0;
 	status = 0;
 	while (++i < cmds->num_cmds - 1)
@@ -80,15 +81,21 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
 /**
  * @brief Check if command must be execute by variable path or if is a
  * local binary to execute
- * @param data
- * @param cmds
- * @param cmd
+ * @param data Data Structure
+ * @param cmds Cmds Structure
+ * @param cmd TODO: Provavelmente será descontinuado.
+ * @param i - Index of command in execution this time
  * @return int
  */
 static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int	status_code;
 
+	if (*cmds->operators == PIPE)
+	{
+		set_pipe_fds(cmds, num_cmd);
+		close_pipe_fds(cmds, num_cmd, true);
+	}
 	if (ft_strchr(cmds->cmd[num_cmd].args[0], '/') == NULL)
 	{
 		status_code = exec_path_var_bin(data, cmds, num_cmd);
@@ -112,6 +119,7 @@ static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
  * @param data TypeDef in MiniShell
  * @param cmds TypeDef commands
  * @param cmd First Arg. Simple the command
+ * @param i Index of cmd coming from structure
  * @return int - exit code
  */
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd)
@@ -124,7 +132,7 @@ static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd)
 	return (EXIT_FAILURE);
 }
 
-/**
+/** TODO: Verificar se será necessário fazer a execução deste cara por index tb.
  * @brief Responsible to handler the local executions. Local Directory,
  * file or in some path.
  * Ex: /bin/ls or ./sh_test.sh
