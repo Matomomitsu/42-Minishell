@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 11:00:01 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/01 11:15:57 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ void	set_pipe_fds(t_commands *cmds, int index);
  * @param index Index to current cmd. -1 if is in all scope / all commands
  * @param close_both Flag to indicate to close both
  */
-void	close_pipe_fds (t_commands *cmds, int index, bool close_both);
+void	close_pipe_fds(t_commands *cmds, int index, bool close_both);
 
 /**
  * @brief Will return the value of the structures

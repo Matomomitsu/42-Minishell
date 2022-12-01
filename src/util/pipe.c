@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:21:30 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 11:00:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/01 11:16:10 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,3 @@ void	close_pipe_fds(t_commands *cmds, int index, bool close_both)
 		i++;
 	}
 }
-
