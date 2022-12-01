@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 16:41:54 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/01 11:00:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,22 @@ bool	is_valid_var_name(char *name);
 /******************************************************************************/
 
 /**
+ * @brief Set the pipe fds to the command. The index will be passed to in or out
+ * base in index passed between commands
+ * @param cmds - Data Object Command
+ * @param index - Index of command executed in the current time
+ */
+void	set_pipe_fds(t_commands *cmds, int index);
+
+/**
+ * @brief Will close File Descriptors from command.
+ * @param cmds Commands Structure
+ * @param index Index to current cmd. -1 if is in all scope / all commands
+ * @param close_both Flag to indicate to close both
+ */
+void	close_pipe_fds (t_commands *cmds, int index, bool close_both);
+
+/**
  * @brief Will return the value of the structures
  * @param data Structure of MiniShell
  * @param cmds Structure of commands
@@ -492,13 +508,14 @@ void	lexer_redirections(const char *s, t_commands *cmds);
 /******************************************************************************/
 
 /**
- * @brief Get the cmd path object
- *
+ * @brief Get the cmd path object. Will pass the name of the command, and this
+ * will be responsible to return all path of the command
  * @param data
  * @param cmds
+ * @param index - Index of command in cmds Structure
  * @return char*
  */
-char	*get_cmd_path(t_data *data, t_commands *cmds);
+char	*get_cmd_path(t_data *data, t_commands *cmds, int index);
 
 /**
  * @brief Tokenize command based on their arguments

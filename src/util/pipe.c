@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_path.c                                       :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 12:34:21 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 11:01:57 by rlins            ###   ########.fr       */
+/*   Created: 2022/11/30 17:21:30 by rlins             #+#    #+#             */
+/*   Updated: 2022/12/01 11:00:10 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*get_cmd_path(t_data *data, t_commands *cmds, int index)
+void	set_pipe_fds(t_commands *cmds, int index)
 {
-	int		i;
-	char	*cmd_comp;
-	char	*cmd;
+	if (index == 0)
+		dup2(cmds->cmd[index].pipe_fd[1], STDOUT_FILENO);
+	else
+		dup2(cmds->cmd[index - 1].pipe_fd[0], STDIN_FILENO);
+	close_pipe_fds(cmds, index, false);
+}
 
-	cmd = ft_strdup("/");
-	cmd = join_strs(cmd, cmds->cmd[index].args[0]);
+void	close_pipe_fds(t_commands *cmds, int index, bool close_both)
+{
+	int	i;
+
 	i = 0;
-	while (cmds->paths[i])
+	while (i < cmds->num_cmds)
 	{
-		cmd_comp = ft_strjoin(cmds->paths[i], cmd);
-		if (access(cmd_comp, F_OK | X_OK) == 0)
+		if (cmds->cmd[i].pipe_fd && (i != index || close_both == true))
 		{
-			free_ptr(cmd);
-			return (cmd_comp);
+			close(cmds->cmd[i].pipe_fd[0]);
+			close(cmds->cmd[i].pipe_fd[1]);
 		}
-		free_ptr(cmd_comp);
 		i++;
 	}
 }
+
