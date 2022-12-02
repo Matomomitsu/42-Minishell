@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:02:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 21:50:55 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:12:41 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	cmd_unset(t_data *data, t_commands *cmds, int num_cmd)
 		}
 		i++;
 	}
-	free(cmds);
 	return (status_code);
 }
 
