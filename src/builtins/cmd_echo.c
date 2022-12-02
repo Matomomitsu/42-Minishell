@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 09:08:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 10:04:27 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:36:45 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	cmd_echo(t_data *data, t_commands *cmds, int num_cmd)
  */
 static bool	exist_n_option(t_commands *cmds, int num_cmd)
 {
-	if (cmds->cmd[num_cmd].args[1])
-		if (ft_strncmp(cmds->cmd[num_cmd].args[1], "-n", 3) == 0)
-			return (true);
+	if (cmds->cmd[num_cmd].args[1]
+		&& ft_strncmp(cmds->cmd[num_cmd].args[1], "-n", 3) == 0)
+		return (true);
 	return (false);
 }

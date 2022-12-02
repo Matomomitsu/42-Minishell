@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sanitization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:06:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 00:17:33 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:30:36 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	free_cmd(t_commands *cmds)
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
-		o = 0;;
+		o = 0;
 		while (cmds->cmd[i].args[o] != NULL)
 			free(cmds->cmd[i].args[o++]);
 		free(cmds->cmd[i].args[o]);
