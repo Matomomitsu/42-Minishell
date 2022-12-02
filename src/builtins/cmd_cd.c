@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 21:50:41 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:28:00 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ static void	update_work_dir_var(t_data *data, char *path);
  * 1) Verify more than 1 param
  * 2) cd / cd [space] / cd -- / cd $HOME => Redirect to home
  * 3) cd - => Redirect to old path. Error when start prompt and do this cmd.
- * TODO: cd $HOME Is NOT Working yet
  */
 int	cmd_cd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	char	*path;
 
-	if (cmds->cmd[num_cmd].args[3])
+	if (cmds->num_cmds > 2)
 		return (error_msg_cmd("cd", NULL, "too many arguments", EXIT_FAILURE));
 	else if (!cmds->cmd[num_cmd].args[1] || ft_isspace(cmds->cmd[num_cmd].args[1][0])
 		|| cmds->cmd[num_cmd].args[1][0] == '\0'

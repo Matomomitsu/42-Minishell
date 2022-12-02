@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 08:18:17 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/02 08:51:17 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ int	exec_handler(t_data *data, t_commands *cmds)
 	int	i;
 
 	i = 0;
-	if (cmds->num_cmds == 1)
-		if (is_builtin_without_output(cmds))
-			cmds->exit_value = call_builtin(data, cmds, 0);
-	while (i < cmds->num_cmds)
+	if (cmds->num_cmds == 1 && is_builtin_without_output(cmds))
+		cmds->exit_value = call_builtin(data, cmds, 0);
+	else
 	{
-		cmds->pid[i] = fork();
-		if (cmds->pid[i] == -1)
-			return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
-		else if (cmds->pid[i] == 0)
-			execute_cmd(data, cmds, i);
-		i++;
+		while (i < cmds->num_cmds)
+		{
+			cmds->pid[i] = fork();
+			if (cmds->pid[i] == -1)
+				return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
+			else if (cmds->pid[i] == 0)
+				execute_cmd(data, cmds, i);
+			i++;
+		}
 	}
 	return (wait_child(data, cmds));
 }
