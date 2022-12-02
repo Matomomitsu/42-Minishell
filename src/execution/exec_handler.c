@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 08:51:17 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/02 10:30:04 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	exec_handler(t_data *data, t_commands *cmds)
 		{
 			cmds->pid[i] = fork();
 			if (cmds->pid[i] == -1)
-				return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
+				return (error_msg_cmd("fork", NULL, strerror(errno),
+						EXIT_FAILURE));
 			else if (cmds->pid[i] == 0)
 				execute_cmd(data, cmds, i);
 			i++;
@@ -60,7 +61,7 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
 	status = 0;
 	save_status = 0;
 	while (++i < cmds->num_cmds - 1)
-			waitpid(cmds->pid[i], NULL, 0);
+		waitpid(cmds->pid[i], NULL, 0);
 	waitpid(cmds->pid[i], &save_status, 0);
 	if (WIFEXITED(save_status))
 		status = WEXITSTATUS(save_status);
@@ -124,7 +125,8 @@ static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd)
 	cmds->cmd[num_cmd].path = get_cmd_path(data, cmds, num_cmd);
 	if (!cmds->cmd[num_cmd].path)
 		return (CMD_NOT_FOUND);
-	if (execve(cmds->cmd[num_cmd].path, cmds->cmd[num_cmd].args, data->env) == -1)
+	if (execve(cmds->cmd[num_cmd].path, cmds->cmd[num_cmd].args, data->env)
+		== -1)
 		error_msg_cmd("execve", NULL, strerror(errno), errno);
 	return (EXIT_FAILURE);
 }
@@ -144,7 +146,8 @@ static int	exec_local_bin(t_data *data, t_commands *cmds, int num_cmd)
 	result_code = validate_cmd_not_found(data, cmds->cmd[num_cmd].args[0]);
 	if (result_code != 0)
 		return (result_code);
-	if (execve(cmds->cmd[num_cmd].args[0], cmds->cmd[num_cmd].args, data->env) == -1)
+	if (execve(cmds->cmd[num_cmd].args[0], cmds->cmd[num_cmd].args, data->env)
+		== -1)
 		return (error_msg_cmd("execve", NULL, strerror(errno), errno));
 	return (EXIT_FAILURE);
 }
