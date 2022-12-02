@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 07:56:45 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/02 08:00:04 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	init_prompt(t_data *data)
 		signals_wait_cmd();
 		prompt = get_prompt(data);
 		data->user_input = readline(prompt);
+		signals_run_cmd();
 		free_ptr(prompt);
 		if (input_handler(data))
 			g_status_code = exec_cmd(data);
