@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 08:00:04 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/02 08:17:04 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,10 @@ static void	init_prompt(t_data *data)
 	exit_shell(data, g_status_code);
 }
 
-/** TODO: Provavelmente este método ficará em outra classe apartada
- * TODO: Provavelmente ele receberá outros métodos auiliares para as
- * diferentes execuções que teremos no minishell
- * @brief Verify what type of command is comming
+/**
+ * @brief Verify what type of command is coming
  * @param data
  */
-
 static int	exec_cmd(t_data *data)
 {
 	t_commands	*cmds;

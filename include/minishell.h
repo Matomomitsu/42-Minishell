@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 15:03:32 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:19:05 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,11 +308,10 @@ void	free_data(t_data *data, bool exit_shell);
 char	**split_args(char *command);
 
 /**
- * @brief TODO:Lins
- *
- * @param str
- * @param add
- * @return char*
+ * @brief Will join strings
+ * @param str Str original
+ * @param add Text to add
+ * @return string concatenated
  */
 char	*join_strs(char *str, char *add);
 
