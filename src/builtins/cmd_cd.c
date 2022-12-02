@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 21:50:41 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 09:47:53 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	cmd_cd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	char	*path;
 
-	if (cmds->cmd[num_cmd].args[3])
+	if (cmds->cmd[num_cmd].args[2])
 		return (error_msg_cmd("cd", NULL, "too many arguments", EXIT_FAILURE));
 	else if (!cmds->cmd[num_cmd].args[1] || ft_isspace(cmds->cmd[num_cmd].args[1][0])
 		|| cmds->cmd[num_cmd].args[1][0] == '\0'
