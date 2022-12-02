@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 15:02:46 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:18:17 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
  * local binary to execute
  * @param data Data Structure
  * @param cmds Cmds Structure
- * @param cmd TODO: Provavelmente será descontinuado.
  * @param i - Index of command in execution this time
  * @return int
  */
@@ -128,7 +127,7 @@ static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd)
 	return (EXIT_FAILURE);
 }
 
-/** TODO: Verificar se será necessário fazer a execução deste cara por index tb.
+/**
  * @brief Responsible to handler the local executions. Local Directory,
  * file or in some path.
  * Ex: /bin/ls or ./sh_test.sh
