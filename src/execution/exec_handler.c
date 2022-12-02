@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 16:51:48 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 09:56:13 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ int	exec_handler(t_data *data, t_commands *cmds)
 	int	i;
 
 	i = 0;
-	if (cmds->num_cmds == 1)
-		if (is_builtin_without_output(cmds))
-			cmds->exit_value = call_builtin(data, cmds, 0);
-	while (i < cmds->num_cmds)
+	if (cmds->num_cmds == 1 && is_builtin_without_output(cmds))
+		cmds->exit_value = call_builtin(data, cmds, 0);
+	else
 	{
-		cmds->pid[i] = fork();
-		if (cmds->pid[i] == -1)
-			return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
-		else if (cmds->pid[i] == 0)
-			execute_cmd(data, cmds, i);
-		i++;
+		while (i < cmds->num_cmds)
+		{
+			cmds->pid[i] = fork();
+			if (cmds->pid[i] == -1)
+				return (error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE));
+			else if (cmds->pid[i] == 0)
+				execute_cmd(data, cmds, i);
+			i++;
+		}
 	}
 	return (wait_child(data, cmds));
 }
@@ -74,7 +76,6 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
  * local binary to execute
  * @param data Data Structure
  * @param cmds Cmds Structure
- * @param cmd TODO: Provavelmente será descontinuado.
  * @param i - Index of command in execution this time
  * @return int
  */
@@ -128,7 +129,7 @@ static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd)
 	return (EXIT_FAILURE);
 }
 
-/** TODO: Verificar se será necessário fazer a execução deste cara por index tb.
+/**
  * @brief Responsible to handler the local executions. Local Directory,
  * file or in some path.
  * Ex: /bin/ls or ./sh_test.sh

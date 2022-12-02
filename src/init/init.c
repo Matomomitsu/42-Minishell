@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 19:16:54 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:17:04 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	init_prompt(t_data *data)
 		signals_wait_cmd();
 		prompt = get_prompt(data);
 		data->user_input = readline(prompt);
+		signals_run_cmd();
 		free_ptr(prompt);
 		if (input_handler(data))
 			g_status_code = exec_cmd(data);
@@ -50,13 +51,10 @@ static void	init_prompt(t_data *data)
 	exit_shell(data, g_status_code);
 }
 
-/** TODO: Provavelmente este método ficará em outra classe apartada
- * TODO: Provavelmente ele receberá outros métodos auiliares para as
- * diferentes execuções que teremos no minishell
- * @brief Verify what type of command is comming
+/**
+ * @brief Verify what type of command is coming
  * @param data
  */
-
 static int	exec_cmd(t_data *data)
 {
 	t_commands	*cmds;
@@ -81,14 +79,17 @@ static int	exec_cmd(t_data *data)
 /**
  * @brief Fill the user_input variable.
  * Verify if something was put in console, or just a null value. Space must
- * give prompt back
- * @param data
- * @return true
- * @return false
+ * give prompt back.
+ * If there is nothin in input, means (Ctrl+D) signal called
+ * @param data Data Minishel structure
+ * @return boolean
  */
 static bool	input_handler(t_data *data)
 {
-	if (data->user_input == NULL || ft_strncmp(data->user_input, "\0", 1) == 0)
+	if (!data->user_input)
+		exit_shell(data, 1);
+	else if (data->user_input == NULL
+		|| ft_strncmp(data->user_input, "\0", 1) == 0)
 		return (false);
 	else if (just_space_string(data->user_input) == true)
 		return (false);

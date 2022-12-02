@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structure.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/30 20:49:17 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:17:37 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 static bool	init_env(t_data *data, char **envp);
 static bool	init_pwd(t_data *data);
 
-/** TODO: Podemos iniciar as demais variáveis da struct aqui também
- */
 bool	init_structure(t_data *data, char **envp)
 {
 	if (!init_env(data, envp))
