@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 10:39:00 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:12:38 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	call_builtin(t_data *data, t_commands *cmds, int num_cmd)
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "pwd", 4) == 0)
 		cmd_code = cmd_pwd();
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "env", 4) == 0)
-		cmd_code = cmd_env(data, false, cmds, num_cmd);
+		cmd_code = cmd_env(data, cmds, num_cmd);
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "cd", 3) == 0)
 		cmd_code = cmd_cd(data, cmds, num_cmd);
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "unset", 6) == 0)
