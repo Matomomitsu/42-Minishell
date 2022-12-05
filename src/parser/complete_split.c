@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 00:19:55 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/01 00:23:43 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:05:07 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	ft_strcpy(char const *s, char **str, t_temp_index *data)
 		if (s[data->i])
 			str[data->j][data->o++] = s[data->i++];
 	}
+	if (s[data->i])
+		data->i++;
 }
 
 void	putchar_split(char const *s, char **str, size_t countc)

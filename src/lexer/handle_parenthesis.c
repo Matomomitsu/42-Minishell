@@ -28,7 +28,7 @@ static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
 		i_data->i++;
 }
 
-static void	parenthesis_erros(const char *s, t_commands *cmds, t_index_data \
+static void	parenthesis_errors(const char *s, t_commands *cmds, t_index_data \
 							*i_data)
 {
 	if (s[i_data->i] == '(')
@@ -60,7 +60,7 @@ static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data \
 	while (s[i_data->i] && s[i_data->i] == ' ')
 		i_data->i++;
 	if (s[i_data->i] && s[i_data->i] == ')')
-		parenthesis_erros(s, cmds, i_data);
+		parenthesis_errors(s, cmds, i_data);
 	while (s[i_data->i] && s[i_data->i] != ')')
 	{
 		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
@@ -69,7 +69,7 @@ static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data \
 			handle_parenteshis(s, cmds, i_data);
 	}
 	if (!s[i_data->i] && s[i_data->i - 1] != ')')
-		parenthesis_erros(s, cmds, i_data);
+		parenthesis_errors(s, cmds, i_data);
 	else
 		i_data->i++;
 }
@@ -84,13 +84,13 @@ void	lexer_parenthesis(const char *s, t_commands *cmds)
 		while (s[i_data.i] && s[i_data.i] == ' ')
 			i_data.i++;
 		if (s[i_data.i] == ')')
-			parenthesis_erros(s, cmds, &i_data);
+			parenthesis_errors(s, cmds, &i_data);
 		if (s[i_data.i] == '(')
 			handle_parenteshis(s, cmds, &i_data);
 		while (s[i_data.i] && s[i_data.i] != '&' && s[i_data.i] != '|')
 		{
 			if (s[i_data.i] == ')' || s[i_data.i] == '(')
-				parenthesis_erros(s, cmds, &i_data);
+				parenthesis_errors(s, cmds, &i_data);
 			if (s[i_data.i] == '\'' || s[i_data.i] == '\"')
 				handle_quotes(&i_data, s, cmds);
 			if (s[i_data.i])

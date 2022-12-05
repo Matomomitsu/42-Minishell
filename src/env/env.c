@@ -3,56 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 08:36:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/21 12:42:19 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/02 22:57:05 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*get_env_var_value(char **env, char *var)
+static char	*check_equal(char *var)
 {
-	int		i;
 	char	*tmp;
-	char	*result;
+	int		i;
 
 	i = 0;
-	tmp = ft_strjoin(var, "=");
-	if (!tmp)
-		return (NULL);
-	while (env[i])
+	if (!ft_strchr(var, '='))
+		tmp = ft_strjoin(var, "=");
+	else
 	{
-		if (ft_strncmp(tmp, env[i], ft_strlen(tmp)) == 0)
-		{
-			free_ptr(tmp);
-			result = ft_strchr(env[i], '=') + 1;
-			return (result);
-		}
-		i++;
+		while (var[i++] != '=')
+			;
+		tmp = (char *)malloc(sizeof(char) * i + 2);
+		tmp[i] = '\0';
+		ft_strlcpy(tmp, var, i + 1);
 	}
-	free_ptr(tmp);
-	return (NULL);
+	return (tmp);
 }
 
 int	get_env_var_index(char **env, char *var)
 {
 	int		index;
 	char	*tmp;
+	char	*temp_env;
 
 	index = 0;
-	tmp = ft_strjoin(var, "=");
+	tmp = check_equal(var);
 	if (!tmp)
 		return (-1);
 	while (env[index])
 	{
-		if (ft_strncmp(tmp, env[index], ft_strlen(tmp)) == 0)
+		temp_env = check_equal(env[index]);
+		if (ft_strncmp(tmp, temp_env, ft_strlen(temp_env)) == 0)
 		{
+			free(temp_env);
 			free_ptr(tmp);
 			return (index);
 		}
 		index++;
+		free(temp_env);
 	}
 	free_ptr(tmp);
 	return (-1);
@@ -64,9 +63,11 @@ bool	set_env_var(t_data *data, char *key, char *value)
 	int		index;
 
 	index = get_env_var_index(data->env, key);
-	if (value == NULL)
-		value = "";
-	temp = ft_strjoin("=", value);
+	if ((value != NULL && !ft_strchr(key, '=')) || \
+		(index != -1 && !ft_strchr(data->env[index], '=')))
+		temp = ft_strjoin("=", value);
+	else
+		temp = ft_strdup("\0");
 	if (index != -1 && data->env[index])
 	{
 		free_ptr(data->env[index]);
@@ -92,23 +93,4 @@ int	env_var_count(char **envp)
 	while (envp && envp[count])
 		count++;
 	return (count);
-}
-
-char	**env_var_realloc(t_data *data, int size)
-{
-	char	**new_env_var;
-	int		i;
-
-	i = 0;
-	new_env_var = ft_calloc((size + 1), sizeof * new_env_var);
-	if (!new_env_var)
-		return (NULL);
-	while (data->env[i] && i < size)
-	{
-		new_env_var[i] = ft_strdup(data->env[i]);
-		free_ptr(data->env[i]);
-		i++;
-	}
-	free_ptr(data->env);
-	return (new_env_var);
 }
