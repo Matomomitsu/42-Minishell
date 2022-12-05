@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 08:17:37 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/05 09:11:36 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,27 @@ static bool	init_env(t_data *data, char **envp)
 	return (true);
 }
 
-int	args_count(char **args)
+void	init_io(t_commands *cmds)
 {
-	int	i;
-
-	i = 1;
-	while (args[i])
+	if (!cmds->io)
 	{
-		i++;
+		cmds->io->in_file_name = NULL;
+		cmds->io->out_file_name = NULL;
+		cmds->io->fd_in = -1;
+		cmds->io->fd_out = -1;
+		cmds->io->std_in_bkp = -1;
+		cmds->io->std_out_bkp = -1;
 	}
-	return (i);
 }
+
+// int	args_count(char **args)
+// {
+// 	int	i;
+
+// 	i = 1;
+// 	while (args[i])
+// 	{
+// 		i++;
+// 	}
+// 	return (i);
+// }

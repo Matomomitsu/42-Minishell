@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/05 08:47:20 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/05 09:13:40 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,12 @@ int		init(int argc, char **argv, char **envp);
 bool	init_structure(t_data *data, char **envp);
 
 /**
+ * @brief Initialize IO structure (In File / out file)
+ * @param cmds Command structure
+ */
+void	init_io(t_commands *cmds);
+
+/**
  * @brief Initialize the commands structure
  * @param data Structure of MiniShell
  * @param cmds Commands structure
@@ -139,7 +145,7 @@ void	init_cmd(t_data *data, t_commands *cmds);
  * @return int - Count Number of arguments. The Command argument will be ignored
  * in this method. Return just arguments
  */
-int		args_count(char **args);
+// int		args_count(char **args);
 
 /**
  * @brief Validate number of arguments of Mini-shell
