@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/05 09:13:40 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/05 09:42:27 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,12 @@ char	*get_prompt(t_data *data);
  */
 void	redirect_io(t_io *io);
 
+/**
+ * @brief Restore the initial state of backups o standard input and output.
+ * @param io
+ */
+void	restore_io(t_io *io);
+
 /******************************************************************************/
 /*Begin - Redirection*/
 /******************************************************************************/
@@ -324,6 +330,13 @@ void	debug_structs(t_data *data, t_commands *cmds);
  * @param ptr Pointer to be free.
  */
 void	free_ptr(void *ptr);
+
+/**
+ * @brief Close File descriptor, if opened.
+ * @param cmds Structure of Commands
+ * @param reset_io if true, will restore stdIn/stdOut Bkp
+ */
+void	close_fds(t_commands *cmds, bool reset_io);
 
 /**
  * @brief

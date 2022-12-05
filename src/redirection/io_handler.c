@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 08:05:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/05 08:42:05 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/05 09:28:25 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,9 @@ void	redirect_io(t_io *io)
 		if (dup2(io->fd_out, STDOUT_FILENO) == -1)
 			error_msg_cmd("dup2", io->out_file_name, strerror(errno),
 				EXIT_FAILURE);
+}
+
+void	restore_io(t_io *io)
+{
+
 }
