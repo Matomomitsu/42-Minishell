@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:06:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 10:30:36 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/05 09:47:40 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static void	free_cmd(t_commands *cmds)
 		free(cmds->cmd[i].path);
 		i++;
 	}
+	free_io(cmds->io);
 	free(cmds->cmd);
 }
 

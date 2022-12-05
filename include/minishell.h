@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/05 09:42:27 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/05 09:45:53 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,6 +337,12 @@ void	free_ptr(void *ptr);
  * @param reset_io if true, will restore stdIn/stdOut Bkp
  */
 void	close_fds(t_commands *cmds, bool reset_io);
+
+/**
+ * @brief Free IO structure
+ * @param io IO Structure
+*/
+void	free_io(t_io *io);
 
 /**
  * @brief
