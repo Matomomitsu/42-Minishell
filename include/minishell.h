@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 08:19:05 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/05 08:47:20 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@
 # define DEFAULT "\001\033[0;39m\002"
 # define YELLOW "\001\033[0;93m\002"
 
+typedef struct s_io
+{
+	int		fd_in;
+	int		fd_out;
+	int		std_in_bkp;
+	int		std_out_bkp;
+	char	*in_file_name;
+	char	*out_file_name;
+
+} t_io;
+
 typedef struct s_data
 {
 	char		*user_input;
@@ -74,6 +85,7 @@ typedef struct s_commands
 	char	**paths;
 	int		*operators;
 	int		exit_value;
+	t_io	*io;
 	t_cmd	*cmd;
 }	t_commands;
 
@@ -181,6 +193,21 @@ void	signals_run_cmd(void);
  * @return char* Text of prompt
  */
 char	*get_prompt(t_data *data);
+
+/******************************************************************************/
+/*Begin - Redirection*/
+/******************************************************************************/
+
+/**
+ * @brief Duplicates the input and output file descriptors.
+ * Backup both to restore before
+ * @param io - IO Data Structure
+ */
+void	redirect_io(t_io *io);
+
+/******************************************************************************/
+/*Begin - Redirection*/
+/******************************************************************************/
 
 /******************************************************************************/
 /*Begin - Builtins*/
