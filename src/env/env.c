@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 08:36:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 22:57:05 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/05 13:11:19 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ bool	set_env_var(t_data *data, char *key, char *value)
 	int		index;
 
 	index = get_env_var_index(data->env, key);
-	if ((value != NULL && !ft_strchr(key, '=')) || \
-		(index != -1 && !ft_strchr(data->env[index], '=')))
+	if (value != NULL && !ft_strchr(key, '='))
 		temp = ft_strjoin("=", value);
 	else
 		temp = ft_strdup("\0");
