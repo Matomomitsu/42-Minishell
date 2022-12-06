@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 07:22:00 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 07:45:19 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,13 @@ bool	remove_old_file_ref(t_io *io, bool in_file);
  * @param cmds Commands Structure
  */
 void	redirection_handler(t_data *data, t_commands *cmds);
+
+/**
+ * @brief Verify if the command that is coming is a redirection format
+ * @param cmds Commands structure
+ * @return boolean.
+ */
+bool	is_redirection_command(t_commands *cmds);
 
 /**
  * @brief Responsible to identify the type of redirection, and call the

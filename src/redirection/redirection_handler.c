@@ -6,11 +6,19 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:24:31 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 07:31:02 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 07:43:41 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+bool	is_redirection_command(t_commands *cmds)
+{
+	if (cmds->cmd[0].redirections[0])
+		return (true);
+	else
+		return (false);
+}
 
 void	redirection_handler(t_data *data, t_commands *cmds)
 {

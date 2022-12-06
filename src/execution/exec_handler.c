@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/05 13:14:11 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 07:45:29 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ int	exec_handler(t_data *data, t_commands *cmds)
 	int	i;
 
 	i = 0;
-	// debug_structs(data, cmds);
-	// TODO:Lins - Isso não está legal
-	if (cmds->num_cmds > 0 && cmds->cmd[0].redirections[0])
+	debug_structs(data, cmds);
+	if (cmds->num_cmds > 0 && is_redirection_command(cmds))
 		redirection_handler(data, cmds);
 	if (cmds->num_cmds == 1 && is_builtin_without_output(cmds))
 		cmds->exit_value = call_builtin(data, cmds, 0);
