@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 15:24:31 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 15:42:08 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,7 +368,7 @@ void	close_pipe_fds(t_commands *cmds, int index, bool close_both);
  * @param data Structure of MiniShell
  * @param cmds Structure of commands
  */
-void	debug_structs(t_data *data, t_commands *cmds);
+void	debug_structs(t_data *data, t_commands *cmds, bool show_path);
 
 /**
  * @brief Deallocate memory from a pointer. Update the variable to NULL
@@ -477,7 +477,7 @@ int		validate_cmd_not_found(t_data *data, char *cmd);
  * @brief Exit free cmd - refactoring execute class
  * @param data Data Structure
  * @param cmds Commands Structuree
- * @param status_code Status code 
+ * @param status_code Status code
  */
 void	free_exit_cmd(t_data *data, t_commands *cmds, int status_code);
 /******************************************************************************/

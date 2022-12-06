@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:57:56 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 06:34:21 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 15:41:44 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	print_operators(int operator);
  * @param data
  * @param cmds
  */
-void	debug_structs(t_data *data, t_commands *cmds)
+void	debug_structs(t_data *data, t_commands *cmds, bool show_path)
 {
 	int	i;
 	int	j;
@@ -30,17 +30,15 @@ void	debug_structs(t_data *data, t_commands *cmds)
 	printf("Nro num_cmds:	%i\n", cmds->num_cmds);
 	print_operators(*cmds->operators);
 	printf("Nro num_exec:	%i\n", cmds->num_exec);
-	// while (cmds->paths[i])
-	// {
-	// 	printf("Paths:	%s\n", cmds->paths[i]);
-	// 	i++;
-	// }
+	if (show_path)
+		while (cmds->paths[i])
+		{
+			printf("Paths:	%s\n", cmds->paths[i]);
+			i++;
+		}
 	i = 0;
 	while (cmds->cmds[i])
-	{
-		printf("Cmds:	%s\n", cmds->cmds[i]);
-		i++;
-	}
+		printf("Cmds:	%s\n", cmds->cmds[i++]);
 	print_cmds(cmds);
 	printf("----End Debug (state Obj)----\n");
 }
