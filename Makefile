@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/06 10:39:35 by rlins            ###   ########.fr        #
+#    Updated: 2022/12/01 15:22:40 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_LEXER)handle_lexer_errors.c \
 		$(PATH_LEXER)handle_parenthesis.c \
 		$(PATH_LEXER)handle_redirections.c \
+		$(PATH_LEXER)handle_operators.c \
 		$(PATH_LEXER)quotes_error.c \
 		$(PATH_PARSER)parser.c \
 		$(PATH_PARSER)complete_parser.c \

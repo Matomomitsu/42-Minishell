@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 15:42:08 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/02 15:32:31 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,7 +317,7 @@ int		cmd_pwd(void);
  * @param exp_no_arg Export With no args - Show env with a pre-fix
  * @return integer - success or error
  */
-int		cmd_env(t_data *data, bool exp_no_arg, t_commands *cmds, int num_cmd);
+int		cmd_env(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins - Command Change Directory.
@@ -597,6 +597,8 @@ void	quotes_error(t_index_data *i_data, const char *s, t_commands *cmds);
  * @param cmds Structure of commands
  */
 void	lexer_redirections(const char *s, t_commands *cmds);
+
+void	lexer_operators(const char *s, t_commands *cmds);
 
 /******************************************************************************/
 /*End - Lexer*/

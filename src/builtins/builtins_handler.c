@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 09:14:15 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/02 15:12:38 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	is_builtin_without_output(t_commands *cmds)
 	else if (ft_strncmp(cmds->cmd[0].args[0], "unset", 6) == 0)
 		return (true);
 	else if (ft_strncmp(cmds->cmd[0].args[0], "export", 7) == 0 && \
-			cmds->num_cmds == 1)
+			cmds->cmd[0].args[1])
 		return (true);
 	else
 		return (false);
@@ -59,7 +59,7 @@ int	call_builtin(t_data *data, t_commands *cmds, int num_cmd)
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "pwd", 4) == 0)
 		cmd_code = cmd_pwd();
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "env", 4) == 0)
-		cmd_code = cmd_env(data, false, cmds, num_cmd);
+		cmd_code = cmd_env(data, cmds, num_cmd);
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "cd", 3) == 0)
 		cmd_code = cmd_cd(data, cmds, num_cmd);
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "unset", 6) == 0)

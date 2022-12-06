@@ -50,8 +50,7 @@ static void	get_size(t_index_data *i_data, const char *s, t_commands *cmds)
 	if (s[i_data->i] == '|' && s[i_data->i - 1] != '|' && s[i_data->i - 1] \
 		!= '&')
 		i_data->i++;
-	if (cmds->exit_value != 0)
-		lexer_errors(i_data, s, cmds);
+	lexer_errors(i_data, s, cmds);
 }
 
 static size_t	ft_countstr(char const *s, t_commands *cmds)
@@ -90,12 +89,14 @@ static void	splitstr(char **str, char const *s, size_t countc, t_commands *cmds)
 }
 
 char	**lexer(char const *s, t_commands *cmds)
-
 {
 	char	**str;
 	size_t	countstr;
 
 	if (!s)
+		return (NULL);
+	lexer_operators(s, cmds);
+	if (cmds->exit_value != 0)
 		return (NULL);
 	lexer_redirections(s, cmds);
 	countstr = ft_countstr(s, cmds);
