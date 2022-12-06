@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 07:45:19 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 08:27:53 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,9 +222,10 @@ void	restore_io(t_io *io);
  * @brief Will handler redirection to truncate file
  * will call initialization IO Structure and start process to handler file
  * @param cmds Command structure
- * @sample: [ls > arq.txt]
+ * @param red Redirection command
+ * @sample: [ls > arq.txt] | [ls > 01 > 02]
  */
-void	rd_truncate_handler(t_commands *cmds);
+void	rd_truncate_handler(t_commands *cmds, char *red);
 
 // TODO:Lins - header
 bool	remove_old_file_ref(t_io *io, bool in_file);

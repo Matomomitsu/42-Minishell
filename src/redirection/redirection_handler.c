@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:24:31 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 07:43:41 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 08:16:52 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,17 @@ bool	is_redirection_command(t_commands *cmds)
 
 void	redirection_handler(t_data *data, t_commands *cmds)
 {
-	// TODO:Lins Melhorar isso
-	if (ft_strncmp(cmds->cmd[0].redirections[0], ">", 1) == 0)
-		rd_truncate_handler(cmds);
-	else if (ft_strncmp(cmds->cmd[0].redirections[0], "<", 1) == 0)
-		rd_input_handler(cmds);
+	int	i;
+
+	i = 0;
+	while (cmds->cmd[0].redirections[i])
+	{
+		if (ft_strncmp(cmds->cmd[0].redirections[i], ">", 1) == 0)
+			rd_truncate_handler(cmds, cmds->cmd[0].redirections[i]);
+		else if (ft_strncmp(cmds->cmd[0].redirections[i], "<", 1) == 0)
+			rd_input_handler(cmds);
+		i++;
+	}
 }
 
 bool	remove_old_file_ref(t_io *io, bool in_file)
