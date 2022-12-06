@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 14:36:20 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 15:11:50 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,16 +206,20 @@ char	*get_prompt(t_data *data);
 /******************************************************************************/
 
 /**
- * @brief Duplicates the input and output file descriptors.
+ * @brief Responsible to manage output of redirection
+ * Duplicates the input and output file descriptors.
  * Backup both to restore before. If the call is not necessary to manipulate IO
  * (no redirection) just return.
- * @param io - IO Data Structure
+  * @param io - IO Data Structure
+  * @sample: wc < arq.txt
  */
 void	redirect_io(t_io *io);
 
 /**
  * @brief Restore the initial state of backups o standard input and output.
- * @param io
+ * Without this, segmentation fault will happen. Must this to close anf
+ * flag variables
+ * @param io IO Data Structure
  */
 void	restore_io(t_io *io);
 
