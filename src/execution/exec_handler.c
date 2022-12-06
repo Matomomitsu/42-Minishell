@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 08:51:49 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 14:37:20 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 	else
 	{
 		redirect_io(cmds->io);
+		close_fds(cmds, false);
 		if (ft_strchr(cmds->cmd[num_cmd].args[0], '/') == NULL)
 		{
 			status_code = exec_path_var_bin(data, cmds, num_cmd);
