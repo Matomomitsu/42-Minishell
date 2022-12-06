@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:57:56 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 13:21:24 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/06 06:34:21 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	debug_structs(t_data *data, t_commands *cmds)
 	printf("Nro num_cmds:	%i\n", cmds->num_cmds);
 	print_operators(*cmds->operators);
 	printf("Nro num_exec:	%i\n", cmds->num_exec);
-	while (cmds->paths[i])
-	{
-		printf("Paths:	%s\n", cmds->paths[i]);
-		i++;
-	}
+	// while (cmds->paths[i])
+	// {
+	// 	printf("Paths:	%s\n", cmds->paths[i]);
+	// 	i++;
+	// }
 	i = 0;
 	while (cmds->cmds[i])
 	{
@@ -43,6 +43,22 @@ void	debug_structs(t_data *data, t_commands *cmds)
 	}
 	print_cmds(cmds);
 	printf("----End Debug (state Obj)----\n");
+}
+
+static void	print_io(t_io *io)
+{
+	printf("----Begin Debug (state IO)----\n");
+
+	printf("\tfd_in:%i\n", io->fd_in);
+	printf("\tfd_out:%i\n", io->fd_out);
+
+	printf("\tstd_in_bkp:%i\n", io->std_in_bkp);
+	printf("\tstd_out_bkp:%i\n", io->std_out_bkp);
+
+	printf("\tin file name:%s\n", io->in_file);
+	printf("\tout file name:%s\n", io->out_file);
+
+	printf("----End Debug (state IO)----\n");
 }
 
 static void	print_operators(int operator)
@@ -67,8 +83,8 @@ static void	print_cmds(t_commands *cmds)
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
-		printf("	cmd - path: %s\n", cmds->cmd[i].path);
-		printf("	cmd - exit_value: %i\n", cmds->exit_value);
+		printf("\tcmd - path: %s\n", cmds->cmd[i].path);
+		printf("\tcmd - exit_value: %i\n", cmds->exit_value);
 		j = 0;
 		while (cmds->cmd[i].redirections[j])
 		{
