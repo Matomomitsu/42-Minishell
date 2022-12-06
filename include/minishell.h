@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 15:11:50 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 15:24:31 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -472,6 +472,14 @@ bool	input_is_dir(char *cmd);
  * @return int
  */
 int		validate_cmd_not_found(t_data *data, char *cmd);
+
+/**
+ * @brief Exit free cmd - refactoring execute class
+ * @param data Data Structure
+ * @param cmds Commands Structuree
+ * @param status_code Status code 
+ */
+void	free_exit_cmd(t_data *data, t_commands *cmds, int status_code);
 /******************************************************************************/
 /*End - Execute*/
 /******************************************************************************/

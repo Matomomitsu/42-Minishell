@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 10:34:07 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 14:42:20 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 15:25:54 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	rd_heredoc(t_commands *cmds, char *red)
 	t_io	*io;
 
 	init_io(cmds);
-
 	io = cmds->io;
 	io->in_file = ".tmp_heredoc";
 	get_delimiter(red, io);
@@ -59,9 +58,8 @@ static bool	heredoc_prompt(t_io *io)
 	char	*user_input;
 
 	fd = open(io->in_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-
 	user_input = NULL;
-	while(true)
+	while (true)
 	{
 		user_input = readline("heredoc> ");
 		if (exit_heredoc_prompt(&user_input, io) == true)
@@ -91,7 +89,7 @@ static bool	exit_heredoc_prompt(char **user_input, t_io *io)
 		return (true);
 	}
 	if (ft_strncmp(*user_input, io->heredoc_delimiter,
-		ft_strlen(io->heredoc_delimiter)) == 0)
+			ft_strlen(io->heredoc_delimiter)) == 0)
 	{
 		return (true);
 	}

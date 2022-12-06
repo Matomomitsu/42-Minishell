@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:21:51 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 14:36:29 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 15:27:14 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	rd_output_handler(t_commands *cmds, char *red, bool trunc)
 
 	init_io(cmds);
 	open_out_file(cmds, red_split[1], trunc);
-
 	free_ptr(red_split);
 }
 
@@ -44,11 +43,11 @@ static void	open_out_file(t_commands *cmds, char *file, bool trunc)
 		return ;
 	}
 	if (trunc == true)
-		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT |
-			O_TRUNC, 0664);
+		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
+				| O_TRUNC, 0664);
 	else
-		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT |
-			O_APPEND, 0664);
+		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
+				| O_APPEND, 0664);
 	if (cmds->io->fd_out == -1)
 		error_msg_cmd(cmds->io->out_file, NULL, strerror(errno), false);
 }

@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 14:37:20 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 15:22:27 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	exec_handler(t_data *data, t_commands *cmds)
 	int	i;
 
 	i = 0;
-	// debug_structs(data, cmds);
 	if (cmds->num_cmds > 0 && is_redirection_command(cmds))
 		redirection_handler(data, cmds);
 	if (cmds->num_cmds == 1 && is_builtin_without_output(cmds))
@@ -102,10 +101,7 @@ static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 		{
 			status_code = exec_path_var_bin(data, cmds, num_cmd);
 			if (status_code != CMD_NOT_FOUND)
-			{
-				free_cmds(cmds);
-				exit_shell(data, status_code);
-			}
+				free_exit_cmd(data, cmds, status_code);
 		}
 		status_code = exec_local_bin(data, cmds, num_cmd);
 	}
