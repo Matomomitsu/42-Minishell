@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
 #    Updated: 2022/12/01 15:22:40 by mtomomit         ###   ########.fr        #
@@ -23,6 +23,7 @@ PATH_MAIN 		= $(PATH_SRC)main/
 PATH_INIT 		= $(PATH_SRC)init/
 PATH_UTIL 		= $(PATH_SRC)util/
 PATH_EXEC 		= $(PATH_SRC)execution/
+PATH_RED 		= $(PATH_SRC)redirection/
 PATH_ENV 		= $(PATH_SRC)env/
 PATH_BUILTINS 	= $(PATH_SRC)builtins/
 PATH_LEXER		= $(PATH_SRC)lexer/
@@ -64,9 +65,15 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_UTIL)debug.c \
 		$(PATH_UTIL)error_handler.c \
 		$(PATH_UTIL)sanitization.c \
+		$(PATH_UTIL)sanitization_partial.c \
 		$(PATH_UTIL)pipe.c \
 		$(PATH_EXEC)exec_handler.c \
 		$(PATH_EXEC)exec_partial.c \
+		$(PATH_RED)redirection_handler.c \
+		$(PATH_RED)rd_output_handler.c \
+		$(PATH_RED)rd_input_handler.c \
+		$(PATH_RED)rd_heredoc.c \
+		$(PATH_RED)io_handler.c \
 		$(PATH_UTIL)split_args.c \
 		$(PATH_ENV)env.c \
 		$(PATH_ENV)env_partial.c \
@@ -112,6 +119,7 @@ $(PATH_OBJS)%.o: $(PATH_SRC)%.c
 	@mkdir -p $(PATH_OBJS)init/
 	@mkdir -p $(PATH_OBJS)util/
 	@mkdir -p $(PATH_OBJS)execution/
+	@mkdir -p $(PATH_OBJS)redirection/
 	@mkdir -p $(PATH_OBJS)env/
 	@mkdir -p $(PATH_OBJS)builtins/
 	@mkdir -p $(PATH_OBJS)lexer/

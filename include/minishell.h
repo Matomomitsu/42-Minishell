@@ -48,6 +48,18 @@
 # define DEFAULT "\001\033[0;39m\002"
 # define YELLOW "\001\033[0;93m\002"
 
+typedef struct s_io
+{
+	int		fd_in;
+	int		fd_out;
+	int		std_in_bkp;
+	int		std_out_bkp;
+	char	*in_file;
+	char	*out_file;
+	char	*heredoc_delimiter;
+
+} t_io;
+
 typedef struct s_data
 {
 	char		*user_input;
@@ -74,6 +86,7 @@ typedef struct s_commands
 	char	**paths;
 	int		*operators;
 	int		exit_value;
+	t_io	*io;
 	t_cmd	*cmd;
 }	t_commands;
 
@@ -108,6 +121,12 @@ int		init(int argc, char **argv, char **envp);
 bool	init_structure(t_data *data, char **envp);
 
 /**
+ * @brief Initialize IO structure (In File / out file). Redirect.
+ * @param cmds Command structure
+ */
+void	init_io(t_commands *cmds);
+
+/**
  * @brief Initialize the commands structure
  * @param data Structure of MiniShell
  * @param cmds Commands structure
@@ -127,7 +146,7 @@ void	init_cmd(t_data *data, t_commands *cmds);
  * @return int - Count Number of arguments. The Command argument will be ignored
  * in this method. Return just arguments
  */
-int		args_count(char **args);
+// int		args_count(char **args);
 
 /**
  * @brief Validate number of arguments of Mini-shell
@@ -181,6 +200,72 @@ void	signals_run_cmd(void);
  * @return char* Text of prompt
  */
 char	*get_prompt(t_data *data);
+
+/******************************************************************************/
+/*Begin - Redirection*/
+/******************************************************************************/
+
+/**
+ * @brief Responsible to manage output of redirection
+ * Duplicates the input and output file descriptors.
+ * Backup both to restore before. If the call is not necessary to manipulate IO
+ * (no redirection) just return.
+  * @param io - IO Data Structure
+  * @sample: wc < arq.txt
+ */
+void	redirect_io(t_io *io);
+
+/**
+ * @brief Restore the initial state of backups o standard input and output.
+ * Without this, segmentation fault will happen. Must this to close anf
+ * flag variables
+ * @param io IO Data Structure
+ */
+void	restore_io(t_io *io);
+
+/**
+ * @brief Will handler redirection to output file
+ * will call initialization IO Structure and start process to handler file
+ * @param cmds Command structure
+ * @param red Redirection command
+ * @param trunc truncate or append mode?
+ * @sample: [ls > arq.txt] | [ls > 01 > 02] | [ls -l | wc -l >> 01]
+ */
+void	rd_output_handler(t_commands *cmds, char *red, bool trunc);
+
+/**
+ * @brief Will handle the type of redirection and call the right method
+ * @param data Data structure
+ * @param cmds Commands Structure
+ */
+void	redirection_handler(t_data *data, t_commands *cmds);
+
+/**
+ * @brief Verify if the command that is coming is a redirection format
+ * @param cmds Commands structure
+ * @return boolean.
+ */
+bool	is_redirection_command(t_commands *cmds);
+
+/**
+ * @brief Responsible to identify the type of redirection, and call the
+ * respective method
+ * @param cmds Commands structure
+ * @param file File name
+ * @sample: [wc < arq.txt]
+ */
+void	rd_input_handler(t_commands *cmds, char *file);
+
+/**
+ * @brief HereDoc handler
+ * @param cmds Commands structure
+ * @param red - Redirection
+ */
+void	rd_heredoc(t_commands *cmds, char *red);
+
+/******************************************************************************/
+/*end - Redirection*/
+/******************************************************************************/
 
 /******************************************************************************/
 /*Begin - Builtins*/
@@ -283,7 +368,7 @@ void	close_pipe_fds(t_commands *cmds, int index, bool close_both);
  * @param data Structure of MiniShell
  * @param cmds Structure of commands
  */
-void	debug_structs(t_data *data, t_commands *cmds);
+void	debug_structs(t_data *data, t_commands *cmds, bool show_path);
 
 /**
  * @brief Deallocate memory from a pointer. Update the variable to NULL
@@ -291,6 +376,20 @@ void	debug_structs(t_data *data, t_commands *cmds);
  * @param ptr Pointer to be free.
  */
 void	free_ptr(void *ptr);
+
+/**
+ * @brief Close File descriptor, if opened.
+ * @param cmds Structure of Commands
+ * @param reset_io if true, will restore stdIn/stdOut Bkp
+ */
+void	close_fds(t_commands *cmds, bool reset_io);
+
+/**
+ * @brief Free IO structure.
+ * Unlink used to drop temp file to heredoc
+ * @param io IO Structure
+*/
+void	free_io(t_io *io);
 
 /**
  * @brief
@@ -373,6 +472,14 @@ bool	input_is_dir(char *cmd);
  * @return int
  */
 int		validate_cmd_not_found(t_data *data, char *cmd);
+
+/**
+ * @brief Exit free cmd - refactoring execute class
+ * @param data Data Structure
+ * @param cmds Commands Structuree
+ * @param status_code Status code
+ */
+void	free_exit_cmd(t_data *data, t_commands *cmds, int status_code);
 /******************************************************************************/
 /*End - Execute*/
 /******************************************************************************/

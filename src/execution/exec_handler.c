@@ -24,6 +24,8 @@ int	exec_handler(t_data *data, t_commands *cmds)
 	int	i;
 
 	i = 0;
+	if (cmds->num_cmds > 0 && is_redirection_command(cmds))
+		redirection_handler(data, cmds);
 	if (cmds->num_cmds == 1 && is_builtin_without_output(cmds))
 		cmds->exit_value = call_builtin(data, cmds, 0);
 	else
@@ -93,14 +95,13 @@ static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 		status_code = call_builtin(data, cmds, num_cmd);
 	else
 	{
+		redirect_io(cmds->io);
+		close_fds(cmds, false);
 		if (ft_strchr(cmds->cmd[num_cmd].args[0], '/') == NULL)
 		{
 			status_code = exec_path_var_bin(data, cmds, num_cmd);
 			if (status_code != CMD_NOT_FOUND)
-			{
-				free_cmds(cmds);
-				exit_shell(data, status_code);
-			}
+				free_exit_cmd(data, cmds, status_code);
 		}
 		status_code = exec_local_bin(data, cmds, num_cmd);
 	}
