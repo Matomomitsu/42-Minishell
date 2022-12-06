@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/05 09:45:53 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 07:22:00 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ typedef struct s_io
 	int		fd_out;
 	int		std_in_bkp;
 	int		std_out_bkp;
-	char	*in_file_name;
-	char	*out_file_name;
+	char	*in_file;
+	char	*out_file;
 
 } t_io;
 
@@ -120,7 +120,7 @@ int		init(int argc, char **argv, char **envp);
 bool	init_structure(t_data *data, char **envp);
 
 /**
- * @brief Initialize IO structure (In File / out file)
+ * @brief Initialize IO structure (In File / out file). Redirect.
  * @param cmds Command structure
  */
 void	init_io(t_commands *cmds);
@@ -206,7 +206,8 @@ char	*get_prompt(t_data *data);
 
 /**
  * @brief Duplicates the input and output file descriptors.
- * Backup both to restore before
+ * Backup both to restore before. If the call is not necessary to manipulate IO
+ * (no redirection) just return.
  * @param io - IO Data Structure
  */
 void	redirect_io(t_io *io);
@@ -216,6 +217,32 @@ void	redirect_io(t_io *io);
  * @param io
  */
 void	restore_io(t_io *io);
+
+/**
+ * @brief Will handler redirection to truncate file
+ * will call initialization IO Structure and start process to handler file
+ * @param cmds Command structure
+ * @sample: [ls > arq.txt]
+ */
+void	rd_truncate_handler(t_commands *cmds);
+
+// TODO:Lins - header
+bool	remove_old_file_ref(t_io *io, bool in_file);
+
+/**
+ * @brief Will handle the type of redirection and call the right method
+ * @param data Data structure
+ * @param cmds Commands Structure
+ */
+void	redirection_handler(t_data *data, t_commands *cmds);
+
+/**
+ * @brief Responsible to identify the type of redirection, and call the
+ * respective method
+ * @param cmds Commands structure
+ * @sample: [wc < arq.txt]
+ */
+void	rd_input_handler(t_commands *cmds);
 
 /******************************************************************************/
 /*Begin - Redirection*/
