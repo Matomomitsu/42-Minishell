@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/05 13:09:59 by rlins            ###   ########.fr        #
+#    Updated: 2022/12/06 09:20:51 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_EXEC)exec_handler.c \
 		$(PATH_EXEC)exec_partial.c \
 		$(PATH_RED)redirection_handler.c \
-		$(PATH_RED)rd_truncate_handler.c \
+		$(PATH_RED)rd_output_handler.c \
 		$(PATH_RED)rd_input_handler.c \
 		$(PATH_RED)io_handler.c \
 		$(PATH_UTIL)split_args.c \

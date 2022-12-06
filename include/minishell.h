@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 09:04:29 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 09:25:20 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,13 +219,14 @@ void	redirect_io(t_io *io);
 void	restore_io(t_io *io);
 
 /**
- * @brief Will handler redirection to truncate file
+ * @brief Will handler redirection to output file
  * will call initialization IO Structure and start process to handler file
  * @param cmds Command structure
  * @param red Redirection command
- * @sample: [ls > arq.txt] | [ls > 01 > 02]
+ * @param trunc truncate or append mode?
+ * @sample: [ls > arq.txt] | [ls > 01 > 02] | [ls -l | wc -l >> 01]
  */
-void	rd_truncate_handler(t_commands *cmds, char *red);
+void	rd_output_handler(t_commands *cmds, char *red, bool trunc);
 
 // TODO:Lins - header
 bool	remove_old_file_ref(t_io *io, bool in_file);
