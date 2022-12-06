@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 12:59:15 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 08:53:46 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 14:36:23 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	rd_input_handler(t_commands *cmds, char *red)
  */
 static void	open_in_file(t_commands *cmds, char *file)
 {
-	if (remove_old_file_ref(cmds->io, false) == false)
-		return ;
 	cmds->io->in_file = file;
 	if (cmds->io->in_file && cmds->io->in_file[0] == '\0')
 	{

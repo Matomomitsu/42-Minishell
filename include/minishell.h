@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 09:25:20 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 14:36:20 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_io
 	int		std_out_bkp;
 	char	*in_file;
 	char	*out_file;
+	char	*heredoc_delimiter;
 
 } t_io;
 
@@ -228,9 +229,6 @@ void	restore_io(t_io *io);
  */
 void	rd_output_handler(t_commands *cmds, char *red, bool trunc);
 
-// TODO:Lins - header
-bool	remove_old_file_ref(t_io *io, bool in_file);
-
 /**
  * @brief Will handle the type of redirection and call the right method
  * @param data Data structure
@@ -253,6 +251,13 @@ bool	is_redirection_command(t_commands *cmds);
  * @sample: [wc < arq.txt]
  */
 void	rd_input_handler(t_commands *cmds, char *file);
+
+/**
+ * @brief HereDoc handler
+ * @param cmds Commands structure
+ * @param red - Redirection
+ */
+void	rd_heredoc(t_commands *cmds, char *red);
 
 /******************************************************************************/
 /*end - Redirection*/
@@ -376,7 +381,8 @@ void	free_ptr(void *ptr);
 void	close_fds(t_commands *cmds, bool reset_io);
 
 /**
- * @brief Free IO structure
+ * @brief Free IO structure.
+ * Unlink used to drop temp file to heredoc
  * @param io IO Structure
 */
 void	free_io(t_io *io);
