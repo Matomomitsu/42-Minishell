@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/05 09:11:36 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 06:34:30 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ void	init_io(t_commands *cmds)
 {
 	if (!cmds->io)
 	{
-		cmds->io->in_file_name = NULL;
-		cmds->io->out_file_name = NULL;
+		cmds->io = malloc(sizeof * cmds->io);
+		if (!cmds->io)
+			return ;
+		cmds->io->in_file = NULL;
+		cmds->io->out_file = NULL;
 		cmds->io->fd_in = -1;
 		cmds->io->fd_out = -1;
 		cmds->io->std_in_bkp = -1;
