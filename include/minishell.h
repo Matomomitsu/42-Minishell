@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 08:27:53 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/06 09:04:29 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,12 +248,13 @@ bool	is_redirection_command(t_commands *cmds);
  * @brief Responsible to identify the type of redirection, and call the
  * respective method
  * @param cmds Commands structure
+ * @param file File name
  * @sample: [wc < arq.txt]
  */
-void	rd_input_handler(t_commands *cmds);
+void	rd_input_handler(t_commands *cmds, char *file);
 
 /******************************************************************************/
-/*Begin - Redirection*/
+/*end - Redirection*/
 /******************************************************************************/
 
 /******************************************************************************/
