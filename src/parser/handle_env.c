@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:12:44 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/01 00:45:48 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 17:46:43 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ static char	*get_env_value(char *s, t_index_data *i_data, t_data *data)
 	char	*env_value;
 
 	variable_size = get_env_variable_size(s, i_data) - 1;
-	if (s[i_data->i + 1] != '?')
+	if (variable_size == 0 && s[i_data->i + 1] != '?')
+		env_value = ft_strdup("$");
+	else if (s[i_data->i + 1] != '?')
 	{
 		env_variable = (char *)malloc(sizeof(char) * (variable_size + 1));
 		env_variable[variable_size] = '\0';
@@ -75,14 +77,13 @@ static void	copy_to_new_str(char *new_str, char *s, char *env_value, \
 	j = 0;
 	while (s[i] && s[i] != '$')
 		new_str[o++] = s[i++];
+	if (s[i])
+		i++;
 	if (env_value)
 	{
-		i++;
 		while (env_value[j])
-		{
 			new_str[o++] = env_value[j++];
-			i_data->i++;
-		}
+		i_data->i = i_data->i + j;
 	}
 	if (s[i] == '?')
 		i++;
