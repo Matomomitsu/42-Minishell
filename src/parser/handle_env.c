@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:12:44 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/07 16:47:57 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 17:31:33 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,13 @@ static void	copy_to_new_str(char *new_str, char *s, char *env_value, \
 	j = 0;
 	while (s[i] && s[i] != '$')
 		new_str[o++] = s[i++];
+	if (s[i])
+		i++;
 	if (env_value)
 	{
-		i++;
 		while (env_value[j])
-		{
 			new_str[o++] = env_value[j++];
-			i_data->i++;
-		}
+		i_data->i = i_data->i + j + 1;
 	}
 	if (s[i] == '?')
 		i++;
