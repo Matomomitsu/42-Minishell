@@ -19,7 +19,6 @@ void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd)
 
 	i_data.i = 0;
 	find_export_cmd(cmds, num_cmd, data);
-	printf("%s\n", cmds->cmds[num_cmd]);
 	while (cmds->cmds[num_cmd][i_data.i])
 	{
 		if (cmds->cmds[num_cmd][i_data.i] == '$')

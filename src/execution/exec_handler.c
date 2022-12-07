@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 15:08:03 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:32:35 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int	status_code;
 
-	if (*cmds->operators == PIPE)
+	if (cmds->operators[num_cmd - 1] == PIPE)
 	{
 		set_pipe_fds(cmds, num_cmd);
 		close_pipe_fds(cmds, num_cmd, true);
