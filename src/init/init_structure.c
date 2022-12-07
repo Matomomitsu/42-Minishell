@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 06:34:30 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 10:26:50 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	init_io(t_commands *cmds)
 		cmds->io->fd_out = -1;
 		cmds->io->std_in_bkp = -1;
 		cmds->io->std_out_bkp = -1;
+		cmds->io->heredoc_delimiter = NULL;
 	}
 }
 
