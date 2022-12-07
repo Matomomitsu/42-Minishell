@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pid.c                                         :+:      :+:    :+:   */
+/*   exec_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 03:06:05 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/07 09:59:02 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:06:19 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	exec_pid(t_data *data, t_commands *cmds, int num_cmd)
+int	exec_child(t_data *data, t_commands *cmds, int num_cmd)
 {
 	while (num_cmd < cmds->num_cmds)
 	{

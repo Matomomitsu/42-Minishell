@@ -62,3 +62,28 @@ void	init_cmd(t_data *data, t_commands *cmds, int num_cmd)
 			i = cmds->num_cmds;
 	}
 }
+
+void	init_single_cmd(t_data *data, t_commands *cmds, int num_cmd)
+{
+	int	i;
+	int	o;
+
+	i = 0;
+	printf("%i\n", cmds->num_cmds);
+	i = num_cmd;
+	if (i < cmds->num_cmds)
+	{
+		cmds->cmd[i].redirections = handle_redirection(cmds->cmds[i]);
+		o = 0;
+		while (cmds->cmd[i].redirections[o])
+			printf("%s\n", cmds->cmd[i].redirections[o++]);
+		change_cmd(cmds, i);
+		printf("%s\n", cmds->cmds[i]);
+		find_dollar_sign(data, cmds, i);
+		cmds->cmd[i].args = parser(cmds->cmds[i]);
+		o = 0;
+		while (cmds->cmd[i].args[o])
+			printf("%s\n", cmds->cmd[i].args[o++]);
+		init_pipe(cmds, i);
+	}
+}

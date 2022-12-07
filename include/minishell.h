@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 03:14:14 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:08:49 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ void	init_cmds(t_data *data, t_commands *cmds);
  * @param cmds Commands structure
  */
 void	init_cmd(t_data *data, t_commands *cmds, int num_cmd);
+
+void	init_single_cmd(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Return the number of arguments passed in the command
@@ -481,7 +483,9 @@ int		validate_cmd_not_found(t_data *data, char *cmd);
  */
 void	free_exit_cmd(t_data *data, t_commands *cmds, int status_code);
 
-int	exec_pid(t_data *data, t_commands *cmds, int num_cmd);
+int	exec_child(t_data *data, t_commands *cmds, int num_cmd);
+
+void	verify_operators(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Check if command must be execute by variable path or if is a

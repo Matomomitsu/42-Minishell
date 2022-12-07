@@ -6,7 +6,7 @@
 #    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/07 10:00:43 by mtomomit         ###   ########.fr        #
+#    Updated: 2022/12/07 15:07:40 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_EXEC)exec_handler.c \
 		$(PATH_EXEC)exec_partial.c \
 		$(PATH_EXEC)exec_child.c \
+		$(PATH_EXEC)verify_parenthesis.c \
 		$(PATH_RED)redirection_handler.c \
 		$(PATH_RED)rd_output_handler.c \
 		$(PATH_RED)rd_input_handler.c \

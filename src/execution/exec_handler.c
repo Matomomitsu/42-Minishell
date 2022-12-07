@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 14:20:06 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:08:03 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ int	exec_handler(t_data *data, t_commands *cmds)
 		while (cmds->num_exec < cmds->num_cmds)
 		{
 			i = cmds->num_exec;
-			status_code = exec_pid(data, cmds, i);
+			status_code = exec_child(data, cmds, i);
 			g_status_code = wait_child(data, cmds);
 			if (status_code != 0)
 				g_status_code = status_code;
 			if (cmds->num_exec < cmds->num_cmds)
 				verify_operators(data, cmds, cmds->num_exec);
-			init_cmd(data, cmds, cmds->num_exec);
 		}
 	}
 	return (g_status_code);
