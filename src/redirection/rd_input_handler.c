@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 12:59:15 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 17:00:30 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 10:19:49 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	rd_input_handler(t_commands *cmds, char *red)
 	result = ft_strtrim(red_split[0], " ");
 	init_io(cmds);
 	open_in_file(cmds, result);
-	free_ptr(red_split);
+	free_array_str(red_split);
 }
 
 /**
