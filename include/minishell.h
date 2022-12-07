@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 15:32:31 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 02:39:56 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	init_cmds(t_data *data, t_commands *cmds);
  * @param data Structure of MiniShell
  * @param cmds Commands structure
  */
-void	init_cmd(t_data *data, t_commands *cmds);
+void	init_cmd(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Return the number of arguments passed in the command

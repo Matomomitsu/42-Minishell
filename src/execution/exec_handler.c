@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 10:36:03 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 02:39:02 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,39 @@ static int	wait_child(t_data *t_data, t_commands *cmds);
 int	exec_handler(t_data *data, t_commands *cmds)
 {
 	int	i;
+	int status_code;
 
-	i = 0;
+	status_code = 0;
 	if (cmds->num_cmds > 0 && is_redirection_command(cmds))
 		redirection_handler(data, cmds);
 	if (cmds->num_cmds == 1 && is_builtin_without_output(cmds))
 		cmds->exit_value = call_builtin(data, cmds, 0);
 	else
 	{
-		while (i < cmds->num_cmds)
+		while (cmds->num_exec < cmds->num_cmds)
 		{
-			cmds->pid[i] = fork();
-			if (cmds->pid[i] == -1)
-				return (error_msg_cmd("fork", NULL, strerror(errno),
+			i = cmds->num_exec;
+			init_cmd(data, cmds, i);
+			while (i < cmds->num_cmds)
+			{
+				cmds->pid[i] = fork();
+				if (cmds->pid[i] == -1)
+					return (error_msg_cmd("fork", NULL, strerror(errno),
 						EXIT_FAILURE));
-			else if (cmds->pid[i] == 0)
-				execute_cmd(data, cmds, i);
-			i++;
+				else if (cmds->pid[i] == 0)
+					execute_cmd(data, cmds, i);
+				cmds->num_exec++;
+				if (cmds->operators[i] == PIPE)
+					i++;
+				else
+					i = cmds->num_cmds;
+			}
+			status_code = wait_child(data, cmds);
+			if (status_code == 0 && cmds->exit_value != 0)
+				g_status_code = status_code;
 		}
 	}
-	return (wait_child(data, cmds));
+	return (g_status_code);
 }
 
 /**

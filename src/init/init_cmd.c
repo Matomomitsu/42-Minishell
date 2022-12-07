@@ -34,13 +34,14 @@ static void	change_cmd(t_commands *cmds, int num_cmd)
 	free(temp_char);
 }
 
-void	init_cmd(t_data *data, t_commands *cmds)
+void	init_cmd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int	i;
 	int	o;
 
 	i = 0;
 	printf("%i\n", cmds->num_cmds);
+	i = num_cmd;
 	while (i < cmds->num_cmds)
 	{
 		cmds->cmd[i].redirections = handle_redirection(cmds->cmds[i]);
@@ -55,6 +56,9 @@ void	init_cmd(t_data *data, t_commands *cmds)
 		while (cmds->cmd[i].args[o])
 			printf("%s\n", cmds->cmd[i].args[o++]);
 		init_pipe(cmds, i);
-		i++;
+		if (cmds->operators[i] == PIPE)
+			i++;
+		else
+			i = cmds->num_cmds;
 	}
 }
