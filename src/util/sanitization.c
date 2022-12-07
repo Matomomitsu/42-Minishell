@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:06:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/05 09:47:40 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 07:51:38 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	free_ptr(void *ptr)
 {
-	free(ptr);
-	ptr = NULL;
+	if (ptr)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
 }
 
 void	free_data(t_data *data, bool exit_shell)
