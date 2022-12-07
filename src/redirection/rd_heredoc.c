@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 10:34:07 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 15:25:54 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 11:16:25 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	get_delimiter(char *red, t_io *io)
 	red_split = ft_split(red, '<');
 	result = ft_strtrim(red_split[0], " ");
 	io->heredoc_delimiter = result;
-	free_ptr(red_split);
+	free_array_str(red_split);
 }
 
 /**
