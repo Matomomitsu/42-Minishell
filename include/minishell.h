@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 02:39:56 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 03:14:14 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,6 +480,19 @@ int		validate_cmd_not_found(t_data *data, char *cmd);
  * @param status_code Status code
  */
 void	free_exit_cmd(t_data *data, t_commands *cmds, int status_code);
+
+int	exec_pid(t_data *data, t_commands *cmds, int num_cmd);
+
+/**
+ * @brief Check if command must be execute by variable path or if is a
+ * local binary to execute
+ * @param data Data Structure
+ * @param cmds Cmds Structure
+ * @param i - Index of command in execution this time
+ * @return int
+ */
+int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd);
+
 /******************************************************************************/
 /*End - Execute*/
 /******************************************************************************/

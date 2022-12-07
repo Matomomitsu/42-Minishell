@@ -6,13 +6,12 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 02:39:02 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 03:14:58 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd);
 static int	exec_local_bin(t_data *data, t_commands *cmds, int num_cmd);
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd);
 static int	wait_child(t_data *t_data, t_commands *cmds);
@@ -34,24 +33,11 @@ int	exec_handler(t_data *data, t_commands *cmds)
 		while (cmds->num_exec < cmds->num_cmds)
 		{
 			i = cmds->num_exec;
-			init_cmd(data, cmds, i);
-			while (i < cmds->num_cmds)
-			{
-				cmds->pid[i] = fork();
-				if (cmds->pid[i] == -1)
-					return (error_msg_cmd("fork", NULL, strerror(errno),
-						EXIT_FAILURE));
-				else if (cmds->pid[i] == 0)
-					execute_cmd(data, cmds, i);
-				cmds->num_exec++;
-				if (cmds->operators[i] == PIPE)
-					i++;
-				else
-					i = cmds->num_cmds;
-			}
-			status_code = wait_child(data, cmds);
-			if (status_code == 0 && cmds->exit_value != 0)
+			status_code = exec_pid(data, cmds, i);
+			g_status_code = wait_child(data, cmds);
+			if (status_code != 0)
 				g_status_code = status_code;
+			init_cmd(data, cmds, cmds->num_exec);
 		}
 	}
 	return (g_status_code);
@@ -75,7 +61,7 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
 	i = -1;
 	status = 0;
 	save_status = 0;
-	while (++i < cmds->num_cmds - 1)
+	while (++i < cmds->num_exec - 1)
 		waitpid(cmds->pid[i], NULL, 0);
 	waitpid(cmds->pid[i], &save_status, 0);
 	if (WIFEXITED(save_status))
@@ -95,7 +81,7 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
  * @param i - Index of command in execution this time
  * @return int
  */
-static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
+int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int	status_code;
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
+#    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/01 15:22:40 by mtomomit         ###   ########.fr        #
+#    Updated: 2022/12/07 03:08:25 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_UTIL)pipe.c \
 		$(PATH_EXEC)exec_handler.c \
 		$(PATH_EXEC)exec_partial.c \
+		$(PATH_EXEC)exec_pid.c \
 		$(PATH_RED)redirection_handler.c \
 		$(PATH_RED)rd_output_handler.c \
 		$(PATH_RED)rd_input_handler.c \

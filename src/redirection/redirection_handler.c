@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_handler.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:24:31 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 14:36:39 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 02:46:48 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_redirection_command(t_commands *cmds)
 {
-	if (cmds->cmd[0].redirections[0])
+	if (cmds->cmd[0].redirections[0] != NULL)
 		return (true);
 	else
 		return (false);
