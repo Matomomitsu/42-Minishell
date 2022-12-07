@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:21:51 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 10:22:52 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 10:29:29 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	rd_output_handler(t_commands *cmds, char *red, bool trunc)
  */
 static void	open_out_file(t_commands *cmds, char *file, bool trunc)
 {
-	cmds->io->out_file = ft_strdup(file);
+	cmds->io->out_file = file;
 	if (cmds->io->out_file && cmds->io->out_file[0] == '\0')
 	{
 		error_msg_cmd(file, NULL, "ambiguous redirect", false);
