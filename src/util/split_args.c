@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:47:03 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 15:07:55 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 13:04:23 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,33 @@ char	*join_strs(char *str, char *add)
 	str = ft_strjoin(tmp, add);
 	free_ptr(tmp);
 	return (str);
+}
+
+void	remove_quotes(char *str)
+{
+	char	last_reg;
+
+	last_reg = 0;
+	while (*str && !last_reg)
+	{
+		if (*str == '\'' || *str == '"')
+		{
+			last_reg = *str;
+			ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
+		}
+		else
+			str++;
+	}
+	while (*str && last_reg)
+	{
+		if (*str && *str == last_reg)
+		{
+			last_reg = 0;
+			ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
+		}
+		else
+			str++;
+	}
+	if (*str)
+		return (remove_quotes(str));
 }
