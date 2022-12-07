@@ -12,6 +12,35 @@
 
 #include <minishell.h>
 
+static void	handle_quotes(t_index_data *i_data, t_commands *cmds, int num_cmd, t_data *data)
+{
+	char			*temp_char;
+
+	if (cmds->cmds[num_cmd][i_data->i++] == '\'')
+	{
+		while (cmds->cmds[num_cmd][i_data->i] != '\'')
+			i_data->i++;
+	}
+	else
+	{
+		while (cmds->cmds[num_cmd][i_data->i] != '\"')
+		{
+			if (cmds->cmds[num_cmd][i_data->i] == '$')
+			{
+				temp_char = handle_env(i_data, cmds->cmds[num_cmd], data);
+				free(cmds->cmds[num_cmd]);
+				cmds->cmds[num_cmd] = (char *)malloc(ft_strlen(temp_char) * \
+							sizeof(char) + 1);
+				cmds->cmds[num_cmd][ft_strlen(temp_char)] = '\0';
+				ft_strlcpy(cmds->cmds[num_cmd], temp_char, ft_strlen(temp_char) + 1);
+				free(temp_char);
+			}
+			else
+				i_data->i++;
+		}
+	}
+}
+
 void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd)
 {
 	t_index_data	i_data;
@@ -19,7 +48,7 @@ void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd)
 
 	i_data.i = 0;
 	find_export_cmd(cmds, num_cmd, data);
-	printf("%s\n", cmds->cmds[num_cmd]);
+//	printf("%s\n", cmds->cmds[num_cmd]);
 	while (cmds->cmds[num_cmd][i_data.i])
 	{
 		if (cmds->cmds[num_cmd][i_data.i] == '$')
@@ -32,9 +61,9 @@ void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd)
 			ft_strlcpy(cmds->cmds[num_cmd], temp_char, ft_strlen(temp_char) + 1);
 			free(temp_char);
 		}
-		if (cmds->cmds[num_cmd][i_data.i] == '\'')
-			while (cmds->cmds[num_cmd][i_data.i++] != '\'')
-				;
+		if (cmds->cmds[num_cmd][i_data.i] == '\'' || \
+			cmds->cmds[num_cmd][i_data.i] == '\"')
+			handle_quotes(&i_data, cmds, num_cmd, data);
 		if (cmds->cmds[num_cmd][i_data.i])
 			i_data.i++;
 	}

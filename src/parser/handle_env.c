@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:12:44 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/01 00:45:48 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:47:57 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ static char	*get_env_value(char *s, t_index_data *i_data, t_data *data)
 	char	*env_value;
 
 	variable_size = get_env_variable_size(s, i_data) - 1;
-	if (s[i_data->i + 1] != '?')
+	if (variable_size == 0 && s[i_data->i + 1] != '?')
+		env_value = ft_strdup("$");
+	else if (s[i_data->i + 1] != '?')
 	{
 		env_variable = (char *)malloc(sizeof(char) * (variable_size + 1));
 		env_variable[variable_size] = '\0';
