@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_partial.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:33:45 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 19:10:18 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 23:44:27 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	validate_cmd_not_found(t_data *data, char *cmd)
 		return (error_msg_cmd(cmd, NULL, "Is a directory", CMD_NOT_EXEC));
 	else if (access(cmd, X_OK) != 0)
 		return (error_msg_cmd(cmd, NULL, strerror(errno), CMD_NOT_EXEC));
+	return (0);
 }
 
 void	free_exit_cmd(t_data *data, t_commands *cmds, int status_code)
