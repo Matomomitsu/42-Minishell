@@ -69,7 +69,7 @@ void	lexer_redirections(const char *s, t_commands *cmds)
 	t_index_data	i_data;
 
 	i_data.i = 0;
-	while (s[i_data.i] && s[i_data.i] != '>' && s[i_data.i] != '<')
+	while (s[i_data.i])
 	{
 		if (s[i_data.i] == '<' || s[i_data.i] == '>')
 			handle_redirections(s, cmds, &i_data);
