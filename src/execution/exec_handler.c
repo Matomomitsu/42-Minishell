@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 10:49:23 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:08:30 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ int	exec_handler(t_data *data, t_commands *cmds)
 
 	status_code = 0;
 	i = 0;
-	if (cmds->cmd[i].args[0] && cmds->num_cmds > 0 && \
-		is_redirection_command(cmds))
-		redirection_handler(data, cmds);
 	if (cmds->cmd[i].args[0] && cmds->num_cmds == 1 && \
 		is_builtin_without_output(cmds))
 		return (call_builtin(data, cmds, 0));
@@ -35,6 +32,8 @@ int	exec_handler(t_data *data, t_commands *cmds)
 	{
 		while (cmds->num_exec < cmds->num_cmds)
 		{
+			if (is_redirection_command(cmds, i))
+				redirection_handler(data, cmds, i);
 			i = cmds->num_exec;
 			status_code = exec_child(data, cmds, i);
 			g_status_code = wait_child(data, cmds);

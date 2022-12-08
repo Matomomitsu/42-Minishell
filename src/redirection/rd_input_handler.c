@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 12:59:15 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 13:02:56 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/08 10:41:41 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ void	rd_input_handler(t_commands *cmds, char *red)
 
 /**
  * @brief Open infile, update the file descriptor. Verify errors to open the
- * file
+ * file. Will check if the previous in file has error. If yes, does not open
+ * any other.
  * @param cmds Commands structure
  */
 static void	open_in_file(t_commands *cmds, char *file)
 {
+	if (!remove_old_file_ref(cmds->io, true))
+		return ;
 	cmds->io->in_file = file;
 	if (cmds->io->in_file && cmds->io->in_file[0] == '\0')
 	{
@@ -43,4 +46,29 @@ static void	open_in_file(t_commands *cmds, char *file)
 	cmds->io->fd_in = open(cmds->io->in_file, O_RDONLY);
 	if (cmds->io->fd_in == -1)
 		error_msg_cmd(cmds->io->in_file, NULL, strerror(errno), false);
+}
+
+bool	remove_old_file_ref(t_io *io, bool in_file)
+{
+	if (in_file == true && io->in_file)
+	{
+		if (io->fd_in == -1 || (io->out_file && io->fd_out == -1))
+			return (false);
+		if (io->heredoc_delimiter != NULL)
+		{
+			free_ptr(io->heredoc_delimiter);
+			io->heredoc_delimiter = NULL;
+			unlink(io->in_file);
+		}
+		free_ptr(io->in_file);
+		close(io->fd_in);
+	}
+	else if (in_file == false && io->out_file)
+	{
+		if (io->fd_out == -1 || (io->in_file && io->fd_in == -1))
+			return (false);
+		free_ptr(io->out_file);
+		close(io->fd_out);
+	}
+	return (true);
 }
