@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 16:15:47 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:16:07 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_prompt(t_data *data)
 		if (input_handler(data))
 			g_status_code = exec_cmd(data);
 		else
-			g_status_code = 1;
+			g_status_code = 0;
 		free_data(data, false);
 	}
 	exit_shell(data, g_status_code);
