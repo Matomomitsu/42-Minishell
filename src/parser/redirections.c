@@ -20,7 +20,6 @@ static void	handle_quotes(t_index_data *i_data, char *s, int add_malloc, \
 		i_data->i++;
 		while (s[i_data->i] && s[i_data->i++] != special_char)
 			i_data->malloc_size++;
-		i_data->malloc_size++;
 	}
 	else
 	{
