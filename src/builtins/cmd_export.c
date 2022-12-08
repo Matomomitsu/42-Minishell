@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:53:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 17:00:38 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:12:17 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ static char	*add_quotes(char *env)
 		temp_char[i++] = env[o++];
 	temp_char[i++] = env[o++];
 	temp_char[i++] = '"';
-	while (env[o] && env[o] != ' ')
-		temp_char[i++] = env[o++];
-	temp_char[i++] = '"';
 	while (env[o])
 		temp_char[i++] = env[o++];
+	temp_char[i++] = '"';
 	return (temp_char);
 }
 
