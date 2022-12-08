@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:21:30 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 20:37:06 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:54:09 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	close_pipe_fds(t_commands *cmds, int index, bool close_both)
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
-		close(cmds->cmd[i].pipe_fd[0]);
-		close(cmds->cmd[i].pipe_fd[1]);
+		if (cmds->cmd[i].pipe_fd)
+		{
+			close(cmds->cmd[i].pipe_fd[0]);
+			close(cmds->cmd[i].pipe_fd[1]);
+		}
 		i++;
 	}
 }

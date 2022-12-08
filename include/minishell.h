@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 15:08:42 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:48:42 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ typedef struct s_io
 	char	*in_file;
 	char	*out_file;
 	char	*heredoc_delimiter;
-
-} t_io;
+}	t_io;
 
 typedef struct s_data
 {

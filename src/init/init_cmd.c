@@ -39,7 +39,6 @@ void	init_cmd(t_data *data, t_commands *cmds, int num_cmd)
 	int	i;
 //	int	o;
 
-//	i = 0;
 	i = num_cmd;
 	while (i < cmds->num_cmds)
 	{
