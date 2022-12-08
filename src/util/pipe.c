@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:21:30 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 11:16:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 20:37:06 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 void	set_pipe_fds(t_commands *cmds, int index)
 {
-	if (index == 0)
-		dup2(cmds->cmd[index].pipe_fd[1], STDOUT_FILENO);
+	if (cmds->operators[index] && index == 0 && cmds->operators[index] == PIPE)
+		dup2(cmds->cmd[index + 1].pipe_fd[1], STDOUT);
 	else
-		dup2(cmds->cmd[index - 1].pipe_fd[0], STDIN_FILENO);
-	close_pipe_fds(cmds, index, false);
+	{
+		if (cmds->operators[index] && cmds->operators[index] == PIPE)
+			dup2(cmds->cmd[index + 1].pipe_fd[1], STDOUT);
+		if (cmds->operators[index - 1] == PIPE)
+			dup2(cmds->cmd[index].pipe_fd[0], STDIN);
+	}
+	close_pipe_fds(cmds, index, true);
 }
 
 void	close_pipe_fds(t_commands *cmds, int index, bool close_both)
@@ -28,11 +33,8 @@ void	close_pipe_fds(t_commands *cmds, int index, bool close_both)
 	i = 0;
 	while (i < cmds->num_cmds)
 	{
-		if (cmds->cmd[i].pipe_fd && (i != index || close_both == true))
-		{
-			close(cmds->cmd[i].pipe_fd[0]);
-			close(cmds->cmd[i].pipe_fd[1]);
-		}
+		close(cmds->cmd[i].pipe_fd[0]);
+		close(cmds->cmd[i].pipe_fd[1]);
 		i++;
 	}
 }

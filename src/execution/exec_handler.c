@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 15:32:35 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:14:00 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int	exec_handler(t_data *data, t_commands *cmds)
 	int status_code;
 
 	status_code = 0;
-	if (cmds->num_cmds > 0 && is_redirection_command(cmds))
+	if (cmds->cmd[i].args[0] && cmds->num_cmds > 0 && \
+		is_redirection_command(cmds))
 		redirection_handler(data, cmds);
-	if (cmds->num_cmds == 1 && is_builtin_without_output(cmds))
-		cmds->exit_value = call_builtin(data, cmds, 0);
+	if (cmds->cmd[i].args[0] && cmds->num_cmds == 1 && \
+		is_builtin_without_output(cmds))
+		return (call_builtin(data, cmds, 0));
 	else
 	{
 		while (cmds->num_exec < cmds->num_cmds)
@@ -86,11 +88,7 @@ int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int	status_code;
 
-	if (cmds->operators[num_cmd - 1] == PIPE)
-	{
-		set_pipe_fds(cmds, num_cmd);
-		close_pipe_fds(cmds, num_cmd, true);
-	}
+	set_pipe_fds(cmds, num_cmd);
 	if (is_builtin(cmds->cmd[num_cmd].args[0]))
 		status_code = call_builtin(data, cmds, num_cmd);
 	else

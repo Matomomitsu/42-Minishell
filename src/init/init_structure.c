@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structure.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:23:38 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 06:34:30 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 16:54:01 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,6 @@ void	init_io(t_commands *cmds)
 		cmds->io->fd_out = -1;
 		cmds->io->std_in_bkp = -1;
 		cmds->io->std_out_bkp = -1;
+		cmds->io->heredoc_delimiter = NULL;
 	}
 }
-
-// int	args_count(char **args)
-// {
-// 	int	i;
-
-// 	i = 1;
-// 	while (args[i])
-// 	{
-// 		i++;
-// 	}
-// 	return (i);
-// }

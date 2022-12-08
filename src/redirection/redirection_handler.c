@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:24:31 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 02:46:48 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:15:27 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ void	redirection_handler(t_data *data, t_commands *cmds)
 	i = 0;
 	while (cmds->cmd[0].redirections[i])
 	{
-		if (ft_strncmp(cmds->cmd[0].redirections[i], "> ", 2) == 0)
-			rd_output_handler(cmds, cmds->cmd[0].redirections[i], true);
-		else if (ft_strncmp(cmds->cmd[0].redirections[i], ">>", 2) == 0)
+		if (ft_strncmp(cmds->cmd[0].redirections[i], ">>", 2) == 0)
 			rd_output_handler(cmds, cmds->cmd[0].redirections[i], false);
-		else if (ft_strncmp(cmds->cmd[0].redirections[i], "< ", 2) == 0)
-			rd_input_handler(cmds, cmds->cmd[0].redirections[i]);
 		else if (ft_strncmp(cmds->cmd[0].redirections[i], "<<", 2) == 0)
 			rd_heredoc(cmds, cmds->cmd[0].redirections[i]);
+		else if (ft_strncmp(cmds->cmd[0].redirections[i], "<", 1) == 0)
+			rd_input_handler(cmds, cmds->cmd[0].redirections[i]);
+		else if (ft_strncmp(cmds->cmd[0].redirections[i], ">", 1) == 0)
+			rd_output_handler(cmds, cmds->cmd[0].redirections[i], true);
+
 		i++;
 	}
 }

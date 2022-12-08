@@ -19,12 +19,17 @@ static char	**get_paths(char **env)
 	char	*trim_path;
 
 	i = 0;
-	while (ft_strncmp(env[i], "PATH=", 5))
+	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
 		i++;
-	trim_path = ft_substr(env[i], 5, ft_strlen(env[i]));
-	paths = ft_split(trim_path, ':');
-	free(trim_path);
-	return (paths);
+	if (env[i])
+	{
+		trim_path = ft_substr(env[i], 5, ft_strlen(env[i]));
+		paths = ft_split(trim_path, ':');
+		free(trim_path);
+		return (paths);
+	}
+	else
+		return (NULL);
 }
 
 static void	handle_operators(t_data *data, t_commands *cmds, size_t *o, \
@@ -70,6 +75,12 @@ void	init_cmds(t_data *data, t_commands *cmds)
 	int		i;
 
 	cmds->cmds = lexer(data->user_input, cmds);
+	i = 0;
+//	if (cmds->cmds)
+//	{
+//		while (cmds->cmds[i])
+//			printf("%s\n", cmds->cmds[i++]);
+//	}
 	i = 0;
 	if (cmds->exit_value == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 15:08:49 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:11:58 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -415,6 +415,13 @@ char	**split_args(char *command);
  * @return string concatenated
  */
 char	*join_strs(char *str, char *add);
+
+/**
+ * @brief Remove (by ref) the quotes from a string.
+ * Will call recursively until return the new string without quotes
+ * @param str
+ */
+void	remove_quotes(char *str);
 
 /**
  * @brief deallocate memory to pointer to pointer.

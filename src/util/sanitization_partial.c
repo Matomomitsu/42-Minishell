@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 09:23:18 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 14:21:28 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 11:14:03 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	free_io(t_io *io)
 		unlink(io->in_file);
 		free_ptr(io->heredoc_delimiter);
 	}
+	else if (io->in_file)
+		free_ptr(io->in_file);
 	if (io->out_file)
 		free_ptr(io->out_file);
 	free_ptr(io);

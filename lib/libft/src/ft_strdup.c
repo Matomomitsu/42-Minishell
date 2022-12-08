@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 20:40:33 by rlins             #+#    #+#             */
-/*   Updated: 2022/04/06 21:45:18 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/07 17:11:37 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 char	*ft_strdup(const char *src)
 {
-	size_t	lengh;
+	size_t	length;
 	char	*result;
 
-	lengh = ft_strlen(src) + 1;
-	result = (char *)malloc(lengh);
+	if (src == NULL)
+		return (NULL);
+	length = ft_strlen(src) + 1;
+	result = (char *)malloc(length);
 	if (result == NULL)
 		return (NULL);
-	ft_strlcpy(result, src, lengh);
+	ft_strlcpy(result, src, length);
 	return (result);
 }

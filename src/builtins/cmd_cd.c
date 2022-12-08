@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 10:37:05 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/07 17:07:28 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	change_dir(t_data *data, char *path)
 	char	buff[MAX_PATH];
 
 	if (chdir(path) != 0)
-		return (error_msg_cmd("cd", path, strerror(errno), errno));
+		return (error_msg_cmd("cd", path, strerror(errno), 1));
 	getcwd(buff, MAX_PATH);
 	path_pwd = ft_strdup(buff);
 	update_work_dir_var(data, path_pwd);
