@@ -6,17 +6,30 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 03:06:05 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/08 16:58:40 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:19:18 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+static int	count_pipes(t_commands *cmds, int num_cmd)
+{
+	int	num_pipes;
+
+	num_pipes = 0;
+	while (cmds->operators[num_cmd] && cmds->operators[num_cmd] == PIPE)
+	{
+		num_cmd = num_cmd + 1;
+		num_pipes++;
+	}
+	return(num_pipes + 1);
+}
+
 int	exec_child(t_data *data, t_commands *cmds, int num_cmd)
 {
+	cmds->num_exec = cmds->num_exec + count_pipes(cmds, num_cmd);
 	while (num_cmd < cmds->num_cmds)
 	{
-		cmds->num_exec++;
 		if (cmds->cmd[num_cmd].args[0])
 		{
 			if (is_redirection_command(cmds, num_cmd))
