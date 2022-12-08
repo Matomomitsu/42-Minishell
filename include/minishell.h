@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 09:25:58 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/08 10:08:20 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,6 +263,15 @@ bool	is_redirection_command(t_commands *cmds);
  * @sample: [wc < arq.txt]
  */
 void	rd_input_handler(t_commands *cmds, char *file);
+
+/**
+ * @brief Verify if the previous command do not throw a exception, and just
+ * return this partner
+ * @param io Io Structure
+ * @param in_file Indicate if must verify in file or out file
+ * @return boolean 
+ */
+bool	remove_old_file_ref(t_io *io, bool in_file);
 
 /**
  * @brief HereDoc handler
