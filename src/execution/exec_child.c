@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 03:06:05 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/07 23:20:45 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:49:55 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,8 @@ int	exec_child(t_data *data, t_commands *cmds, int num_cmd)
 					EXIT_FAILURE));
 			else if (cmds->pid[num_cmd] == 0)
 				execute_cmd(data, cmds, num_cmd);
-			if (cmds->operators[num_cmd] == PIPE)
-				num_cmd++;
-			else
-				num_cmd = cmds->num_cmds;
 		}
-		if (cmds->operators[num_cmd] == PIPE)
+		if (cmds->operators[num_cmd] && cmds->operators[num_cmd] == PIPE)
 			num_cmd++;
 		else
 			num_cmd = cmds->num_cmds;

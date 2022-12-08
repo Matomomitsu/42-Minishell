@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 09:17:42 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:49:53 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	exec_handler(t_data *data, t_commands *cmds)
 	int status_code;
 
 	status_code = 0;
+	i = 0;
 	if (cmds->cmd[i].args[0] && cmds->num_cmds > 0 && \
 		is_redirection_command(cmds))
 		redirection_handler(data, cmds);

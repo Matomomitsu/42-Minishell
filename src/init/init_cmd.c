@@ -39,8 +39,8 @@ void	init_cmd(t_data *data, t_commands *cmds, int num_cmd)
 	int	i;
 //	int	o;
 
-	i = 0;
-//	i = num_cmd;
+//	i = 0;
+	i = num_cmd;
 	while (i < cmds->num_cmds)
 	{
 		cmds->cmd[i].redirections = handle_redirection(cmds->cmds[i]);
@@ -55,7 +55,7 @@ void	init_cmd(t_data *data, t_commands *cmds, int num_cmd)
 //		while (cmds->cmd[i].args[o])
 //			printf("%s\n", cmds->cmd[i].args[o++]);
 		init_pipe(cmds, i);
-		if (cmds->operators[i] == PIPE)
+		if (cmds->operators[i] && cmds->operators[i] == PIPE)
 			i++;
 		else
 			i = cmds->num_cmds;
