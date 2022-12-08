@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 08:05:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/06 07:00:33 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/08 09:21:50 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ void	restore_io(t_io *io)
 		close (io->std_out_bkp);
 		io->std_out_bkp = -1;
 	}
+}
+
+bool	check_in_out_file(t_io *io)
+{
+	if (!io || (!io->in_file && !io->out_file))
+		return (true);
+	if ((io->in_file && io->fd_in == -1)
+		|| (io->out_file && io->fd_out == -1))
+		return (false);
+	return (true);
 }
