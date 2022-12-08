@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 12:53:42 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/08 09:25:58 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,14 @@ void	redirect_io(t_io *io);
  * @param io IO Data Structure
  */
 void	restore_io(t_io *io);
+
+/**
+ * @brief Responsible to check if got some trouble with File descriptors and
+ * files. Avoid errors like `cat <"1"
+ * @param io
+ * @return bool - true if it's OK with IO properties
+ */
+bool	check_in_out_file(t_io *io);
 
 /**
  * @brief Will handler redirection to output file

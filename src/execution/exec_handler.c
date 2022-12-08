@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 09:04:01 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:24:08 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 
 	if (cmds->operators[0])
 		set_pipe_fds(cmds, num_cmd);
+	if (!check_in_out_file(cmds->io))
+		exit_shell(data, EXIT_FAILURE);
 	if (is_builtin(cmds->cmd[num_cmd].args[0]))
 		status_code = call_builtin(data, cmds, num_cmd);
 	else
