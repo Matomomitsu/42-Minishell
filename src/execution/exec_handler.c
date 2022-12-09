@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 12:12:10 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/09 10:46:00 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 
 	if (cmds->operators[0])
 		set_pipe_fds(cmds, num_cmd);
-	if (!check_in_out_file(cmds->io))
+	if (is_redirection_command(cmds, num_cmd) &&
+		check_in_out_file(cmds->io) == false)
 		exit_shell(data, EXIT_FAILURE);
 	if (is_builtin(cmds->cmd[num_cmd].args[0]))
 		status_code = call_builtin(data, cmds, num_cmd);
