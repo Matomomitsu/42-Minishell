@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 12:09:02 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/09 11:36:56 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ bool	check_in_out_file(t_io *io);
  * @param trunc truncate or append mode?
  * @sample: [ls > arq.txt] | [ls > 01 > 02] | [ls -l | wc -l >> 01]
  */
-void	rd_output_handler(t_commands *cmds, char *red, bool trunc);
+int		rd_output_handler(t_commands *cmds, char *red, bool trunc);
 
 /**
  * @brief Will handle the type of redirection and call the right method
@@ -264,7 +264,7 @@ bool	is_redirection_command(t_commands *cmds, int i);
  * @param file File name
  * @sample: [wc < arq.txt]
  */
-void	rd_input_handler(t_commands *cmds, char *file);
+int		rd_input_handler(t_commands *cmds, char *file);
 
 /**
  * @brief Verify if the previous command do not throw a exception, and just
