@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/09 18:07:04 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/10 12:33:37 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_io
 	char	*out_file;
 	char	*heredoc_delimiter;
 	bool	error;
+	int		cmd_index;
 
 } t_io;
 
@@ -214,7 +215,7 @@ char	*get_prompt(t_data *data);
   * @param io - IO Data Structure
   * @sample: wc < arq.txt
  */
-void	redirect_io(t_io *io);
+void	redirect_io(t_io *io, int index_cmd);
 
 /**
  * @brief Restore the initial state of backups o standard input and output.

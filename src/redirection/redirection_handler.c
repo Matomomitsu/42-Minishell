@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:24:31 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/10 09:19:26 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/10 12:32:25 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	redirection_handler(t_data *data, t_commands *cmds, int j)
 			status_code = rd_input_handler(cmds, cmds->cmd[j].redirections[i]);
 		else if (ft_strncmp(cmds->cmd[j].redirections[i], ">", 1) == 0)
 			status_code = rd_output_handler(cmds, cmds->cmd[j].redirections[i], true);
+		cmds->io->cmd_index = j;
 		if (status_code != -1)
 			break ;
 		i++;
