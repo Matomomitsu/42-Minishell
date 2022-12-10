@@ -6,15 +6,15 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 08:05:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/10 09:05:11 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/10 12:34:10 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	redirect_io(t_io *io)
+void	redirect_io(t_io *io, int index_cmd)
 {
-	if (!io)
+	if (!io || io->cmd_index != index_cmd)
 		return ;
 	io->std_in_bkp = dup(STDIN_FILENO);
 	if (io->std_in_bkp == -1)
