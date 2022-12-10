@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:24:31 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/09 11:36:39 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/10 09:19:26 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	redirection_handler(t_data *data, t_commands *cmds, int j)
 	while (cmds->cmd[j].redirections[i])
 	{
 		if (ft_strncmp(cmds->cmd[j].redirections[i], ">>", 2) == 0)
-			rd_output_handler(cmds, cmds->cmd[j].redirections[i], false);
+			status_code = rd_output_handler(cmds, cmds->cmd[j].redirections[i], false);
 		else if (ft_strncmp(cmds->cmd[j].redirections[i], "<<", 2) == 0)
 			rd_heredoc(cmds, cmds->cmd[j].redirections[i]);
 		else if (ft_strncmp(cmds->cmd[j].redirections[i], "<", 1) == 0)
