@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 12:59:15 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/09 11:32:38 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/10 08:59:18 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int	rd_input_handler(t_commands *cmds, char *red)
 	init_io(cmds);
 	status_code = open_in_file(cmds, result);
 	free_array_str(red_split);
+	if (status_code != -1)
+		cmds->io->error = true;
+	else
+		cmds->io->error = false;
 	return (status_code);
 }
 
@@ -37,8 +41,8 @@ int	rd_input_handler(t_commands *cmds, char *red)
  */
 static int	open_in_file(t_commands *cmds, char *file)
 {
-	if (!remove_old_file_ref(cmds->io, true))
-		return (-1);
+	// if (!remove_old_file_ref(cmds->io, true))
+	// 	return (-1);
 	cmds->io->in_file = file;
 	if (cmds->io->in_file && cmds->io->in_file[0] == '\0')
 	{

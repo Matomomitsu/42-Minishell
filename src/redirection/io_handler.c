@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 08:05:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 09:21:50 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/10 09:05:11 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ bool	check_in_out_file(t_io *io)
 {
 	if (!io || (!io->in_file && !io->out_file))
 		return (true);
-	if ((io->in_file && io->fd_in == -1)
-		|| (io->out_file && io->fd_out == -1))
+	if (((io->in_file && io->fd_in == -1)
+		|| (io->out_file && io->fd_out == -1)) && io->error == true)
 		return (false);
 	return (true);
 }
