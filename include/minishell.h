@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/09 11:36:56 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/09 18:07:04 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_io
 	char	*in_file;
 	char	*out_file;
 	char	*heredoc_delimiter;
+	bool	error;
 
 } t_io;
 
