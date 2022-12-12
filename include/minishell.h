@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 09:26:01 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:03:56 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,10 +145,10 @@ void	init_cmd(t_data *data, t_commands *cmds);
 /**
  * @brief Validate number of arguments of Mini-shell
  * @param argc Argument Counts
- * @return true - Valid
- * @return false - Failed
+ * @param argv Argument Vector
+ * @return boolean. Valid / Failed
  */
-bool	valid_args(int argc);
+bool	valid_args(int argc, char **argv);
 
 /**
  * @brief Verify if all sentence is just space or similar char

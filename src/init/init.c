@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 19:16:07 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:03:05 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	if (valid_args(argc) == false || init_structure(&data, envp) == false)
+	if (valid_args(argc, argv) == false || init_structure(&data, envp) == false)
 		exit_shell(NULL, EXIT_FAILURE);
 	init_prompt(&data);
 	return (0);
