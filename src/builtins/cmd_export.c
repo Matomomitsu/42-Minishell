@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:53:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 22:12:17 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:02:14 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static int	print_env(t_data *data)
 		return (EXIT_FAILURE);
 	while (data->env[i])
 	{
-			ft_putstr_fd("declare -x ", STDOUT_FILENO);
-			temp_char = add_quotes(data->env[i]);
-			if (temp_char)
-				ft_putendl_fd(temp_char, STDOUT_FILENO);
-			else
-				ft_putendl_fd(data->env[i], STDOUT_FILENO);
-			i++;
-			free(temp_char);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		temp_char = add_quotes(data->env[i]);
+		if (temp_char)
+			ft_putendl_fd(temp_char, STDOUT_FILENO);
+		else
+			ft_putendl_fd(data->env[i], STDOUT_FILENO);
+		i++;
+		free(temp_char);
 	}
 	return (EXIT_SUCCESS);
 }

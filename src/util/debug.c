@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:57:56 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:20:00 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 11:11:14 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ void	debug_structs(t_commands *cmds, bool show_path)
 	print_operators(*cmds->operators);
 	printf("Nro num_exec:	%i\n", cmds->num_exec);
 	if (show_path)
+	{
 		while (cmds->paths[i])
 		{
 			printf("Paths:	%s\n", cmds->paths[i]);
 			i++;
 		}
+	}
 	i = 0;
 	while (cmds->cmds[i])
 		printf("Cmds:	%s\n", cmds->cmds[i++]);
@@ -46,16 +48,12 @@ void	debug_structs(t_commands *cmds, bool show_path)
 static void	print_io(t_io *io)
 {
 	printf("----Begin Debug (state IO)----\n");
-
 	printf("\tfd_in:%i\n", io->fd_in);
 	printf("\tfd_out:%i\n", io->fd_out);
-
 	printf("\tstd_in_bkp:%i\n", io->std_in_bkp);
 	printf("\tstd_out_bkp:%i\n", io->std_out_bkp);
-
 	printf("\tin file name:%s\n", io->in_file);
 	printf("\tout file name:%s\n", io->out_file);
-
 	printf("----End Debug (state IO)----\n");
 }
 

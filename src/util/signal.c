@@ -6,13 +6,21 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:25:21 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:09:32 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 11:38:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	reset_prompt();
+static void	reset_prompt(int signo)
+{
+	(void)signo;
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+}
+
 static void	new_line(int signal);
 
 void	signals_wait_cmd(void)
@@ -34,15 +42,4 @@ static void	new_line(int signal)
 {
 	(void)signal;
 	rl_on_new_line();
-}
-
-/**
- * @brief Will reset the prompt.
- */
-static void	reset_prompt()
-{
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
 }
