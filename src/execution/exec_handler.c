@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:20:47 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:29:30 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd);
 static int	exec_local_bin(t_data *data, t_commands *cmds, int num_cmd);
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd);
-static int	wait_child(t_data *t_data, t_commands *cmds);
+static int	wait_child(t_commands *cmds);
 
 /* Debug Fork - -exec set follow-fork-mode child
 */
@@ -32,7 +32,7 @@ int	exec_handler(t_data *data, t_commands *cmds)
 		while (i < cmds->num_cmds)
 		{
 			if (is_redirection_command(cmds, i))
-				redirection_handler(data, cmds, i);
+				redirection_handler(cmds, i);
 			if (cmds->cmd[i].args[0])
 			{
 				cmds->pid[i] = fork();
@@ -45,7 +45,7 @@ int	exec_handler(t_data *data, t_commands *cmds)
 			i++;
 		}
 	}
-	return (wait_child(data, cmds));
+	return (wait_child(cmds));
 }
 
 /**
@@ -56,7 +56,7 @@ int	exec_handler(t_data *data, t_commands *cmds)
  * @param t_data
  * @return int - Returns Child status.
  */
-static int	wait_child(t_data *t_data, t_commands *cmds)
+static int	wait_child(t_commands *cmds)
 {
 	int	i;
 	int	status;

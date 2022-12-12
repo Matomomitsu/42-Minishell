@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:20:40 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:30:15 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,11 +237,10 @@ int		rd_output_handler(t_commands *cmds, char *red, bool trunc);
 
 /**
  * @brief Will handle the type of redirection and call the right method
- * @param data Data structure
  * @param cmds Commands Structure
  * @param j Index of command in structure
  */
-void	redirection_handler(t_data *data, t_commands *cmds, int j);
+void	redirection_handler(t_commands *cmds, int j);
 
 /**
  * @brief Verify if the command that is coming is a redirection format
@@ -304,11 +303,10 @@ int		call_builtin(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins Echo - Represent the Echo command in shell (-n flag enabled)
- * @param data Structure of MiniShell
  * @param cmds Command Structure
  * @return int - Code of execution
  */
-int		cmd_echo(t_data *data, t_commands *cmds, int num_cmd);
+int		cmd_echo(t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins Exit - Responsible to close the program.

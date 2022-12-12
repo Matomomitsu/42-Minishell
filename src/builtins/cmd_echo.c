@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 09:08:47 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 10:36:45 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:30:02 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 static bool	exist_n_option(t_commands *cmds, int num_cmd);
 
-int	cmd_echo(t_data *data, t_commands *cmds, int num_cmd)
+int	cmd_echo(t_commands *cmds, int num_cmd)
 {
 	int		i;
-	char	**echo_cmd;
 	bool	option_n;
 
 	option_n = exist_n_option(cmds, num_cmd);
