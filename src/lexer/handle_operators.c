@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_operators.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:16:03 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/01 15:53:19 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:33:26 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
-{
-	if (s[i_data->i++] == '\'')
-	{
-		while (s[i_data->i] && s[i_data->i] != '\'')
-			i_data->i++;
-	}
-	else
-	{
-		while (s[i_data->i] && s[i_data->i] != '\"')
-				i_data->i++;
-	}
-	if (s[i_data->i])
-		i_data->i++;
-}
 
 static void	operators_errors(const char *s, t_commands *cmds, t_index_data \
 							*i_data)

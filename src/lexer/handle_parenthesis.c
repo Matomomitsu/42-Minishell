@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
+static void	handle_quotes(t_index_data *i_data, const char *s)
 {
 	if (s[i_data->i++] == '\'')
 	{
@@ -64,7 +64,7 @@ static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data \
 	while (s[i_data->i] && s[i_data->i] != ')')
 	{
 		if (s[i_data->i] == '\'' || s[i_data->i] == '\"')
-			handle_quotes(i_data, s, cmds);
+			handle_quotes(i_data, s);
 		if (s[i_data->i++] == '(')
 			handle_parenteshis(s, cmds, i_data);
 	}
@@ -92,7 +92,7 @@ void	lexer_parenthesis(const char *s, t_commands *cmds)
 			if (s[i_data.i] == ')' || s[i_data.i] == '(')
 				parenthesis_errors(s, cmds, &i_data);
 			if (s[i_data.i] == '\'' || s[i_data.i] == '\"')
-				handle_quotes(&i_data, s, cmds);
+				handle_quotes(&i_data, s);
 			if (s[i_data.i])
 				i_data.i++;
 		}

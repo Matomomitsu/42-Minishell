@@ -37,8 +37,6 @@ static void	copy_quotes(char *s, char **str, t_temp_index *data)
 
 static void	ft_strcpy(char *s, char **str, t_temp_index *data)
 {
-	char	special_char;
-
 	data->o = 0;
 	while (s[data->i] && (s[data->i] == ' ' || s[data->i] == '('))
 		data->i++;

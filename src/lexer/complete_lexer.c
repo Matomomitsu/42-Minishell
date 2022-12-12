@@ -51,7 +51,7 @@ static void	ft_strcpy(char const *s, char **str, t_temp_index *data)
 		data->i++;
 	if (s[data->i] && s[data->i - 1] == '|' && s[data->i] == '|')
 		data->i++;
-	while (s[data->i] && s[data->i] == '|' || s[data->i] == '&' \
+	while ((s[data->i] && s[data->i] == '|') || s[data->i] == '&' \
 			|| s[data->i] == ' ')
 		data->i++;
 }

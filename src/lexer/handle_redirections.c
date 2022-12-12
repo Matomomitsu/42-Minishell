@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static void	handle_quotes(t_index_data *i_data, const char *s, t_commands *cmds)
+static void	handle_quotes(t_index_data *i_data, const char *s)
 {
 	if (s[i_data->i++] == '\'')
 	{
@@ -74,7 +74,7 @@ void	lexer_redirections(const char *s, t_commands *cmds)
 		if (s[i_data.i] == '<' || s[i_data.i] == '>')
 			handle_redirections(s, cmds, &i_data);
 		if (s[i_data.i] == '\'' || s[i_data.i] == '\"')
-			handle_quotes(&i_data, s, cmds);
+			handle_quotes(&i_data, s);
 		if (s[i_data.i])
 			i_data.i++;
 	}
