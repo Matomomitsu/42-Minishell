@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 12:59:15 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/10 08:59:18 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 11:04:56 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,13 @@ int	rd_input_handler(t_commands *cmds, char *red)
  */
 static int	open_in_file(t_commands *cmds, char *file)
 {
-	// if (!remove_old_file_ref(cmds->io, true))
-	// 	return (-1);
 	cmds->io->in_file = file;
 	if (cmds->io->in_file && cmds->io->in_file[0] == '\0')
-	{
 		return (error_msg_cmd(file, NULL, "ambiguous redirect", false));
-	}
 	cmds->io->fd_in = open(cmds->io->in_file, O_RDONLY);
 	if (cmds->io->fd_in == -1)
-		return(error_msg_cmd(cmds->io->in_file, NULL, strerror(errno), false));
-	return(-1);
+		return (error_msg_cmd(cmds->io->in_file, NULL, strerror(errno), false));
+	return (-1);
 }
 
 bool	remove_old_file_ref(t_io *io, bool in_file)

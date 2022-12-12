@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:14:03 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 11:56:37 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 11:01:55 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	cmd_exit(t_data *data, t_commands *cmds, int num_cmd)
 	bool	error;
 
 	error = false;
-	// ft_putendl_fd("exit", STDERR_FILENO);
 	if (!cmds || !cmds->cmd[num_cmd].args[1])
 		exit_code = g_status_code;
 	else
