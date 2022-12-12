@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 17:04:41 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 08:50:27 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ typedef struct s_io
 	char	*in_file;
 	char	*out_file;
 	char	*heredoc_delimiter;
-}	t_io;
+	bool	error;
+	int		cmd_index;
+
+} t_io;
 
 typedef struct s_data
 {
@@ -214,7 +217,7 @@ char	*get_prompt(t_data *data);
   * @param io - IO Data Structure
   * @sample: wc < arq.txt
  */
-void	redirect_io(t_io *io);
+void	redirect_io(t_io *io, int index_cmd);
 
 /**
  * @brief Restore the initial state of backups o standard input and output.
@@ -240,7 +243,7 @@ bool	check_in_out_file(t_io *io);
  * @param trunc truncate or append mode?
  * @sample: [ls > arq.txt] | [ls > 01 > 02] | [ls -l | wc -l >> 01]
  */
-void	rd_output_handler(t_commands *cmds, char *red, bool trunc);
+int		rd_output_handler(t_commands *cmds, char *red, bool trunc);
 
 /**
  * @brief Will handle the type of redirection and call the right method
@@ -265,7 +268,7 @@ bool	is_redirection_command(t_commands *cmds, int i);
  * @param file File name
  * @sample: [wc < arq.txt]
  */
-void	rd_input_handler(t_commands *cmds, char *file);
+int		rd_input_handler(t_commands *cmds, char *file);
 
 /**
  * @brief Verify if the previous command do not throw a exception, and just

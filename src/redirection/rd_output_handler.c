@@ -6,24 +6,30 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:21:51 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 17:04:20 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 08:51:10 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	open_out_file(t_commands *cmds, char *file, bool trunc);
+static int	open_out_file(t_commands *cmds, char *file, bool trunc);
 
-void	rd_output_handler(t_commands *cmds, char *red, bool trunc)
+int	rd_output_handler(t_commands *cmds, char *red, bool trunc)
 {
 	char	**red_split;
 	char	*result;
+	int		status_code;
 
 	red_split = ft_split(red, '>');
 	result = ft_strtrim(red_split[0], " ");
 	init_io(cmds);
-	open_out_file(cmds, result, trunc);
+	status_code = open_out_file(cmds, result, trunc);
 	free_array_str(red_split);
+	if (status_code != -1)
+		cmds->io->error = true;
+	else
+		cmds->io->error = false;
+	return (status_code);
 }
 
 /**
@@ -35,14 +41,11 @@ void	rd_output_handler(t_commands *cmds, char *red, bool trunc)
  * @param file File name
  * @param trunc Truncate or append
  */
-static void	open_out_file(t_commands *cmds, char *file, bool trunc)
+static int	open_out_file(t_commands *cmds, char *file, bool trunc)
 {
 	cmds->io->out_file = file;
 	if (cmds->io->out_file && cmds->io->out_file[0] == '\0')
-	{
-		error_msg_cmd(file, NULL, "ambiguous redirect", false);
-		return ;
-	}
+		return(error_msg_cmd(file, NULL, "ambiguous redirect", false));
 	if (trunc == true)
 		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
 				| O_TRUNC, 0664);
@@ -50,5 +53,6 @@ static void	open_out_file(t_commands *cmds, char *file, bool trunc)
 		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
 				| O_APPEND, 0664);
 	if (cmds->io->fd_out == -1)
-		error_msg_cmd(cmds->io->out_file, NULL, strerror(errno), false);
+		return (error_msg_cmd(cmds->io->out_file, NULL, strerror(errno), false));
+	return (-1);
 }
