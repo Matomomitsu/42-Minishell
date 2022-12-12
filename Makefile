@@ -6,7 +6,7 @@
 #    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/07 23:48:47 by mtomomit         ###   ########.fr        #
+#    Updated: 2022/12/12 13:03:53 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,8 @@ LIBFT 			= ./lib/libft.a
 # Compilation
 CC = gcc
 
-# TODO: RollBack this flags
-# CFLAGS = -g -Wall -Werror -Wextra
-CFLAGS = -g
+# Compilation flags
+CFLAGS = -g -Wall -Werror -Wextra
 
 #Chedk Leak memory
 LEAK = valgrind --leak-check=full --show-leak-kinds=all \

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/08 19:17:55 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:35:01 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	if (valid_args(argc) == false || init_structure(&data, envp) == false)
+	if (valid_args(argc, argv) == false || init_structure(&data, envp) == false)
 		exit_shell(NULL, EXIT_FAILURE);
 	init_prompt(&data);
 	return (0);
@@ -58,7 +58,6 @@ static void	init_prompt(t_data *data)
 static int	exec_cmd(t_data *data)
 {
 	t_commands	*cmds;
-	char		**args;
 	int			status_code;
 
 	cmds = (t_commands *)ft_calloc(1, sizeof(t_commands));

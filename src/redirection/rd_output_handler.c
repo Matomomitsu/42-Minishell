@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:21:51 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 08:51:10 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:36:00 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	open_out_file(t_commands *cmds, char *file, bool trunc)
 {
 	cmds->io->out_file = file;
 	if (cmds->io->out_file && cmds->io->out_file[0] == '\0')
-		return(error_msg_cmd(file, NULL, "ambiguous redirect", false));
+		return (error_msg_cmd(file, NULL, "ambiguous redirect", false));
 	if (trunc == true)
 		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
 				| O_TRUNC, 0664);
@@ -53,6 +53,7 @@ static int	open_out_file(t_commands *cmds, char *file, bool trunc)
 		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
 				| O_APPEND, 0664);
 	if (cmds->io->fd_out == -1)
-		return (error_msg_cmd(cmds->io->out_file, NULL, strerror(errno), false));
+		return (error_msg_cmd(cmds->io->out_file, NULL, strerror(errno),
+				false));
 	return (-1);
 }

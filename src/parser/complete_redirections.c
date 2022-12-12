@@ -29,7 +29,7 @@ static void	handle_quotes(t_temp_index *data, char *s, char special_char)
 
 static void	copy_quotes(char *s, char **str, t_temp_index *data)
 {
-	s[data->i++];
+	data->i++;
 	if (s[data->i - 1] == '\'')
 	{
 		while (s[data->i] && s[data->i] != '\'')
@@ -40,7 +40,7 @@ static void	copy_quotes(char *s, char **str, t_temp_index *data)
 		while (s[data->i] && s[data->i] != '\"')
 			str[data->j][data->o++] = s[data->i++];
 	}
-	s[data->i++];
+	data->i++;
 }
 
 static void	ft_strcpy(char *s, char **str, t_temp_index *data)
