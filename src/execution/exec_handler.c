@@ -95,11 +95,11 @@ static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 	if (is_redirection_command(cmds, num_cmd) &&
 		check_in_out_file(cmds->io) == false)
 		exit_shell(data, EXIT_FAILURE);
+	redirect_io(cmds->io, num_cmd);
 	if (is_builtin(cmds->cmd[num_cmd].args[0]))
 		status_code = call_builtin(data, cmds, num_cmd);
 	else
 	{
-		redirect_io(cmds->io, num_cmd);
 		close_fds(cmds, false);
 		if (ft_strchr(cmds->cmd[num_cmd].args[0], '/') == NULL)
 		{
