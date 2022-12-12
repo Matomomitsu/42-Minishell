@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/10 12:33:37 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:44:45 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_io
 	bool	error;
 	int		cmd_index;
 
-} t_io;
+}	t_io;
 
 typedef struct s_data
 {
@@ -143,20 +143,12 @@ void	init_cmds(t_data *data, t_commands *cmds);
 void	init_cmd(t_data *data, t_commands *cmds);
 
 /**
- * @brief Return the number of arguments passed in the command
- * @param args TypeDef in MiniShell
- * @return int - Count Number of arguments. The Command argument will be ignored
- * in this method. Return just arguments
- */
-// int		args_count(char **args);
-
-/**
  * @brief Validate number of arguments of Mini-shell
  * @param argc Argument Counts
- * @return true - Valid
- * @return false - Failed
+ * @param argv Argument Vector
+ * @return boolean. Valid / Failed
  */
-bool	valid_args(int argc);
+bool	valid_args(int argc, char **argv);
 
 /**
  * @brief Verify if all sentence is just space or similar char
@@ -245,11 +237,10 @@ int		rd_output_handler(t_commands *cmds, char *red, bool trunc);
 
 /**
  * @brief Will handle the type of redirection and call the right method
- * @param data Data structure
  * @param cmds Commands Structure
  * @param j Index of command in structure
  */
-void	redirection_handler(t_data *data, t_commands *cmds, int j);
+void	redirection_handler(t_commands *cmds, int j);
 
 /**
  * @brief Verify if the command that is coming is a redirection format
@@ -312,12 +303,10 @@ int		call_builtin(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins Echo - Represent the Echo command in shell (-n flag enabled)
- * @param data Structure of MiniShell
  * @param cmds Command Structure
  * @return int - Code of execution
  */
-
-int		cmd_echo(t_data *data, t_commands *cmds, int num_cmd);
+int		cmd_echo(t_commands *cmds, int num_cmd);
 
 /**
  * @brief Builtins Exit - Responsible to close the program.
@@ -382,14 +371,13 @@ void	set_pipe_fds(t_commands *cmds, int index);
  * @param index Index to current cmd. -1 if is in all scope / all commands
  * @param close_both Flag to indicate to close both
  */
-void	close_pipe_fds(t_commands *cmds, int index, bool close_both);
+void	close_pipe_fds(t_commands *cmds);
 
 /**
  * @brief Will return the value of the structures
- * @param data Structure of MiniShell
  * @param cmds Structure of commands
  */
-void	debug_structs(t_data *data, t_commands *cmds, bool show_path);
+void	debug_structs(t_commands *cmds, bool show_path);
 
 /**
  * @brief Deallocate memory from a pointer. Update the variable to NULL
@@ -413,10 +401,9 @@ void	close_fds(t_commands *cmds, bool reset_io);
 void	free_io(t_io *io);
 
 /**
- * @brief
- *
- * @param data
- * @param exit_shell
+ * @brief Will free Data structure in mini-shell
+ * @param data Data structure
+ * @param Boolean - exit_shell. Indicate to terminate program
  */
 void	free_data(t_data *data, bool exit_shell);
 
@@ -546,8 +533,7 @@ int		env_var_count(char **envp);
  * @param data Structure of MiniShell
  * @param key key of variable
  * @param value value of variable
- * @return true - Success
- * @return false - Failed
+ * @return bool - Success / Failed
  */
 bool	set_env_var(t_data *data, char *key, char *value);
 
@@ -644,7 +630,7 @@ void	lexer_operators(const char *s, t_commands *cmds);
  * @param index - Index of command in cmds Structure
  * @return char*
  */
-char	*get_cmd_path(t_data *data, t_commands *cmds, int index);
+char	*get_cmd_path(t_commands *cmds, int index);
 
 /**
  * @brief Tokenize command based on their arguments
@@ -709,7 +695,7 @@ void	copy_cmd(char *s, char *new_str);
  * @param s Command
  * @param str An array that contain the new command
  */
-void	find_export_cmd(t_commands *cmds, int num_cmd, t_data *data);
+void	find_export_cmd(t_commands *cmds, int num_cmd);
 
 char	**rm_spaces(char const *s);
 void	putchar_split(char const *s, char **str, size_t countc);

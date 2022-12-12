@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:34:21 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/01 13:21:32 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:44:21 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*get_cmd_path(t_data *data, t_commands *cmds, int index)
+char	*get_cmd_path(t_commands *cmds, int index)
 {
 	int		i;
 	char	*cmd_comp;

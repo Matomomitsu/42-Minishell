@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:51:53 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 19:30:24 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:29:46 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	cmd_env(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int		i;
-	char	*temp_char;
 
 	if (cmds->cmd[num_cmd].args[1])
 		return (error_msg_cmd("env", NULL, "too many arguments", STDERR));

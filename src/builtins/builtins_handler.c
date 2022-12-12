@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:19:00 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/02 15:12:38 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:30:20 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	call_builtin(t_data *data, t_commands *cmds, int num_cmd)
 
 	cmd_code = CMD_NOT_FOUND;
 	if (ft_strncmp(cmds->cmd[num_cmd].args[0], "echo", 5) == 0)
-		cmd_code = cmd_echo(data, cmds, num_cmd);
+		cmd_code = cmd_echo(cmds, num_cmd);
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "exit", 5) == 0)
 		cmd_code = cmd_exit(data, cmds, num_cmd);
 	else if (ft_strncmp(cmds->cmd[num_cmd].args[0], "pwd", 4) == 0)
