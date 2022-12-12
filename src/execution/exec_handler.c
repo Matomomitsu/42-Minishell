@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:29:30 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:44:32 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
  */
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd)
 {
-	cmds->cmd[num_cmd].path = get_cmd_path(data, cmds, num_cmd);
+	cmds->cmd[num_cmd].path = get_cmd_path(cmds, num_cmd);
 	if (!cmds->cmd[num_cmd].path)
 		return (CMD_NOT_FOUND);
 	if (execve(cmds->cmd[num_cmd].path, cmds->cmd[num_cmd].args, data->env)

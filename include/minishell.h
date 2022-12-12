@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:30:15 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:44:45 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -630,7 +630,7 @@ void	lexer_operators(const char *s, t_commands *cmds);
  * @param index - Index of command in cmds Structure
  * @return char*
  */
-char	*get_cmd_path(t_data *data, t_commands *cmds, int index);
+char	*get_cmd_path(t_commands *cmds, int index);
 
 /**
  * @brief Tokenize command based on their arguments
@@ -695,7 +695,7 @@ void	copy_cmd(char *s, char *new_str);
  * @param s Command
  * @param str An array that contain the new command
  */
-void	find_export_cmd(t_commands *cmds, int num_cmd, t_data *data);
+void	find_export_cmd(t_commands *cmds, int num_cmd);
 
 char	**rm_spaces(char const *s);
 void	putchar_split(char const *s, char **str, size_t countc);

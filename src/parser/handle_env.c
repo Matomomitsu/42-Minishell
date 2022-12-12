@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:12:44 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/07 17:46:43 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:43:00 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static int	check_type(char ch)
 static int	get_env_variable_size(char *s, t_index_data *i_data)
 {
 	int		i;
-	int		o;
-	char	*exit_value;
 
 	i = i_data->i + 1;
 	while (s[i] && check_type(s[i]))
