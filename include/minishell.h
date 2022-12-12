@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/10 12:33:37 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 09:26:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_io
 	bool	error;
 	int		cmd_index;
 
-} t_io;
+}	t_io;
 
 typedef struct s_data
 {
@@ -141,14 +141,6 @@ void	init_cmds(t_data *data, t_commands *cmds);
  * @param cmds Commands structure
  */
 void	init_cmd(t_data *data, t_commands *cmds);
-
-/**
- * @brief Return the number of arguments passed in the command
- * @param args TypeDef in MiniShell
- * @return int - Count Number of arguments. The Command argument will be ignored
- * in this method. Return just arguments
- */
-// int		args_count(char **args);
 
 /**
  * @brief Validate number of arguments of Mini-shell
@@ -316,7 +308,6 @@ int		call_builtin(t_data *data, t_commands *cmds, int num_cmd);
  * @param cmds Command Structure
  * @return int - Code of execution
  */
-
 int		cmd_echo(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
@@ -413,10 +404,9 @@ void	close_fds(t_commands *cmds, bool reset_io);
 void	free_io(t_io *io);
 
 /**
- * @brief
- *
- * @param data
- * @param exit_shell
+ * @brief Will free Data structure in mini-shell
+ * @param data Data structure
+ * @param Boolean - exit_shell. Indicate to terminate program
  */
 void	free_data(t_data *data, bool exit_shell);
 
@@ -546,8 +536,7 @@ int		env_var_count(char **envp);
  * @param data Structure of MiniShell
  * @param key key of variable
  * @param value value of variable
- * @return true - Success
- * @return false - Failed
+ * @return bool - Success / Failed
  */
 bool	set_env_var(t_data *data, char *key, char *value);
 
