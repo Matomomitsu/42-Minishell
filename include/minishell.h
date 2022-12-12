@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:03:56 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:20:40 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -373,14 +373,13 @@ void	set_pipe_fds(t_commands *cmds, int index);
  * @param index Index to current cmd. -1 if is in all scope / all commands
  * @param close_both Flag to indicate to close both
  */
-void	close_pipe_fds(t_commands *cmds, int index, bool close_both);
+void	close_pipe_fds(t_commands *cmds);
 
 /**
  * @brief Will return the value of the structures
- * @param data Structure of MiniShell
  * @param cmds Structure of commands
  */
-void	debug_structs(t_data *data, t_commands *cmds, bool show_path);
+void	debug_structs(t_commands *cmds, bool show_path);
 
 /**
  * @brief Deallocate memory from a pointer. Update the variable to NULL

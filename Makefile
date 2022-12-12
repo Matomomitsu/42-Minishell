@@ -6,7 +6,7 @@
 #    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/12 10:04:25 by rlins            ###   ########.fr        #
+#    Updated: 2022/12/12 10:21:10 by rlins            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ CC = gcc
 
 # TODO: RollBack this flags
 # CFLAGS = -g -Wall -Werror -Wextra
+
 CFLAGS = -g
 
 #Chedk Leak memory

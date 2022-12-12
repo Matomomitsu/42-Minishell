@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/10 12:33:26 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:20:47 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	wait_child(t_data *t_data, t_commands *cmds)
 	int	status;
 	int	save_status;
 
-	close_pipe_fds(cmds, -1, true);
+	close_pipe_fds(cmds);
 	i = -1;
 	status = 0;
 	save_status = 0;

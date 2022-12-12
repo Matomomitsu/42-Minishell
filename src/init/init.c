@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:03:05 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 10:09:04 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	init_prompt(t_data *data)
 static int	exec_cmd(t_data *data)
 {
 	t_commands	*cmds;
-	char		**args;
 	int			status_code;
 
 	cmds = (t_commands *)ft_calloc(1, sizeof(t_commands));
