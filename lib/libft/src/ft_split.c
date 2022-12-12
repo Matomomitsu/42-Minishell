@@ -6,55 +6,92 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:01:18 by rlins             #+#    #+#             */
-/*   Updated: 2022/04/12 15:22:08 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 11:52:59 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_str_count_word(const char *str, char c)
+static size_t	ft_countc(const char *s, char c)
 {
 	size_t	i;
-	size_t	word;
+	size_t	counter;
+	size_t	o;
 
 	i = 0;
-	word = 0;
-	while (str[i])
+	counter = 0;
+	while (s[i])
 	{
-		if (str[i] != c)
-			word++;
-		while (str[i] != c && str[i + 1])
+		o = 0;
+		while (s[i] && s[i] == c)
 			i++;
-		i++;
+		while (s[i] && s[i++] != c)
+			o++;
+		if (o != 0)
+			counter++;
 	}
-	return (word);
+	return (counter);
 }
 
-char	**ft_split(char const *str, char c)
+static void	splitstr(char **str, char c, char const *s, size_t countc)
+{
+	size_t	i;
+	size_t	malloc_size;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (j < countc)
+	{
+		malloc_size = 0;
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] && s[i++] != c)
+			malloc_size++;
+		str[j] = (char *)malloc((malloc_size + 1) * sizeof(char));
+		if (str[j++] == NULL)
+		{
+			str = NULL;
+			break ;
+		}
+	}
+}
+
+static void	putchar_str(char const *s, char **str, char c, size_t countc)
 {
 	size_t	i;
 	size_t	j;
-	size_t	k;
-	char	**result;
+	size_t	o;
 
 	i = 0;
-	k = 0;
-	result = (char **)malloc(sizeof(char *) * (ft_str_count_word(str, c) + 1));
-	if (!str || !result)
-		return (NULL);
-	while (i < ft_str_count_word(str, c))
+	j = 0;
+	while (j < countc)
 	{
-		result[i] = (char *)malloc(sizeof(char) * (ft_strlen(&str[k]) + 1));
-		if (!result[i])
-			return (NULL);
-		j = 0;
-		while (str[k] == c)
-			k++;
-		while (str[k] != c && str[k])
-			result[i][j++] = str[k++];
-		result[i][j] = '\0';
-		i++;
+		o = 0;
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] != c && s[i])
+			str[j][o++] = s[i++];
+		str[j][o] = '\0';
+		j++;
 	}
-	result[i] = '\0';
-	return (result);
+	str[j] = NULL;
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**str;
+	size_t	countc;
+
+	if (!s)
+		return (NULL);
+	countc = ft_countc(s, c);
+	str = (char **)malloc((countc + 1) * sizeof(char *));
+	if (!str)
+		return (NULL);
+	splitstr(str, c, s, countc);
+	if (str == NULL)
+		return (NULL);
+	putchar_str(s, str, c, countc);
+	return (str);
 }
