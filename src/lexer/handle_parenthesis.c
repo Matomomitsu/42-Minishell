@@ -42,15 +42,15 @@ static void	parenthesis_errors(const char *s, t_commands *cmds, t_index_data \
 		cmds->exit_value = 2;
 		ft_putstr_fd("-minishell: syntax error near unexpected token `", \
 		STDERR);
-		ft_putchar_fd(s[i_data->i], STDERR);
+		while (s[i_data->i] && (s[i_data->i] == '&' || s[i_data->i] == '|' || \
+				s[i_data->i] == '>' || s[i_data->i] == '<'))
+			ft_putchar_fd(s[i_data->i++], STDERR);
 		ft_putstr_fd("'\n", STDERR);
 	}
 	if (cmds->exit_value == 0 && !s[i_data->i])
 	{
-		cmds->exit_value = 2;
-		ft_putstr_fd("-minishell: syntax error near unexpected token `", \
-		STDERR);
-		ft_putstr_fd("newline'\n", STDERR);
+		cmds->exit_value = error_msg_cmd(NULL, NULL, "-minishell: \
+				syntax error not expecting newline", 2);
 	}
 }
 

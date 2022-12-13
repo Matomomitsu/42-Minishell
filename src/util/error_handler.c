@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:23:22 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/29 16:26:25 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/12 14:38:51 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
 	char	*full_msg;
 	bool	is_quotes;
 
-	is_quotes = response_with_quotes(cmd);
+	if (cmd != NULL)
+		is_quotes = response_with_quotes(cmd);
 	full_msg = ft_strdup("minishell: ");
 	if (cmd != NULL)
 	{

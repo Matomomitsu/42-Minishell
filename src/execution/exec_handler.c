@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 13:34:23 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 20:07:25 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,26 @@ static int	wait_child(t_commands *cmds);
 */
 int	exec_handler(t_data *data, t_commands *cmds)
 {
-	int	i;
 	int status_code;
 
 	status_code = 0;
-	i = 0;
-	if (cmds->cmd[i].args[0] && cmds->num_cmds == 1 && \
-		is_builtin_without_output(cmds))
-		return (call_builtin(data, cmds, 0));
-	else
+	while (cmds->num_exec < cmds->num_cmds)
 	{
-		while (cmds->num_exec < cmds->num_cmds)
+		if (cmds->cmd[cmds->num_exec].args[0] && \
+			cmds->operators[cmds->num_exec] \
+			!= PIPE && is_builtin_without_output(cmds))
 		{
-			status_code = exec_child(data, cmds, i);
-			g_status_code = wait_child(data, cmds);
+			g_status_code = call_builtin(data, cmds, 0);
+			cmds->num_exec++;
+		}
+		else
+		{
+			status_code = exec_child(data, cmds, cmds->num_exec);
+			g_status_code = wait_child(cmds);
 			if (status_code != 0)
 				g_status_code = status_code;
 			if (cmds->num_exec < cmds->num_cmds)
 				verify_operators(data, cmds, cmds->num_exec);
-			i = cmds->num_exec;
 		}
 	}
 	return (g_status_code);

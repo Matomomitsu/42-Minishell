@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 10:04:17 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/08 19:17:52 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:41:20 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ static void	verify_parenthesis_and(t_data *data, t_commands *cmds, int num_cmd)
 
 void	verify_operators(t_data *data, t_commands *cmds, int num_cmd)
 {
-	int	i;
-
 	if (cmds->operators[num_cmd - 1] == OR)
 		verify_parenthesis_or(data, cmds, num_cmd);
 	if (cmds->operators[num_cmd - 1] == AND)
