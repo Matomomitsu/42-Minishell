@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 13:04:53 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:50:59 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@ typedef struct s_cmd
 	char	*path;
 	char	**args;
 	char	**redirections;
-	int		*pipe_fd;
-	int		exit_value;
 }	t_cmd;
+
+typedef struct s_pipe
+{
+	int	*fd;
+}	t_pipe;
 
 typedef struct s_commands
 {
@@ -88,6 +91,7 @@ typedef struct s_commands
 	char	**paths;
 	int		*operators;
 	int		exit_value;
+	t_pipe	*pipe;
 	t_io	*io;
 	t_cmd	*cmd;
 }	t_commands;

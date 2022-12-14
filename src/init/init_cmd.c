@@ -12,15 +12,6 @@
 
 #include <minishell.h>
 
-static void	init_pipe(t_commands *cmds, int num_cmd)
-{
-	cmds->cmd[num_cmd].pipe_fd = (int *)ft_calloc(sizeof(int), 3);
-	if (!cmds->cmd[num_cmd].pipe_fd)
-		exit(6);
-	if (pipe(cmds->cmd[num_cmd].pipe_fd) == -1)
-		exit (7);
-}
-
 static void	change_cmd(t_commands *cmds, int num_cmd)
 {
 	char			*temp_char;
@@ -46,7 +37,6 @@ void	init_cmd(t_data *data, t_commands *cmds, int num_cmd)
 		if (cmds->cmds[i][0])
 			find_dollar_sign(data, cmds, i);
 		cmds->cmd[i].args = parser(cmds->cmds[i]);
-		init_pipe(cmds, i);
 		if (cmds->operators[i] && cmds->operators[i] == PIPE)
 			i++;
 		else
@@ -67,6 +57,5 @@ void	init_single_cmd(t_data *data, t_commands *cmds, int num_cmd)
 		if (cmds->cmds[i][0])
 			find_dollar_sign(data, cmds, i);
 		cmds->cmd[i].args = parser(cmds->cmds[i]);
-		init_pipe(cmds, i);
 	}
 }
