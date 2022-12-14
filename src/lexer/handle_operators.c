@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:16:03 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/12 15:58:59 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/14 13:51:55 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	operators_errors(const char *s, t_commands *cmds, t_index_data \
 	}
 	if (cmds->exit_value == 0 && !s[i_data->i])
 	{
-		cmds->exit_value = error_msg_cmd(NULL, NULL, "-minishell: \
-					syntax error not expecting newline", 2);
+		cmds->exit_value = error_msg_cmd(NULL, NULL, \
+		"-minishell: syntax error not expecting newline", 2);
 	}
 }
 

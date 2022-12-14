@@ -6,16 +6,11 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:21:30 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/13 13:06:13 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/14 13:49:53 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static void	check_parenthesis(t_commands *cmds, int index)
-{
-
-}
 
 void	set_pipe_fds(t_commands *cmds, int index)
 {

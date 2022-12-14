@@ -49,14 +49,15 @@ static void	parenthesis_errors(const char *s, t_commands *cmds, t_index_data \
 	}
 	if (cmds->exit_value == 0 && !s[i_data->i])
 	{
-		cmds->exit_value = error_msg_cmd(NULL, NULL, "-minishell: \
-				syntax error not expecting newline", 2);
+		cmds->exit_value = error_msg_cmd(NULL, NULL, \
+		"-minishell: syntax error not expecting newline", 2);
 	}
 }
 
 static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data \
 			*i_data)
 {
+	i_data->i++;
 	while (s[i_data->i] && s[i_data->i] == ' ')
 		i_data->i++;
 	if (s[i_data->i] && s[i_data->i] == ')')
