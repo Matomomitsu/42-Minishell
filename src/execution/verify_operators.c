@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 10:04:17 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/15 12:04:37 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:56:46 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void	verify_and(t_data *data, t_commands *cmds, int num_cmd)
 	int	i;
 
 	i = num_cmd;
-	if (g_status_code == 0)
+	if (g_status_code != 0)
 	{
-		while (cmds->operators[i - 1] && cmds->operators[i - 1] == OR)
+		while (cmds->operators[i - 1] && cmds->operators[i - 1] == AND)
 		{
 			init_single_cmd(data, cmds, i);
 			i++;
