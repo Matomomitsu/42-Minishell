@@ -31,7 +31,7 @@ static void	handle_quotes(t_index_data *i_data, const char *s)
 static void	parenthesis_errors(const char *s, t_commands *cmds, t_index_data \
 							*i_data)
 {
-	if (s[i_data->i] == '(')
+	if (s[i_data->i] == '(' || s[i_data->i] == ')')
 	{
 		i_data->i++;
 		while (s[i_data->i] && s[i_data->i] == ' ')
@@ -42,12 +42,11 @@ static void	parenthesis_errors(const char *s, t_commands *cmds, t_index_data \
 		cmds->exit_value = 2;
 		ft_putstr_fd("-minishell: syntax error near unexpected token `", \
 		STDERR);
-		while (s[i_data->i] && (s[i_data->i] == '&' || s[i_data->i] == '|' || \
-				s[i_data->i] == '>' || s[i_data->i] == '<'))
+		while (s[i_data->i])
 			ft_putchar_fd(s[i_data->i++], STDERR);
 		ft_putstr_fd("'\n", STDERR);
 	}
-	if (cmds->exit_value == 0 && !s[i_data->i])
+	if (cmds->exit_value == 0 && !s[i_data->i] && s[i_data->i - 1] != ')')
 	{
 		cmds->exit_value = error_msg_cmd(NULL, NULL, \
 		"-minishell: syntax error not expecting newline", 2);
@@ -57,6 +56,9 @@ static void	parenthesis_errors(const char *s, t_commands *cmds, t_index_data \
 static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data \
 			*i_data)
 {
+	int	i;
+
+	i = 0;
 	i_data->i++;
 	while (s[i_data->i] && s[i_data->i] == ' ')
 		i_data->i++;
@@ -70,6 +72,11 @@ static void	handle_parenteshis(const char *s, t_commands *cmds, t_index_data \
 			handle_parenteshis(s, cmds, i_data);
 	}
 	if (!s[i_data->i] && s[i_data->i - 1] != ')')
+		parenthesis_errors(s, cmds, i_data);
+	while (s[i_data->i + i] && (s[i_data->i + i] != '&' && s[i_data->i + i] \
+			!= '|'))
+		i++;
+	if (!s[i_data->i + i])
 		parenthesis_errors(s, cmds, i_data);
 	else
 		i_data->i++;
