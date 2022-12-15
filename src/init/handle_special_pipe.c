@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:49:25 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/15 10:56:52 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:43:37 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	check_parenthesis(t_commands *cmds)
 	num_parenthesis = 0;
 	while (cmds->cmds[i])
 	{
-		printf("%s\n", cmds->cmds[i]);
 		o = 0;
 		while (cmds->cmds[i][o] && cmds->cmds[i][o] == ' ')
 			o++;
@@ -32,12 +31,12 @@ static int	check_parenthesis(t_commands *cmds)
 		{
 			if (cmds->cmds[i][o] == ')')
 				num_parenthesis++;
+			if (cmds->operators[i] != PIPE && cmds->cmds[i][o] == ')')
+				num_parenthesis = num_parenthesis - 2;
 			o++;
 		}
 		i++;
-		printf("%i\n", num_parenthesis);
 	}
-	printf("%i\n", num_parenthesis);
 	if (num_parenthesis % 2 == 0)
 		return (num_parenthesis / 2);
 	else

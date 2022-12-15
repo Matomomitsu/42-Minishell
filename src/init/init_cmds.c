@@ -49,9 +49,9 @@ static void	handle_operators(t_data *data, t_commands *cmds, size_t *o, \
 
 static void	get_operators(t_data *data, t_commands *cmds)
 {
-	size_t		i;
-	size_t		o;
-	char		special_char;
+	size_t	i;
+	size_t	o;
+	char	special_char;
 
 	i = 0;
 	o = 0;
