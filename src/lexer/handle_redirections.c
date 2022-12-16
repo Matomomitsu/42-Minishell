@@ -38,7 +38,7 @@ static void	redirections_erros(const char *s, t_commands *cmds, t_index_data \
 		STDERR);
 		while (s[i_data->i] && (s[i_data->i] == '&' || s[i_data->i] == '|' || \
 			s[i_data->i] == '>' || s[i_data->i] == '<'))
-		ft_putchar_fd(s[i_data->i++], STDERR);
+			ft_putchar_fd(s[i_data->i++], STDERR);
 		ft_putstr_fd("'\n", STDERR);
 	}
 	if (cmds->exit_value == 0 && !s[i_data->i])

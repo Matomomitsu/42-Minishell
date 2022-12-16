@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 17:57:27 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:24:19 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -504,7 +504,7 @@ int		validate_cmd_not_found(t_data *data, char *cmd);
  */
 void	free_exit_cmd(t_data *data, t_commands *cmds, int status_code);
 
-int	exec_child(t_data *data, t_commands *cmds, int num_cmd);
+int		exec_child(t_data *data, t_commands *cmds, int num_cmd);
 
 void	verify_operators(t_data *data, t_commands *cmds, int num_cmd);
 
@@ -516,7 +516,7 @@ void	verify_operators(t_data *data, t_commands *cmds, int num_cmd);
  * @param i - Index of command in execution this time
  * @return int
  */
-int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd);
+int		execute_cmd(t_data *data, t_commands *cmds, int num_cmd);
 
 /******************************************************************************/
 /*End - Execute*/

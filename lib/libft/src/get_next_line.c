@@ -6,12 +6,11 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 19:14:18 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/15 09:50:14 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:23:36 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 static void	complete_line(char **s1, char const *s2)
 {

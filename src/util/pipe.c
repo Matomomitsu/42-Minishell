@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:21:30 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 17:47:19 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:21:12 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	init_variables(int *i, t_num_parenthesis *num_p)
 	num_p->last_p = 0;
 }
 
-static void	reset_num_parenthesis(t_num_parenthesis *num_p, t_commands *cmds, int index)
+static void	reset_num_parenthesis(t_num_parenthesis *num_p, t_commands *cmds, \
+							int index)
 {
 	if (cmds->operators[index] != PIPE)
 		num_p->first_p = num_p->first_p - 1;
