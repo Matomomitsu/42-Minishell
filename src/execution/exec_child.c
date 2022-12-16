@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 03:06:05 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/16 18:23:14 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:26:19 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	exec_child(t_data *data, t_commands *cmds, int num_cmd)
 			cmds->pid[num_cmd] = fork();
 			if (cmds->pid[num_cmd] == -1)
 				return (error_msg_cmd("fork", NULL, strerror(errno),
-					EXIT_FAILURE));
+						EXIT_FAILURE));
 			else if (cmds->pid[num_cmd] == 0)
-					execute_cmd(data, cmds, num_cmd);
+				execute_cmd(data, cmds, num_cmd);
 		}
 		if (!cmds->cmds[num_cmd] && cmds->cmd[num_cmd].redirections[0])
 			create_redirection(cmds, num_cmd, data);

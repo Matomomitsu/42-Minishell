@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:21:30 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 18:21:12 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:25:39 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	reset_num_parenthesis(t_num_parenthesis *num_p, t_commands *cmds, \
 
 static int	checking_parenthesis(t_commands *cmds, int index)
 {
-	int	i;
-	int	o;
+	int					i;
+	int					o;
 	t_num_parenthesis	num_p;
 
 	init_variables(&i, &num_p);
@@ -54,7 +54,7 @@ static int	checking_parenthesis(t_commands *cmds, int index)
 		}
 		i++;
 		if (num_p.first_p >= 1 && i > index && num_p.last_p >= 1)
-			break;
+			break ;
 	}
 	if (i < index)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 18:01:54 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:26:43 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	wait_child(t_commands *cmds);
 */
 int	exec_handler(t_data *data, t_commands *cmds)
 {
-	int status_code;
+	int	status_code;
 
 	status_code = 0;
 	while (cmds->num_exec < cmds->num_cmds)
