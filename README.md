@@ -1,6 +1,7 @@
-<p align="center"><img src="https://i2.wp.com/www.aponia-dental-center.com/fachzahnarztliche-praxis/wp-content/uploads/2014/01/work-in-progress.png?fit=286%2C253" alt="Working Progress"> </p>
 
 <div align="center">
+TODO: nominette
+TODO: teste do lucas
 
 [![HitCount](https://hits.dwyl.com/rlinsdev/42-Minishell-aux.svg?style=flat-square&show=unique)](http://hits.dwyl.com/rlinsdev/42-Minishell-aux)
 
@@ -19,6 +20,35 @@ Project to test and detail all the external functions allowed
 * Lexer: TODO
 * Parser: TODO
 * HereDoc: TODO
+
+## External functs.
+| function | Description |
+|-						|-		 |
+|`access` 				| check access (used in pipex)
+|`execve` 				| exec cmd. (used in pipex)
+|`fork` 				| divide process in 2. Child and parent
+|`free` 				| free ptr
+|`getpwd` 				| get pwd
+|`malloc` 				| allocate memory space
+|`open` 				| open file
+|`opendir` 				| open specific directory
+|`pipe` 				| Pipe (learned in pipex)
+|`dup2` 				| duplicate FD and change (learned in pipex)
+|`printf` 				| weird pdf allow this... But it's ok
+|`read` 				| read from File Descriptor
+|`readline` 			| waiting prompt
+|`signal` 				| Change the process, by signal passed. Take other action
+|`write` 				| write
+|`rl_`					| handler with prompt
+|`add_history`			| add cmd in history
+|`waitpid`				| wait child exec
+|`chdir`				| change directory
+|`stat`					| get properties from path
+|`unlink`				| drop a file
+|`strerror`				| describes error
+|`getenv`				| get environment variables
+
+
 
 ## Todo's
 * Prompt display
@@ -57,3 +87,6 @@ Project to test and detail all the external functions allowed
 
 ## Links
 * <a href="https://www.makeuseof.com/shell-builtin-commands-in-linux/">How to Identify a Shell Builtin Command</a>
+
+### Functions
+* `stat`: https://codeforwin.org/2018/03/c-program-find-file-properties-using-stat-function.html#:~:text=stat()%20function%20in%20C&text=stat()%20function%20is%20used,h%20header%20file.
