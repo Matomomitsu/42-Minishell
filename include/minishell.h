@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/15 09:32:57 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:02:16 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,6 @@ typedef struct s_pipe
 	int	*fd;
 }	t_pipe;
 
-typedef struct s_special_pipe
-{
-	int	*fd;
-}	t_special_pipe;
-
 typedef struct s_commands
 {
 	pid_t			*pid;
@@ -96,7 +91,6 @@ typedef struct s_commands
 	char			**paths;
 	int				*operators;
 	int				exit_value;
-	t_special_pipe	*special_pipe;
 	t_pipe			*pipe;
 	t_io			*io;
 	t_cmd			*cmd;
@@ -153,8 +147,6 @@ void	init_cmds(t_data *data, t_commands *cmds);
 void	init_cmd(t_data *data, t_commands *cmds, int num_cmd);
 
 void	init_single_cmd(t_data *data, t_commands *cmds, int num_cmd);
-
-void	special_pipe(t_commands *cmds);
 
 /**
  * @brief Validate number of arguments of Mini-shell
@@ -386,6 +378,8 @@ void	set_pipe_fds(t_commands *cmds, int index);
  * @param close_both Flag to indicate to close both
  */
 void	close_pipe_fds(t_commands *cmds);
+
+void	close_exec_pipe_fds(t_commands *cmds);
 
 /**
  * @brief Will return the value of the structures

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 03:06:05 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/15 11:38:21 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:05:34 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,48 +44,6 @@ static void	create_redirection(t_commands *cmds, int num_cmd, t_data *data)
 	}
 }
 
-/*static void	write_special_pipe(t_commands *cmds, int num_cmd, int num_pipe)
-{
-	char	*gnl;
-	int		num_pipe;
-
-	num_pipe = 0;
-	gnl = get_next_line(cmds->pipe[num_cmd + 1].fd[0]);
-	while (gnl)
-	{
-		ft_putstr_fd(gnl, cmds->special_pipe[num_pipe].fd[1]);
-		gnl = get_next_line(cmds->pipe[num_cmd + 1].fd[0]);
-	}
-}*/
-
-static void	check_special_pipe(t_commands *cmds, int num_cmd)
-{
-	int	i;
-	int	o;
-	int	num_parenthesis;
-
-	i = 0;
-	num_parenthesis = 0;
-	while (i <= num_cmd)
-	{
-		o = 0;
-		while (cmds->cmds[i][o] && cmds->cmds[i][o] == ' ')
-			o++;
-		while (cmds->cmds[i][o++] == '(')
-			num_parenthesis++;
-		while (cmds->cmds[i][o])
-		{
-			if (cmds->cmds[i][o] == ')')
-				num_parenthesis++;
-			o++;
-		}
-		i++;
-	}
-	printf("%i - num_parenthesis\n", num_parenthesis);
-//	if (num_parenthesis > 0)
-//		write_special_pipe(cmds, num_cmd);
-}
-
 int	exec_child(t_data *data, t_commands *cmds, int num_cmd)
 {
 	cmds->num_exec = cmds->num_exec + count_pipes(cmds, num_cmd);
@@ -101,9 +59,6 @@ int	exec_child(t_data *data, t_commands *cmds, int num_cmd)
 					EXIT_FAILURE));
 			else if (cmds->pid[num_cmd] == 0)
 				execute_cmd(data, cmds, num_cmd);
-				else
-					check_special_pipe(cmds, num_cmd);
-
 		}
 		if (!cmds->cmds[num_cmd] && cmds->cmd[num_cmd].redirections[0])
 			create_redirection(cmds, num_cmd, data);

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:21:30 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/14 15:26:05 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:59:25 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,33 @@
 
 static int	checking_parenthesis(t_commands *cmds, int index)
 {
-	while (index < cmds->num_cmds && !ft_strchr(cmds->cmds[index], ')'))
-		index++;
-	if (index < cmds->num_cmds)
-		return (index);
-	else
+	int	i;
+	int	o;
+	int	num_parenthesis;
+
+	i = 0;
+	num_parenthesis = 0;
+	while (i < cmds->num_cmds && num_parenthesis < 2)
+	{
+		o = 0;
+		while (cmds->cmds[i][o] && cmds->cmds[i][o] == ' ')
+			o++;
+		while (cmds->cmds[i][o++] == '(')
+			num_parenthesis++;
+		while (cmds->cmds[i][o])
+		{
+			if (cmds->cmds[i][o] == ')')
+				num_parenthesis++;
+			if (cmds->operators[i] != PIPE && cmds->cmds[i][o] == ')')
+				num_parenthesis = num_parenthesis - 2;
+			o++;
+		}
+		i++;
+	}
+	if (i < index)
 		return (0);
+	else
+		return (i - 1);
 }
 
 static void	checking_pipes(t_commands *cmds, int index)
@@ -30,7 +51,9 @@ static void	checking_pipes(t_commands *cmds, int index)
 	if (i == 0)
 		i = index;
 	if (cmds->operators[i] == PIPE)
+	{
 		dup2(cmds->pipe[i + 1].fd[1], STDOUT);
+	}
 }
 
 void	set_pipe_fds(t_commands *cmds, int index)
@@ -44,20 +67,5 @@ void	set_pipe_fds(t_commands *cmds, int index)
 		if (cmds->operators[index - 1] == PIPE)
 			dup2(cmds->pipe[index].fd[0], STDIN);
 	}
-}
-
-void	close_pipe_fds(t_commands *cmds)
-{
-	int	i;
-
-	i = 0;
-	while (i < cmds->num_cmds)
-	{
-		if (cmds->pipe[i].fd)
-		{
-			close(cmds->pipe[i].fd[0]);
-			close(cmds->pipe[i].fd[1]);
-		}
-		i++;
-	}
+	close_pipe_fds(cmds);
 }

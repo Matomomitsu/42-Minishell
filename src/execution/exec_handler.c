@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 20:07:25 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:37:35 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	wait_child(t_commands *cmds)
 	int	status;
 	int	save_status;
 
-	close_pipe_fds(cmds);
+	close_exec_pipe_fds(cmds);
 	i = -1;
 	status = 0;
 	save_status = 0;
@@ -93,11 +93,11 @@ int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 		&& check_in_out_file(cmds->io) == false)
 		exit_shell(data, EXIT_FAILURE);
 	redirect_io(cmds->io, num_cmd);
+	close_fds(cmds, false);
 	if (is_builtin(cmds->cmd[num_cmd].args[0]))
 		status_code = call_builtin(data, cmds, num_cmd);
 	else
 	{
-		close_fds(cmds, false);
 		if (ft_strchr(cmds->cmd[num_cmd].args[0], '/') == NULL)
 		{
 			status_code = exec_path_var_bin(data, cmds, num_cmd);

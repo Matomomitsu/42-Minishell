@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 10:04:17 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/15 13:56:46 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 10:28:50 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	verify_or(t_data *data, t_commands *cmds, int num_cmd)
 			i++;
 		}
 		cmds->num_exec = i;
-		printf("%i\n", cmds->num_exec);
 		init_cmd(data, cmds, i);
 	}
 	else
@@ -45,7 +44,6 @@ static void	verify_and(t_data *data, t_commands *cmds, int num_cmd)
 			i++;
 		}
 		cmds->num_exec = i;
-		printf("%i\n", cmds->num_exec);
 		init_cmd(data, cmds, i);
 	}
 	else
