@@ -1,6 +1,7 @@
 
 <div align="center">
 TODO: nominette
+
 TODO: teste do lucas
 
 [![HitCount](https://hits.dwyl.com/rlinsdev/42-Minishell-aux.svg?style=flat-square&show=unique)](http://hits.dwyl.com/rlinsdev/42-Minishell-aux)
@@ -55,13 +56,13 @@ Project to test and detail all the external functions allowed
 * Command history (up and down arrows)
 * System executables available from the environment (`ls`, `cat`, `grep`, etc.)
 * Builtin commands:
-  * `echo` (and option `-n`)
-  * `cd` (with only a relative or absolute path)
-  * `pwd` (no options)
-  * `export` (no options) - Export  variables in bash
-  * `unset` (no options)
-  * `env` (no options or arguments)
-  * `exit` (with exit number but no other options)
+  * `echo` Allow option `-n`
+  * `cd` Relative or absolute path
+  * `pwd` No args
+  * `export`Export variables in bash
+  * `unset` No args
+  * `env` No options. No args
+  * `exit` Allow exit number
 
 * Pipes: `|` which redirect output from one command to input for the next
 
@@ -69,21 +70,21 @@ Project to test and detail all the external functions allowed
   * `>` redirects output
   * `>>` redirects output in append mode
   * `<` redirects input
-  * `<< DELIMITER` displays a new prompt, reads user input until reaching
-  	`DELIMITER`, redirects user input to command input (does not update history)
+  * `<< DELIMITER` displays a new prompt. HereDoc
+  	`DELIMITER` redirects user input to command input
 
 
-* Environment variables (`$USER` or `$VAR`) that expand to their values.
   * `$?` expands to the exit status of the most recently executed foreground pipeline.
 
 
 * Signals:
   * `ctrl-c` displays a new prompt line. SIGINT: SIGINT resets the user input
   prompt to a new blank line.
-  * `ctrl-d` exits minishell.
-  * `ctrl-\` does nothing. SIGQUIT: is ignored.
+  * `ctrl-d` exit.
+  * `ctrl-\` does nothing.
 
-* Global variable:
+## Tests:
+xxxx
 
 ## Links
 * <a href="https://www.makeuseof.com/shell-builtin-commands-in-linux/">How to Identify a Shell Builtin Command</a>
