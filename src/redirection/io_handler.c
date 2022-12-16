@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_handler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 08:05:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 11:07:08 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/16 17:57:07 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,15 @@ void	restore_io(t_io *io)
 	}
 }
 
-bool	check_in_out_file(t_io *io)
+bool	check_in_out_file(t_io *io, t_commands *cmds)
 {
 	if (!io || (!io->in_file && !io->out_file))
 		return (true);
 	if (((io->in_file && io->fd_in == -1)
 			|| (io->out_file && io->fd_out == -1)) && io->error == true)
-		return (false);
+		{
+			free_cmds(cmds);
+			return (false);
+		}
 	return (true);
 }

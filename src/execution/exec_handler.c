@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 12:37:35 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:01:54 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 	if (cmds->operators[0])
 		set_pipe_fds(cmds, num_cmd);
 	if (is_redirection_command(cmds, num_cmd)
-		&& check_in_out_file(cmds->io) == false)
+		&& check_in_out_file(cmds->io, cmds) == false)
 		exit_shell(data, EXIT_FAILURE);
 	redirect_io(cmds->io, num_cmd);
 	close_fds(cmds, false);

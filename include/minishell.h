@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 14:02:16 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:57:27 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ void	restore_io(t_io *io);
  * @param io
  * @return bool - true if it's OK with IO properties
  */
-bool	check_in_out_file(t_io *io);
+bool	check_in_out_file(t_io *io, t_commands *cmds);
 
 /**
  * @brief Will handler redirection to output file
