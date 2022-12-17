@@ -92,7 +92,7 @@ void	init_cmds(t_data *data, t_commands *cmds)
 	int		i;
 	char	*new_user_input;
 
-	new_user_input = ft_strtrim(data->user_input, " ");
+	new_user_input = trim_user_imput(data->user_input);
 	cmds->cmds = lexer(new_user_input, cmds);
 	free(new_user_input);
 	i = 0;

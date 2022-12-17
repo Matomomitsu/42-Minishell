@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 18:24:19 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:04:28 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ void	init_cmds(t_data *data, t_commands *cmds);
 void	init_cmd(t_data *data, t_commands *cmds, int num_cmd);
 
 void	init_single_cmd(t_data *data, t_commands *cmds, int num_cmd);
+
+char	*trim_user_imput(char *user_input);
 
 /**
  * @brief Validate number of arguments of Mini-shell

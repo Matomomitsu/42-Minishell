@@ -6,7 +6,7 @@
 #    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/16 14:02:52 by mtomomit         ###   ########.fr        #
+#    Updated: 2022/12/17 16:04:03 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init_validation.c \
 		$(PATH_INIT)prompt.c \
 		$(PATH_INIT)init_structure.c \
+		$(PATH_INIT)trim_user_input.c \
 		$(PATH_UTIL)exit.c \
 		$(PATH_UTIL)signal.c \
 		$(PATH_UTIL)debug.c \
