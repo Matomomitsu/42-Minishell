@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/17 16:04:28 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:28:27 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,18 @@ void	init_cmds(t_data *data, t_commands *cmds);
  */
 void	init_cmd(t_data *data, t_commands *cmds, int num_cmd);
 
+/**
+ * @brief Initialize a single command
+ * @param data Structure of MiniShell
+ * @param cmds Commands structure
+ * @param num_cmd Number of the command that gonna be initialised
+ */
 void	init_single_cmd(t_data *data, t_commands *cmds, int num_cmd);
 
+/**
+ * @brief Trim the extra spaces from user_input
+ * @param user_input
+ */
 char	*trim_user_imput(char *user_input);
 
 /**
@@ -290,6 +300,7 @@ void	rd_heredoc(t_commands *cmds, char *red);
 /******************************************************************************/
 /*Begin - Builtins*/
 /******************************************************************************/
+
 /**
  * @brief Verify if the command is a Builtin command. This is necessary to know
  * what is came from terminal
@@ -299,6 +310,12 @@ void	rd_heredoc(t_commands *cmds, char *red);
  */
 bool	is_builtin(char *argv);
 
+/**
+ * @brief Verify if the command is a Builtin command that doesn't have output
+ * @param cmds Commands structure
+ * @return true
+ * @return false
+ */
 bool	is_builtin_without_output(t_commands *cmds);
 
 /**
@@ -376,11 +393,14 @@ void	set_pipe_fds(t_commands *cmds, int index);
 /**
  * @brief Will close File Descriptors from command.
  * @param cmds Commands Structure
- * @param index Index to current cmd. -1 if is in all scope / all commands
- * @param close_both Flag to indicate to close both
  */
 void	close_pipe_fds(t_commands *cmds);
 
+/**
+ * @brief Will close File Descriptors from command, based in what command
+ * had been executed.
+ * @param cmds Commands Structure
+ */
 void	close_exec_pipe_fds(t_commands *cmds);
 
 /**
@@ -506,8 +526,20 @@ int		validate_cmd_not_found(t_data *data, char *cmd);
  */
 void	free_exit_cmd(t_data *data, t_commands *cmds, int status_code);
 
+/**
+ * @brief Executes the commands until the operators is different than a pipe
+ * @param data Data Structure
+ * @param cmds Commands Structuree
+ * @param num_cmd
+ */
 int		exec_child(t_data *data, t_commands *cmds, int num_cmd);
 
+/**
+ * @brief Verify the next operators than initialise the next commands
+ * @param data Data Structure
+ * @param cmds Commands Structuree
+ * @param num_cmd
+ */
 void	verify_operators(t_data *data, t_commands *cmds, int num_cmd);
 
 /**
@@ -722,7 +754,18 @@ void	copy_cmd(char *s, char *new_str);
  */
 void	find_export_cmd(t_commands *cmds, int num_cmd);
 
+/**
+ * @brief Split the command based on spaces to verify the export command
+ * @param s Command
+ */
 char	**rm_spaces(char const *s);
+
+/**
+ * @brief Copy the partial splited command into a new object
+ * @param s Command
+ * @param str An array that contains all the redirections
+ * @param countc Number of redirections
+ */
 void	putchar_split(char const *s, char **str, size_t countc);
 
 /******************************************************************************/
