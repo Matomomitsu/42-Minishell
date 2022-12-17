@@ -6,7 +6,7 @@
 #    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/17 16:04:03 by mtomomit         ###   ########.fr        #
+#    Updated: 2022/12/17 16:33:51 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -147,6 +147,10 @@ fclean: clean
 	@echo "$(GREEN)Done!$(RESET)"
 
 re: fclean all
+
+bonus: all
+
+rebonus: fclean all
 
 run:
 	make re && ./minishell
