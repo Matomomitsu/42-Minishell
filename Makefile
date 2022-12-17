@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+         #
+#    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/12 10:45:51 by rlins            ###   ########.fr        #
+#    Updated: 2022/12/17 16:33:51 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_INIT)init_validation.c \
 		$(PATH_INIT)prompt.c \
 		$(PATH_INIT)init_structure.c \
+		$(PATH_INIT)trim_user_input.c \
 		$(PATH_UTIL)exit.c \
 		$(PATH_UTIL)signal.c \
 		$(PATH_UTIL)debug.c \
@@ -66,8 +67,11 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_UTIL)sanitization.c \
 		$(PATH_UTIL)sanitization_partial.c \
 		$(PATH_UTIL)pipe.c \
+		$(PATH_UTIL)close_pipes.c \
 		$(PATH_EXEC)exec_handler.c \
 		$(PATH_EXEC)exec_partial.c \
+		$(PATH_EXEC)exec_child.c \
+		$(PATH_EXEC)verify_operators.c \
 		$(PATH_RED)redirection_handler.c \
 		$(PATH_RED)rd_output_handler.c \
 		$(PATH_RED)rd_input_handler.c \
@@ -143,6 +147,10 @@ fclean: clean
 	@echo "$(GREEN)Done!$(RESET)"
 
 re: fclean all
+
+bonus: all
+
+rebonus: fclean all
 
 run:
 	make re && ./minishell

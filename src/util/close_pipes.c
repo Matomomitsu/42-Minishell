@@ -1,33 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   close_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 02:33:28 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 14:52:29 by mtomomit         ###   ########.fr       */
+/*   Created: 2022/12/16 13:54:40 by mtomomit          #+#    #+#             */
+/*   Updated: 2022/12/16 13:55:00 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-char	*ft_strtrim(char const *s1, char const *set)
+void	close_pipe_fds(t_commands *cmds)
 {
-	size_t	len;
-	char	*result;
+	int	i;
 
-	if (s1 == NULL || set == NULL)
-		return (NULL);
-	while (*s1 && ft_strchr(set, *s1))
+	i = 0;
+	while (i < cmds->num_cmds)
 	{
-		s1++;
+		if (cmds->pipe[i].fd)
+		{
+			close(cmds->pipe[i].fd[0]);
+			close(cmds->pipe[i].fd[1]);
+		}
+		i++;
 	}
-	len = ft_strlen(s1);
-	while (len && ft_strchr(set, s1[len - 1]))
+}
+
+void	close_exec_pipe_fds(t_commands *cmds)
+{
+	int	i;
+
+	i = 0;
+	while (i < cmds->num_exec)
 	{
-		len--;
+		if (cmds->pipe[i].fd)
+		{
+			close(cmds->pipe[i].fd[0]);
+			close(cmds->pipe[i].fd[1]);
+		}
+		i++;
 	}
-	result = ft_substr(s1, 0, len);
-	return (result);
 }

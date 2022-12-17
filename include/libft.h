@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:30:32 by rlins             #+#    #+#             */
-/*   Updated: 2022/11/22 14:11:27 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/15 09:51:17 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdbool.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 /**
 * @brief The isalpha() function checks whether a character is an alphabet or not.
@@ -370,5 +374,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 char	*ft_realloc(char *str, size_t size);
+
+char	*get_next_line(int fd);
 
 #endif

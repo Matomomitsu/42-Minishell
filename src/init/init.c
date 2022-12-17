@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:09:04 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/16 10:28:22 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	exec_cmd(t_data *data)
 	init_cmds(data, cmds);
 	if (cmds->exit_value == 0)
 	{
-		init_cmd(data, cmds);
+		init_cmd(data, cmds, 0);
 		cmds->exit_value = exec_handler(data, cmds);
 	}
 	if (status_code == 0 && cmds->exit_value != 0)
