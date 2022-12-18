@@ -8,7 +8,8 @@ TODO: teste do lucas
 
 </div>
 
-<p align="center"><img src="https://miro.medium.com/max/450/1*ZE2T9JllKfTOQ90oDwqGmQ.png" alt="Bash 1"> </p>
+<!-- <p align="center"><img src="https://miro.medium.com/max/450/1*ZE2T9JllKfTOQ90oDwqGmQ.png" alt="Bash 1"> </p> -->
+<p align="center"><img src="https://game.42sp.org.br/static/assets/achievements/minishellm.png" alt="Minishell"> </p>
 
 
 # MiniShell
@@ -78,16 +79,18 @@ Project to test and detail all the external functions allowed
 
 
 * Signals:
-  * `ctrl-c` displays a new prompt line. SIGINT: SIGINT resets the user input
+  * `ctrl-c`: displays a new prompt line. SIGINT: SIGINT resets the user input
   prompt to a new blank line.
-  * `ctrl-d` exit.
-  * `ctrl-\` does nothing.
+  * `ctrl-d`: exit.
+  * `ctrl-\`: does nothing.
 
 ## Tests:
-xxxx
+* <a href="https://github.com/LucasKuhn/minishell_tester/">Minishell Tester - Lucas Kuhn</a>
 
 ## Links
 * <a href="https://www.makeuseof.com/shell-builtin-commands-in-linux/">How to Identify a Shell Builtin Command</a>
+* <a href="https://www.youtube.com/playlist?list=PLucm8g_ezqNrYgjXC8_CgbvHbvI7dDfhs">Course - Shell script (BOSON - pt-br)</a>
+* <a href="https://www.youtube.com/playlist?list=PLFAC320731F539902">Unix terminals and shells</a>
 
 ### Functions
 * `stat`: https://codeforwin.org/2018/03/c-program-find-file-properties-using-stat-function.html#:~:text=stat()%20function%20in%20C&text=stat()%20function%20is%20used,h%20header%20file.
