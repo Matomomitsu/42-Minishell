@@ -1,8 +1,6 @@
 
 <div align="center">
 
-TODO: teste do lucas
-
 [![HitCount](https://hits.dwyl.com/rlinsdev/42-Minishell-aux.svg?style=flat-square&show=unique)](http://hits.dwyl.com/rlinsdev/42-Minishell-aux)
 ![norminette](https://github.com/rlinsdev/42-Minishell/workflows/norminette/badge.svg?branch=main)
 
@@ -19,9 +17,8 @@ Project to test and detail all the external functions allowed
 
 ## Definition
 * One line definition: A shell is an interface that allows you to interact with the kernel of an operating system.
-* Lexer: TODO
-* Parser: TODO
-* HereDoc: TODO
+* Lexer: It helps you to convert a sequence of characters into a sequence of tokens
+* Parser: The parser will then check for invalid syntax and create a kind of command
 
 ## External functs.
 | function | Description |
@@ -91,6 +88,6 @@ Project to test and detail all the external functions allowed
 * <a href="https://www.makeuseof.com/shell-builtin-commands-in-linux/">How to Identify a Shell Builtin Command</a>
 * <a href="https://www.youtube.com/playlist?list=PLucm8g_ezqNrYgjXC8_CgbvHbvI7dDfhs">Course - Shell script (BOSON - pt-br)</a>
 * <a href="https://www.youtube.com/playlist?list=PLFAC320731F539902">Unix terminals and shells</a>
+* <a href="https://www.guru99.com/compiler-design-lexical-analysis.html">Lexer</a>
 
-### Functions
-* `stat`: https://codeforwin.org/2018/03/c-program-find-file-properties-using-stat-function.html#:~:text=stat()%20function%20in%20C&text=stat()%20function%20is%20used,h%20header%20file.
+
