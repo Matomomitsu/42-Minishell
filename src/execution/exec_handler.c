@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 18:26:43 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/18 15:42:22 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	exec_handler(t_data *data, t_commands *cmds)
 			cmds->operators[cmds->num_exec] \
 			!= PIPE && is_builtin_without_output(cmds))
 		{
-			g_status_code = call_builtin(data, cmds, 0);
 			cmds->num_exec++;
+			g_status_code = call_builtin(data, cmds, 0);
 		}
 		else
 		{
