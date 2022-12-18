@@ -62,7 +62,8 @@ void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd)
 		if (cmds->cmds[num_cmd][i_data.i] == '\'' || \
 			cmds->cmds[num_cmd][i_data.i] == '\"')
 			handle_quotes(&i_data, cmds, num_cmd, data);
-		if (cmds->cmds[num_cmd][i_data.i])
+		if (cmds->cmds[num_cmd][i_data.i] && \
+			cmds->cmds[num_cmd][i_data.i] != '$')
 			i_data.i++;
 	}
 }
