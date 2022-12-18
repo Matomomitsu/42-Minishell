@@ -95,10 +95,10 @@ char	**lexer(char const *s, t_commands *cmds)
 
 	if (!s)
 		return (NULL);
+	lexer_redirections(s, cmds);
 	lexer_operators(s, cmds);
 	if (cmds->exit_value != 0)
 		return (NULL);
-	lexer_redirections(s, cmds);
 	countstr = ft_countstr(s, cmds);
 	lexer_parenthesis(s, cmds);
 	if (cmds->exit_value != 0)

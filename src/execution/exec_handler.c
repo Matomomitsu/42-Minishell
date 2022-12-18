@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 11:02:29 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/16 18:26:43 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd);
 static int	exec_local_bin(t_data *data, t_commands *cmds, int num_cmd);
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd);
 static int	wait_child(t_commands *cmds);
@@ -21,31 +20,29 @@ static int	wait_child(t_commands *cmds);
 */
 int	exec_handler(t_data *data, t_commands *cmds)
 {
-	int	i;
+	int	status_code;
 
-	i = 0;
-	if (cmds->cmd[i].args[0] && cmds->num_cmds == 1 && \
-		is_builtin_without_output(cmds))
-		return (call_builtin(data, cmds, 0));
-	else
+	status_code = 0;
+	while (cmds->num_exec < cmds->num_cmds)
 	{
-		while (i < cmds->num_cmds)
+		if (cmds->cmd[cmds->num_exec].args[0] && \
+			cmds->operators[cmds->num_exec] \
+			!= PIPE && is_builtin_without_output(cmds))
 		{
-			if (is_redirection_command(cmds, i))
-				redirection_handler(cmds, i);
-			if (cmds->cmd[i].args[0])
-			{
-				cmds->pid[i] = fork();
-				if (cmds->pid[i] == -1)
-					return (error_msg_cmd("fork", NULL, strerror(errno),
-							EXIT_FAILURE));
-				else if (cmds->pid[i] == 0)
-					execute_cmd(data, cmds, i);
-			}
-			i++;
+			g_status_code = call_builtin(data, cmds, 0);
+			cmds->num_exec++;
+		}
+		else
+		{
+			status_code = exec_child(data, cmds, cmds->num_exec);
+			g_status_code = wait_child(cmds);
+			if (status_code != 0)
+				g_status_code = status_code;
+			if (cmds->num_exec < cmds->num_cmds)
+				verify_operators(data, cmds, cmds->num_exec);
 		}
 	}
-	return (wait_child(cmds));
+	return (g_status_code);
 }
 
 /**
@@ -62,11 +59,11 @@ static int	wait_child(t_commands *cmds)
 	int	status;
 	int	save_status;
 
-	close_pipe_fds(cmds);
+	close_exec_pipe_fds(cmds);
 	i = -1;
 	status = 0;
 	save_status = 0;
-	while (++i < cmds->num_cmds - 1)
+	while (++i < cmds->num_exec - 1)
 		waitpid(cmds->pid[i], NULL, 0);
 	waitpid(cmds->pid[i], &save_status, 0);
 	if (WIFEXITED(save_status))
@@ -86,21 +83,21 @@ static int	wait_child(t_commands *cmds)
  * @param i - Index of command in execution this time
  * @return int
  */
-static int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
+int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 {
 	int	status_code;
 
 	if (cmds->operators[0])
 		set_pipe_fds(cmds, num_cmd);
 	if (is_redirection_command(cmds, num_cmd)
-		&& check_in_out_file(cmds->io) == false)
+		&& check_in_out_file(cmds->io, cmds) == false)
 		exit_shell(data, EXIT_FAILURE);
 	redirect_io(cmds->io, num_cmd);
+	close_fds(cmds, false);
 	if (is_builtin(cmds->cmd[num_cmd].args[0]))
 		status_code = call_builtin(data, cmds, num_cmd);
 	else
 	{
-		close_fds(cmds, false);
 		if (ft_strchr(cmds->cmd[num_cmd].args[0], '/') == NULL)
 		{
 			status_code = exec_path_var_bin(data, cmds, num_cmd);
