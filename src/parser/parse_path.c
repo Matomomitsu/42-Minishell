@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:34:21 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 10:44:21 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/20 14:46:20 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,19 @@ char	*get_cmd_path(t_commands *cmds, int index)
 	cmd = ft_strdup("/");
 	cmd = join_strs(cmd, cmds->cmd[index].args[0]);
 	i = 0;
-	while (cmds->paths[i])
+	if (cmds->paths)
 	{
-		cmd_comp = ft_strjoin(cmds->paths[i], cmd);
-		if (access(cmd_comp, F_OK | X_OK) == 0)
+		while (cmds->paths[i])
 		{
-			free_ptr(cmd);
-			return (cmd_comp);
+			cmd_comp = ft_strjoin(cmds->paths[i], cmd);
+			if (access(cmd_comp, F_OK | X_OK) == 0)
+			{
+				free_ptr(cmd);
+				return (cmd_comp);
+			}
+			free_ptr(cmd_comp);
+			i++;
 		}
-		free_ptr(cmd_comp);
-		i++;
 	}
 	free_ptr(cmd);
 	return (NULL);
