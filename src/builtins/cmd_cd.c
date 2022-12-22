@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:49:23 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/21 20:07:25 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/22 17:50:11 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,18 @@ int	cmd_cd(t_data *data, t_commands *cmds, int n)
 {
 	char	*path;
 
-	if (!cmds->cmd[n].args[1])
-		return (0);
-	if (cmds->cmd[n].args[2])
-		return (error_msg_cmd("cd", NULL, "too many arguments", EXIT_FAILURE));
-	else if (!cmds->cmd[n].args[1] || ft_isspace(cmds->cmd[n].args[1][0])
+	if (!cmds->cmd[n].args[1] || ft_isspace(cmds->cmd[n].args[1][0])
 		|| cmds->cmd[n].args[1][0] == '\0'
-		|| (ft_strncmp(cmds->cmd[n].args[1], "--", 3) == 0
-		|| ft_strncmp(cmds->cmd[n].args[1], " ", 2)) == 0)
+		|| ft_strncmp(cmds->cmd[n].args[1], "--", 3) == 0
+		|| ft_strncmp(cmds->cmd[n].args[1], " ", 2) == 0)
 	{
 		path = get_env_var_value(data->env, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
 			return (error_msg_cmd("cd", NULL, "HOME not set", EXIT_FAILURE));
 		return (change_dir(data, path));
 	}
+	else if (cmds->cmd[n].args[2])
+		return (error_msg_cmd("cd", NULL, "too many arguments", EXIT_FAILURE));
 	else if (ft_strncmp(cmds->cmd[n].args[1], "-", 2) == 0)
 	{
 		path = get_env_var_value(data->env, OLD_PWD);
