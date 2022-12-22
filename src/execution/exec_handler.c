@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/22 11:49:50 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/22 19:57:13 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	exec_handler(t_data *data, t_commands *cmds)
 			cmds->operators[cmds->num_exec] \
 			!= PIPE && is_builtin_without_output(cmds))
 		{
+			if (is_redirection_command(cmds, cmds->num_exec))
+				redirection_handler(cmds, cmds->num_exec);
 			cmds->num_exec++;
 			g_status_code = call_builtin(data, cmds, 0);
 		}
