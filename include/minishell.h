@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/17 16:28:27 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/21 20:08:21 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,8 +357,9 @@ int		cmd_env(t_data *data, t_commands *cmds, int num_cmd);
 /**
  * @brief Builtins - Command Change Directory.
  * @param data Structure of MiniShell
+ * @param n Number of command
  */
-int		cmd_cd(t_data *data, t_commands *cmds, int num_cmd);
+int		cmd_cd(t_data *data, t_commands *cmds, int n);
 
 /**
  * @brief Builtins - Unset Variables

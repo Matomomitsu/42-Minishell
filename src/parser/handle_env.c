@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   handle_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:12:44 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/12 10:43:00 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/21 20:03:32 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	check_type(char ch)
+static void	copy_start(char *new_str, char *s, t_index_data *aux)
 {
-	if (ch >= '0' && ch <= '9')
-		return (1);
-	if (ch >= 'a' && ch <= 'z')
-		return (1);
-	if (ch >= 'A' && ch <= 'Z')
-		return (1);
-	if (ch == '_')
-		return (1);
-	return (0);
+	while (s[aux->i])
+	{
+		if (s[aux->i] == '$' && s[aux->i + 1] && \
+			(ft_isalnum(s[aux->i + 1]) || \
+			s[aux->i + 1] == '_' || s[aux->i + 1] == '?'))
+			break ;
+		else
+			new_str[aux->malloc_size++] = s[aux->i++];
+	}
 }
 
 static int	get_env_variable_size(char *s, t_index_data *i_data)
@@ -30,7 +30,7 @@ static int	get_env_variable_size(char *s, t_index_data *i_data)
 	int		i;
 
 	i = i_data->i + 1;
-	while (s[i] && check_type(s[i]))
+	while (s[i] && (ft_isalnum(s[i]) || s[i] == '_'))
 		i++;
 	return (i - i_data->i);
 }
@@ -66,31 +66,28 @@ static char	*get_env_value(char *s, t_index_data *i_data, t_data *data)
 static void	copy_to_new_str(char *new_str, char *s, char *env_value, \
 		t_index_data *i_data)
 {
-	size_t	i;
-	size_t	o;
-	size_t	j;
+	t_index_data	aux;
 
-	i = 0;
-	o = 0;
-	j = 0;
-	while (s[i] && s[i] != '$')
-		new_str[o++] = s[i++];
-	if (s[i])
-		i++;
+	aux.i = 0;
+	aux.j = 0;
+	aux.malloc_size = 0;
+	copy_start(new_str, s, &aux);
+	if (s[aux.i])
+		aux.i++;
 	if (env_value)
 	{
-		while (env_value[j])
-			new_str[o++] = env_value[j++];
-		i_data->i = i_data->i + j;
+		while (env_value[aux.j])
+			new_str[aux.malloc_size++] = env_value[aux.j++];
+		i_data->i = i_data->i + aux.j;
 	}
-	if (s[i] == '?')
-		i++;
+	if (s[aux.i] == '?')
+		aux.i++;
 	else
-		while (s[i] && check_type(s[i]))
-			i++;
-	while (s[i])
-		new_str[o++] = s[i++];
-	new_str[o] = s[i];
+		while (s[aux.i] && (ft_isalnum(s[aux.i]) || s[aux.i] == '_'))
+			aux.i++;
+	while (s[aux.i])
+		new_str[aux.malloc_size++] = s[aux.i++];
+	new_str[aux.malloc_size] = s[aux.i];
 }
 
 char	*handle_env(t_index_data *i_data, char *s, t_data *data)
