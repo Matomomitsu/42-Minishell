@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:25:21 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 11:38:01 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/22 09:26:01 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	reset_prompt(int signo)
 {
-	(void)signo;
+	g_status_code = 128 + signo;
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -38,8 +38,8 @@ void	signals_run_cmd(void)
 /**
  * @brief Print a new line when the shell is processing the requisition
  */
-static void	new_line(int signal)
+static void	new_line(int signo)
 {
-	(void)signal;
+	g_status_code = 128 + signo;
 	rl_on_new_line();
 }
