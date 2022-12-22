@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/22 10:21:22 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/22 11:49:50 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	exec_handler(t_data *data, t_commands *cmds)
 		else
 		{
 			status_code = exec_child(data, cmds, cmds->num_exec);
-				g_status_code = wait_child(cmds);
+			g_status_code = wait_child(cmds);
 			if (status_code != 0)
 				g_status_code = status_code;
 			if (cmds->num_exec < cmds->num_cmds)
