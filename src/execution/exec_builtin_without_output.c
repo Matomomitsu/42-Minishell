@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:11:22 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/23 01:48:47 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 09:02:04 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	cd_special_case(t_commands *cmds, t_data *data)
 {
 	char	*path;
+
 	cmds->pid[0] = fork();
 	if (cmds->pid[0] == -1)
 		error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE);
@@ -30,6 +31,7 @@ static void	cd_special_case(t_commands *cmds, t_data *data)
 			;
 		else
 			ft_putendl_fd(path, STDOUT);
+		free(path);
 		free_cmds(cmds);
 		exit_shell(data, 0);
 	}
