@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:14:03 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 11:01:55 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/23 02:02:18 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	cmd_exit(t_data *data, t_commands *cmds, int num_cmd)
 			return (error_msg_cmd("exit", NULL, "too many arguments",
 					EXIT_FAILURE));
 	}
+	close_fds(cmds, false);
 	free_cmds(cmds);
+	ft_putendl_fd("exit", STDOUT);
 	exit_shell(data, exit_code);
 	return (STDERR_FILENO);
 }

@@ -1,6 +1,0 @@
-*.o
-/objs/
-minishell
-libft.a
-*test*
-sh_test.sh

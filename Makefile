@@ -6,7 +6,7 @@
 #    By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 08:46:02 by rlins             #+#    #+#              #
-#    Updated: 2022/12/17 16:33:51 by mtomomit         ###   ########.fr        #
+#    Updated: 2022/12/23 01:12:05 by mtomomit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRCS =	$(PATH_MAIN)main.c \
 		$(PATH_UTIL)sanitization_partial.c \
 		$(PATH_UTIL)pipe.c \
 		$(PATH_UTIL)close_pipes.c \
+		$(PATH_EXEC)exec_builtin_without_output.c \
 		$(PATH_EXEC)exec_handler.c \
 		$(PATH_EXEC)exec_partial.c \
 		$(PATH_EXEC)exec_child.c \

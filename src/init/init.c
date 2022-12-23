@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:54:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/22 11:27:42 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/23 02:01:21 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static int	exec_cmd(t_data *data)
 	}
 	if (status_code == 0 && cmds->exit_value != 0)
 		status_code = cmds->exit_value;
+	close_fds(cmds, false);
 	free_cmds(cmds);
 	return (status_code);
 }
@@ -86,7 +87,10 @@ static int	exec_cmd(t_data *data)
 static bool	input_handler(t_data *data)
 {
 	if (!data->user_input)
+	{
+		ft_putendl_fd("exit", STDOUT);
 		exit_shell(data, 0);
+	}
 	else if (data->user_input == NULL
 		|| ft_strncmp(data->user_input, "\0", 1) == 0)
 		return (false);
