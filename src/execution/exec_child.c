@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 03:06:05 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/23 01:41:56 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 15:16:42 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	create_redirection(t_commands *cmds, int num_cmd, t_data *data)
 	{
 		if (is_redirection_command(cmds, num_cmd)
 			&& check_in_out_file(cmds->io, cmds, true) == false)
-				exit_shell(data, EXIT_FAILURE);
+			exit_shell(data, EXIT_FAILURE);
 		redirect_io(cmds->io, num_cmd);
 		close_fds(cmds, false);
 		free_cmds(cmds);
