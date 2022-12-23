@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:11:22 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/23 09:06:03 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 12:10:51 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	cd_special_case(t_commands *cmds, t_data *data)
 			;
 		else
 			ft_putendl_fd(path, STDOUT);
-		free(path);
 		free_cmds(cmds);
 		exit_shell(data, 0);
 	}
@@ -71,8 +70,8 @@ void	exec_builtin_without_output(t_commands *cmds, t_data *data)
 	{
 		g_status_code = call_builtin(data, cmds, 0);
 		if (ft_strncmp(cmds->cmd[0].args[0], "cd", 3) == 0 && \
-			ft_strncmp(cmds->cmd[0].args[1], "-", 2) == 0 && \
-			g_status_code == 0)
+			cmds->cmd[0].args[1] && g_status_code == 0 && \
+			ft_strncmp(cmds->cmd[0].args[1], "-", 2) == 0)
 		{
 			cd_special_case(cmds, data);
 			g_status_code = wait_child(cmds);
