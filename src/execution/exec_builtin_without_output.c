@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:11:22 by mtomomit          #+#    #+#             */
-/*   Updated: 2022/12/23 09:02:04 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 09:06:03 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	cd_special_case(t_commands *cmds, t_data *data)
 	{
 		if (is_redirection_command(cmds, 0)
 			&& check_in_out_file(cmds->io, cmds, true) == false)
-				exit_shell(data, EXIT_FAILURE);
+			exit_shell(data, EXIT_FAILURE);
 		redirect_io(cmds->io, 0);
 		close_fds(cmds, false);
 		path = get_env_var_value(data->env, PWD);
@@ -70,12 +70,12 @@ void	exec_builtin_without_output(t_commands *cmds, t_data *data)
 	else
 	{
 		g_status_code = call_builtin(data, cmds, 0);
-		if (ft_strncmp(cmds->cmd[0].args[0], "cd", 3) == 0 &&
-			ft_strncmp(cmds->cmd[0].args[1], "-", 2) == 0 &&
+		if (ft_strncmp(cmds->cmd[0].args[0], "cd", 3) == 0 && \
+			ft_strncmp(cmds->cmd[0].args[1], "-", 2) == 0 && \
 			g_status_code == 0)
-			{
-				cd_special_case(cmds, data);
-				g_status_code = wait_child(cmds);
-			}
+		{
+			cd_special_case(cmds, data);
+			g_status_code = wait_child(cmds);
+		}
 	}
 }
