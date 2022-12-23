@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:06:42 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 10:29:01 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 08:46:11 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static void	free_cmd(t_commands *cmds)
 			free(cmds->cmd[i].redirections[o++]);
 		free(cmds->cmd[i].redirections[o]);
 		free(cmds->cmd[i].redirections);
-		free(cmds->pipe[i].fd);
 		free(cmds->cmd[i].path);
 		i++;
 	}
@@ -95,7 +94,7 @@ void	free_cmds(t_commands *cmds)
 	if (cmds->cmds != NULL)
 	{
 		free_cmd(cmds);
-		free(cmds->pipe);
+		free_pipes(cmds);
 		while (cmds->cmds[i] != NULL)
 			free(cmds->cmds[i++]);
 		free(cmds->cmds[i]);

@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 08:05:58 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/23 01:41:17 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 01:58:08 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ bool	check_in_out_file(t_io *io, t_commands *cmds, bool free)
 			|| (io->out_file && io->fd_out == -1)) && io->error == true)
 	{
 		if (free)
+		{
+			close_fds(cmds, false);
 			free_cmds(cmds);
+		}
 		return (false);
 	}
 	return (true);

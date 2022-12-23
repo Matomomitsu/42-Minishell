@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/23 01:39:44 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 08:47:25 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -430,6 +430,12 @@ void	close_fds(t_commands *cmds, bool reset_io);
  * @param io IO Structure
 */
 void	free_io(t_io *io);
+
+/**
+ * @brief Free pipe structure.
+ * @param cmds Structure of Commands
+*/
+void	free_pipes(t_commands *cmds);
 
 /**
  * @brief Will free Data structure in mini-shell

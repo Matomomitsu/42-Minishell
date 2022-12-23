@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:33:45 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/12 13:34:40 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 02:11:10 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	validate_cmd_not_found(t_data *data, char *cmd)
 
 void	free_exit_cmd(t_data *data, t_commands *cmds, int status_code)
 {
+	close_fds(cmds, true);
 	free_cmds(cmds);
 	exit_shell(data, status_code);
 }

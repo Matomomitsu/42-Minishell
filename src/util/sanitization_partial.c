@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 09:23:18 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 10:28:58 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 08:46:13 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,17 @@ void	free_io(t_io *io)
 	if (io->out_file)
 		free_ptr(io->out_file);
 	free_ptr(io);
+}
+
+void	free_pipes(t_commands *cmds)
+{
+	int	i;
+
+	i = 0;
+	while (i < cmds->num_cmds)
+	{
+		free(cmds->pipe[i].fd);
+		i++;
+	}
+	free(cmds->pipe);
 }
