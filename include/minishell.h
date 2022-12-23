@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/22 00:04:13 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 01:39:44 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ void	restore_io(t_io *io);
  * @param io
  * @return bool - true if it's OK with IO properties
  */
-bool	check_in_out_file(t_io *io, t_commands *cmds);
+bool	check_in_out_file(t_io *io, t_commands *cmds, bool free);
 
 /**
  * @brief Will handler redirection to output file
@@ -499,6 +499,8 @@ int		error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
  * @return int
  */
 int		exec_handler(t_data *data, t_commands *cmds);
+
+void	exec_builtin_without_output(t_commands *cmds, t_data *data);
 
 /**
  * @brief Verify if the command passed is a directory. Necessary to throw the
