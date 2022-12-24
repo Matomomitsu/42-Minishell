@@ -11,7 +11,7 @@
 
 
 # MiniShell
-Project to test and detail all the external functions allowed
+Minishell is a 42 school team project write in C language. It implements redirections, pipes, environment variable, expansions, builtin commands, etc.
 
 
 
@@ -49,7 +49,7 @@ Project to test and detail all the external functions allowed
 
 
 
-## Todo's
+## Implemented:
 * Prompt display
 * Command history (up and down arrows)
 * System executables available from the environment (`ls`, `cat`, `grep`, etc.)
@@ -80,6 +80,10 @@ Project to test and detail all the external functions allowed
   prompt to a new blank line.
   * `ctrl-d`: exit.
   * `ctrl-\`: does nothing.
+
+* Parser:
+
+* Lexer
 
 ## Tests:
 * <a href="https://github.com/LucasKuhn/minishell_tester/">Minishell Tester - Lucas Kuhn</a>
