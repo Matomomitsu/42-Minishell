@@ -48,6 +48,17 @@ Minishell is a 42 school team project write in C language. It implements redirec
 |`getenv`				| get environment variables
 
 
+## Commands
+To run the program:
+```shell
+./minishell
+```
+Check Leaks:
+```shell
+make valgrind
+```
+
+
 
 ## Implemented:
 * Prompt display
@@ -81,9 +92,11 @@ Minishell is a 42 school team project write in C language. It implements redirec
   * `ctrl-d`: exit.
   * `ctrl-\`: does nothing.
 
+* Priorities operator `||` and `&&`
+
 * Parser:
 
-* Lexer
+* Lexer:
 
 ## Tests:
 * <a href="https://github.com/LucasKuhn/minishell_tester/">Minishell Tester - Lucas Kuhn</a>
