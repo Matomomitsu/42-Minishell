@@ -1,7 +1,7 @@
 
 <div align="center">
 
-[![HitCount](https://hits.dwyl.com/rlinsdev/42-Minishell-aux.svg?style=flat-square&show=unique)](http://hits.dwyl.com/rlinsdev/42-Minishell-aux)
+[![HitCount](https://hits.dwyl.com/rlinsdev/42-Minishell.svg?style=flat-square&show=unique)](http://hits.dwyl.com/rlinsdev/42-Minishell)
 ![norminette](https://github.com/rlinsdev/42-Minishell/workflows/norminette/badge.svg?branch=main)
 
 </div>
