@@ -15,16 +15,15 @@ Minishell is a 42 school team project write in C language. It implements redirec
 
 
 
-## Definition
+## Definitions
 * One line definition: A shell is an interface that allows you to interact with the kernel of an operating system.
-* Lexer: It helps you to convert a sequence of characters into a sequence of tokens
-* Parser: The parser will then check for invalid syntax and create a kind of command
+
 
 ## External functs.
 | function | Description |
 |-						|-		 |
 |`access` 				| check access (used in pipex)
-|`execve` 				| exec cmd. (used in pipex)
+|`execve` 				| exec cmd (used in pipex)
 |`fork` 				| divide process in 2. Child and parent
 |`free` 				| free ptr
 |`getpwd` 				| get pwd
@@ -33,12 +32,12 @@ Minishell is a 42 school team project write in C language. It implements redirec
 |`opendir` 				| open specific directory
 |`pipe` 				| Pipe (learned in pipex)
 |`dup2` 				| duplicate FD and change (learned in pipex)
-|`printf` 				| weird pdf allow this... But it's ok
+|`printf` 				| (weird pdf allow this... But it's ok)
 |`read` 				| read from File Descriptor
 |`readline` 			| waiting prompt
 |`signal` 				| Change the process, by signal passed. Take other action
 |`write` 				| write
-|`rl_`					| handler with prompt
+|`rl_*`					| handler with prompt
 |`add_history`			| add cmd in history
 |`waitpid`				| wait child exec
 |`chdir`				| change directory
@@ -65,13 +64,13 @@ make valgrind
 * Command history (up and down arrows)
 * System executables available from the environment (`ls`, `cat`, `grep`, etc.)
 * Builtin commands:
-  * `echo` Allow option `-n`
-  * `cd` Relative or absolute path
-  * `pwd` No args
-  * `export`Export variables in bash
-  * `unset` No args
-  * `env` No options. No args
-  * `exit` Allow exit number
+  * `echo`: Allow option `-n`
+  * `cd`: Relative or absolute path
+  * `pwd`: No args
+  * `export`: Export variables in bash
+  * `unset`: No args
+  * `env`: No options. No args
+  * `exit`: Allow exit number
 
 * Pipes: `|` which redirect output from one command to input for the next
 
@@ -94,9 +93,13 @@ make valgrind
 
 * Priorities operator `||` and `&&`
 
-* Parser:
+* Lexer: It helps you to convert a sequence of characters into a sequence of tokens
 
-* Lexer:
+* Parser: The parser will then check for invalid syntax and create a kind of command
+
+## Bonus
+* And, or (&&, ||)
+
 
 ## Tests:
 * <a href="https://github.com/LucasKuhn/minishell_tester/">Minishell Tester - Lucas Kuhn</a>
