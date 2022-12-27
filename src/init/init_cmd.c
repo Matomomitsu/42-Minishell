@@ -34,7 +34,7 @@ void	init_cmd(t_data *data, t_commands *cmds, int num_cmd)
 	{
 		cmds->cmd[i].redirections = handle_redirection(cmds->cmds[i]);
 		change_cmd(cmds, i);
-		if (cmds->cmds[i][0])
+		if (cmds->cmds[i][0] && cmds->cmds[i][0] != ' ')
 			find_dollar_sign(data, cmds, i);
 		cmds->cmd[i].args = parser(cmds->cmds[i]);
 		if (cmds->operators[i] && cmds->operators[i] == PIPE)
@@ -54,7 +54,7 @@ void	init_single_cmd(t_data *data, t_commands *cmds, int num_cmd)
 	{
 		cmds->cmd[i].redirections = handle_redirection(cmds->cmds[i]);
 		change_cmd(cmds, i);
-		if (cmds->cmds[i][0])
+		if (cmds->cmds[i][0] && cmds->cmds[i][0] != ' ')
 			find_dollar_sign(data, cmds, i);
 		cmds->cmd[i].args = parser(cmds->cmds[i]);
 	}

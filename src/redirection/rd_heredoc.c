@@ -6,7 +6,7 @@
 /*   By: rlins <rlins@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 10:34:07 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/07 11:16:25 by rlins            ###   ########.fr       */
+/*   Updated: 2022/12/22 11:58:30 by rlins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ static bool	heredoc_prompt(t_io *io)
 	user_input = NULL;
 	while (true)
 	{
+		signals_wait_cmd();
 		user_input = readline("heredoc> ");
+		signals_run_cmd();
 		if (exit_heredoc_prompt(&user_input, io) == true)
 			break ;
 		ft_putendl_fd(user_input, fd);

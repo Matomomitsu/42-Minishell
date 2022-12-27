@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 10:08:27 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/16 18:26:43 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 08:39:40 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ int	exec_handler(t_data *data, t_commands *cmds)
 		if (cmds->cmd[cmds->num_exec].args[0] && \
 			cmds->operators[cmds->num_exec] \
 			!= PIPE && is_builtin_without_output(cmds))
-		{
-			g_status_code = call_builtin(data, cmds, 0);
-			cmds->num_exec++;
-		}
+			exec_builtin_without_output(cmds, data);
 		else
 		{
 			status_code = exec_child(data, cmds, cmds->num_exec);
@@ -69,7 +66,7 @@ static int	wait_child(t_commands *cmds)
 	if (WIFEXITED(save_status))
 		status = WEXITSTATUS(save_status);
 	else if (WIFSIGNALED(save_status))
-		status = WTERMSIG(save_status);
+		status = 128 + WTERMSIG(save_status);
 	else
 		status = cmds->exit_value;
 	return (status);
@@ -90,7 +87,7 @@ int	execute_cmd(t_data *data, t_commands *cmds, int num_cmd)
 	if (cmds->operators[0])
 		set_pipe_fds(cmds, num_cmd);
 	if (is_redirection_command(cmds, num_cmd)
-		&& check_in_out_file(cmds->io, cmds) == false)
+		&& check_in_out_file(cmds->io, cmds, true) == false)
 		exit_shell(data, EXIT_FAILURE);
 	redirect_io(cmds->io, num_cmd);
 	close_fds(cmds, false);

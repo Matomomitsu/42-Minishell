@@ -82,8 +82,8 @@ char	*rm_redirection(char *s)
 	if (!s)
 		return (NULL);
 	countstr = ft_countstr(s);
-	new_str = (char *)ft_calloc((ft_strlen(s) - countstr), sizeof(char *) + 1);
-	new_str[(ft_strlen(s) - countstr)] = '\0';
+	new_str = (char *)ft_calloc((ft_strlen(s) - countstr) + 1, sizeof(char *));
+	new_str[ft_strlen(s) - countstr] = '\0';
 	if (!new_str)
 		return (NULL);
 	copy_cmd(s, new_str);

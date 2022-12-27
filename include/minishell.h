@@ -6,7 +6,7 @@
 /*   By: mtomomit <mtomomit@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:51:11 by rlins             #+#    #+#             */
-/*   Updated: 2022/12/17 16:28:27 by mtomomit         ###   ########.fr       */
+/*   Updated: 2022/12/23 08:47:25 by mtomomit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ void	restore_io(t_io *io);
  * @param io
  * @return bool - true if it's OK with IO properties
  */
-bool	check_in_out_file(t_io *io, t_commands *cmds);
+bool	check_in_out_file(t_io *io, t_commands *cmds, bool free);
 
 /**
  * @brief Will handler redirection to output file
@@ -357,8 +357,9 @@ int		cmd_env(t_data *data, t_commands *cmds, int num_cmd);
 /**
  * @brief Builtins - Command Change Directory.
  * @param data Structure of MiniShell
+ * @param n Number of command
  */
-int		cmd_cd(t_data *data, t_commands *cmds, int num_cmd);
+int		cmd_cd(t_data *data, t_commands *cmds, int n);
 
 /**
  * @brief Builtins - Unset Variables
@@ -431,6 +432,12 @@ void	close_fds(t_commands *cmds, bool reset_io);
 void	free_io(t_io *io);
 
 /**
+ * @brief Free pipe structure.
+ * @param cmds Structure of Commands
+*/
+void	free_pipes(t_commands *cmds);
+
+/**
  * @brief Will free Data structure in mini-shell
  * @param data Data structure
  * @param Boolean - exit_shell. Indicate to terminate program
@@ -498,6 +505,8 @@ int		error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
  * @return int
  */
 int		exec_handler(t_data *data, t_commands *cmds);
+
+void	exec_builtin_without_output(t_commands *cmds, t_data *data);
 
 /**
  * @brief Verify if the command passed is a directory. Necessary to throw the
@@ -716,9 +725,9 @@ char	*handle_env(t_index_data *i_data, char *s, t_data *data);
  * @brief Search the existence of '$' in that part of the input
  * @param data Data structure
  * @param cmds Structure of commands
- * @param num_cmd The number of the command
+ * @param n The number of the command
  */
-void	find_dollar_sign(t_data *data, t_commands *cmds, int num_cmd);
+void	find_dollar_sign(t_data *data, t_commands *cmds, int n);
 
 /**
  * @brief Search if exists redirection in the command
